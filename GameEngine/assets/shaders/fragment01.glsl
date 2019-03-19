@@ -15,7 +15,7 @@ in vec4 vertBiNormXYZ;		// bi-normal (or bi-tangent) to the surface
 uniform vec4 objectDiffuse;		// becomes objectDiffuse in the shader
 uniform vec4 objectSpecular;	// rgb + a, which is the power)
 
-uniform vec3 eyeLocation;		// This is in "world space"
+uniform vec3 eyeLocation;		// This is in "world space"  
 
 // Set this to true (1), and the vertex colour is used
 uniform bool useVertexColour;
@@ -92,6 +92,7 @@ uniform sampler2D texture07;
 // For the 2 pass rendering
 uniform float renderPassNumber;	// 1 = 1st pass, 2nd for offscreen to quad
 uniform sampler2D texPass1OutputTexture;
+uniform sampler2D texPass1OutputTexture2;
 
 
 // Cube map texture (NOT a sampler3D)
@@ -125,7 +126,14 @@ void main()
 //		vec3 ObjectNormal = texture( texObjectColour, vertUV_x2.st ).rgb;
 	
 		// 2nd pass (very simple)
-		finalOutputColour.rgb = texture( texPass1OutputTexture, vertUV_x2.st ).rgb;
+		vec4 texRecticle = texture( texture00, vertUV_x2.st ).rgba;
+		if (texRecticle.g > 0.5 && texRecticle.r < 0.5)
+		{
+			texRecticle *= 0.15;
+		}
+		
+		finalOutputColour.rgb = texture( texPass1OutputTexture, vertUV_x2.st + 0.007*vec2( sin(1024.0*vertUV_x2.s),cos(768.0*vertUV_x2.t))).rgb
+		                           + texRecticle.rgb;
 		
 //		float bw =   0.2126f * finalOutputColour.r
 //                   + 0.7152f * finalOutputColour.g 
@@ -268,8 +276,9 @@ void main()
 //theLights[0].atten;
 
 	vec3 norm = normalize(vertNormal.xyz);
+
+	vec4 finalObjectColour = vec4(0.0,0.0,0.0,1.0);
 	
-	vec4 finalObjectColour = vec4( 0.0f, 0.0f, 0.0f, 1.0f );
 	
 	for ( int index = 0; index < NUMBEROFLIGHTS; index++ )
 	{	
@@ -413,12 +422,23 @@ void main()
 	}//for(intindex=0...
 	
 	finalOutputColour.rgb = finalObjectColour.rgb;
+
+	
+	// CHANGED
+	float ambientAmount = 0.2;
+	// finalOutputColour.rgb = materialDiffuse.rgb * textureLod(textureSkyBox, 
+	// 		norm, 4).rgb * ambientAmount;
+
+	finalOutputColour.rgb += materialDiffuse.rgb  * ambientAmount;
+
 	finalOutputColour.a = wholeObjectAlphaTransparency;
 	
 		// Also output the normal to colour #1
 	finalOutputNormal.rgb = vertNormal.xyz;
 //	finalOutputNormal.r = 1.0f;
 	finalOutputNormal.a = 1.0f;
+
+	
 
 	
 	// Brigher for the dim projector
@@ -478,6 +498,7 @@ void main()
 //		finalOutputColour.r = 1.0f - ParticleImposterAlphaOverride;
 		
 	}//if(bIsParticleImposter)
+
 	
 	
 	// All done.

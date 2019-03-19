@@ -533,10 +533,13 @@ int main(void)
 				curMesh->rigidBody->GetShape()->GetSphereRadius(rad);
 				if (curMesh->friendlyName == "chan") { 
 					curMesh->position = curMesh->rigidBody->GetPosition();
-					curMesh->position.y = curMesh->rigidBody->GetPosition().y - rad; 
+					//curMesh->position.y = curMesh->rigidBody->GetPosition().y - rad; 
 				}
-				else{ curMesh->position = curMesh->rigidBody->GetPosition(); }
-				curMesh->m_meshQOrientation = glm::mat4(curMesh->rigidBody->GetMatRotation());
+				else {
+					curMesh->position = curMesh->rigidBody->GetPosition();
+					curMesh->m_meshQOrientation = glm::mat4(curMesh->rigidBody->GetMatRotation());
+				}
+
 
 			}
 		}
