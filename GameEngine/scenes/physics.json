@@ -93,7 +93,7 @@
 
           "RigidBody": {
               "Type": "CLOTH",
-              "SpringConstant" : 200.0,
+              "SpringConstant" : 100.0,
               "NumNodesAB": 10,
               "NumNodesAC": 7,
               "CornerA" : [

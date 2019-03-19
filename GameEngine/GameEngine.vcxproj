@@ -101,7 +101,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>assimp-vc140-mt.lib;glfw3.lib;freetype271MT.lib;lua5.3.3-static.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp-vc140-mt.lib;glfw3.lib;fmod_vc.lib;freetype271MT.lib;lua5.3.3-static.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -114,7 +114,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>assimp-vc140-mt.lib;glfw3.lib;freetype.lib;lua53.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp-vc140-mt.lib;glfw3.lib;freetype.lib;fmod_vc.lib;lua53.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -131,7 +131,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>assimp-vc140-mt.lib;glfw3.lib;freetype271MT.lib;lua5.3.3-static.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp-vc140-mt.lib;glfw3.lib;fmod_vc.lib;freetype271MT.lib;lua5.3.3-static.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <StackReserveSize>
       </StackReserveSize>
     </Link>
@@ -150,7 +150,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>assimp-vc140-mt.lib;glfw3.lib;freetype.lib;lua53.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp-vc140-mt.lib;glfw3.lib;freetype.lib;fmod_vc.lib;lua53.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -179,6 +179,7 @@
     <ClCompile Include="cShaderManager.cpp" />
     <ClCompile Include="cSimpleAssimpSkinnedMeshLoader_OneMesh.cpp" />
     <ClCompile Include="cSimpleDebugRenderer.cpp" />
+    <ClCompile Include="cSoundManager.cpp" />
     <ClCompile Include="cTextRend.cpp" />
     <ClCompile Include="cTriggerCommand.cpp" />
     <ClCompile Include="cVAOMeshManager.cpp" />
@@ -235,6 +236,7 @@
     <ClInclude Include="cSceneManager.h" />
     <ClInclude Include="cSimpleAssimpSkinnedMeshLoader_OneMesh.h" />
     <ClInclude Include="cSimpleDebugRenderer.h" />
+    <ClInclude Include="cSoundManager.h" />
     <ClInclude Include="cTriggerCommand.h" />
     <ClInclude Include="cVAOMeshManager.h" />
     <ClInclude Include="cGameObject.h" />

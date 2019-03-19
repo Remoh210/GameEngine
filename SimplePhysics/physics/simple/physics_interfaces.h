@@ -8,3 +8,5 @@
 #include <Interfaces/sRigidBodyDef.h>
 #include <Interfaces/sSoftBodyDef.h>
 #include <Interfaces/iSoftBody.h>
+#include <Interfaces/iWreckingBallPhysics.h>
+#include <Interfaces/iWreckingBallPhysics.h>

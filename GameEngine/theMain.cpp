@@ -8,23 +8,23 @@
 #include "globalStuff.h"
 
 #include <glm/glm.hpp>
-#include <glm/vec3.hpp> // glm::vec3
-#include <glm/vec4.hpp> // glm::vec4
-#include <glm/mat4x4.hpp> // glm::mat4
-#include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale, glm::perspective
-#include <glm/gtc/type_ptr.hpp> // glm::value_ptr
+#include <glm/vec3.hpp> 
+#include <glm/vec4.hpp> 
+#include <glm/mat4x4.hpp>
+#include <glm/gtc/matrix_transform.hpp> 
+#include <glm/gtc/type_ptr.hpp> 
 #include <rapidjson/filereadstream.h>
 #include <rapidjson/document.h>
 #include "Camera.h"
 #include <stdlib.h>
-#include <stdio.h>		// printf();
-#include <iostream>		// cout (console out)
-
-#include <vector>		// "smart array" dynamic array
+#include <stdio.h>		
+#include <iostream>		
+#include <vector>	
 
 #include "cShaderManager.h"
 #include "cGameObject.h"
 #include "cVAOMeshManager.h"
+#include "cSoundManager.h"
 #include <algorithm>
 #include <windows.h>
 
@@ -47,6 +47,7 @@ GLuint program;
 cDebugRenderer* g_pDebugRendererACTUAL = NULL;
 iDebugRenderer* g_pDebugRenderer = NULL;
 cSimpleDebugRenderer* g_simpleDubugRenderer = NULL;
+cSoundManager* g_pSoundManager = NULL;
 cLuaBrain* p_LuaScripts = NULL;
 cTextRend* g_textRenderer = NULL;
 //cCommandGroup sceneCommandGroup;
@@ -61,11 +62,8 @@ double FPS_last_Time = 0;
 bool bIsDebugMode = false;
 
 std::vector< cGameObject* > vec_pObjectsToDraw;
+//for physics
 std::vector< cGameObject* > vec_pSpheres;
-
-// To the right, up 4.0 units, along the x axis
-
-
 unsigned int numberOfObjectsToDraw = 0;
 
 unsigned int SCR_WIDTH = 1000;
@@ -85,14 +83,11 @@ glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 glm::vec3 g_CameraEye = glm::vec3( 0.0, 0.0, 250.0f );
 
-//glm::vec3 g_CameraAt = glm::vec3(g_CameraEye, g_CameraEye.z + cameraFront.z, cameraUp.y);
-//glm::vec3 g_CameraAt = glm::vec3( 0.0, 0.0, 0.0f );
 
 
-cShaderManager* pTheShaderManager = NULL;		// "Heap" variable
+cShaderManager* pTheShaderManager = NULL;
 cVAOMeshManager* g_pTheVAOMeshManager = NULL;
 cSceneManager* g_pSceneManager = NULL;
-//cTextRend g_textRend;
 cLightManager* LightManager = NULL;
 
 std::vector<cGameObject*> vec_transObj;
@@ -110,9 +105,7 @@ cAABBHierarchy* g_pTheTerrain = new cAABBHierarchy();
 bool loadConfig();
 cFBO* g_pFBOMain;
 
-// For now, I'm doing this here, but you might want to do this
-//  in the object, in the "phsyics" thing, or wherever. 
-//  Or leave it here!!
+
 
 // Set up the off screen textures to draw to
 GLuint g_FBO = 0;
@@ -152,10 +145,7 @@ int main(void)
 	gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 	glfwSwapInterval(1);
 
-
-	// Create the shader manager...
-	//cShaderManager TheShaderManager;	
-	//cShaderManager* pTheShaderManager;		
+		
 	pTheShaderManager = new cShaderManager();
 	pTheShaderManager->setBasePath("assets/shaders/");
 
@@ -202,18 +192,15 @@ int main(void)
 
 	::g_pTheVAOMeshManager = new cVAOMeshManager();
 	::g_pTheVAOMeshManager->SetBasePath("assets/models");
-
 	::g_pTheTextureManager = new cBasicTextureManager();
-
 	::g_textRenderer = new cTextRend();
-	//Create Scene Manager
 	::g_pSceneManager = new cSceneManager();
+	::g_pSoundManager = new cSoundManager();
 	::g_pSceneManager->setBasePath("scenes");
-
 	::LightManager = new cLightManager();
-	
 	::g_pFBOMain = new cFBO();
-
+	
+	
 	//Set Up FBO
 	static const GLenum draw_bufers[] = { GL_COLOR_ATTACHMENT0 };
 	glDrawBuffers(1, draw_bufers);
@@ -237,24 +224,12 @@ int main(void)
 
 	// Loading the uniform variables here (rather than the inner draw loop)
 	GLint objectColour_UniLoc = glGetUniformLocation(program, "objectColour");
-	//uniform vec3 lightPos;
-	//uniform float lightAtten;
-
-
-//	GLint lightPos_UniLoc = glGetUniformLocation(program, "lightPos");
-//	GLint lightBrightness_UniLoc = glGetUniformLocation(program, "lightBrightness");
-
-	//	// uniform mat4 MVP;	THIS ONE IS NO LONGER USED	
-	//uniform mat4 matModel;	// M
-	//uniform mat4 matView;		// V
-	//uniform mat4 matProj;		// P
-	//GLint mvp_location = glGetUniformLocation(program, "MVP");
 	GLint matModel_location = glGetUniformLocation(program, "matModel");
 	GLint matView_location = glGetUniformLocation(program, "matView");
 	GLint matProj_location = glGetUniformLocation(program, "matProj");
 	GLint eyeLocation_location = glGetUniformLocation(program, "eyeLocation");
 
-	// Note that this point is to the +interface+ but we're creating the actual object
+
 	::g_pDebugRendererACTUAL = new cDebugRenderer();
 	::g_pDebugRenderer = (iDebugRenderer*)::g_pDebugRendererACTUAL;
 
@@ -269,25 +244,16 @@ int main(void)
 	}
 
 
-	//Physics Initia
+	//Physics Initialization
 	hGetProckDll = LoadLibraryA("SimplePhysics.dll");
 	physics_library = SIMPLE;
 	f_createPhysicsFactory CreatePhysicsFactory = (f_createPhysicsFactory)GetProcAddress(hGetProckDll, "CreateFactory");
 	gPhysicsFactory = CreatePhysicsFactory();
 	gPhysicsWorld = gPhysicsFactory->CreatePhysicsWorld();
-
 	gPhysicsWorld->SetGravity(g_Gravity);
 
-	//nPhysics::iShape* plane = gPhysicsFactory->CreatePlaneShape(glm::vec3(0.0f), 0.0f);
-	//nPhysics::sRigidBodyDef def;
-	//def.Position = glm::vec3(0.0f, 0.0f, 10.0f);
-	//nPhysics::iRigidBody* rigidBody = gPhysicsFactory->CreateRigidBody(def, plane);
-	//gPhysicsWorld->AddBody(rigidBody);
-
-
-
 	LoadSkinnedMeshModel(::vec_pObjectsToDraw, program);
-
+	g_pSoundManager->InitFmod();
 	LoadModelTypes(::g_pTheVAOMeshManager, program);
 	::g_pSceneManager->loadScene(scene);
 	::LightManager->LoadUniformLocations(program);
@@ -295,21 +261,18 @@ int main(void)
 	LoadModelsIntoScene(::vec_pObjectsToDraw);
 	g_simpleDubugRenderer = new cSimpleDebugRenderer(findObjectByFriendlyName("DebugSphere"), findObjectByFriendlyName("DebugCube"), program);
 
-	//vec_sorted_drawObj = vec_pObjectsToDraw;
-
 	
-	for (unsigned int objIndex = 0;
-		objIndex != (unsigned int)vec_pObjectsToDraw.size();
-		objIndex++)
-	{
-		cGameObject* pCurrentMesh = vec_pObjectsToDraw[objIndex];
-		if (pCurrentMesh->materialDiffuse.a < 1.0f) { vec_transObj.push_back(pCurrentMesh); }
-		else { vec_non_transObj.push_back(pCurrentMesh); }
+	
+	//for (unsigned int objIndex = 0;
+	//	objIndex != (unsigned int)vec_pObjectsToDraw.size();
+	//	objIndex++)
+	//{
+	//	cGameObject* pCurrentMesh = vec_pObjectsToDraw[objIndex];
+	//	if (pCurrentMesh->materialDiffuse.a < 1.0f) { vec_transObj.push_back(pCurrentMesh); }
+	//	else { vec_non_transObj.push_back(pCurrentMesh); }
 
-	}//for ( unsigned int objIndex = 0; 
+	//}//for ( unsigned int objIndex = 0; 
 
-
-	// Get the current time to start with
 	double lastTime = glfwGetTime();
 
 
@@ -318,10 +281,9 @@ int main(void)
 	
 	
 
-
+	//Lua
 	//::p_LuaScripts = new cLuaBrain();
 	//::p_LuaScripts->SetObjectVector(&(::vec_pObjectsToDraw));
-
 	//::p_LuaScripts->LoadScriptFile("example.lua");
 
 
@@ -330,8 +292,7 @@ int main(void)
 	// 1 = 1st pass (the actual scene)
 	// 2 = 2nd pass (rendering what we drew to the output)
 	GLint renderPassNumber_UniLoc = glGetUniformLocation(program, "renderPassNumber");
-	//std::cout << renderPassNumber_UniLoc << std::endl;
-	//*****************************************************************
+
 
 	//Copy All Spheres to new Vec to manipulate them later
 	for (int i = 0; i < vec_pObjectsToDraw.size(); i++)
@@ -388,18 +349,14 @@ int main(void)
 		glEnable( GL_DEPTH_TEST );	// When drawing, checked the existing depth
 		glEnable( GL_CULL_FACE );	// Discared "back facing" triangles
 
-		// Colour and depth buffers are TWO DIFF THINGS.
         glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
-		//mat4x4_ortho(p, -ratio, ratio, -1.f, 1.f, 1.f, -1.f);
+		
 		matProjection = glm::perspective( 1.0f,			// FOV
 			                                ratio,		// Aspect ratio
-			                                0.1f,			// Near clipping plane
+			                                0.1f,		// Near clipping plane
 			                                15000.0f );	// Far clipping plane
 
-
-		//glm::vec3 migpos = findObjectByFriendlyName("mig")->position;
-		//matView = glm::lookAt(camera.Position, migpos, camera.WorldUp);
 
 		matView = camera.GetViewMatrix();
 
@@ -411,7 +368,6 @@ int main(void)
 
 		glUniformMatrix4fv( matView_location, 1, GL_FALSE, glm::value_ptr(matView));
 		glUniformMatrix4fv( matProj_location, 1, GL_FALSE, glm::value_ptr(matProjection));
-		// Do all this ONCE per frame
 		LightManager->CopyLightValuesToShader();
 			
 
@@ -419,11 +375,11 @@ int main(void)
 
 
 
-//	
+	
 
 
 		//std::sort(vec_sorted_drawObj.begin(), vec_sorted_drawObj.end(), transp);
-		std::sort(vec_transObj.begin(), vec_transObj.end(), distToCam);
+		//std::sort(vec_transObj.begin(), vec_transObj.end(), distToCam);
 		
 		cGameObject* pSkyBox = findObjectByFriendlyName("SkyBoxObject");
 		// Place skybox object at camera location
@@ -466,9 +422,9 @@ int main(void)
 
 
 
-
-		DrawScene_Simple(vec_non_transObj, program, 1);
-		DrawScene_Simple(vec_transObj, program, 1);
+		DrawScene_Simple(vec_pObjectsToDraw, program, 1);
+//		DrawScene_Simple(vec_non_transObj, program, 1);
+//		DrawScene_Simple(vec_transObj, program, 1);
 
 		//for ( unsigned int objIndex = 0; 
 		//	  objIndex != (unsigned int)vec_non_transObj.size();

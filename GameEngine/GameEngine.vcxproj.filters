@@ -5,10 +5,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Shader Stuff">
       <UniqueIdentifier>{351c4102-546a-4a75-943c-1f344df3cd6a}</UniqueIdentifier>
     </Filter>
@@ -32,10 +28,6 @@
     </Filter>
     <Filter Include="Phsyics">
       <UniqueIdentifier>{14672551-867a-4658-bcd2-b5e0a931e219}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
     <Filter Include="TextureManager">
       <UniqueIdentifier>{4b3fb560-6cd0-4465-b682-6c9962cb2e85}</UniqueIdentifier>
@@ -109,13 +101,20 @@
     <Filter Include="Ply">
       <UniqueIdentifier>{28cde939-6953-4b0a-8dba-15b3ce32ac62}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="SoudManager">
+      <UniqueIdentifier>{01d53ee0-7df7-42f7-8d36-fb1cd143954f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="theMain.cpp">
-      <Filter>Resource Files\Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="glad.c">
-      <Filter>Resource Files\Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="cShaderManager.cpp">
       <Filter>Shader Stuff</Filter>
@@ -124,10 +123,10 @@
       <Filter>Shader Stuff</Filter>
     </ClCompile>
     <ClCompile Include="PlyFileLoader.cpp">
-      <Filter>Resource Files\Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="OpenGLMeshLoader.cpp">
-      <Filter>Resource Files\Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sModelDrawInfo.cpp">
       <Filter>Mesh Manager</Filter>
@@ -136,10 +135,10 @@
       <Filter>Mesh Manager</Filter>
     </ClCompile>
     <ClCompile Include="DrawObject_call.cpp">
-      <Filter>Resource Files\Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LoadModels.cpp">
-      <Filter>Resource Files\Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DebugRenderer\cDebugRenderer.cpp">
       <Filter>DebugRender</Filter>
@@ -279,10 +278,13 @@
     <ClCompile Include="Ply\CVector3f.cpp">
       <Filter>Ply</Filter>
     </ClCompile>
+    <ClCompile Include="cSoundManager.cpp">
+      <Filter>SoudManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="linmath.h">
-      <Filter>Resource Files\Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="cShaderManager.h">
       <Filter>Shader Stuff</Filter>
@@ -433,6 +435,9 @@
     </ClInclude>
     <ClInclude Include="Ply\CVector3f.h">
       <Filter>Ply</Filter>
+    </ClInclude>
+    <ClInclude Include="cSoundManager.h">
+      <Filter>SoudManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

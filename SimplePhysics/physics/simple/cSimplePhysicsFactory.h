@@ -14,6 +14,8 @@ namespace nPhysics
 		virtual iSphereShape* CreateSphereShape(float radius);
 		virtual iPlaneShape* CreatePlaneShape(const glm::vec3& normal, float constant);
 		virtual iSoftBody* CreateSoftBody(const sSoftBodyDef& sbDef);
+
+		virtual iWreckingBallPhysics* CreateWreckingBall(std::vector<sWreckingBallPNodeDef>& wreckingDef) { return NULL; };
 	};
 }
 

@@ -12,9 +12,9 @@ namespace nPhysics
 
 	}
 
-	cSimplePhysicsWorld::~cSimplePhysicsWorld() 
+	cSimplePhysicsWorld::~cSimplePhysicsWorld()
 	{
-		
+
 	}
 	void cSimplePhysicsWorld::SetDebugRenderer(iDebugRenderer* debugRenderer)
 	{
@@ -96,13 +96,13 @@ namespace nPhysics
 
 	}
 
-	bool TestAABBAABB(glm::vec3 aMax, glm::vec3 aMin,  glm::vec3 bMax, glm::vec3 bMin)
+	bool TestAABBAABB(glm::vec3 aMax, glm::vec3 aMin, glm::vec3 bMax, glm::vec3 bMin)
 	{
 		// Exit with no intersection if separated along an axis
-		if (aMax[0] < bMin[0] || aMin[0] > bMax[0]){
+		if (aMax[0] < bMin[0] || aMin[0] > bMax[0]) {
 			return false;
 		}
-			
+
 		if (aMax[1] < bMin[1] || aMin[1] > bMax[1]) {
 			return false;
 		}
@@ -118,7 +118,7 @@ namespace nPhysics
 	bool cSimplePhysicsWorld::CollideRigidBodySoftBody(cSimpleRigidBody* rigidBody, cSimpleSoftBody* softBody)
 	{
 
-		//AABB
+		//AABB vs AABB broadphase
 		glm::vec3 RigidBodyMin;
 		glm::vec3 RigidBodyMax;
 
@@ -132,7 +132,7 @@ namespace nPhysics
 
 
 
-		if(rigidBody->GetShape()->GetShapeType() == SHAPE_TYPE_SPHERE)
+		if (rigidBody->GetShape()->GetShapeType() == SHAPE_TYPE_SPHERE)
 		{
 			if (TestAABBAABB(RigidBodyMax, RigidBodyMin, SoftBodyMax, SoftBodyMin)) {
 				float sphereRad;
@@ -146,7 +146,7 @@ namespace nPhysics
 
 					if (vecLength < sphereRad)
 					{
-						glm::vec3 position = glm::normalize(v)*(softBody->mNodes[i]->Radius);
+						glm::vec3 position = glm::normalize(v)*(softBody->mNodes[i]->Radius*1.1f);
 
 						if (!softBody->mNodes[i]->IsFixed())
 						{
@@ -224,156 +224,153 @@ namespace nPhysics
 
 			cSimpleRigidBody* rbA = mBodies[idxA];
 
-				for (size_t idxB = 0; idxB < numBodies; idxB++)
+			for (size_t idxB = 0; idxB < numBodies; idxB++)
+			{
+
+				cSimpleRigidBody* rbB = mBodies[idxB];
+				if (rbA != rbB)
 				{
-
-					cSimpleRigidBody* rbB = mBodies[idxB];
-					if (rbA != rbB) 
+					if (CollisionTest(rbA, rbB))
 					{
-						if (CollisionTest(rbA, rbB))
+						if (rbA->GetShape()->GetShapeType() == nPhysics::SHAPE_TYPE_SPHERE && rbB->GetShape()->GetShapeType() == nPhysics::SHAPE_TYPE_SPHERE)
 						{
-							if (rbA->GetShape()->GetShapeType() == nPhysics::SHAPE_TYPE_SPHERE && rbB->GetShape()->GetShapeType() == nPhysics::SHAPE_TYPE_SPHERE)
+
+
+							rbA->mPosition = rbA->mLastPos;
+							rbB->mPosition = rbB->mLastPos;
+
+							float massA = rbA->mMass;
+							float massB = rbB->mMass;
+							float totalMass = massA + massB;
+
+
+
+							float fac1 = massA / totalMass;
+							float fac2 = massB / totalMass;
+
+
+							glm::vec3 x = rbA->mPosition - rbB->mPosition;
+							x = glm::normalize(x);
+
+
+							glm::vec3 v1 = rbA->mVelocity;
+							float x1 = glm::dot(x, v1);
+							glm::vec3 v1x = x * x1;
+							glm::vec3 v1y = v1 - v1x;
+
+							x = x * -1.0f;
+							glm::vec3 v2 = rbB->mVelocity;
+							float x2 = glm::dot(x, v2);
+							glm::vec3 v2x = x * x2;
+							glm::vec3 v2y = v2 - v2x;
+
+							rbA->mVelocity = v1x * (massA - massB) / (massA + massB) + v2x * (2 * massB) / (massA + massB) + v1y;
+							rbB->mVelocity = v1x * (2 * massA) / (massA + massB) + v2x * (massB - massA) / (massA + massB) + v2y;
+							rbA->mVelocity *= 0.95f;
+							rbB->mVelocity *= 0.95f;
+
+
+
+							float rad;
+							rbA->GetShape()->GetSphereRadius(rad);
+							if (abs(rbA->mPosition.y) <= rad + 0.2f)
 							{
-								
-
-								rbA->mPosition = rbA->mLastPos;
-								rbB->mPosition = rbB->mLastPos;
-
-								float massA = rbA->mMass;
-								float massB = rbB->mMass;
-								float totalMass = massA + massB;
-
-
-
-								float fac1 = massA / totalMass;
-								float fac2 = massB / totalMass;
-
-
-								glm::vec3 x = rbA->mPosition - rbB->mPosition;
-								x = glm::normalize(x);
-
-
-								glm::vec3 v1 = rbA->mVelocity;
-								float x1 = glm::dot(x, v1);
-								glm::vec3 v1x = x * x1;
-								glm::vec3 v1y = v1 - v1x;
-
-								x = x * -1.0f;
-								glm::vec3 v2 = rbB->mVelocity;
-								float x2 = glm::dot(x, v2);
-								glm::vec3 v2x = x * x2;
-								glm::vec3 v2y = v2 - v2x;
-
-								rbA->mVelocity = v1x * (massA - massB) / (massA + massB) +  v2x * (2 * massB) / (massA + massB) + v1y;
-								rbB->mVelocity = v1x * (2 * massA) / (massA + massB) + v2x * (massB - massA) / (massA + massB) + v2y;
-								rbA->mVelocity *= 0.95f;
-								rbB->mVelocity *= 0.95f;
-
-							
-
-								float rad;
-								rbA->GetShape()->GetSphereRadius(rad);
-								if (abs(rbA->mPosition.y) <= rad + 0.2f)
-								{
-									if (abs(rbA->mVelocity.x) <= 1.0f
-										&& rbA->mVelocity.y <= 0.1f
+								if (abs(rbA->mVelocity.x) <= 1.0f
+									&& rbA->mVelocity.y <= 0.1f
 									&& abs(rbA->mVelocity.z) <= 1.0f)
-									{
-										rbA->mPosition.y += 0.01;
-										rbA->mVelocity = -(rbB->mVelocity * fac2);
-									}
+								{
+									rbA->mPosition.y += 0.01;
+									rbA->mVelocity = -(rbB->mVelocity * fac2);
 								}
-	
-
-
 							}
 
 
-							if (rbB->GetShape()->GetShapeType() == nPhysics::SHAPE_TYPE_SPHERE && rbA->GetShape()->GetShapeType() == nPhysics::SHAPE_TYPE_PLANE)
+
+						}
+
+
+						if (rbB->GetShape()->GetShapeType() == nPhysics::SHAPE_TYPE_SPHERE && rbA->GetShape()->GetShapeType() == nPhysics::SHAPE_TYPE_PLANE)
+						{
+
+
+							rbB->mPosition = rbB->mLastPos;
+							float radiusB;
+							rbB->GetShape()->GetSphereRadius(radiusB);
+
+							float constA;
+							glm::vec3 normA;
+							rbA->GetShape()->GetPlaneConstant(constA);
+							rbA->GetShape()->GetPlaneNormal(normA);
+
+
+							if (abs(rbB->mVelocity.y) > 1.0f || normA.y != 1.0f)
 							{
-
-
-								rbB->mPosition = rbB->mLastPos;
-								float radiusB;
-								rbB->GetShape()->GetSphereRadius(radiusB);
-
-								float constA;
-								glm::vec3 normA;
-								rbA->GetShape()->GetPlaneConstant(constA);
-								rbA->GetShape()->GetPlaneNormal(normA);
-
-
-								if(abs(rbB->mVelocity.y) > 1.0f || normA.y != 1.0f)
-								{
 								rbB->mVelocity = glm::reflect(rbB->mVelocity, normA);
 								glm::vec3 nComponent = glm::proj(rbB->mVelocity, normA);
 								rbB->mVelocity -= nComponent * 5.0f * dt;
 								//rbB->mVelocity *= 0.995f;
-								}
-								else {
-									rbB->mVelocity *= 0.995f * dt;
-								}
-								
-
+							}
+							else {
+								rbB->mVelocity *= 0.995f * dt;
 							}
 
 
 						}
+
+
 					}
-
 				}
 
+			}
 
 
 
-				if (rbA->GetShape()->GetShapeType() != nPhysics::SHAPE_TYPE_PLANE) {
+			if (rbA->GetShape()->GetShapeType() != nPhysics::SHAPE_TYPE_PLANE) {
 
-					glm::vec3 direction = rbA->mVelocity - rbA->mPosition;
-					direction.y = 0.0f;
-					glm::vec3 rotAxis = glm::normalize(glm::cross(direction, glm::vec3(0.0f, -1.0f, 0.0f)));
-					float angularVel = glm::length(glm::vec3(rbA->mVelocity.x, 0.0f, rbA->mVelocity.z)) * dt;
-					rbA->mAnguralVel = rotAxis * angularVel;
-					glm::mat4 finalRotation(1.0f);
-					finalRotation = glm::rotate(finalRotation, angularVel /rbA->mMass, rotAxis);
-					rbA->mRotation *= finalRotation;
-					
-					// RK4 Integration
-					rbA->mLastPos = rbA->mPosition; 
-					integrate(rbA->mPosition, rbA->mVelocity, mGravity, dt);
-				}
+				glm::vec3 direction = rbA->mVelocity - rbA->mPosition;
+				direction.y = 0.0f;
+				glm::vec3 rotAxis = glm::normalize(glm::cross(direction, glm::vec3(0.0f, -1.0f, 0.0f)));
+				float angularVel = glm::length(glm::vec3(rbA->mVelocity.x, 0.0f, rbA->mVelocity.z)) * dt;
+				rbA->mAnguralVel = rotAxis * angularVel;
+				glm::mat4 finalRotation(1.0f);
+				finalRotation = glm::rotate(finalRotation, angularVel / rbA->mMass, rotAxis);
+				rbA->mRotation *= finalRotation;
 
+				// RK4 Integration
+				rbA->mLastPos = rbA->mPosition;
+				integrate(rbA->mPosition, rbA->mVelocity, mGravity, dt);
+			}
 
-
-
-				//SoftBodies Integration
-				std::vector<cSimpleSoftBody*>::iterator itSoft = mSoftBodies.begin();
-				while(itSoft != mSoftBodies.end())
-				{
-					(*itSoft)->UpdateInternal(dt, mGravity);
-					itSoft++;
-				}
-
-				//SoftBody-RigidBody collision
-
-				itSoft = mSoftBodies.begin();
-				while (itSoft != mSoftBodies.end())
-				{
-					std::vector<cSimpleRigidBody*>::iterator it = mBodies.begin();
-					while (it != mBodies.end())
-					{
-						CollideRigidBodySoftBody(*it, *itSoft);
-						it++;
-					}
-
-					(*itSoft)->UpdateInternal(dt, mGravity);
-					itSoft++;
-				}
 
 
 
 		}
+		std::vector<cSimpleSoftBody*>::iterator itSoft = mSoftBodies.begin();
+		//SoftBodies Integration
+
+		while (itSoft != mSoftBodies.end())
+		{
+			(*itSoft)->UpdateInternal(dt, mGravity);
+			itSoft++;
+		}
+
+		//SoftBody-RigidBody collision
+		itSoft = mSoftBodies.begin();
+		while (itSoft != mSoftBodies.end())
+		{
+			std::vector<cSimpleRigidBody*>::iterator it = mBodies.begin();
+			while (it != mBodies.end())
+			{
+				CollideRigidBodySoftBody(*it, *itSoft);
+				it++;
+			}
+			itSoft++;
+		}
+
+
+
 	}
-	
+
 
 
 	void cSimplePhysicsWorld::integrate(glm::vec3& pos, glm::vec3& vel, glm::vec3 accel, float dt)

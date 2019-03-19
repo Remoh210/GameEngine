@@ -3,6 +3,7 @@
 #include "cBulletRigidBody.h"
 
 
+
 nPhysics::cBulletPhysicsWorld::cBulletPhysicsWorld()
 	: iPhysicsWorld()
 {
@@ -65,12 +66,33 @@ void nPhysics::cBulletPhysicsWorld::SetGravity(const glm::vec3& gravity)
 
 bool nPhysics::cBulletPhysicsWorld::AddBody(iRigidBody* body)
 {
+	//Check Type
+	//If type is BODY_TYPE_RIGID_BODY
 	cBulletRigidBody* bulletRigidBody = dynamic_cast<cBulletRigidBody*>(body);
 	if (!bulletRigidBody)
 	{
 		return false;
 	}
 	mDynamicsWorld->addRigidBody(bulletRigidBody->GetBulletBody());
+
+	//else if type is BODY_TYPE_COMPOUND
+	{
+		cBulletCompoundBody* bulletCompoundBody = dynamic_cast<cBulletCompoundBody*>(body);
+		bulletCompoundBody->AddToWorld(mDynamicsWorld);
+		size_t numRigidBodies = bulletCompoundBody->GetNumRigidBodies();
+		size_t numConstrains = bulletCompoundBody->GetNumConstrains();
+		for (size_t i = 0; i < numRigidBodies; i++)
+		{
+			cBulletRigidBody* rb = bulletCompoundBody->GetRigidBody(c);
+			mDynamicsWorld->addRigidBody(rb);
+		}
+		for (size_t i = 0; i < numConstrains; i++)
+		{
+			btTypedConstraint* constraint = bulletCompoundBody->GetConstraint(c);
+			mDynamicsWorld->addConstraint(constraint);
+		}
+		mCompoundBodies.pushback(bulletCompoundBody);
+	}
 
 	return true;
 
