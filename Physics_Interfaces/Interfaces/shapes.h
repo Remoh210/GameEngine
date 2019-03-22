@@ -28,4 +28,32 @@ namespace nPhysics
 		iPlaneShape(const iPlaneShape& other) : iShape(other) {}
 		iPlaneShape& operator=(const iPlaneShape& other) { return *this; }
 	};
+
+	class iCylinderShape : public iShape
+	{
+	public:
+		virtual ~iCylinderShape() {}
+		virtual float GetCylinderRadius() = 0;
+		virtual float GetCylinderHeight() = 0;
+		virtual int GetCylinderAxis() = 0;
+
+	protected:
+		iCylinderShape() : iShape(SHAPE_TYPE_CYLINDER) {}
+		iCylinderShape(const iCylinderShape& other) : iShape(other) {}
+		iCylinderShape& operator=(const iCylinderShape& other) { return *this; }
+	};
+
+	class iCapsuleShape : public iShape
+	{
+	public:
+		virtual ~iCapsuleShape() {}
+		virtual float GetCapsuleRadius() = 0;
+		virtual float GetCapsuleHeight() = 0;
+		virtual int GetCapsuleAxis() = 0;
+
+	protected:
+		iCapsuleShape() : iShape(SHAPE_TYPE_CAPSULE) {}
+		iCapsuleShape(const iCapsuleShape& other) : iShape(other) {}
+		iCapsuleShape& operator=(const iCapsuleShape& other) { return *this; }
+	};
 }

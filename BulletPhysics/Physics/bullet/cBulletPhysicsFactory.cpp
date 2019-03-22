@@ -27,4 +27,17 @@ namespace nPhysics
 		return new cBulletPlaneShape(normal, constant);
 	}
 
+	iCylinderShape * cBulletPhysicsFactory::CreateCylinderShape(const glm::vec3 & halfExtent, int axis)
+	{
+		return new cBulletCylinderShape(halfExtent, axis);
+	}
+
+	iCapsuleShape* cBulletPhysicsFactory::CreateCapsuleShape(float height, float radius, int axis)
+	{
+		return new cBulletCapsuleShape(height, radius, axis);
+	}
+
+
+
+
 }

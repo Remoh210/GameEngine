@@ -375,6 +375,21 @@ void ProcessAsynKeys(GLFWwindow* window)
 	//									x axis = left and right
 	//									z axis = forward and backward
 	// 
+	cGameObject* ch = findObjectByFriendlyName("capsule");
+	glm::vec3 vel;
+	vel = ch->rigidBody->GetVelocity();
+	
+	
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+		ch->rigidBody->SetVelocity(glm::vec3(50.0f, vel.y, 0.0f));
+	else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+		ch->rigidBody->SetVelocity(glm::vec3(-50.0f, vel.y, 0.0f));
+	else if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+		ch->rigidBody->SetVelocity(glm::vec3(0.0f, vel.y, 50.0f));
+	else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+		ch->rigidBody->SetVelocity(glm::vec3(0.0f, vel.y, -50.0f));
+	else 
+		ch->rigidBody->SetVelocity(glm::vec3(0.0f, vel.y, 0.0f));
 
 	float cameraSpeed = CAMERA_SPEED_SLOW;
 	if ( glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS  )
@@ -387,21 +402,21 @@ void ProcessAsynKeys(GLFWwindow* window)
 	{
 		// Note: The "== GLFW_PRESS" isn't really needed as it's actually "1" 
 		// (so the if() treats the "1" as true...)
+		if (bIsDebugMode) {
+			if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+				camera.ProcessKeyboard(FORWARD, deltaTime);
+			if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+				camera.ProcessKeyboard(BACKWARD, deltaTime);
+			if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+				camera.ProcessKeyboard(LEFT, deltaTime);
+			if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+				camera.ProcessKeyboard(RIGHT, deltaTime);
+			if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
+				camera.ProcessKeyboard(UP, deltaTime);
+			if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
+				camera.ProcessKeyboard(DOWN, deltaTime);
 
-		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-			camera.ProcessKeyboard(FORWARD, deltaTime);
-		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-			camera.ProcessKeyboard(BACKWARD, deltaTime);
-		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-			camera.ProcessKeyboard(LEFT, deltaTime);
-		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-			camera.ProcessKeyboard(RIGHT, deltaTime);
-		if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
-			camera.ProcessKeyboard(UP, deltaTime);
-		if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
-			camera.ProcessKeyboard(DOWN, deltaTime);
-
-
+		}
 	}//if(AreAllModifiersUp(window)
 
 	//const float MIN_LIGHT_BRIGHTNESS = 0.001f;
@@ -418,7 +433,7 @@ void ProcessAsynKeys(GLFWwindow* window)
 			CamDir = glm::normalize(CamDir);
 			CamDir.y = 0.0f;
 			velVec += CamDir * 200.0f * (float)deltaTime;
-			velVec.y = 5.0f;
+			//velVec.y = 5.0f;
 			vec_pSpheres[SphIndex]->rigidBody->SetVelocity(velVec);
 		}
 		if (glfwGetKey(window, GLFW_KEY_S)) {
@@ -430,20 +445,20 @@ void ProcessAsynKeys(GLFWwindow* window)
 			CamDir = glm::normalize(CamDir);
 			CamDir.y = 0.0f;
 			velVec += -CamDir * 200.0f * (float)deltaTime;
-			velVec.y = 5.0f;
+			//velVec.y = 5.0f;
 			vec_pSpheres[SphIndex]->rigidBody->SetVelocity(velVec);
 		}
 
 		if (glfwGetKey(window, GLFW_KEY_D)) {
 			//glm::vec3 CamDir = glm::vec3(camera.Front.x, 0.0f, camera.Front.z);
-//CamDir = glm::normalize(CamDir);
+			//CamDir = glm::normalize(CamDir);
 			glm::vec3 velVec = vec_pSpheres[SphIndex]->rigidBody->GetVelocity();
 			////lets add some speed
 			glm::vec3 CamDir = camera.Right;
 			CamDir = glm::normalize(CamDir);
 			CamDir.y = 0.0f;
 			velVec += CamDir * 200.0f * (float)deltaTime;
-			velVec.y = 5.0f;
+			//velVec.y = 5.0f;
 			vec_pSpheres[SphIndex]->rigidBody->SetVelocity(velVec);
 		}
 		if (glfwGetKey(window, GLFW_KEY_A)) {
@@ -455,7 +470,7 @@ void ProcessAsynKeys(GLFWwindow* window)
 			CamDir = glm::normalize(CamDir);
 			CamDir.y = 0.0f;
 			velVec += - CamDir * 200.0f * (float)deltaTime;
-			velVec.y = 5.0f;
+			//velVec.y = 5.0f;
 			vec_pSpheres[SphIndex]->rigidBody->SetVelocity(velVec);
 		}
 		

@@ -28,7 +28,7 @@ namespace nPhysics
 		virtual void SetMass(float mass) = 0;
 		virtual void SetVelocity(glm::vec3 velocity) = 0;
 		virtual void SettAccel(glm::vec3 accel) = 0;
-		virtual void GetAABB(glm::vec3& minBoundsOut, glm::vec3& maxBoundsOut) = 0;
+		//virtual void GetAABB(glm::vec3& minBoundsOut, glm::vec3& maxBoundsOut) = 0;
 
 
 	protected:

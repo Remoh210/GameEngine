@@ -3,5 +3,5 @@
 
 EXTERN_DLL_EXPORTS nPhysics::iPhysicsFactory* CreateFactory()
 {
-	//return new nPhysics::cBulletPhysicsFactory();
+	return new nPhysics::cBulletPhysicsFactory();
 }

@@ -19,9 +19,11 @@ namespace nPhysics
 		virtual iRigidBody* CreateRigidBody(const sRigidBodyDef& def, iShape* shape) = 0;
 		virtual iSphereShape* CreateSphereShape(float radius) = 0;
 		virtual iPlaneShape* CreatePlaneShape(const glm::vec3& normal, float constant) = 0;
-		virtual iSoftBody* CreateSoftBody(const sSoftBodyDef& sbDef) = 0;
+		virtual iCylinderShape* CreateCylinderShape(const glm::vec3& halfExtent, int axis) = 0;
+		virtual iCapsuleShape* CreateCapsuleShape(float height, float radius, int axis) = 0;
+		//virtual iSoftBody* CreateSoftBody(const sSoftBodyDef& sbDef) = 0;
 
-		virtual iWreckingBallPhysics* CreateWreckingBall(std::vector<sWreckingBallPNodeDef>& wreckingDef) = 0;
+		//virtual iWreckingBallPhysics* CreateWreckingBall(std::vector<sWreckingBallPNodeDef>& wreckingDef) = 0;
 
 	};
 

@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameEngine", "GameEngine\GameEngine.vcxproj", "{F63D2F6C-8CBF-47DF-A2AE-BD1354C271AC}"
 	ProjectSection(ProjectDependencies) = postProject
-		{F6A4CFFF-BF94-4DE8-A9A6-0C1A07A7AC83} = {F6A4CFFF-BF94-4DE8-A9A6-0C1A07A7AC83}
+		{E3A9F462-FC4D-48DD-B144-EF8BB9CE5E2C} = {E3A9F462-FC4D-48DD-B144-EF8BB9CE5E2C}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Physics_Interfaces", "Physics_Interfaces\Physics_Interfaces.vcxproj", "{D62DA76F-9D9F-40B5-A183-E25D886DFF18}"

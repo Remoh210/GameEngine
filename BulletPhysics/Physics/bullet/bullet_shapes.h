@@ -46,4 +46,51 @@ namespace nPhysics
 
 	};
 
+	class cBulletCylinderShape : public iCylinderShape
+	{
+	public:
+		cBulletCylinderShape(const glm::vec3& halfExtents, int axis);
+		virtual ~cBulletCylinderShape();
+		virtual float GetCylinderRadius();
+		virtual float GetCylinderHeight();
+		virtual int GetCylinderAxis();
+		inline btCollisionShape* GetBulletShape()
+		{
+			return mBulletShape;
+		}
+
+	protected:
+		float mRadius;
+		int mAxis;
+		cBulletCylinderShape(const cBulletCylinderShape& other) : iCylinderShape(other) {}
+		cBulletCylinderShape& operator=(const cBulletCylinderShape& other) { return *this; }
+		btCollisionShape* mBulletShape;
+
+
+	};
+
+	class cBulletCapsuleShape : public iCapsuleShape
+	{
+	public:
+		cBulletCapsuleShape(float height, float radius, int axis);
+		virtual ~cBulletCapsuleShape();
+		virtual float GetCapsuleRadius();
+		virtual float GetCapsuleHeight();
+		virtual int GetCapsuleAxis();
+		inline btCollisionShape* GetBulletShape()
+		{
+			return mBulletShape;
+		}
+
+	protected:
+		float mRadius;
+		int mAxis;
+		float mHeight;
+		cBulletCapsuleShape(const cBulletCapsuleShape& other) : iCapsuleShape(other) {}
+		cBulletCapsuleShape& operator=(const cBulletCapsuleShape& other) { return *this; }
+		btCollisionShape* mBulletShape;
+
+
+	};
+
 }

@@ -127,12 +127,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Interfaces\eBodyType.h" />
+    <ClInclude Include="Interfaces\iCilinderShape.h" />
     <ClInclude Include="Interfaces\iVehicle.h" />
     <ClInclude Include="Interfaces\iWreckingBallPhysics.h" />
     <ClInclude Include="Interfaces\sSoftBodyDef.h" />
     <ClInclude Include="Interfaces\iCollisionBody.h" />
     <ClInclude Include="Interfaces\eShapeType.h" />
-    <ClInclude Include="Interfaces\iDebugRenderer.h" />
     <ClInclude Include="Interfaces\iPhysicsFactory.h" />
     <ClInclude Include="Interfaces\iPhysicsWorld.h" />
     <ClInclude Include="Interfaces\iRigidBody.h" />

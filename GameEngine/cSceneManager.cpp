@@ -496,84 +496,84 @@ bool cSceneManager::loadScene(std::string filename) {
 			std::string type = GameObject[i]["RigidBody"]["Type"].GetString();
 			if (type == "CLOTH")
 			{
-				//nPhysics::iSoftBody = new
-				nPhysics::sSoftBodyDef def;
-				def.SpringConstant = GameObject[i]["RigidBody"]["SpringConstant"].GetFloat();
-				glm::vec3 cornerA;
-				glm::vec3 cornerB;
-				glm::vec3 cornerC;
+				////nPhysics::iSoftBody = new
+				//nPhysics::sSoftBodyDef def;
+				//def.SpringConstant = GameObject[i]["RigidBody"]["SpringConstant"].GetFloat();
+				//glm::vec3 cornerA;
+				//glm::vec3 cornerB;
+				//glm::vec3 cornerC;
 
-				const rapidjson::Value& jsonCornerA = GameObject[i]["RigidBody"]["CornerA"];
-				for (int i = 0; i < 3; i++)
-				{
-					cornerA[i] = jsonCornerA[i].GetFloat();
-				}
-				const rapidjson::Value& jsonCornerB = GameObject[i]["RigidBody"]["CornerB"];
-				for (int i = 0; i < 3; i++)
-				{
-					cornerB[i] = jsonCornerB[i].GetFloat();
-				}
-				const rapidjson::Value& jsonCornerC = GameObject[i]["RigidBody"]["CornerC"];
-				for (int i = 0; i < 3; i++)
-				{
-					cornerC[i] = jsonCornerC[i].GetFloat();
-				}
-
-
-				int numNodesAtoB = GameObject[i]["RigidBody"]["NumNodesAB"].GetInt();
-				int numNodesAtoC = GameObject[i]["RigidBody"]["NumNodesAC"].GetInt();
-				glm::vec3 position(0.f);
-				glm::vec3 test = cornerB - cornerA;
-				glm::vec3 sepAtoB((cornerB - cornerA) / (float)(numNodesAtoB - 1));
-				glm::vec3 sepAtoC((cornerC - cornerA) / (float)(numNodesAtoC - 1));
-
-				for (int idxB = 0; idxB < numNodesAtoC; idxB++)
-				{
-					
-					for (int idxA = 0; idxA < numNodesAtoB; idxA++)
-					{
-						
-						def.Nodes.push_back(nPhysics::sSoftBodyNodeDef(cornerA + sepAtoB * float(idxA) + sepAtoC * float(idxB), 1.0f));
-						position.x += 5.0f;
-					}
-					position.y += 5.0f;
-					position.x = 0.f;
-				}
-
-				for (int indexm = 0; indexm < numNodesAtoB; indexm++)
-				{
-					def.Nodes[indexm].Mass = 0;
-
-				}
+				//const rapidjson::Value& jsonCornerA = GameObject[i]["RigidBody"]["CornerA"];
+				//for (int i = 0; i < 3; i++)
+				//{
+				//	cornerA[i] = jsonCornerA[i].GetFloat();
+				//}
+				//const rapidjson::Value& jsonCornerB = GameObject[i]["RigidBody"]["CornerB"];
+				//for (int i = 0; i < 3; i++)
+				//{
+				//	cornerB[i] = jsonCornerB[i].GetFloat();
+				//}
+				//const rapidjson::Value& jsonCornerC = GameObject[i]["RigidBody"]["CornerC"];
+				//for (int i = 0; i < 3; i++)
+				//{
+				//	cornerC[i] = jsonCornerC[i].GetFloat();
+				//}
 
 
-				for (int idxB = 0; idxB < numNodesAtoC - 1; idxB++)
-				{
+				//int numNodesAtoB = GameObject[i]["RigidBody"]["NumNodesAB"].GetInt();
+				//int numNodesAtoC = GameObject[i]["RigidBody"]["NumNodesAC"].GetInt();
+				//glm::vec3 position(0.f);
+				//glm::vec3 test = cornerB - cornerA;
+				//glm::vec3 sepAtoB((cornerB - cornerA) / (float)(numNodesAtoB - 1));
+				//glm::vec3 sepAtoC((cornerC - cornerA) / (float)(numNodesAtoC - 1));
 
-					for (int idxA = 0; idxA < numNodesAtoB - 1; idxA++)
-					{
-						int index = idxA + idxB * numNodesAtoB;
-						def.Springs.push_back(std::make_pair(index, index + 1));
-						def.Springs.push_back(std::make_pair(index, index + numNodesAtoB));
-					}
+				//for (int idxB = 0; idxB < numNodesAtoC; idxB++)
+				//{
+				//	
+				//	for (int idxA = 0; idxA < numNodesAtoB; idxA++)
+				//	{
+				//		
+				//		def.Nodes.push_back(nPhysics::sSoftBodyNodeDef(cornerA + sepAtoB * float(idxA) + sepAtoC * float(idxB), 1.0f));
+				//		position.x += 5.0f;
+				//	}
+				//	position.y += 5.0f;
+				//	position.x = 0.f;
+				//}
 
-				}
-				int  numNodes = numNodesAtoB * numNodesAtoC;
-				for (int idxA = 0; idxA < numNodesAtoB - 1; idxA++)
-				{
-					def.Springs.push_back(std::make_pair(numNodes - idxA - 1, numNodes - idxA - 2));
-				}
+				//for (int indexm = 0; indexm < numNodesAtoB; indexm++)
+				//{
+				//	def.Nodes[indexm].Mass = 0;
 
-				for (int idxB = 1; idxB < numNodesAtoC; idxB++)
-				{
-					int index = (numNodesAtoB * idxB) - 1;
-					def.Springs.push_back(std::make_pair(index, index + numNodesAtoB));
-				}
+				//}
 
 
-				nPhysics::iSoftBody* curSoftBody = gPhysicsFactory->CreateSoftBody(def);
-				CurModel->softBody = curSoftBody;
-				gPhysicsWorld->AddBody(curSoftBody);
+				//for (int idxB = 0; idxB < numNodesAtoC - 1; idxB++)
+				//{
+
+				//	for (int idxA = 0; idxA < numNodesAtoB - 1; idxA++)
+				//	{
+				//		int index = idxA + idxB * numNodesAtoB;
+				//		def.Springs.push_back(std::make_pair(index, index + 1));
+				//		def.Springs.push_back(std::make_pair(index, index + numNodesAtoB));
+				//	}
+
+				//}
+				//int  numNodes = numNodesAtoB * numNodesAtoC;
+				//for (int idxA = 0; idxA < numNodesAtoB - 1; idxA++)
+				//{
+				//	def.Springs.push_back(std::make_pair(numNodes - idxA - 1, numNodes - idxA - 2));
+				//}
+
+				//for (int idxB = 1; idxB < numNodesAtoC; idxB++)
+				//{
+				//	int index = (numNodesAtoB * idxB) - 1;
+				//	def.Springs.push_back(std::make_pair(index, index + numNodesAtoB));
+				//}
+
+
+				//nPhysics::iSoftBody* curSoftBody = gPhysicsFactory->CreateSoftBody(def);
+				//CurModel->softBody = curSoftBody;
+				//gPhysicsWorld->AddBody(curSoftBody);
 
 			}
 
@@ -606,6 +606,7 @@ bool cSceneManager::loadScene(std::string filename) {
 
 				float planeConst = GameObject[i]["RigidBody"]["Constant"].GetFloat();
 
+
 				const rapidjson::Value& NormArray = GameObject[i]["RigidBody"]["Normal"];
 				glm::vec3 norm;
 				for (int i = 0; i < 3; i++)
@@ -613,6 +614,61 @@ bool cSceneManager::loadScene(std::string filename) {
 					norm[i] = NormArray[i].GetFloat();
 				}
 				CurShape = gPhysicsFactory->CreatePlaneShape(norm, planeConst);
+
+				nPhysics::iRigidBody* rigidBody = gPhysicsFactory->CreateRigidBody(def, CurShape);
+				CurModel->rigidBody = rigidBody;
+				gPhysicsWorld->AddBody(rigidBody);
+
+			}
+			else if (type == "CYLINDER")
+			{
+
+				nPhysics::iShape* CurShape = NULL;
+				nPhysics::sRigidBodyDef def;
+
+				//in Radians
+				def.Position = CurModel->position;
+				def.Mass = GameObject[i]["RigidBody"]["Mass"].GetFloat();
+
+				const rapidjson::Value& ExtentsArray = GameObject[i]["RigidBody"]["HalfExtents"];
+				glm::vec3 hE;
+				for (int i = 0; i < 3; i++)
+				{
+					hE[i] = ExtentsArray[i].GetFloat();
+				}
+				int axis = GameObject[i]["RigidBody"]["Axis"].GetInt();
+
+				CurShape = gPhysicsFactory->CreateCylinderShape(hE, axis);
+
+				nPhysics::iRigidBody* rigidBody = gPhysicsFactory->CreateRigidBody(def, CurShape);
+				CurModel->rigidBody = rigidBody;
+				gPhysicsWorld->AddBody(rigidBody);
+
+			}
+			else if (type == "CAPSULE")
+			{
+
+				nPhysics::iShape* CurShape = NULL;
+				nPhysics::sRigidBodyDef def;
+
+				//in Radians
+				def.Position = CurModel->position;
+				def.Mass = GameObject[i]["RigidBody"]["Mass"].GetFloat();
+
+				float radius = GameObject[i]["RigidBody"]["Radius"].GetFloat();
+				float height = GameObject[i]["RigidBody"]["Height"].GetFloat();
+
+				int axis = GameObject[i]["RigidBody"]["Axis"].GetInt();
+
+				CurShape = gPhysicsFactory->CreateCapsuleShape(height, radius, axis);
+
+				if (GameObject[i]["RigidBody"].HasMember("IsPlayer")) 
+				{
+					if (GameObject[i]["RigidBody"]["IsPlayer"].GetBool() == true) 
+					{
+						def.isPlayer = true;
+					}
+				}
 
 				nPhysics::iRigidBody* rigidBody = gPhysicsFactory->CreateRigidBody(def, CurShape);
 				CurModel->rigidBody = rigidBody;

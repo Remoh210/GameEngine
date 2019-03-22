@@ -172,6 +172,112 @@
               "Mass": 10.0
           }
       },
+      {
+           "Name": "capsule",
+           "Mesh": "capsule.ply",
+           "Visible": true,
+           "Use_Physics": true,
+           "Wireframe": false,
+           "Position": [
+               -80.0,
+               2.0,
+               -50.0
+           ],
+           "DiffuseRGB_Alpha": [
+               0.0,
+               0.0,
+               0.0,
+               1.0
+           ],
+           "SpecularRGB_Alpha": [
+               1.0,
+               1.0,
+               1.0,
+               100.0
+           ],
+           "Rotation": [
+               0.0,
+               0.0,
+               0.0
+           ],
+           "Scale": [
+               5.0,
+               5.0,
+               5.0
+           ],
+           "Textures": [
+               {
+                   "Name": "earthTex.bmp",
+                   "Strength": 1.0
+               },
+               {
+                   "Name": "testTex.bmp",
+                   "Strength": 0.0
+               }
+           ],
+           "RigidBody": {
+               "Type": "CAPSULE",
+               "Axis": 1,
+               "Radius": 5.0,
+               "Height": 60.0,
+               "Mass": 200.0,
+              "IsPlayer" : true
+           }
+       },
+       {
+            "Name": "cylinder",
+            "Mesh": "cylinder.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                -100.0,
+                200.0,
+                -50.0
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Scale": [
+                5.0,
+                10.0,
+                5.0
+            ],
+            "Textures": [
+                {
+                    "Name": "earthTex.bmp",
+                    "Strength": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "CYLINDER",
+                "Axis": 1,
+                "HalfExtents": [
+                    5.0,
+                    10.0,
+                    0.0
+                ],
+                "Mass": 20.0
+            }
+      },
 	   {
           "Name": "earth1",
           "Mesh": "earth.ply",

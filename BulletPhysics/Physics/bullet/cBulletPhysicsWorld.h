@@ -1,5 +1,6 @@
 #pragma once
 #include <Interfaces/iPhysicsWorld.h>
+
 #include "btBulletDynamicsCommon.h"
 #include <stdio.h>
 
@@ -9,8 +10,7 @@ namespace nPhysics {
 	public:
 		cBulletPhysicsWorld();
 		~cBulletPhysicsWorld();
-		void SetDebugRenderer(iDebugRenderer* debugRenderer);
-		void DrawDebug();
+		void DebugDrawWorld(int shaderID, const glm::mat4& viewMatrix, float zoom, int width, int height);
 
 		void SetGravity(const glm::vec3& gravity);
 		bool AddBody(iRigidBody* body);

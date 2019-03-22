@@ -245,8 +245,8 @@ int main(void)
 
 
 	//Physics Initialization
-	hGetProckDll = LoadLibraryA("SimplePhysics.dll");
-	physics_library = SIMPLE;
+	hGetProckDll = LoadLibraryA("BulletPhysics.dll");
+	physics_library = BULLET;
 	f_createPhysicsFactory CreatePhysicsFactory = (f_createPhysicsFactory)GetProcAddress(hGetProckDll, "CreateFactory");
 	gPhysicsFactory = CreatePhysicsFactory();
 	gPhysicsWorld = gPhysicsFactory->CreatePhysicsWorld();
@@ -298,7 +298,8 @@ int main(void)
 	for (int i = 0; i < vec_pObjectsToDraw.size(); i++)
 	{
 		if (vec_pObjectsToDraw[i]->rigidBody != NULL) {
-			if (vec_pObjectsToDraw[i]->rigidBody->GetShape()->GetShapeType() == nPhysics::SHAPE_TYPE_SPHERE) {
+			if (vec_pObjectsToDraw[i]->rigidBody->GetShape()->GetShapeType() != nPhysics::SHAPE_TYPE_PLANE)
+			{
 				vec_pSpheres.push_back(vec_pObjectsToDraw[i]);
 			}
 		}
@@ -716,9 +717,6 @@ cGameObject* findObjectByFriendlyName(std::string theNameToFind)
 {
 	for ( unsigned int index = 0; index != vec_pObjectsToDraw.size(); index++ )
 	{
-		// Is this it? 500K - 1M
-		// CPU limited Memory delay = 0
-		// CPU over powered (x100 x1000) Memory is REAAAAALLY SLOW
 		if ( vec_pObjectsToDraw[index]->friendlyName == theNameToFind )
 		{
 			return vec_pObjectsToDraw[index];
