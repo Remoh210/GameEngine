@@ -2,10 +2,11 @@
 #include "globalStuff.h"
 
 
-cSimpleDebugRenderer::cSimpleDebugRenderer(cGameObject* mUnitSphere, cGameObject* mUnitCube, GLuint IDprogram)
+cSimpleDebugRenderer::cSimpleDebugRenderer(cGameObject* capsule, cGameObject* mUnitSphere, cGameObject* mUnitCube, GLuint IDprogram)
 	:mUnitSphere(mUnitSphere),
 	mUnitCube(mUnitCube),
-	mShaderProgram(IDprogram)
+	mShaderProgram(IDprogram),
+	mCapsule(capsule)
 {
 
 }
@@ -32,4 +33,16 @@ void cSimpleDebugRenderer::drawCube(glm::vec3 pos, float side)
 	mUnitCube->bDontLight = true;
 	DrawObject(mUnitCube, iden, mShaderProgram);
 	mUnitCube->bIsVisible = false;
+}
+
+void cSimpleDebugRenderer::drawCapsule(glm::vec3 pos)
+{
+	glm::mat4 iden(1.0f);
+	mCapsule->position = pos;
+	mCapsule->setDiffuseColour(glm::vec3(1.0f, 0.0f, 0.0f));
+	mCapsule->bIsVisible = true;
+	mCapsule->bDontLight = true;
+	mUnitSphere->setUniformScale(20.0f);
+	DrawObject(mUnitCube, iden, mShaderProgram);
+	mCapsule->bIsVisible = false;
 }

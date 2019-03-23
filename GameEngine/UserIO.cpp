@@ -27,6 +27,7 @@ void ManageScene(GLFWwindow* window);
 bool bIsPicked = false;
 cGameObject* closedModel;
 bool bMouseInWindow = false;
+bool bIsRunning = false;
 
 bool IsPicked = false;
 void commandsInterface();
@@ -107,6 +108,16 @@ void key_callback( GLFWwindow* window,
 	if (key == GLFW_KEY_ENTER && action == GLFW_PRESS)
 	{
 		bIsDebugMode = !bIsDebugMode;
+		if (camera.mCameraType == THIRD_PERSON)
+		{
+			camera.setFreeCamera();
+		}
+		else
+		{
+			
+			camera.mCameraType = THIRD_PERSON;
+		}
+		
 
 
 	}
@@ -349,7 +360,8 @@ bool IsAltDown(GLFWwindow* window)
 
 bool AreAllModifiersUp(GLFWwindow* window)
 {
-	if ( IsShiftDown(window) )	{ return false;	}
+	if (IsShiftDown(window)) { return false; }
+
 	if ( IsCtrlDown(window) )	{ return false;	} 
 	if ( IsAltDown(window) )	{ return false; }
 	// Yup, they are all UP
@@ -375,24 +387,53 @@ void ProcessAsynKeys(GLFWwindow* window)
 	//									x axis = left and right
 	//									z axis = forward and backward
 	// 
-	cGameObject* ch = findObjectByFriendlyName("capsule");
+	cGameObject* ch = findObjectByFriendlyName("chan");
 	glm::vec3 vel;
 	vel = ch->rigidBody->GetVelocity();
 	
 	if (!bIsDebugMode) {
 		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-			ch->rigidBody->SetVelocity(glm::vec3(50.0f, vel.y, 0.0f));
+		{
+			glm::vec3 velVec = vec_pSpheres[SphIndex]->rigidBody->GetVelocity();
+			glm::vec3 CamDir = camera.getDirectionVector();
+			
+			if (IsShiftDown(window)) {
+				velVec = CamDir * 10000.0f * (float)deltaTime;
+				ch->rigidBody->SetVelocity(velVec);
+				ch->currentAnimation = "Run-forward"; 
+			}
+			else{
+				velVec = CamDir * 5000.0f * (float)deltaTime;
+				ch->rigidBody->SetVelocity(velVec);
+				ch->currentAnimation = "Walk-forward";
+			}
+			
+			
+		}
 		else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-			ch->rigidBody->SetVelocity(glm::vec3(-50.0f, vel.y, 0.0f));
-		else if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-			ch->rigidBody->SetVelocity(glm::vec3(0.0f, vel.y, 50.0f));
-		else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-			ch->rigidBody->SetVelocity(glm::vec3(0.0f, vel.y, -50.0f));
+		{
+			glm::vec3 velVec = vec_pSpheres[SphIndex]->rigidBody->GetVelocity();
+			glm::vec3 CamDir = camera.getDirectionVector();
+			velVec = -CamDir * 3000.0f * (float)deltaTime;
+			ch->rigidBody->SetVelocity(velVec);
+			ch->currentAnimation = "Walk-backward";
+
+		}
 		else
+		{
 			ch->rigidBody->SetVelocity(glm::vec3(0.0f, vel.y, 0.0f));
+			ch->currentAnimation = "Idle";
+		}
+		//else if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+		//	//ch->rigidBody->SetVelocity(glm::vec3(0.0f, vel.y, 50.0f));
+		//else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+		//	//ch->rigidBody->SetVelocity(glm::vec3(0.0f, vel.y, -50.0f));
+	
+			
 	}
 	else
 	{
+		ch->currentAnimation = "Idle";
 		ch->rigidBody->SetVelocity(glm::vec3(0.0f, vel.y, 0.0f));
 	}
 	float cameraSpeed = CAMERA_SPEED_SLOW;
@@ -429,14 +470,15 @@ void ProcessAsynKeys(GLFWwindow* window)
 	if ( IsCtrlDown(window) )
 	{
 		if (glfwGetKey(window, GLFW_KEY_W)) {
+
 			//glm::vec3 CamDir = glm::vec3(camera.Front.x, 0.0f, camera.Front.z);
 			//CamDir = glm::normalize(CamDir);
 			glm::vec3 velVec = vec_pSpheres[SphIndex]->rigidBody->GetVelocity();
 			////lets add some speed
-			glm::vec3 CamDir = camera.Front - camera.Position;
+			glm::vec3 CamDir = camera.Front;
 			CamDir = glm::normalize(CamDir);
 			CamDir.y = 0.0f;
-			velVec += CamDir * 200.0f * (float)deltaTime;
+			velVec = CamDir * 2000.0f * (float)deltaTime;
 			//velVec.y = 5.0f;
 			vec_pSpheres[SphIndex]->rigidBody->SetVelocity(velVec);
 		}
@@ -445,10 +487,10 @@ void ProcessAsynKeys(GLFWwindow* window)
 			//CamDir = glm::normalize(CamDir);
 			glm::vec3 velVec = vec_pSpheres[SphIndex]->rigidBody->GetVelocity();
 			////lets add some speed
-			glm::vec3 CamDir = camera.Front - camera.Position;
+			glm::vec3 CamDir = camera.Front;
 			CamDir = glm::normalize(CamDir);
 			CamDir.y = 0.0f;
-			velVec += -CamDir * 200.0f * (float)deltaTime;
+			velVec = -CamDir * 2000.0f * (float)deltaTime;
 			//velVec.y = 5.0f;
 			vec_pSpheres[SphIndex]->rigidBody->SetVelocity(velVec);
 		}
@@ -461,7 +503,7 @@ void ProcessAsynKeys(GLFWwindow* window)
 			glm::vec3 CamDir = camera.Right;
 			CamDir = glm::normalize(CamDir);
 			CamDir.y = 0.0f;
-			velVec += CamDir * 200.0f * (float)deltaTime;
+			velVec = CamDir * 2000.0f * (float)deltaTime;
 			//velVec.y = 5.0f;
 			vec_pSpheres[SphIndex]->rigidBody->SetVelocity(velVec);
 		}
@@ -473,7 +515,7 @@ void ProcessAsynKeys(GLFWwindow* window)
 			glm::vec3 CamDir = camera.Right;
 			CamDir = glm::normalize(CamDir);
 			CamDir.y = 0.0f;
-			velVec += - CamDir * 200.0f * (float)deltaTime;
+			velVec = - CamDir * 2000.0f * (float)deltaTime;
 			//velVec.y = 5.0f;
 			vec_pSpheres[SphIndex]->rigidBody->SetVelocity(velVec);
 		}

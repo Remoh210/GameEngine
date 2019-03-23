@@ -316,6 +316,10 @@ void LoadModelTypes( cVAOMeshManager* pTheVAOMeshManager, GLuint shaderProgramID
 	sphereInfo.meshFileName = "Sphere_320.ply";			// "Sphere_320_faces_xyz.ply";
 	pTheVAOMeshManager->LoadModelIntoVAO(sphereInfo, shaderProgramID);
 
+	sModelDrawInfo capsule;
+	capsule.meshFileName = "capsule.ply";			// "Sphere_320_faces_xyz.ply";
+	pTheVAOMeshManager->LoadModelIntoVAO(capsule, shaderProgramID);
+
 	sModelDrawInfo sphereInvertedNormalsInfo;
 	sphereInvertedNormalsInfo.meshFileName = "Sphere_320_faces_xyz_n_GARBAGE_uv_INVERTED_NORMALS.ply";			// "Sphere_320_faces_xyz.ply";
 	pTheVAOMeshManager->LoadModelIntoVAO(sphereInvertedNormalsInfo, shaderProgramID);
@@ -399,7 +403,6 @@ void LoadModelsIntoScene( std::vector<cGameObject*> &vec_pObjectsToDraw )
 		pDebugCube->friendlyName = "DebugCube";
 		float scale = 1.0f;
 		pDebugCube->nonUniformScale = glm::vec3(scale, scale, scale);
-		pDebugCube->bDontLight = "cube.ply";
 		pDebugCube->meshName = "cube.ply";
 		pDebugCube->bIsWireFrame = true;
 		pDebugCube->position = glm::vec3(0.0f, 10.0f, 0.0f);
@@ -409,7 +412,27 @@ void LoadModelsIntoScene( std::vector<cGameObject*> &vec_pObjectsToDraw )
 		//pDebugCube->pDebugRenderer = ::g_pDebugRenderer;
 		vec_pObjectsToDraw.push_back(pDebugCube);
 	}
+
+
+	{
+		cGameObject* pDebugcapsule = new cGameObject();
+		pDebugcapsule->setDiffuseColour(glm::vec3(1.0f, 0.0f, 0.0f));
+		pDebugcapsule->friendlyName = "DebugCapsule";
+		float scale = 5.0f;
+		pDebugcapsule->nonUniformScale = glm::vec3(scale, scale, scale);
+		pDebugcapsule->bDontLight = "capsule.ply";
+		pDebugcapsule->meshName = "capsule.ply";
+		pDebugcapsule->bIsWireFrame = true;
+		pDebugcapsule->position = glm::vec3(0.0f, 10.0f, 0.0f);
+		pDebugcapsule->bIsUpdatedByPhysics = false;
+		pDebugcapsule->bIsVisible = false;
+		pDebugcapsule->bIsDebug = true;
+		//pDebugcapsule->pDebugRenderer = ::g_pDebugRenderer;
+		vec_pObjectsToDraw.push_back(pDebugcapsule);
+	}
 	
+
+
 
 
 

@@ -238,6 +238,8 @@
       "Animation": {
               "Idle" : "assets/models/FBX/chan-idle.fbx",
               "Walk-forward" : "assets/models/FBX/chan-walk-forward.fbx",
+              "Walk-backward" : "assets/models/FBX/chan-walk-backward.fbx",
+              "Run-forward" : "assets/models/FBX/chan-run-forward.fbx",
               "Action1" : "assets/models/FBX/chan-punch-left.fbx",
               "Action2" : "assets/models/FBX/chan-punch-right.fbx",
               "Action3" : "assets/models/FBX/chan-punch-3.fbx",
@@ -249,7 +251,7 @@
           "Wireframe": false,
           "Position": [
               0.0,
-              10.0,
+              2.0,
               -30.0
           ],
           "DiffuseRGB_Alpha": [
@@ -285,9 +287,12 @@
               }
           ],
           "RigidBody": {
-              "Type": "SPHERE",
-              "Radius": 10.0,
-              "Mass": 10.0
+              "Type": "CAPSULE",
+              "Axis": 1,
+              "Radius": 5.0,
+              "Height": 30.0,
+              "Mass": 200.0,
+             "IsPlayer" : true
           }
       },
       {

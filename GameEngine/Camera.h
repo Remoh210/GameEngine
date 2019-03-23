@@ -6,8 +6,13 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include <vector>
+#include "cGameObject.h"
 
-
+enum Camera_Type
+{
+	FREE,
+	THIRD_PERSON
+};
 
 
 enum Camera_Movement {
@@ -41,9 +46,12 @@ public:
 	float MouseSensitivity;
 	float Zoom;
 	bool b_controlledByScript;
+	cGameObject* mTarget;
+	Camera_Type mCameraType;
 	glm::mat4 newViewMat;
 
-	Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM)
+	Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH)
+		: Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM)
 	{
 		Position = position;
 		WorldUp = up;
@@ -51,6 +59,14 @@ public:
 		Pitch = pitch;
 		updateCameraVectors();
 		b_controlledByScript = false;
+		//if(target != NULL)
+		//{
+			mCameraType = THIRD_PERSON;
+		//}
+		//else
+		//{
+			mCameraType = FREE;
+		//}
 		glm::mat4 newViewMat = glm::mat4(0.0f);
 	}
 	// Constructor with scalar values
@@ -71,8 +87,21 @@ public:
 	// Returns the view matrix calculated using Euler Angles and the LookAt Matrix
 	glm::mat4 GetViewMatrix()
 	{
-		if (!this->b_controlledByScript) { return glm::lookAt(Position, Position + Front, Up);}
-		else { return newViewMat; }
+		//if (!this->b_controlledByScript) { return glm::lookAt(Position, Position + Front, Up);}
+		/*else { return newViewMat; }*/
+
+		switch (mCameraType)
+		{
+		case FREE:
+			return glm::lookAt(Position, Position + Front, Up);
+			break;
+		case THIRD_PERSON:
+			return glm::lookAt(Position, mTarget->position, glm::vec3(0.0f, 1.0f, 0.0f));
+			break;
+		default:
+			break;
+		}
+
 	}
 
 	// Processes input received from any keyboard-like input system. Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)
@@ -116,6 +145,20 @@ public:
 	}
 
 
+	void setThirdPerson(cGameObject* target)
+	{
+		mTarget = target;
+		mCameraType = THIRD_PERSON;
+	}
+
+
+	void setFreeCamera()
+	{
+		Front = glm::vec3(0.0f, 0.0f, -1.0f);
+		mCameraType = FREE;
+	}
+
+
 	//void ProcessMouseScroll(float yoffset)
 	//{
 	//	if (Zoom >= 1.0f && Zoom <= 45.0f)
@@ -126,25 +169,81 @@ public:
 	//		Zoom = 45.0f;
 	//}
 
-private:
-	
+
+	glm::vec3 getDirectionVector()
+	{
+		glm::vec3 orthoFront = Front - Position;
+		orthoFront.y = 0.0f;
+		return glm::normalize(orthoFront);
+	}
+
+
 	void updateCameraVectors()
 	{
-		glm::vec3 front;
-		front.x = cos(glm::radians(Yaw)) * cos(glm::radians(Pitch));
-		front.y = sin(glm::radians(Pitch));
-		front.z = sin(glm::radians(Yaw)) * cos(glm::radians(Pitch));
-		Front = glm::normalize(front);
-		Right = glm::normalize(glm::cross(Front, WorldUp));  
-		Up = glm::normalize(glm::cross(Right, Front));
+		//glm::vec3 front;
+		//front.x = cos(glm::radians(Yaw)) * cos(glm::radians(Pitch));
+		//front.y = sin(glm::radians(Pitch));
+		//front.z = sin(glm::radians(Yaw)) * cos(glm::radians(Pitch));
+		//Front = glm::normalize(front);
+		//Right = glm::normalize(glm::cross(Front, WorldUp));  
+		//Up = glm::normalize(glm::cross(Right, Front));
+
+
+
+
+
+
+
+		switch (mCameraType)
+		{
+		case FREE:
+		{
+			glm::vec3 front;
+			front.x = cos(glm::radians(Yaw)) * cos(glm::radians(Pitch));
+			front.y = sin(glm::radians(Pitch));
+			front.z = sin(glm::radians(Yaw)) * cos(glm::radians(Pitch));
+			Front = glm::normalize(front);
+			Right = glm::normalize(glm::cross(Front, WorldUp));
+			Up = glm::normalize(glm::cross(Right, Front));
+		}
+		break;
+		case THIRD_PERSON:
+		{
+			// LookAt by GameObject
+			Front = mTarget->position;
+			//front = m_cameraGO->position;
+			//Front += glm::vec3(0.0f, 50.5f, 0.0f);
+
+			// Calculate a direction to guide the new position of the camera
+			// related to the center of the Point of Interest
+			glm::vec3 posDirection;
+			posDirection.x = cos(glm::radians(Yaw)) * cos(glm::radians(Pitch));
+			posDirection.y = sin(glm::radians(-Pitch));
+			posDirection.z = sin(glm::radians(Yaw)) * cos(glm::radians(Pitch));
+			posDirection = glm::normalize(posDirection);
+
+			// Project the new position and assign        
+			Position = Front + posDirection * 50.0f;
+		}
+		break;
+		default:
+			break;
+		}
+
+
+
 	}
+
+private:
+	
+	
 };
 
 
 extern glm::vec3 cameraPos;
 extern glm::vec3 cameraFront;
 extern glm::vec3 cameraUp;
-
+//
 //camera control 
 extern Camera camera;
 

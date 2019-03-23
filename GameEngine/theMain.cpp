@@ -259,7 +259,7 @@ int main(void)
 	::LightManager->LoadUniformLocations(program);
 	
 	LoadModelsIntoScene(::vec_pObjectsToDraw);
-	g_simpleDubugRenderer = new cSimpleDebugRenderer(findObjectByFriendlyName("DebugSphere"), findObjectByFriendlyName("DebugCube"), program);
+	g_simpleDubugRenderer = new cSimpleDebugRenderer(findObjectByFriendlyName("DebugCapsule"), findObjectByFriendlyName("DebugSphere"), findObjectByFriendlyName("DebugCube"), program);
 
 	
 	
@@ -304,10 +304,8 @@ int main(void)
 			}
 		}
 	}
-
-	//AddSomeVel
-
-
+	cGameObject* player = findObjectByFriendlyName("chan");
+	camera.setThirdPerson(player);
 	
 	// Draw the "scene" (run the program)
 	while (!glfwWindowShouldClose(window))
@@ -530,11 +528,11 @@ int main(void)
 			cGameObject* curMesh = vec_pObjectsToDraw[i];
 			if (curMesh->rigidBody != NULL && curMesh->rigidBody->GetShape()->GetShapeType() != nPhysics::SHAPE_TYPE_PLANE) {
 				
-				float rad;
-				curMesh->rigidBody->GetShape()->GetSphereRadius(rad);
+				float Totalheight;
+				Totalheight = curMesh->rigidBody->GetShape()->GetCapsuleRadius()*2 + 2.0f;
 				if (curMesh->friendlyName == "chan") { 
 					curMesh->position = curMesh->rigidBody->GetPosition();
-					//curMesh->position.y = curMesh->rigidBody->GetPosition().y - rad; 
+					curMesh->position.y = curMesh->rigidBody->GetPosition().y - Totalheight;
 				}
 				else {
 					curMesh->position = curMesh->rigidBody->GetPosition();
@@ -558,12 +556,13 @@ int main(void)
 						curObj->rigidBody->GetShape()->GetSphereRadius(rad);
 						g_simpleDubugRenderer->drawCube(curObj->rigidBody->GetPosition(), rad);
 					}
-					if (curObj->rigidBody->GetShape()->GetShapeType() == nPhysics::SHAPE_TYPE_PLANE) {
-						curObj->bIsWireFrame = true;
-						curObj->bIsVisible = true;
-						glm::mat4 matIden = glm::mat4(1.0f);
-						DrawObject(curObj, matIden, program);
-					}
+
+					//if (curObj->rigidBody->GetShape()->GetShapeType() == nPhysics::SHAPE_TYPE_PLANE) {
+					//	//curObj->bIsWireFrame = true;
+					//	//curObj->bIsVisible = true;
+					//	//glm::mat4 matIden = glm::mat4(1.0f);
+					//	//DrawObject(curObj, matIden, program);
+					//}
 				}
 				if (curObj->softBody != NULL) 
 				{
@@ -674,6 +673,18 @@ int main(void)
 		}
 
 
+
+		if (camera.mCameraType == THIRD_PERSON)
+		
+		{
+			camera.updateCameraVectors();
+			glm::vec3 lookDirection = camera.Position - player->position;
+			lookDirection.y = 0.0f;
+			lookDirection = glm::normalize(lookDirection);
+			glm::vec3 worldUP(0.0f, 1.0f, 0.0f);
+			glm::mat4 finalOrientation = glm::inverse(glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), lookDirection, worldUP));
+			player->m_meshQOrientation = glm::toQuat(finalOrientation);
+		}
 
 
 		UpdateWindowTitle();

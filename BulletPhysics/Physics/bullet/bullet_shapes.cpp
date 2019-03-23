@@ -116,6 +116,7 @@ namespace nPhysics
 		: iCapsuleShape()
 		, mRadius(radius)
 		, mAxis(axis)
+		, mHeight(height)
 
 	{
 		{
