@@ -58,6 +58,59 @@
           }
       },
       {
+          "Name": "portal_cube",
+          "Mesh": "Portal_cube.ply",
+          "Visible": true,
+          "Use_Physics": true,
+          "Wireframe": false,
+          "Position": [
+              -20.0,
+              100.00,
+              30.0
+          ],
+          "DiffuseRGB_Alpha": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+          ],
+          "SpecularRGB_Alpha": [
+              1.0,
+              1.0,
+              1.0,
+              100.0
+          ],
+          "Rotation": [
+              0.0,
+              0.0,
+              0.0
+          ],
+          "Scale": [
+              10.0,
+              10.0,
+              10.0
+          ],
+          "Textures": [
+              {
+                  "Name": "portalCubeTex.bmp",
+                  "Strength": 1.0
+              },
+              {
+                  "Name": "testTex.bmp",
+                  "Strength": 0.0
+              }
+          ],
+          "RigidBody": {
+            "Type": "BOX",
+            "HalfExtents": [
+                10.0,
+                10.0,
+                10.0
+            ],
+            "Mass": 70.0
+          }
+      },
+      {
           "Name": "moonPivot",
           "Mesh": "earth.ply",
           "Visible": true,
