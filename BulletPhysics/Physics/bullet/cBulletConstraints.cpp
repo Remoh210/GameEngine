@@ -18,4 +18,18 @@ nPhysics::cBulletHingeConstraint::~cBulletHingeConstraint()
 {
 }
 
+nPhysics::cBulletPoinToPointConstraint::cBulletPoinToPointConstraint(cBulletRigidBody * rb, const btVector3 & pivot)
+	: iConstraint(CONSTRAINT_TYPE_POINT_TO_POINT)
+{
+	mConstraint = new btPoint2PointConstraint(*rb->GetBulletBody(), pivot);
+}
 
+nPhysics::cBulletPoinToPointConstraint::cBulletPoinToPointConstraint(cBulletRigidBody * rbA, cBulletRigidBody * rbB, const btVector3 & pivotInA, const btVector3 & pivotInB)
+	: iConstraint(CONSTRAINT_TYPE_POINT_TO_POINT)
+{
+	mConstraint = new btPoint2PointConstraint(*rbA->GetBulletBody(), *rbB->GetBulletBody(), pivotInA, pivotInB);
+}
+
+nPhysics::cBulletPoinToPointConstraint::~cBulletPoinToPointConstraint()
+{
+}

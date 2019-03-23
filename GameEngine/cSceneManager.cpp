@@ -595,6 +595,103 @@ bool cSceneManager::loadScene(std::string filename) {
 				gPhysicsWorld->AddBody(rigidBody);
 				
 			}
+
+			if (type == "SPHERE_TO_POINT")
+			{
+				nPhysics::iShape* CurShape = NULL;
+				nPhysics::sRigidBodyDef def;
+				def.Orientation = CurModel->getMeshOrientationEulerAngles();
+				def.Position = CurModel->position;
+
+				float radius = GameObject[i]["RigidBody"]["Radius"].GetFloat();
+				CurShape = gPhysicsFactory->CreateSphereShape(radius);
+				def.Mass = GameObject[i]["RigidBody"]["Mass"].GetFloat();
+
+				const rapidjson::Value& pivotArray = GameObject[i]["RigidBody"]["Pivot"];
+				glm::vec3 pivot;
+				for (int i = 0; i < 3; i++)
+				{
+					pivot[i] = pivotArray[i].GetFloat();
+				}
+
+
+				nPhysics::iRigidBody* rigidBody = gPhysicsFactory->CreateRigidBody(def, CurShape);
+				CurModel->rigidBody = rigidBody;
+				gPhysicsWorld->AddBody(rigidBody);
+				nPhysics::iConstraint* costr = gPhysicsFactory->CreatePointToPointConstraint(rigidBody, pivot);
+				gPhysicsWorld->AddConstraint(costr);
+
+			}
+
+			if (type == "SPHERE_TO_SPHERE")
+			{
+				nPhysics::iShape* CurShapeA = NULL;
+				nPhysics::iShape* CurShapeB = NULL;
+				nPhysics::sRigidBodyDef defA;
+				nPhysics::sRigidBodyDef defB;
+
+
+
+				float radius = GameObject[i]["RigidBody"]["Radius"].GetFloat();
+				
+				defA.Mass = GameObject[i]["RigidBody"]["Mass"].GetFloat();
+				defB.Mass = GameObject[i]["RigidBody"]["Mass"].GetFloat();
+
+
+				const rapidjson::Value& offsetArray = GameObject[i]["RigidBody"]["Offset"];
+				glm::vec3 offset;
+				for (int i = 0; i < 3; i++)
+				{
+					offset[i] = offsetArray[i].GetFloat();
+				}
+
+				const rapidjson::Value& pivotArrayA = GameObject[i]["RigidBody"]["PivotA"];
+				glm::vec3 pivotA;
+				for (int i = 0; i < 3; i++)
+				{
+					pivotA[i] = pivotArrayA[i].GetFloat();
+				}
+
+				const rapidjson::Value& pivotArrayB = GameObject[i]["RigidBody"]["PivotB"];
+				glm::vec3 pivotB;
+				for (int i = 0; i < 3; i++)
+				{
+					pivotB[i] = pivotArrayB[i].GetFloat();
+				}
+
+				CurShapeA = gPhysicsFactory->CreateSphereShape(radius);
+				CurShapeB = gPhysicsFactory->CreateSphereShape(radius);
+
+				defA.Orientation = CurModel->getMeshOrientationEulerAngles();
+				defB.Orientation = CurModel->getMeshOrientationEulerAngles();
+				defA.Position = CurModel->position;
+				defB.Position = CurModel->position + offset;
+
+
+				cGameObject* CurModel2 = new cGameObject();
+				CurModel2->position = defB.Position;
+				CurModel2->friendlyName = CurModel->friendlyName + "second";
+				CurModel2->meshName = CurModel->meshName;
+				CurModel2->setDiffuseColour(glm::vec3(0.f));
+				CurModel2->vecTextures = CurModel->vecTextures;
+				CurModel2->nonUniformScale = CurModel->nonUniformScale;
+
+				nPhysics::iRigidBody* rigidBodyA = gPhysicsFactory->CreateRigidBody(defA, CurShapeA);
+				nPhysics::iRigidBody* rigidBodyB = gPhysicsFactory->CreateRigidBody(defB, CurShapeB);
+				CurModel->rigidBody = rigidBodyA;
+				CurModel2->rigidBody = rigidBodyB;
+
+				gPhysicsWorld->AddBody(rigidBodyA);
+				gPhysicsWorld->AddBody(rigidBodyB);
+
+				nPhysics::iConstraint* constr = gPhysicsFactory->CreatePointToPointConstraint(rigidBodyA, rigidBodyB, pivotA, pivotB);
+				gPhysicsWorld->AddConstraint(constr);
+
+				vec_pObjectsToDraw.push_back(CurModel2);
+
+
+			}
+
 			else if (type == "PLANE")
 			{
 				

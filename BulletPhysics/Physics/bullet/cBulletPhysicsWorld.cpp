@@ -115,10 +115,10 @@ void nPhysics::cBulletPhysicsWorld::AddConstraint(iConstraint * constraint)
 
 	switch (type)
 	{
-	case nPhysics::CONSTRAINT_TYPE_BALL_AND_SOCKET:
+	case nPhysics::CONSTRAINT_TYPE_POINT_TO_POINT:
 	{
-		//cBallAndSocketConstraint* basConstraint = dynamic_cast<cBallAndSocketConstraint*>(constraint);
-		//this->dynamicsWorld->addConstraint(basConstraint->GetTypedConstraint());
+		cBulletPoinToPointConstraint* basConstraint = dynamic_cast<cBulletPoinToPointConstraint*>(constraint);
+		this->mDynamicsWorld->addConstraint(basConstraint->GetTypedConstraint());
 
 	}
 		break;

@@ -58,6 +58,124 @@
           }
       },
       {
+          "Name": "moonPivot",
+          "Mesh": "earth.ply",
+          "Visible": true,
+          "Use_Physics": true,
+          "Wireframe": false,
+          "Position": [
+              -22.0,
+              15.0,
+              34.0
+          ],
+          "DiffuseRGB_Alpha": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+          ],
+          "SpecularRGB_Alpha": [
+              1.0,
+              1.0,
+              1.0,
+              100.0
+          ],
+          "Rotation": [
+              0.0,
+              0.0,
+              0.0
+          ],
+          "Scale": [
+              10.0,
+              10.0,
+              10.0
+          ],
+          "Textures": [
+              {
+                  "Name": "moonTex.bmp",
+                  "Strength": 1.0
+              },
+              {
+                  "Name": "testTex.bmp",
+                  "Strength": 0.0
+              }
+          ],
+          "RigidBody": {
+              "Type": "SPHERE_TO_POINT",
+              "Radius": 10.0,
+              "Mass": 10.0,
+              "Pivot" : [
+                  0.0,
+                  10.0,
+                  0.0
+              ]
+          }
+      },
+      {
+          "Name": "SphereToSphere",
+          "Mesh": "earth.ply",
+          "Visible": true,
+          "Use_Physics": true,
+          "Wireframe": false,
+          "Position": [
+              -22.0,
+              50.0,
+              60.0
+          ],
+          "DiffuseRGB_Alpha": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+          ],
+          "SpecularRGB_Alpha": [
+              1.0,
+              1.0,
+              1.0,
+              100.0
+          ],
+          "Rotation": [
+              0.0,
+              0.0,
+              0.0
+          ],
+          "Scale": [
+              15.0,
+              15.0,
+              15.0
+          ],
+          "Textures": [
+              {
+                  "Name": "marsTex.bmp",
+                  "Strength": 1.0
+              },
+              {
+                  "Name": "testTex.bmp",
+                  "Strength": 0.0
+              }
+          ],
+          "RigidBody": {
+              "Type": "SPHERE_TO_SPHERE",
+              "Radius": 15.0,
+              "Mass": 10.0,
+              "Offset" : [
+                  0.0,
+                  15.0,
+                  0.0
+              ],
+              "PivotA" : [
+                  30.0,
+                  0.0,
+                  0.0
+              ],
+              "PivotB" : [
+                  -30.0,
+                  0.0,
+                  0.0
+              ]
+          }
+      },
+      {
           "Name": "Cloth",
           "Mesh": "Sphere_320.ply",
           "Visible": false,
@@ -444,9 +562,9 @@
                 0.0
             ],
             "Scale": [
-                5.0,
                 10.0,
-                5.0
+                20.0,
+                10.0
             ],
             "Textures": [
                 {
@@ -462,8 +580,8 @@
                 "Type": "CYLINDER",
                 "Axis": 1,
                 "HalfExtents": [
-                    5.0,
                     10.0,
+                    20.0,
                     0.0
                 ],
                 "Mass": 20.0

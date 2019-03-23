@@ -53,6 +53,16 @@ namespace nPhysics
 		return new cBulletHingeConstraint((cBulletRigidBody*)rbA, (cBulletRigidBody*)rbB, nConvert::ToBullet(pivotInA), nConvert::ToBullet(pivotInB), nConvert::ToBullet(axisInA), nConvert::ToBullet(axisInB));
 	}
 
+	iConstraint * cBulletPhysicsFactory::CreatePointToPointConstraint(iRigidBody * rb, const glm::vec3 & pivot)
+	{
+		return new cBulletPoinToPointConstraint((cBulletRigidBody*)rb, nConvert::ToBullet(pivot));
+	}
+
+	iConstraint * cBulletPhysicsFactory::CreatePointToPointConstraint(iRigidBody * rbA, iRigidBody * rbB, const glm::vec3 & pivotInA, const glm::vec3 & pivotInB)
+	{
+		return new cBulletPoinToPointConstraint((cBulletRigidBody*)rbA, (cBulletRigidBody*)rbB, nConvert::ToBullet(pivotInA), nConvert::ToBullet(pivotInB));
+	}
+
 
 
 
