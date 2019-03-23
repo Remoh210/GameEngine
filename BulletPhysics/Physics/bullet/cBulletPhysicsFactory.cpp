@@ -2,6 +2,7 @@
 #include "cBulletRigidBody.h"
 #include "bullet_shapes.h"
 #include "cBulletPhysicsWorld.h"
+#include <nConvert.h>
 
 namespace nPhysics
 {
@@ -35,6 +36,21 @@ namespace nPhysics
 	iCapsuleShape* cBulletPhysicsFactory::CreateCapsuleShape(float height, float radius, int axis)
 	{
 		return new cBulletCapsuleShape(height, radius, axis);
+	}
+
+	iBoxShape * cBulletPhysicsFactory::CreateBoxShape(const glm::vec3 & halfExtents)
+	{
+		return new cBulletBoxShape(halfExtents);
+	}
+
+	iConstraint * cBulletPhysicsFactory::CreatHingeConstraint(iRigidBody * rb, const glm::vec3 & pivot, const glm::vec3 & axis)
+	{
+		return new cBulletHingeConstraint((cBulletRigidBody*)rb, nConvert::ToBullet(pivot), nConvert::ToBullet(axis));
+	}
+
+	iConstraint * cBulletPhysicsFactory::CreatHingeConstraint(iRigidBody * rbA, iRigidBody * rbB, const glm::vec3 & pivotInA, const glm::vec3 & pivotInB, const glm::vec3 & axisInA, const glm::vec3 & axisInB)
+	{
+		return new cBulletHingeConstraint((cBulletRigidBody*)rbA, (cBulletRigidBody*)rbB, nConvert::ToBullet(pivotInA), nConvert::ToBullet(pivotInB), nConvert::ToBullet(axisInA), nConvert::ToBullet(axisInB));
 	}
 
 

@@ -1,6 +1,6 @@
 #pragma once
 #include <Interfaces/iPhysicsWorld.h>
-
+#include <Interfaces/iConstraint.h>
 #include "btBulletDynamicsCommon.h"
 #include <stdio.h>
 
@@ -10,11 +10,15 @@ namespace nPhysics {
 	public:
 		cBulletPhysicsWorld();
 		~cBulletPhysicsWorld();
-		void DebugDrawWorld(int shaderID, const glm::mat4& viewMatrix, float zoom, int width, int height);
 
 		void SetGravity(const glm::vec3& gravity);
 		bool AddBody(iRigidBody* body);
 		bool RemoveBody(iRigidBody* body);
+
+		//Constraints
+		virtual void AddConstraint(iConstraint* constraint);
+		virtual void RemoveConstraint(iConstraint* constraint);
+
 		void Update(float dt);
 
 	protected:

@@ -379,18 +379,22 @@ void ProcessAsynKeys(GLFWwindow* window)
 	glm::vec3 vel;
 	vel = ch->rigidBody->GetVelocity();
 	
-	
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		ch->rigidBody->SetVelocity(glm::vec3(50.0f, vel.y, 0.0f));
-	else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		ch->rigidBody->SetVelocity(glm::vec3(-50.0f, vel.y, 0.0f));
-	else if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		ch->rigidBody->SetVelocity(glm::vec3(0.0f, vel.y, 50.0f));
-	else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		ch->rigidBody->SetVelocity(glm::vec3(0.0f, vel.y, -50.0f));
-	else 
+	if (!bIsDebugMode) {
+		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+			ch->rigidBody->SetVelocity(glm::vec3(50.0f, vel.y, 0.0f));
+		else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+			ch->rigidBody->SetVelocity(glm::vec3(-50.0f, vel.y, 0.0f));
+		else if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+			ch->rigidBody->SetVelocity(glm::vec3(0.0f, vel.y, 50.0f));
+		else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+			ch->rigidBody->SetVelocity(glm::vec3(0.0f, vel.y, -50.0f));
+		else
+			ch->rigidBody->SetVelocity(glm::vec3(0.0f, vel.y, 0.0f));
+	}
+	else
+	{
 		ch->rigidBody->SetVelocity(glm::vec3(0.0f, vel.y, 0.0f));
-
+	}
 	float cameraSpeed = CAMERA_SPEED_SLOW;
 	if ( glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS  )
 	{

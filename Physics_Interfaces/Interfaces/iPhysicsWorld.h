@@ -1,5 +1,6 @@
 #pragma once
 #include "iRigidBody.h"
+#include "iConstraint.h"
 #include "iSoftBody.h"
 namespace nPhysics {
 	class iPhysicsWorld
@@ -11,6 +12,11 @@ namespace nPhysics {
 		virtual bool AddBody(iRigidBody* body) = 0;
 		virtual bool RemoveBody(iRigidBody* body) = 0;
 
+		//Constraints
+		virtual void AddConstraint(iConstraint* constraint) = 0;
+		virtual void RemoveConstraint(iConstraint* constraint) = 0;
+
+		//SoftBody
 		//virtual bool AddBody(iSoftBody* body) = 0;
 		//virtual bool RemoveBody(iSoftBody* body) = 0;
 

@@ -56,4 +56,18 @@ namespace nPhysics
 		iCapsuleShape(const iCapsuleShape& other) : iShape(other) {}
 		iCapsuleShape& operator=(const iCapsuleShape& other) { return *this; }
 	};
+
+
+	class iBoxShape : public iShape
+	{
+	public:
+		virtual ~iBoxShape() {}
+		virtual glm::vec3 GetHalfExtents() = 0;
+
+
+	protected:
+		iBoxShape() : iShape(SHAPE_TYPE_BOX) {}
+		iBoxShape(const iBoxShape& other) : iShape(other) {}
+		iBoxShape& operator=(const iBoxShape& other) { return *this; }
+	};
 }

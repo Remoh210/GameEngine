@@ -126,6 +126,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Interfaces\eConstraintType.h" />
+    <ClInclude Include="Interfaces\iConstraint.h" />
     <ClInclude Include="Interfaces\eBodyType.h" />
     <ClInclude Include="Interfaces\iCilinderShape.h" />
     <ClInclude Include="Interfaces\iVehicle.h" />

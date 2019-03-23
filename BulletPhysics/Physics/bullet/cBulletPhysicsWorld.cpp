@@ -1,6 +1,7 @@
 #include "cBulletPhysicsWorld.h"
 #include "nConvert.h"
 #include "cBulletRigidBody.h"
+#include "cBulletConstraints.h"
 
 
 
@@ -106,6 +107,34 @@ bool nPhysics::cBulletPhysicsWorld::RemoveBody(iRigidBody * body)
 	mDynamicsWorld->removeRigidBody(BulletBtBody);
 	return true;
 
+}
+
+void nPhysics::cBulletPhysicsWorld::AddConstraint(iConstraint * constraint)
+{
+	eConstraintType type = constraint->GetConstraintType();
+
+	switch (type)
+	{
+	case nPhysics::CONSTRAINT_TYPE_BALL_AND_SOCKET:
+	{
+		//cBallAndSocketConstraint* basConstraint = dynamic_cast<cBallAndSocketConstraint*>(constraint);
+		//this->dynamicsWorld->addConstraint(basConstraint->GetTypedConstraint());
+
+	}
+		break;
+	case nPhysics::CONSTRAINT_TYPE_HINGE:
+	{
+		cBulletHingeConstraint* hingeConstraint = dynamic_cast<cBulletHingeConstraint*>(constraint);
+		this->mDynamicsWorld->addConstraint(hingeConstraint->GetTypedConstraint());
+	}
+		break;
+	default:
+		break;
+	}
+}
+
+void nPhysics::cBulletPhysicsWorld::RemoveConstraint(iConstraint * constraint)
+{
 }
 
 void nPhysics::cBulletPhysicsWorld::Update(float dt)

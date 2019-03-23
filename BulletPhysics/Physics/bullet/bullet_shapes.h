@@ -93,4 +93,27 @@ namespace nPhysics
 
 	};
 
+	class cBulletBoxShape : public iBoxShape
+	{
+	public:
+		cBulletBoxShape(const glm::vec3& halfExtents);
+		virtual ~cBulletBoxShape();
+		inline glm::vec3 GetHalfExtents()
+		{
+			return mHalfExtents;
+		};
+		inline btCollisionShape* GetBulletShape()
+		{
+			return mBulletShape;
+		}
+
+	protected:
+		glm::vec3 mHalfExtents;
+		cBulletBoxShape(const cBulletBoxShape& other) : iBoxShape(other) {}
+		cBulletBoxShape& operator=(const cBulletBoxShape& other) { return *this; }
+		btCollisionShape* mBulletShape;
+
+
+	};
+
 }

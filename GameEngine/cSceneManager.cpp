@@ -645,6 +645,155 @@ bool cSceneManager::loadScene(std::string filename) {
 				gPhysicsWorld->AddBody(rigidBody);
 
 			}
+			else if (type == "BOX")
+			{
+
+				nPhysics::iShape* CurShape = NULL;
+				nPhysics::sRigidBodyDef def;
+
+				//in Radians
+				def.Position = CurModel->position;
+				def.Mass = GameObject[i]["RigidBody"]["Mass"].GetFloat();
+
+				const rapidjson::Value& ExtentsArray = GameObject[i]["RigidBody"]["HalfExtents"];
+				glm::vec3 hE;
+				for (int i = 0; i < 3; i++)
+				{
+					hE[i] = ExtentsArray[i].GetFloat();
+				}
+
+				CurShape = gPhysicsFactory->CreateBoxShape(hE);
+
+				nPhysics::iRigidBody* rigidBody = gPhysicsFactory->CreateRigidBody(def, CurShape);
+				CurModel->rigidBody = rigidBody;
+				gPhysicsWorld->AddBody(rigidBody);
+
+			}
+
+			else if (type == "BOX_HINGE")
+			{
+
+				nPhysics::iShape* CurShape = NULL;
+				nPhysics::sRigidBodyDef def;
+
+				//in Radians
+				def.Position = CurModel->position;
+				def.Mass = GameObject[i]["RigidBody"]["Mass"].GetFloat();
+
+				
+				
+
+				const rapidjson::Value& ExtentsArray = GameObject[i]["RigidBody"]["HalfExtents"];
+				glm::vec3 hE;
+				for (int i = 0; i < 3; i++)
+				{
+					hE[i] = ExtentsArray[i].GetFloat();
+				}
+
+				const rapidjson::Value& pivotAray = GameObject[i]["RigidBody"]["Pivot"];
+				glm::vec3 pivot;
+				for (int i = 0; i < 3; i++)
+				{
+					pivot[i] = pivotAray[i].GetFloat();
+				}
+
+				const rapidjson::Value& axisArray = GameObject[i]["RigidBody"]["Axis"];
+				glm::vec3 axis;
+				for (int i = 0; i < 3; i++)
+				{
+					axis[i] = axisArray[i].GetFloat();
+				}
+
+				CurShape = gPhysicsFactory->CreateBoxShape(hE);
+
+				nPhysics::iRigidBody* rigidBody = gPhysicsFactory->CreateRigidBody(def, CurShape);
+				CurModel->rigidBody = rigidBody;
+				gPhysicsWorld->AddBody(rigidBody);
+
+				nPhysics::iConstraint* costr = gPhysicsFactory->CreatHingeConstraint(rigidBody, pivot, axis);
+				gPhysicsWorld->AddConstraint(costr);
+			}
+
+			else if (type == "BOX_TO_BOX_HINDGE")
+			{
+
+			nPhysics::iShape* CurShapeA = NULL;
+			nPhysics::iShape* CurShapeB = NULL;
+			nPhysics::sRigidBodyDef defA;
+			nPhysics::sRigidBodyDef defB;
+
+
+
+
+
+
+			const rapidjson::Value& ExtentsArray = GameObject[i]["RigidBody"]["HalfExtents"];
+			glm::vec3 hE;
+			for (int i = 0; i < 3; i++)
+			{
+				hE[i] = ExtentsArray[i].GetFloat();
+			}
+
+			const rapidjson::Value& pivotA_Aray = GameObject[i]["RigidBody"]["PivotA"];
+			glm::vec3 pivotA;
+			for (int i = 0; i < 3; i++)
+			{
+				pivotA[i] = pivotA_Aray[i].GetFloat();
+			}
+
+			const rapidjson::Value& pivotB_Aray = GameObject[i]["RigidBody"]["PivotB"];
+			glm::vec3 pivotB;
+			for (int i = 0; i < 3; i++)
+			{
+				pivotB[i] = pivotB_Aray[i].GetFloat();
+			}
+
+			const rapidjson::Value& axisArray = GameObject[i]["RigidBody"]["Axis"];
+			glm::vec3 axis;
+			for (int i = 0; i < 3; i++)
+			{
+				axis[i] = axisArray[i].GetFloat();
+			}
+
+			const rapidjson::Value& offsetArray = GameObject[i]["RigidBody"]["Offset"];
+			glm::vec3 offset;
+			for (int i = 0; i < 3; i++)
+			{
+				offset[i] = offsetArray[i].GetFloat();
+			}
+			//in Radians
+			defA.Position = CurModel->position;
+			defA.Mass = GameObject[i]["RigidBody"]["Mass"].GetFloat();
+			defB.Position = CurModel->position + offset;
+			defB.Mass = defA.Mass;
+
+			CurShapeA = gPhysicsFactory->CreateBoxShape(hE);
+			CurShapeB = gPhysicsFactory->CreateBoxShape(hE);
+
+			cGameObject* CurModel2 = new cGameObject();
+			CurModel2->position = defB.Position;
+			CurModel2->friendlyName = CurModel->friendlyName + "second";
+			CurModel2->meshName = CurModel->meshName;
+			CurModel2->setDiffuseColour(glm::vec3(0.f));
+			CurModel2->vecTextures = CurModel->vecTextures;
+			CurModel2->nonUniformScale = CurModel->nonUniformScale;
+
+			nPhysics::iRigidBody* rigidBodyA = gPhysicsFactory->CreateRigidBody(defA, CurShapeA);
+			nPhysics::iRigidBody* rigidBodyB = gPhysicsFactory->CreateRigidBody(defB, CurShapeB);
+			CurModel->rigidBody = rigidBodyA;
+			CurModel2->rigidBody = rigidBodyB;
+	
+			gPhysicsWorld->AddBody(rigidBodyA);
+			gPhysicsWorld->AddBody(rigidBodyB);
+
+			nPhysics::iConstraint* constr = gPhysicsFactory->CreatHingeConstraint(rigidBodyA, rigidBodyB,
+				pivotA, pivotB, axis, axis);
+			gPhysicsWorld->AddConstraint(constr);
+
+			vec_pObjectsToDraw.push_back(CurModel2);
+			}
+
+
 			else if (type == "CAPSULE")
 			{
 

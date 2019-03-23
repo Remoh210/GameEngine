@@ -405,6 +405,7 @@
     <ClInclude Include="Physics\bullet\BulletSoftBody\btSoftSoftCollisionAlgorithm.h" />
     <ClInclude Include="Physics\bullet\BulletSoftBody\btSparseSDF.h" />
     <ClInclude Include="Physics\bullet\bullet_shapes.h" />
+    <ClInclude Include="Physics\bullet\cBulletConstraints.h" />
     <ClInclude Include="Physics\bullet\cBulletPhysicsFactory.h" />
     <ClInclude Include="Physics\bullet\cBulletPhysicsWorld.h" />
     <ClInclude Include="Physics\bullet\cBulletRigidBody.h" />
@@ -598,6 +599,7 @@
     <ClCompile Include="Physics\bullet\BulletSoftBody\btSoftRigidDynamicsWorld.cpp" />
     <ClCompile Include="Physics\bullet\BulletSoftBody\btSoftSoftCollisionAlgorithm.cpp" />
     <ClCompile Include="Physics\bullet\bullet_shapes.cpp" />
+    <ClCompile Include="Physics\bullet\cBulletConstraints.cpp" />
     <ClCompile Include="Physics\bullet\cBulletPhysicsFactory.cpp" />
     <ClCompile Include="Physics\bullet\cBulletPhysicsWorld.cpp" />
     <ClCompile Include="Physics\bullet\cBulletRigidBody.cpp" />

@@ -87,7 +87,36 @@ namespace nPhysics {
 			startTransform.setRotation(nConvert::ToBullet(def.quatOrientation));
 			mMotionState = new btDefaultMotionState(startTransform);
 			btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, mMotionState, colShape, localInertia);
-			//just for now (for character collision)
+			rbInfo.m_restitution = 0.9;
+			rbInfo.m_friction = 10.2;
+			mBody = new btRigidBody(rbInfo);
+			mBody->setLinearVelocity(nConvert::ToBullet(def.Velocity));
+			mBody->setAngularVelocity(nConvert::ToBullet(def.AngularVelocity));
+			//mBody->setAngularFactor(btVector3(0.0f, 1.0f, 0.0f));
+			mBody->setSleepingThresholds(0.0f, 0.0f);
+
+			break;
+		}
+
+		case nPhysics::SHAPE_TYPE_BOX:
+		{
+			btCollisionShape* colShape = dynamic_cast<cBulletBoxShape*>(shape)->GetBulletShape();
+			btTransform startTransform;
+			startTransform.setIdentity();
+
+			mMass = def.Mass;
+			btScalar mass(mMass);
+			bool isDynamic = (mass != 0.f);
+			btVector3 localInertia(0, 0, 0);
+
+			if (isDynamic)
+			{
+				colShape->calculateLocalInertia(mass, localInertia);
+			}
+			startTransform.setOrigin(nConvert::ToBullet(def.Position));
+			startTransform.setRotation(nConvert::ToBullet(def.quatOrientation));
+			mMotionState = new btDefaultMotionState(startTransform);
+			btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, mMotionState, colShape, localInertia);
 			rbInfo.m_restitution = 0.9;
 			rbInfo.m_friction = 10.2;
 			mBody = new btRigidBody(rbInfo);

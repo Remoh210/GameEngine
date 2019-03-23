@@ -22,6 +22,9 @@ namespace nPhysics
 		virtual float GetCapsuleHeight() { return 0.0f; }
 		virtual int	GetCapsuleAxis() { return 0; }
 
+		//Box
+		virtual glm::vec3 GetHalfExtents() { return glm::vec3(0.f); }
+
 	protected: 
 		iShape(eShapeType shapeType) : mShapeType(shapeType){}
 		iShape(const iShape& other){}

@@ -132,7 +132,7 @@
           "Position": [
               0.0,
               10.0,
-              0.0
+              -30.0
           ],
           "DiffuseRGB_Alpha": [
               0.0,
@@ -180,7 +180,7 @@
            "Wireframe": false,
            "Position": [
                -80.0,
-               2.0,
+               50.0,
                -50.0
            ],
            "DiffuseRGB_Alpha": [
@@ -219,11 +219,202 @@
                "Type": "CAPSULE",
                "Axis": 1,
                "Radius": 5.0,
-               "Height": 60.0,
+               "Height": 30.0,
                "Mass": 200.0,
               "IsPlayer" : true
            }
        },
+       {
+            "Name": "rigidCube",
+            "Mesh": "cube.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                100.0,
+                150.0,
+                20.0
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Scale": [
+                20.0,
+                20.0,
+                20.0
+            ],
+            "Textures": [
+                {
+                    "Name": "earthTex.bmp",
+                    "Strength": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0
+                }
+            ],
+            "RigidBody": {
+              "Type": "BOX",
+              "HalfExtents": [
+                  20.0,
+                  20.0,
+                  20.0
+              ],
+              "Mass": 20.0
+            }
+        },
+        {
+             "Name": "HingeCube",
+             "Mesh": "cube.ply",
+             "Visible": true,
+             "Use_Physics": true,
+             "Wireframe": false,
+             "Position": [
+                 0.0,
+                 20.0,
+                 20.0
+             ],
+             "DiffuseRGB_Alpha": [
+                 0.0,
+                 0.0,
+                 0.0,
+                 1.0
+             ],
+             "SpecularRGB_Alpha": [
+                 1.0,
+                 1.0,
+                 1.0,
+                 100.0
+             ],
+             "Rotation": [
+                 0.0,
+                 0.0,
+                 0.0
+             ],
+             "Scale": [
+                 10.0,
+                 10.0,
+                 10.0
+             ],
+             "Textures": [
+                 {
+                     "Name": "earthTex.bmp",
+                     "Strength": 1.0
+                 },
+                 {
+                     "Name": "testTex.bmp",
+                     "Strength": 0.0
+                 }
+             ],
+             "RigidBody": {
+               "Type": "BOX_HINGE",
+               "HalfExtents": [
+                   10.0,
+                   10.0,
+                   10.0
+               ],
+               "Mass": 20.0,
+               "Pivot" : [
+                   15.0,
+                   0.0,
+                   0.0
+               ],
+               "Axis" : [
+                   0.0,
+                   1.0,
+                   0.0
+               ]
+
+             }
+         },
+         {
+              "Name": "HingeCube",
+              "Mesh": "cube.ply",
+              "Visible": true,
+              "Use_Physics": true,
+              "Wireframe": false,
+              "Position": [
+                  100.0,
+                  20.0,
+                  -100.0
+              ],
+              "DiffuseRGB_Alpha": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+              ],
+              "SpecularRGB_Alpha": [
+                  1.0,
+                  1.0,
+                  1.0,
+                  100.0
+              ],
+              "Rotation": [
+                  0.0,
+                  0.0,
+                  0.0
+              ],
+              "Scale": [
+                  10.0,
+                  10.0,
+                  10.0
+              ],
+              "Textures": [
+                  {
+                      "Name": "earthTex.bmp",
+                      "Strength": 1.0
+                  },
+                  {
+                      "Name": "testTex.bmp",
+                      "Strength": 0.0
+                  }
+              ],
+              "RigidBody": {
+                "Type": "BOX_TO_BOX_HINDGE",
+                "HalfExtents": [
+                    10.0,
+                    10.0,
+                    10.0
+                ],
+                "Mass": 20.0,
+                "PivotA" : [
+                    15.0,
+                    0.0,
+                    0.0
+                ],
+                "PivotB" : [
+                    -15.0,
+                    0.0,
+                    0.0
+                ],
+                "Axis" : [
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "Offset" : [
+                    30.0,
+                    0.0,
+                    0.0
+                ]
+
+              }
+          },
        {
             "Name": "cylinder",
             "Mesh": "cylinder.ply",
