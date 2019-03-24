@@ -742,6 +742,41 @@ bool cSceneManager::loadScene(std::string filename) {
 				gPhysicsWorld->AddBody(rigidBody);
 
 			}
+
+			if (type == "CYLINDER_TO_POINT")
+			{
+				nPhysics::iShape* CurShape = NULL;
+				nPhysics::sRigidBodyDef def;
+
+				//in Radians
+				def.Position = CurModel->position;
+				def.Mass = GameObject[i]["RigidBody"]["Mass"].GetFloat();
+
+				const rapidjson::Value& ExtentsArray = GameObject[i]["RigidBody"]["HalfExtents"];
+				glm::vec3 hE;
+				for (int i = 0; i < 3; i++)
+				{
+					hE[i] = ExtentsArray[i].GetFloat();
+				}
+				int axis = GameObject[i]["RigidBody"]["Axis"].GetInt();
+
+				CurShape = gPhysicsFactory->CreateCylinderShape(hE, axis);
+
+				const rapidjson::Value& pivotArray = GameObject[i]["RigidBody"]["Pivot"];
+				glm::vec3 pivot;
+				for (int i = 0; i < 3; i++)
+				{
+					pivot[i] = pivotArray[i].GetFloat();
+				}
+
+
+				nPhysics::iRigidBody* rigidBody = gPhysicsFactory->CreateRigidBody(def, CurShape);
+				CurModel->rigidBody = rigidBody;
+				gPhysicsWorld->AddBody(rigidBody);
+				nPhysics::iConstraint* costr = gPhysicsFactory->CreatePointToPointConstraint(rigidBody, pivot);
+				gPhysicsWorld->AddConstraint(costr);
+
+			}
 			else if (type == "BOX")
 			{
 

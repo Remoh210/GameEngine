@@ -1,20 +1,31 @@
-!!Run on Debug/Release x64!!
+!!Run on Debug or Release x64!!
+
 Controls:
 
-camera:
-WASD + Mouse - move camera camera
+-----------camera------------
+Enter - switch FLY/THIRD PERSON camera
+
+Third Person:
+(Character has capsule collider)
+W + Mouse - move forward
+hold shift to move faster
+
+Fly:
+WASD + Mouse - move camera
 EQ - move camera Up/Down
+-----------camera------------
 
-BackSpace - switch physics 
-T - switch between sphres
-Arrows Up/Down change gravity
+-----------other-------------
+T - switch between spheres
 ctrl + WASD - apply velocity in camera looking direction
-Space - lift selected sphere up
-G - lift All spheres up
-Enter - switch ON/OFF debug view
 
-RK integration is in cSimplePhysicsWorld.cpp
+Additional controls:
+Arrows Up/Down change gravity
+Space - lift selected rigidbody up
+G - lift All rigidbodies up
+-----------other-------------
 
-you can cofigure spheres radius/mass in GameEngine/scenes/physics.json
+you can cofigure objects in GameEngine/scenes/physics.json
+
 
 

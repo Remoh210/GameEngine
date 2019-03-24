@@ -111,6 +111,271 @@
           }
       },
       {
+          "Name": "portal_cube2",
+          "Mesh": "Portal_cube.ply",
+          "Visible": true,
+          "Use_Physics": true,
+          "Wireframe": false,
+          "Position": [
+              -30.0,
+              70.00,
+              30.0
+          ],
+          "DiffuseRGB_Alpha": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+          ],
+          "SpecularRGB_Alpha": [
+              1.0,
+              1.0,
+              1.0,
+              100.0
+          ],
+          "Rotation": [
+              0.0,
+              0.0,
+              0.0
+          ],
+          "Scale": [
+              10.0,
+              10.0,
+              10.0
+          ],
+          "Textures": [
+              {
+                  "Name": "portalCubeTex.bmp",
+                  "Strength": 1.0
+              },
+              {
+                  "Name": "testTex.bmp",
+                  "Strength": 0.0
+              }
+          ],
+          "RigidBody": {
+            "Type": "BOX",
+            "HalfExtents": [
+                10.0,
+                10.0,
+                10.0
+            ],
+            "Mass": 70.0
+          }
+      },
+      {
+          "Name": "portal_cube3",
+          "Mesh": "Portal_cube.ply",
+          "Visible": true,
+          "Use_Physics": true,
+          "Wireframe": false,
+          "Position": [
+              -40.0,
+              40.00,
+              30.0
+          ],
+          "DiffuseRGB_Alpha": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+          ],
+          "SpecularRGB_Alpha": [
+              1.0,
+              1.0,
+              1.0,
+              100.0
+          ],
+          "Rotation": [
+              0.0,
+              0.0,
+              0.0
+          ],
+          "Scale": [
+              10.0,
+              10.0,
+              10.0
+          ],
+          "Textures": [
+              {
+                  "Name": "portalCubeTex.bmp",
+                  "Strength": 1.0
+              },
+              {
+                  "Name": "testTex.bmp",
+                  "Strength": 0.0
+              }
+          ],
+          "RigidBody": {
+            "Type": "BOX",
+            "HalfExtents": [
+                10.0,
+                10.0,
+                10.0
+            ],
+            "Mass": 70.0
+          }
+      },
+      {
+          "Name": "turret",
+          "Mesh": "Turret.ply",
+          "Visible": true,
+          "Use_Physics": true,
+          "Wireframe": false,
+          "Position": [
+              70.0,
+              10.00,
+              0.0
+          ],
+          "DiffuseRGB_Alpha": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+          ],
+          "SpecularRGB_Alpha": [
+              1.0,
+              1.0,
+              1.0,
+              100.0
+          ],
+          "Rotation": [
+              0.0,
+              0.0,
+              0.0
+          ],
+          "Scale": [
+              1.0,
+              1.0,
+              1.0
+          ],
+          "Textures": [
+              {
+                  "Name": "turretTex.bmp",
+                  "Strength": 1.0
+              },
+              {
+                  "Name": "testTex.bmp",
+                  "Strength": 0.0
+              }
+          ],
+          "RigidBody": {
+            "Type": "BOX",
+            "HalfExtents": [
+                14.0,
+                34.0,
+                23.0
+            ],
+            "Mass": 10.0
+          }
+      },
+      {
+          "Name": "turret",
+          "Mesh": "Turret.ply",
+          "Visible": true,
+          "Use_Physics": true,
+          "Wireframe": false,
+          "Position": [
+              40.0,
+              5.00,
+              0.0
+          ],
+          "DiffuseRGB_Alpha": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+          ],
+          "SpecularRGB_Alpha": [
+              1.0,
+              1.0,
+              1.0,
+              100.0
+          ],
+          "Rotation": [
+              0.0,
+              0.0,
+              0.0
+          ],
+          "Scale": [
+              0.5,
+              0.5,
+              0.5
+          ],
+          "Textures": [
+              {
+                  "Name": "turretTex.bmp",
+                  "Strength": 1.0
+              },
+              {
+                  "Name": "testTex.bmp",
+                  "Strength": 0.0
+              }
+          ],
+          "RigidBody": {
+            "Type": "BOX",
+            "HalfExtents": [
+                7.0,
+                17.0,
+                11.5
+            ],
+            "Mass": 40.0
+          }
+      },
+      {
+          "Name": "turret2",
+          "Mesh": "Turret.ply",
+          "Visible": true,
+          "Use_Physics": true,
+          "Wireframe": false,
+          "Position": [
+              40.0,
+              1.00,
+              -10.0
+          ],
+          "DiffuseRGB_Alpha": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+          ],
+          "SpecularRGB_Alpha": [
+              1.0,
+              1.0,
+              1.0,
+              100.0
+          ],
+          "Rotation": [
+              0.0,
+              0.0,
+              0.0
+          ],
+          "Scale": [
+              0.1,
+              0.1,
+              0.1
+          ],
+          "Textures": [
+              {
+                  "Name": "turretTex.bmp",
+                  "Strength": 1.0
+              },
+              {
+                  "Name": "testTex.bmp",
+                  "Strength": 0.0
+              }
+          ],
+          "RigidBody": {
+            "Type": "BOX",
+            "HalfExtents": [
+                1.4,
+                3.4,
+                2.3
+            ],
+            "Mass": 70.0
+          }
+      },
+      {
           "Name": "moonPivot",
           "Mesh": "earth.ply",
           "Visible": true,
@@ -591,6 +856,82 @@
 
               }
           },
+
+          {
+               "Name": "HingePortalCube",
+               "Mesh": "Portal_cube.ply",
+               "Visible": true,
+               "Use_Physics": true,
+               "Wireframe": false,
+               "Position": [
+                   10.0,
+                   30.0,
+                   -30.0
+               ],
+               "DiffuseRGB_Alpha": [
+                   0.0,
+                   0.0,
+                   0.0,
+                   1.0
+               ],
+               "SpecularRGB_Alpha": [
+                   1.0,
+                   1.0,
+                   1.0,
+                   100.0
+               ],
+               "Rotation": [
+                   0.0,
+                   0.0,
+                   0.0
+               ],
+               "Scale": [
+                   10.0,
+                   10.0,
+                   10.0
+               ],
+               "Textures": [
+                   {
+                       "Name": "portalCubeTex.bmp",
+                       "Strength": 1.0
+                   },
+                   {
+                       "Name": "testTex.bmp",
+                       "Strength": 0.0
+                   }
+               ],
+               "RigidBody": {
+                 "Type": "BOX_TO_BOX_HINDGE",
+                 "HalfExtents": [
+                     10.0,
+                     10.0,
+                     10.0
+                 ],
+                 "Mass": 20.0,
+                 "PivotA" : [
+                     15.0,
+                     0.0,
+                     0.0
+                 ],
+                 "PivotB" : [
+                     -15.0,
+                     0.0,
+                     0.0
+                 ],
+                 "Axis" : [
+                     0.0,
+                     1.0,
+                     0.0
+                 ],
+                 "Offset" : [
+                     30.0,
+                     0.0,
+                     0.0
+                 ]
+
+               }
+           },
+
        {
             "Name": "cylinder",
             "Mesh": "cylinder.ply",
@@ -645,6 +986,65 @@
                 "Mass": 20.0
             }
       },
+      {
+           "Name": "cylinder",
+           "Mesh": "cylinder.ply",
+           "Visible": true,
+           "Use_Physics": true,
+           "Wireframe": false,
+           "Position": [
+               -200.0,
+               25.0,
+               -100.0
+           ],
+           "DiffuseRGB_Alpha": [
+               0.0,
+               0.0,
+               0.0,
+               1.0
+           ],
+           "SpecularRGB_Alpha": [
+               1.0,
+               1.0,
+               1.0,
+               100.0
+           ],
+           "Rotation": [
+               0.0,
+               0.0,
+               0.0
+           ],
+           "Scale": [
+               15.0,
+               18.0,
+               15.0
+           ],
+           "Textures": [
+               {
+                   "Name": "neptuneTex.bmp",
+                   "Strength": 1.0
+               },
+               {
+                   "Name": "testTex.bmp",
+                   "Strength": 0.0
+               }
+           ],
+           "RigidBody": {
+               "Type": "CYLINDER_TO_POINT",
+               "Axis": 1,
+               "HalfExtents": [
+                   15.0,
+                   18.0,
+                   0.0
+               ],
+               "Mass": 20.0,
+               "Pivot": [
+                   0.0,
+                   35.0,
+                   0.0
+               ]
+           }
+     },
 	   {
           "Name": "earth1",
           "Mesh": "earth.ply",

@@ -117,7 +117,7 @@ namespace nPhysics {
 			startTransform.setRotation(nConvert::ToBullet(def.quatOrientation));
 			mMotionState = new btDefaultMotionState(startTransform);
 			btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, mMotionState, colShape, localInertia);
-			rbInfo.m_restitution = 0.9;
+			rbInfo.m_restitution = 0.2;
 			rbInfo.m_friction = 10.2;
 			mBody = new btRigidBody(rbInfo);
 			mBody->setLinearVelocity(nConvert::ToBullet(def.Velocity));
