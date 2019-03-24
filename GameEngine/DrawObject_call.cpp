@@ -407,7 +407,7 @@ void DrawObject(cGameObject* pCurrentMesh,
 		vecOffsets);                 // local offset for each bone
 
 
-		::g_HACK_CurrentTime += 0.01f;		// Frame time, but we are going at 60HZ
+		::g_HACK_CurrentTime += deltaTime;		// Frame time, but we are going at 60HZ
 
 
 		unsigned int numberOfBonesUsed = static_cast<unsigned int>(vecFinalTransformation.size());

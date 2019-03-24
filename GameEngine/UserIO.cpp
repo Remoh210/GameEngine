@@ -398,12 +398,12 @@ void ProcessAsynKeys(GLFWwindow* window)
 			glm::vec3 CamDir = camera.getDirectionVector();
 			
 			if (IsShiftDown(window)) {
-				velVec = CamDir * 5000.0f * (float)deltaTime;
+				velVec = CamDir * 80.0f;
 				ch->rigidBody->SetVelocity(velVec);
 				ch->currentAnimation = "Run-forward"; 
 			}
 			else{
-				velVec = CamDir * 2500.0f * (float)deltaTime;
+				velVec = CamDir * 30.0f;
 				ch->rigidBody->SetVelocity(velVec);
 				ch->currentAnimation = "Walk-forward";
 			}
@@ -414,7 +414,7 @@ void ProcessAsynKeys(GLFWwindow* window)
 		{
 			glm::vec3 velVec = vec_pSpheres[SphIndex]->rigidBody->GetVelocity();
 			glm::vec3 CamDir = camera.getDirectionVector();
-			velVec = -CamDir * 1000.0f * (float)deltaTime;
+			velVec = -CamDir * 30.0f;
 			ch->rigidBody->SetVelocity(velVec);
 			ch->currentAnimation = "Walk-backward";
 

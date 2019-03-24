@@ -74,12 +74,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(SolutionDir)include;$(IncludePath)$(SolutionDir)Physics_Interfaces</IncludePath>
-    <LibraryPath>$(SolutionDir)/GameEngine/lib/x86;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)\GameEngine\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(SolutionDir)include;$(IncludePath)$(SolutionDir)Physics_Interfaces</IncludePath>
-    <LibraryPath>$(SolutionDir)/GameEngine/lib/x64;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)\GameEngine\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
