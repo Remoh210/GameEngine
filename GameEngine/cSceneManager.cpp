@@ -672,6 +672,7 @@ bool cSceneManager::loadScene(std::string filename) {
 				CurModel2->position = defB.Position;
 				CurModel2->friendlyName = CurModel->friendlyName + "second";
 				CurModel2->meshName = CurModel->meshName;
+				CurModel2->setSpecularPower(CurModel->materialSpecular.a);
 				CurModel2->setDiffuseColour(glm::vec3(0.f));
 				CurModel2->vecTextures = CurModel->vecTextures;
 				CurModel2->nonUniformScale = CurModel->nonUniformScale;
@@ -906,6 +907,7 @@ bool cSceneManager::loadScene(std::string filename) {
 			CurModel2->position = defB.Position;
 			CurModel2->friendlyName = CurModel->friendlyName + "second";
 			CurModel2->meshName = CurModel->meshName;
+			CurModel2->setSpecularPower(CurModel->materialSpecular.a);
 			CurModel2->setDiffuseColour(glm::vec3(0.f));
 			CurModel2->vecTextures = CurModel->vecTextures;
 			CurModel2->nonUniformScale = CurModel->nonUniformScale;
