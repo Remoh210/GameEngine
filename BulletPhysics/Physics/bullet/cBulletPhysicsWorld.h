@@ -3,6 +3,7 @@
 #include <Interfaces/iConstraint.h>
 #include "btBulletDynamicsCommon.h"
 #include <stdio.h>
+#include <string>
 
 namespace nPhysics {
 	class cBulletPhysicsWorld : public iPhysicsWorld
@@ -18,6 +19,7 @@ namespace nPhysics {
 		//Constraints
 		virtual void AddConstraint(iConstraint* constraint);
 		virtual void RemoveConstraint(iConstraint* constraint);
+		virtual std::pair<std::string, std::string> GetLastColPair();
 
 		void Update(float dt);
 

@@ -2,6 +2,7 @@
 #include <glm/glm.hpp>
 #include "iShape.h"
 #include <glm\mat4x4.hpp>
+#include <string>
 namespace nPhysics
 {
 	class iRigidBody
@@ -18,10 +19,15 @@ namespace nPhysics
 		virtual glm::vec3 GetVelocity() = 0;
 		virtual glm::vec3 GetAngulatVelocity() = 0;
 		virtual glm::vec3 GetAccel() = 0;
+		virtual bool GetCollision() = 0;
+		virtual std::string GetGOName() = 0;
+		
+		
 
 
 		//virtual void SetTransform(glm::mat4 transform) = 0;
 		//virtual void ApplyForce(const glm::vec3& force) = 0;
+		virtual void SetCollision(bool coll) = 0;
 		virtual void SetPosition(glm::vec3 position) = 0;
 		virtual void SetEulerRotation(glm::vec3 rotation) = 0;
 		virtual void SetMatRotation(glm::mat4 rotation) = 0;

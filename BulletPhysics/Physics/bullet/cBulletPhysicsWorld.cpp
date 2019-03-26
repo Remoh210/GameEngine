@@ -4,6 +4,20 @@
 #include "cBulletConstraints.h"
 
 
+std::pair<std::string, std::string> lastColNames;
+
+extern ContactAddedCallback	gContactAddedCallback;
+
+bool callbackFunc(btManifoldPoint& cp,
+	const btCollisionObjectWrapper* obj1, int id1, int index1,
+	const btCollisionObjectWrapper* obj2, int id2, int index2)
+{
+	((nPhysics::cBulletRigidBody*)obj1->getCollisionObject()->getUserPointer())->SetCollision(true);
+	((nPhysics::cBulletRigidBody*)obj2->getCollisionObject()->getUserPointer())->SetCollision(true);
+	lastColNames.first = ((nPhysics::cBulletRigidBody*)obj1->getCollisionObject()->getUserPointer())->GetGOName();
+	lastColNames.second = ((nPhysics::cBulletRigidBody*)obj2->getCollisionObject()->getUserPointer())->GetGOName();
+	return false;
+}
 
 nPhysics::cBulletPhysicsWorld::cBulletPhysicsWorld()
 	: iPhysicsWorld()
@@ -21,6 +35,8 @@ nPhysics::cBulletPhysicsWorld::cBulletPhysicsWorld()
 
 	mDynamicsWorld = new btDiscreteDynamicsWorld(mDispatcher, mOverlappingPairCache, mSolver, mCollisionConfiguration);
 	mDynamicsWorld->setGravity(btVector3(0, -10, 0));
+
+	gContactAddedCallback = callbackFunc;
 }
 
 nPhysics::cBulletPhysicsWorld::~cBulletPhysicsWorld()
@@ -135,6 +151,11 @@ void nPhysics::cBulletPhysicsWorld::AddConstraint(iConstraint * constraint)
 
 void nPhysics::cBulletPhysicsWorld::RemoveConstraint(iConstraint * constraint)
 {
+}
+
+std::pair<std::string, std::string> nPhysics::cBulletPhysicsWorld::GetLastColPair()
+{
+	return lastColNames;
 }
 
 void nPhysics::cBulletPhysicsWorld::Update(float dt)

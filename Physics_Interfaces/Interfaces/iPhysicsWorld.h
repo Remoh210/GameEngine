@@ -15,7 +15,7 @@ namespace nPhysics {
 		//Constraints
 		virtual void AddConstraint(iConstraint* constraint) = 0;
 		virtual void RemoveConstraint(iConstraint* constraint) = 0;
-
+		virtual std::pair<std::string, std::string> GetLastColPair() = 0;
 		//SoftBody
 		//virtual bool AddBody(iSoftBody* body) = 0;
 		//virtual bool RemoveBody(iSoftBody* body) = 0;

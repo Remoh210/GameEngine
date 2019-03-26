@@ -21,15 +21,19 @@ namespace nPhysics
 		virtual glm::vec3 GetEulerRotation();
 		virtual glm::mat4 GetMatRotation();
 		virtual float GetMass();
+		virtual bool GetCollision();
 		virtual glm::vec3 GetVelocity();
 		virtual glm::vec3 GetAccel();
 		virtual glm::vec3 GetAngulatVelocity();
+		virtual std::string GetGOName();
+
 		virtual void SetPosition(glm::vec3 position);
 		virtual void SetEulerRotation(glm::vec3 rotation);
 		virtual void SetMatRotation(glm::mat4 rotation);
 		virtual void SetMass(float mass);
 		virtual void SetVelocity(glm::vec3 velocity);
 		virtual void SettAccel(glm::vec3 accel);
+		virtual void SetCollision(bool coll);
 
 
 		//void SettAccel(glm::vec3 accel);
@@ -37,6 +41,8 @@ namespace nPhysics
 		btDefaultMotionState* mMotionState;
 		btRigidBody* mBody;
 		iShape* mShape;
+		bool bHasCollided;
+		std::string mGameObjectName;
 		float mMass;
 	};
 

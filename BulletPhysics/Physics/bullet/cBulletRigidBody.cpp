@@ -12,6 +12,9 @@ namespace nPhysics {
 		:mShape(shape)
 	{
 
+		//For Collision detection
+		this->bHasCollided = false;
+		this->mGameObjectName = def.GameObjectName;
 		switch (shape->GetShapeType())
 		{
 		case nPhysics::SHAPE_TYPE_PLANE:
@@ -34,7 +37,8 @@ namespace nPhysics {
 			rbInfo.m_friction = 10.0;
 			mBody = new btRigidBody(rbInfo);
 			
-
+			mBody->setCollisionFlags(mBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+			mBody->setUserPointer(this);
 
 			break;
 		}
@@ -64,6 +68,9 @@ namespace nPhysics {
 			mBody->setAngularVelocity(nConvert::ToBullet(def.AngularVelocity));
 			
 			mBody->setSleepingThresholds(0.0f, 0.0f);
+
+			mBody->setCollisionFlags(mBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+			mBody->setUserPointer(this);
 
 			break;
 		}
@@ -95,6 +102,9 @@ namespace nPhysics {
 			//mBody->setAngularFactor(btVector3(0.0f, 1.0f, 0.0f));
 			mBody->setSleepingThresholds(0.0f, 0.0f);
 
+			mBody->setCollisionFlags(mBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+			mBody->setUserPointer(this);
+
 			break;
 		}
 
@@ -124,6 +134,9 @@ namespace nPhysics {
 			mBody->setAngularVelocity(nConvert::ToBullet(def.AngularVelocity));
 			//mBody->setAngularFactor(btVector3(0.0f, 1.0f, 0.0f));
 			mBody->setSleepingThresholds(0.0f, 0.0f);
+
+			mBody->setCollisionFlags(mBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+			mBody->setUserPointer(this);
 
 			break;
 		}
@@ -172,6 +185,9 @@ namespace nPhysics {
 				mBody->setSleepingThresholds(0.0f, 0.0f);
 				
 			}
+
+			mBody->setCollisionFlags(mBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+			mBody->setUserPointer(this);
 
 			break;
 		}
@@ -230,6 +246,11 @@ namespace nPhysics {
 		return this->mMass;
 	}
 
+	bool cBulletRigidBody::GetCollision()
+	{
+		return this->bHasCollided;
+	}
+
 	glm::vec3 cBulletRigidBody::GetVelocity()
 	{
 		btVector3 vel = this->mBody->getLinearVelocity();
@@ -244,6 +265,11 @@ namespace nPhysics {
 	glm::vec3 cBulletRigidBody::GetAngulatVelocity()
 	{
 		return nConvert::ToSimple(mBody->getAngularVelocity());
+	}
+
+	std::string cBulletRigidBody::GetGOName()
+	{
+		return mGameObjectName;
 	}
 
 	void cBulletRigidBody::SetPosition(glm::vec3 position)
@@ -275,5 +301,9 @@ namespace nPhysics {
 	}
 	void cBulletRigidBody::SettAccel(glm::vec3 accel)
 	{
+	}
+	void cBulletRigidBody::SetCollision(bool coll)
+	{
+		this->bHasCollided = coll;
 	}
 }

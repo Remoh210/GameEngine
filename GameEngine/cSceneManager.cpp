@@ -373,6 +373,16 @@ bool cSceneManager::loadScene(std::string filename) {
 					curSkinnedMesh->LoadMeshAnimation("Strafe-Right", StrafeR);
 				}
 
+				std::string RollL = (GameObject[i]["Animation"].HasMember("Roll-Left")) ? GameObject[i]["Animation"]["Roll-Left"].GetString() : "";
+				if (RollL != "") {
+					curSkinnedMesh->LoadMeshAnimation("Roll-Left", RollL);
+				}
+
+				std::string RollR = (GameObject[i]["Animation"].HasMember("Roll-Right")) ? GameObject[i]["Animation"]["Roll-Right"].GetString() : "";
+				if (RollR != "") {
+					curSkinnedMesh->LoadMeshAnimation("Roll-Right", RollR);
+				}
+
 				std::string TurnL = (GameObject[i]["Animation"].HasMember("Turn-Left")) ? GameObject[i]["Animation"]["Turn-Left"].GetString() : "";
 				if (TurnL != "") {
 					curSkinnedMesh->LoadMeshAnimation("Turn-Left", TurnL);
@@ -585,6 +595,7 @@ bool cSceneManager::loadScene(std::string filename) {
 				nPhysics::sRigidBodyDef def;
 				def.Orientation = CurModel->getMeshOrientationEulerAngles();
 				def.Position = CurModel->position;
+				def.GameObjectName = CurModel->friendlyName;
 
 				float radius = GameObject[i]["RigidBody"]["Radius"].GetFloat();
 				CurShape = gPhysicsFactory->CreateSphereShape(radius);
@@ -602,6 +613,7 @@ bool cSceneManager::loadScene(std::string filename) {
 				nPhysics::sRigidBodyDef def;
 				def.Orientation = CurModel->getMeshOrientationEulerAngles();
 				def.Position = CurModel->position;
+				def.GameObjectName = CurModel->friendlyName;
 
 				float radius = GameObject[i]["RigidBody"]["Radius"].GetFloat();
 				CurShape = gPhysicsFactory->CreateSphereShape(radius);
@@ -665,6 +677,8 @@ bool cSceneManager::loadScene(std::string filename) {
 				defA.Orientation = CurModel->getMeshOrientationEulerAngles();
 				defB.Orientation = CurModel->getMeshOrientationEulerAngles();
 				defA.Position = CurModel->position;
+				defA.GameObjectName = CurModel->friendlyName;
+				defB.GameObjectName = CurModel->friendlyName + "second";
 				defB.Position = CurModel->position + offset;
 
 
@@ -701,7 +715,7 @@ bool cSceneManager::loadScene(std::string filename) {
 
 				//in Radians
 				def.Position = CurModel->position;
-
+				def.GameObjectName = CurModel->friendlyName;
 				float planeConst = GameObject[i]["RigidBody"]["Constant"].GetFloat();
 
 
@@ -727,6 +741,7 @@ bool cSceneManager::loadScene(std::string filename) {
 				//in Radians
 				def.Position = CurModel->position;
 				def.Mass = GameObject[i]["RigidBody"]["Mass"].GetFloat();
+				def.GameObjectName = CurModel->friendlyName;
 
 				const rapidjson::Value& ExtentsArray = GameObject[i]["RigidBody"]["HalfExtents"];
 				glm::vec3 hE;
@@ -752,7 +767,7 @@ bool cSceneManager::loadScene(std::string filename) {
 				//in Radians
 				def.Position = CurModel->position;
 				def.Mass = GameObject[i]["RigidBody"]["Mass"].GetFloat();
-
+				def.GameObjectName = CurModel->friendlyName;
 				const rapidjson::Value& ExtentsArray = GameObject[i]["RigidBody"]["HalfExtents"];
 				glm::vec3 hE;
 				for (int i = 0; i < 3; i++)
@@ -787,7 +802,7 @@ bool cSceneManager::loadScene(std::string filename) {
 				//in Radians
 				def.Position = CurModel->position;
 				def.Mass = GameObject[i]["RigidBody"]["Mass"].GetFloat();
-
+				def.GameObjectName = CurModel->friendlyName;
 				const rapidjson::Value& ExtentsArray = GameObject[i]["RigidBody"]["HalfExtents"];
 				glm::vec3 hE;
 				for (int i = 0; i < 3; i++)
@@ -812,7 +827,7 @@ bool cSceneManager::loadScene(std::string filename) {
 				//in Radians
 				def.Position = CurModel->position;
 				def.Mass = GameObject[i]["RigidBody"]["Mass"].GetFloat();
-
+				def.GameObjectName = CurModel->friendlyName;
 				
 				
 
@@ -897,7 +912,9 @@ bool cSceneManager::loadScene(std::string filename) {
 			//in Radians
 			defA.Position = CurModel->position;
 			defA.Mass = GameObject[i]["RigidBody"]["Mass"].GetFloat();
+			defA.GameObjectName = CurModel->friendlyName;
 			defB.Position = CurModel->position + offset;
+			defB.GameObjectName = CurModel->friendlyName + "second";
 			defB.Mass = defA.Mass;
 
 			CurShapeA = gPhysicsFactory->CreateBoxShape(hE);
@@ -937,6 +954,7 @@ bool cSceneManager::loadScene(std::string filename) {
 				//in Radians
 				def.Position = CurModel->position;
 				def.Mass = GameObject[i]["RigidBody"]["Mass"].GetFloat();
+				def.GameObjectName = CurModel->friendlyName;
 
 				float radius = GameObject[i]["RigidBody"]["Radius"].GetFloat();
 				float height = GameObject[i]["RigidBody"]["Height"].GetFloat();

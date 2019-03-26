@@ -61,6 +61,10 @@ double deltaTime = 0;
 double FPS_last_Time = 0;
 bool bIsDebugMode = false;
 
+//for collision
+float time = 0.0f;
+bool collided = false;
+//for collision
 std::vector< cGameObject* > vec_pObjectsToDraw;
 //for physics
 std::vector< cGameObject* > vec_pSpheres;
@@ -520,8 +524,43 @@ int main(void)
 
 		// The physics update loop
 
+
+
 		//New Dll physics
 		gPhysicsWorld->Update(deltaTime);
+
+		
+
+		
+		//Collision listner, kind of....
+
+		std::string PairF = gPhysicsWorld->GetLastColPair().first;
+		std::string PairS = gPhysicsWorld->GetLastColPair().second;
+		if (PairF == "chan" && PairS == "HingeCube" || PairS == "chan" && PairF == "HingeCube")
+		{
+
+			collided = true;
+
+			
+		}
+		if (collided)
+		{
+			cGameObject* hgcube = findObjectByFriendlyName("HingeCube");
+			time += deltaTime;
+			if (time < 2.0f)
+			{
+				hgcube->vecTextures[1].strength = 1.0f;
+				time += deltaTime;
+
+			}
+			else
+			{
+				hgcube->vecTextures[1].strength = 0.0f;
+				time = 0.f;
+				collided = false;
+			}
+		}
+
 
 		for (int i = 0; i < vec_pObjectsToDraw.size(); i++)
 		{
@@ -533,14 +572,25 @@ int main(void)
 				if (curMesh->friendlyName == "chan") { 
 					curMesh->position = curMesh->rigidBody->GetPosition();
 					curMesh->position.y = curMesh->rigidBody->GetPosition().y - Totalheight;
+
+
+					
+
 				}
 				else {
 					curMesh->position = curMesh->rigidBody->GetPosition();
 					curMesh->m_meshQOrientation = glm::mat4(curMesh->rigidBody->GetMatRotation());
+
 				}
 
 
+				
+
+				//Reset Collision
+				curMesh->rigidBody->SetCollision(false);
 			}
+
+
 		}
 
 		if (bIsDebugMode) {
