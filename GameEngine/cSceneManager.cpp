@@ -363,24 +363,24 @@ bool cSceneManager::loadScene(std::string filename) {
 					curSkinnedMesh->LoadMeshAnimation("Walk-backward", Backward);
 				}
 
-				std::string StrafeL = (GameObject[i]["Animation"].HasMember("Strafe-Left")) ? GameObject[i]["Animation"]["Strafe-Left"].GetString() : "";
+				std::string StrafeL = (GameObject[i]["Animation"].HasMember("Strafe-left")) ? GameObject[i]["Animation"]["Strafe-left"].GetString() : "";
 				if (StrafeL != "") {
-					curSkinnedMesh->LoadMeshAnimation("Strafe-Left", StrafeL);
+					curSkinnedMesh->LoadMeshAnimation("Strafe-left", StrafeL);
 				}
 
-				std::string StrafeR = (GameObject[i]["Animation"].HasMember("Strafe-Right")) ? GameObject[i]["Animation"]["Strafe-Right"].GetString() : "";
+				std::string StrafeR = (GameObject[i]["Animation"].HasMember("Strafe-right")) ? GameObject[i]["Animation"]["Strafe-right"].GetString() : "";
 				if (StrafeR != "") {
-					curSkinnedMesh->LoadMeshAnimation("Strafe-Right", StrafeR);
+					curSkinnedMesh->LoadMeshAnimation("Strafe-right", StrafeR);
 				}
 
-				std::string RollL = (GameObject[i]["Animation"].HasMember("Roll-Left")) ? GameObject[i]["Animation"]["Roll-Left"].GetString() : "";
+				std::string RollL = (GameObject[i]["Animation"].HasMember("Roll-left")) ? GameObject[i]["Animation"]["Roll-left"].GetString() : "";
 				if (RollL != "") {
-					curSkinnedMesh->LoadMeshAnimation("Roll-Left", RollL);
+					curSkinnedMesh->LoadMeshAnimation("Roll-left", RollL);
 				}
 
-				std::string RollR = (GameObject[i]["Animation"].HasMember("Roll-Right")) ? GameObject[i]["Animation"]["Roll-Right"].GetString() : "";
+				std::string RollR = (GameObject[i]["Animation"].HasMember("Roll-right")) ? GameObject[i]["Animation"]["Roll-right"].GetString() : "";
 				if (RollR != "") {
-					curSkinnedMesh->LoadMeshAnimation("Roll-Right", RollR);
+					curSkinnedMesh->LoadMeshAnimation("Roll-right", RollR);
 				}
 
 				std::string TurnL = (GameObject[i]["Animation"].HasMember("Turn-Left")) ? GameObject[i]["Animation"]["Turn-Left"].GetString() : "";
@@ -391,6 +391,11 @@ bool cSceneManager::loadScene(std::string filename) {
 				std::string TurnR = (GameObject[i]["Animation"].HasMember("Turn-Right")) ? GameObject[i]["Animation"]["Turn-Right"].GetString() : "";
 				if (TurnR != "") {
 					curSkinnedMesh->LoadMeshAnimation("Turn-Right", TurnR);
+				}
+
+				std::string RunJump = (GameObject[i]["Animation"].HasMember("Run-jump")) ? GameObject[i]["Animation"]["Run-jump"].GetString() : "";
+				if (RunJump != "") {
+					curSkinnedMesh->LoadMeshAnimation("Run-jump", RunJump);
 				}
 
 				std::string Jump1 = (GameObject[i]["Animation"].HasMember("Jump1")) ? GameObject[i]["Animation"]["Jump1"].GetString() : "";

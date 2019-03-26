@@ -122,15 +122,15 @@ void key_callback( GLFWwindow* window,
 
 	}
 
-	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
-	{
-		vec_pSpheres[SphIndex]->rigidBody->SetVelocity(vec_pSpheres[SphIndex]->rigidBody->GetVelocity() + glm::vec3(0.0f, 40.0f, 0.0f));
-		//::g_pSceneManager->saveScene("physics.json");
-		//g_pDebugRenderer->addDebugSphere(glm::vec3(0.0f), glm::vec3(1.0f, 0.0f, 0.0f), 20, 100.0f);
-		//::g_pSceneManager->loadScene("output.json");
-		//CreateModels("Models.txt", g_pTheVAOMeshManager, program);
+	//if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
+	//{
+	//	vec_pSpheres[SphIndex]->rigidBody->SetVelocity(vec_pSpheres[SphIndex]->rigidBody->GetVelocity() + glm::vec3(0.0f, 40.0f, 0.0f));
+	//	//::g_pSceneManager->saveScene("physics.json");
+	//	//g_pDebugRenderer->addDebugSphere(glm::vec3(0.0f), glm::vec3(1.0f, 0.0f, 0.0f), 20, 100.0f);
+	//	//::g_pSceneManager->loadScene("output.json");
+	//	//CreateModels("Models.txt", g_pTheVAOMeshManager, program);
 
-	}
+	//}
 
 	if (glfwGetKey(window, GLFW_KEY_BACKSPACE))
 	{
@@ -394,13 +394,21 @@ void ProcessAsynKeys(GLFWwindow* window)
 	if (!bIsDebugMode) {
 		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 		{
-			glm::vec3 velVec = vec_pSpheres[SphIndex]->rigidBody->GetVelocity();
+			glm::vec3 velVec;
 			glm::vec3 CamDir = camera.getDirectionVector();
 			
 			if (IsShiftDown(window)) {
 				velVec = CamDir * 80.0f;
 				ch->rigidBody->SetVelocity(velVec);
-				ch->currentAnimation = "Run-forward"; 
+				if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+				{
+					ch->currentAnimation = "Run-jump";
+				}
+				else
+				{
+					ch->currentAnimation = "Run-forward";
+				}
+				
 			}
 			else{
 				velVec = CamDir * 30.0f;
@@ -412,11 +420,41 @@ void ProcessAsynKeys(GLFWwindow* window)
 		}
 		else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
 		{
-			glm::vec3 velVec = vec_pSpheres[SphIndex]->rigidBody->GetVelocity();
+			glm::vec3 velVec;
 			glm::vec3 CamDir = camera.getDirectionVector();
 			velVec = -CamDir * 30.0f;
 			ch->rigidBody->SetVelocity(velVec);
 			ch->currentAnimation = "Walk-backward";
+
+		}
+		else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+		{
+			glm::vec3 velVec;
+			glm::vec3 CamDir = camera.getDirectionVector();
+			//calculate Left
+			glm::vec3 right = glm::cross(CamDir, glm::vec3(0.0f, 1.0f, 0.0f));
+			
+			velVec = right * 30.0f;
+			ch->rigidBody->SetVelocity(velVec);
+			ch->currentAnimation = "Strafe-right";
+			
+
+
+		}
+		else if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+		{
+			glm::vec3 velVec;
+			glm::vec3 CamDir = camera.getDirectionVector();
+			//calculate Left
+			glm::vec3 left = -glm::cross(CamDir, glm::vec3(0.0f, 1.0f, 0.0f));
+
+
+
+			velVec = left * 30.0f;
+			ch->rigidBody->SetVelocity(velVec);
+			ch->currentAnimation = "Strafe-left";
+
+
 
 		}
 		else
