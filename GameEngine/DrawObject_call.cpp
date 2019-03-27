@@ -1,6 +1,7 @@
 //DrawOjbect_calls.cpp
 #include "globalOpenGLStuff.h"		// For GLFW and glad (OpenGL calls)
 #include "globalStuff.h"
+#include "GlobalCharacterControlls.h"
 
 #include <glm/glm.hpp>
 #include <glm/vec3.hpp> // glm::vec3
@@ -45,17 +46,6 @@ GLint texPass1OutputTexture_UniLoc = -1;
 void BindTextures(cGameObject* pCurrentMesh, GLuint shaderProgramID)
 {
 
-
-
-	// This is pretty much a hack, so we should likely pass the shader object 
-	// (pointer) to this function, and to the DrawObject call, too. 
-	// (Another option would be to pass the shader MANAGER instead, so 
-	//  that the functions can look up various things in the shader)
-	//
-	// For now, I'm going to get the uniform location here 
-	// (to make it clear (maybe?) that we'll NEED those shader uniform locations)
-
-	// So this is only called once... 
 	if (!HACK_bTextureUniformLocationsLoaded)
 	{
 		tex00_UniLoc = glGetUniformLocation(shaderProgramID, "texture00");		// uniform sampler2D texture00;
@@ -75,70 +65,24 @@ void BindTextures(cGameObject* pCurrentMesh, GLuint shaderProgramID)
 
 		texPass1OutputTexture_UniLoc = glGetUniformLocation(shaderProgramID, "texPass1OutputTexture");
 
-	}//if(!HACK_bTextureUniformLocationsLoaded )
+	}
 
 
-	// ******************************************************************** 
-	//    _  _              _ _       ___ ___  ___    _           _                  _    _         _ _           
-	//   | || |__ _ _ _  __| | |___  | __| _ )/ _ \  | |_ _____ _| |_ _  _ _ _ ___  | |__(_)_ _  __| (_)_ _  __ _ 
-	//   | __ / _` | ' \/ _` | / -_) | _|| _ \ (_) | |  _/ -_) \ /  _| || | '_/ -_) | '_ \ | ' \/ _` | | ' \/ _` |
-	//   |_||_\__,_|_||_\__,_|_\___| |_| |___/\___/   \__\___/_\_\\__|\_,_|_| \___| |_.__/_|_||_\__,_|_|_||_\__, |
-	//                                                                                                      |___/ 
-	// HACK: This is dealing with the SINGLE FBO object, currently.
-	// The cGameObject has a boolean to indicate that is using this
-	// offscreen texture (the FBO). 
-	// If it IS using this, then we bind the texture to that, and exit.
-	// We will be making this more sophisticated so that we can have
-	// multiple FBOs (which we will need and-or want)
-
-	// HACK: hakity hack hack hack hack hack
-	//    _  _   _   ___ _  ___ 
-	//   | || | /_\ / __| |/ / |
-	//   | __ |/ _ \ (__| ' <|_|
-	//   |_||_/_/ \_\___|_|\_(_)
-	//                          	
-	// This lets us "get at" the one, global FBO
-//	extern GLuint g_FBO;
-//	extern GLuint g_FBO_colourTexture;		// <--- texture number of the texture
-//	extern GLuint g_FBO_depthTexture;
-//	extern GLint g_FBO_SizeInPixes;		// = 512 the WIDTH of the framebuffer, in pixels;
 
 	if (pCurrentMesh->b_HACK_UsesOffscreenFBO)
 	{
-		// Connect the texture for this object to the FBO texture
-		// Pick texture unit 16 (just because - I randomly picked that)
+
 
 		int FBO_Texture_Unit_Michael_Picked = 1;
 
-		// 0x84C0  (or 33984)		
-		// Please bind to texture unit 34,000. Why gawd, why?
 		glActiveTexture(GL_TEXTURE0 + FBO_Texture_Unit_Michael_Picked);
 
-		// Connect the specific texture to THIS texture unit
-//		glBindTexture( GL_TEXTURE_2D, g_FBO_colourTexture );
 		glBindTexture(GL_TEXTURE_2D, ::g_pFBOMain->colourTexture_0_ID);
 
-		// Now pick to read from the normal (output from the 1st pass):
-//		glBindTexture( GL_TEXTURE_2D, ::g_pFBOMain->normalTexture_1_ID );
-//		glBindTexture( GL_TEXTURE_2D, ::g_pFBOMain->depthTexture_ID );
-//		glBindTexture( GL_TEXTURE_2D, ::g_pFBOMain->vertexWorldPos_2_ID );
-
-
-		// Set the sampler (in the shader) to ALSO point to texture unit 16
-		// This one takes the unchanged texture unit numbers 
-//		glUniform1i( tex00_UniLoc, FBO_Texture_Unit_Michael_Picked );
 		glUniform1i(texPass1OutputTexture_UniLoc, FBO_Texture_Unit_Michael_Picked);
 
-
-		// Set the blending to that it's 0th texture sampler
-		// NOTE: it's only the 0th (1st) texture that we are mixing from
-//		glUniform4f( texBW_0_UniLoc, 1.0f, 0.0f, 0.0f, 0.0f );		// <---- Note the 1.0f
-//		glUniform4f( texBW_1_UniLoc, 0.0f, 0.0f, 0.0f, 0.0f );
-
-		// NOTE: Early return (so we don't set any other textures
-		// Again; HACK!!
 		return;
-	}//if ( pCurrentMesh->b_HACK_UsesOffscreenFBO )
+	}
 
 	float blendWeights[8] = { 0 };
 
@@ -155,8 +99,7 @@ void BindTextures(cGameObject* pCurrentMesh, GLuint shaderProgramID)
 
 		glBindTexture(GL_TEXTURE_2D, texID);
 
-		// Use a switch to pick the texture sampler and weight (strength)
-		// BECAUSE the samplers can't be in an array
+		//the samplers can't be in an array
 		switch (texBindIndex)
 		{
 		case 0:		// uniform sampler2D texture00  AND texBlendWeights[0].x;
@@ -244,8 +187,9 @@ void DrawScene_Simple(std::vector<cGameObject*> vec_pMeshSceneObjects,
 	return;
 }
 
-static float g_HACK_CurrentTime = 0.0f;
-
+static float playTime = 0.0f;
+std::string prevAnim = "Idle";
+bool exited = false;
 
 void DrawObject(cGameObject* pCurrentMesh,
 	glm::mat4x4 &matModel,
@@ -265,12 +209,6 @@ void DrawObject(cGameObject* pCurrentMesh,
 
 
 
-	//************************************
-	//	matModel = glm::mat4x4(1.0f);		// mat4x4_identity(m);
-
-
-		//m = m * rotateZ;
-
 	glm::mat4 matTranslation = glm::translate(glm::mat4(1.0f),
 		pCurrentMesh->position);
 	matModel = matModel * matTranslation;		// matMove
@@ -288,8 +226,6 @@ void DrawObject(cGameObject* pCurrentMesh,
 	glm::mat4 matScale = glm::scale(glm::mat4(1.0f),
 		pCurrentMesh->nonUniformScale);
 	matModel = matModel * matScale;
-
-
 
 
 	glUseProgram(shaderProgramID);
@@ -382,6 +318,15 @@ void DrawObject(cGameObject* pCurrentMesh,
 	}
 	else
 	{
+		//if(pCurrentMesh->pSimpleSkinnedMesh->GetAnimationInfo(pCurrentMesh->currentAnimation)->bHasExitTime){}
+		std::string CurAnim = g_pCharacterController->GetCurrentAnimation();
+
+		if (CurAnim != prevAnim)
+		{
+			playTime = 0.0f;
+		}
+
+
 		// It ++IS++ skinned mesh
 		modelInfo.meshFileName = pCurrentMesh->pSimpleSkinnedMesh->fileName;
 
@@ -397,18 +342,21 @@ void DrawObject(cGameObject* pCurrentMesh,
 
 		pCurrentMesh->pSimpleSkinnedMesh->BoneTransform(
 			//0.0f,	// curFrameTime,
-			g_HACK_CurrentTime,	// curFrameTime,
-//										"assets/modelsFBX/RPG-Character_Unarmed-Walk(FBX2013).FBX",		// animationToPlay,		//**NEW**
-//										"assets/modelsFBX/RPG-Character_Unarmed-Roll-Backward(FBX2013).fbx",		// animationToPlay,		//**NEW**
-//										"assets/modelsFBX/RPG-Character_Unarmed-Idle(FBX2013).fbx",		// animationToPlay,		//**NEW**
-		pCurrentMesh->currentAnimation,
+			playTime,	// curFrameTime,
+		CurAnim,
 		vecFinalTransformation,		// Final bone transforms for mesh
 		pCurrentMesh->vecObjectBoneTransformation,  // final location of bones
 		vecOffsets);                 // local offset for each bone
 
 
-		::g_HACK_CurrentTime += deltaTime;		// Frame time, but we are going at 60HZ
+		playTime += deltaTime;		// Frame time, but we are going at 60HZ
+		float dur = pCurrentMesh->pSimpleSkinnedMesh->GetDurationInSec(CurAnim);
+		if (playTime >= dur)
+		{
+			
+			//playTime = 0;
 
+		}
 
 		unsigned int numberOfBonesUsed = static_cast<unsigned int>(vecFinalTransformation.size());
 
@@ -431,15 +379,11 @@ void DrawObject(cGameObject* pCurrentMesh,
 		glUniformMatrix4fv(bones_UniLoc, numberOfBonesUsed, GL_FALSE,
 			(const GLfloat*)glm::value_ptr(*pBoneMatrixArray));
 
-		// Update the extents of the skinned mesh from the bones...
-		//	sMeshDrawInfo.minXYZ_from_SM_Bones(glm::vec3(0.0f)), 
-		//  sMeshDrawInfo.maxXYZ_from_SM_Bones(glm::vec3(0.0f))
+
 		for (unsigned int boneIndex = 0; boneIndex != numberOfBonesUsed; boneIndex++)
 		{
 			glm::mat4 boneLocal = pCurrentMesh->vecObjectBoneTransformation[boneIndex];
 
-			// HACK: Need to add "uniform scale" to mesh
-	//		float scale = pCurrentMesh->nonUniformScale.x;
 			float scale = 1.0f;	// For now
 			boneLocal = glm::scale(boneLocal, glm::vec3(pCurrentMesh->nonUniformScale.x,
 				pCurrentMesh->nonUniformScale.y,
@@ -447,30 +391,6 @@ void DrawObject(cGameObject* pCurrentMesh,
 
 			glm::vec4 boneBallLocation = boneLocal * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
 			boneBallLocation *= scale;
-
-			// Draw a debug sphere at the location of the bone
-	//		boneBallLocation += glm::vec4(0.0f, 0.0f, 0.0f, 0.0f);
-
-
-	//		::g_pDebugRenderer->addDebugSphere( glm::vec3(boneBallLocation), 
-	//										    glm::vec3( 1.0f, 1.0f, 1.0f ),
-	//										    scale, 0.0f );
-			//DrawDebugBall( glm::vec3(boneBallLocation), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f), 0.2f );
-
-
-			// Bone index [13] = "B_L_Finger31"
-	//		if (boneIndex == 25)
-	//		{
-	//			//DrawDebugBall( glm::vec3(boneBallLocation), glm::vec4(1.0f, 0.0f, 0.0f, 1.0f), 0.5f );
-	////			std::cout << "Bone 13, B_L_Finger31: " 
-	////				<< boneBallLocation.x << ", "
-	////				<< boneBallLocation.y << ", " 
-	////				<< boneBallLocation.z << std::endl;
-
-	//			cGameObject* pPlayerBody = findObjectByFriendlyName("PlayerBody");
-	//			pPlayerBody->setUniformScale(10.0f);
-	//			pPlayerBody->position = boneBallLocation;
-	//		}
 
 
 
@@ -498,10 +418,13 @@ void DrawObject(cGameObject* pCurrentMesh,
 					pCurrentMesh->maxXYZ_from_SM_Bones.z = boneBallLocation.z;
 				}
 			}//if ( boneIndex == 0 )
-
+			
 
 		}
 
+		prevAnim = CurAnim;
+		
+		
 
 	}//if ( pCurrentMesh->pSimpleSkinnedMesh == NULL )
 //  ___ _   _                  _ __  __        _    

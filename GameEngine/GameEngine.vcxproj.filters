@@ -108,6 +108,9 @@
     <Filter Include="SoudManager">
       <UniqueIdentifier>{01d53ee0-7df7-42f7-8d36-fb1cd143954f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CharacterController">
+      <UniqueIdentifier>{397bdc3a-0e5a-4f72-a093-1e8f938f70f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="theMain.cpp">
@@ -281,6 +284,9 @@
     <ClCompile Include="cSoundManager.cpp">
       <Filter>SoudManager</Filter>
     </ClCompile>
+    <ClCompile Include="CharacterController.cpp">
+      <Filter>CharacterController</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="linmath.h">
@@ -438,6 +444,12 @@
     </ClInclude>
     <ClInclude Include="cSoundManager.h">
       <Filter>SoudManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterController.h">
+      <Filter>CharacterController</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalCharacterControlls.h">
+      <Filter>Global</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

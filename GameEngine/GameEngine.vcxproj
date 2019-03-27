@@ -164,6 +164,7 @@
     <ClCompile Include="cFBO.cpp" />
     <ClCompile Include="cFollowCurve.cpp" />
     <ClCompile Include="cFollowObjectCommand.cpp" />
+    <ClCompile Include="CharacterController.cpp" />
     <ClCompile Include="cLightHelper.cpp" />
     <ClCompile Include="cLightManager.cpp" />
     <ClCompile Include="cLuaBrain.cpp" />
@@ -225,6 +226,7 @@
     <ClInclude Include="cCommandGroup.h" />
     <ClInclude Include="cFBO.h" />
     <ClInclude Include="cFollowObjectCommand.h" />
+    <ClInclude Include="CharacterController.h" />
     <ClInclude Include="cLightHelper.h" />
     <ClInclude Include="cLightManager.h" />
     <ClInclude Include="cLuaBrain.h" />
@@ -247,6 +249,7 @@
     <ClInclude Include="Error\CErrorLog.h" />
     <ClInclude Include="Error\COpenGLError.h" />
     <ClInclude Include="cFollowCurve.h" />
+    <ClInclude Include="GlobalCharacterControlls.h" />
     <ClInclude Include="globalOpenGLStuff.h" />
     <ClInclude Include="globalStuff.h" />
     <ClInclude Include="cTextRend.h" />

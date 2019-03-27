@@ -16,6 +16,13 @@
 class cSimpleAssimpSkinnedMesh;	// Forward declare
 class cAnimationState;			// Forward declare 
 
+struct sAnimation
+{
+	std::string AnimName;
+	bool hasExitTime;
+	//duaration in sec
+	float duration;
+};
 
 
 struct sSphere
@@ -49,6 +56,16 @@ struct sTextureInfo
 	int cachedTextureID; 	// Set to -1 by default
 	float strength;		
 };
+
+
+struct sCurAnim
+{
+
+	std::string name;
+	bool hasExitTime;
+	bool IsFinished;
+};
+
 
 class cGameObject
 {
@@ -153,6 +170,8 @@ public:
 	cSimpleAssimpSkinnedMesh*	pSimpleSkinnedMesh;
 	// HACK
 	std::string currentAnimation;
+
+
 	cAnimationState*	pAniState;
 
 	// Extent Values for skinned mesh

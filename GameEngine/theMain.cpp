@@ -6,6 +6,7 @@
 //
 #include "globalOpenGLStuff.h"
 #include "globalStuff.h"
+#include "GlobalCharacterControlls.h"
 
 #include <glm/glm.hpp>
 #include <glm/vec3.hpp> 
@@ -50,6 +51,8 @@ cSimpleDebugRenderer* g_simpleDubugRenderer = NULL;
 cSoundManager* g_pSoundManager = NULL;
 cLuaBrain* p_LuaScripts = NULL;
 cTextRend* g_textRenderer = NULL;
+cCharacterController* g_pCharacterController = NULL;
+
 //cCommandGroup sceneCommandGroup;
 int cou;
 int nbFrames = 0;
@@ -310,7 +313,8 @@ int main(void)
 	}
 	cGameObject* player = findObjectByFriendlyName("chan");
 	camera.setThirdPerson(player);
-	
+
+	g_pCharacterController = new cCharacterController(player);
 	// Draw the "scene" (run the program)
 	while (!glfwWindowShouldClose(window))
     {

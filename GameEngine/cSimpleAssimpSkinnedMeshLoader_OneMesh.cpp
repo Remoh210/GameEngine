@@ -118,9 +118,47 @@ float cSimpleAssimpSkinnedMesh::FindAnimationTotalTime(std::string animationName
 	return (float)itAnimation->second.pAIScene->mAnimations[0]->mDuration;
 }
 
+float cSimpleAssimpSkinnedMesh::GetDurationInSec(std::string animationName)
+{
+	//std::map< std::string /*animationfile*/,
+//	const aiScene* >::iterator itAnimation = this->mapAnimationNameTo_pScene.find(animationName);
+	std::map< std::string /*animation FRIENDLY name*/,
+		sAnimationInfo >::iterator itAnimation = this->mapAnimationFriendlyNameTo_pScene.find(animationName);
+
+	// Found it? 
+	if (itAnimation == this->mapAnimationFriendlyNameTo_pScene.end())
+	{	// Nope.
+		return 0.0f;
+	}
+
+	// This is scaling the animation from 0 to 1
+	return (float)itAnimation->second.pAIScene->mAnimations[0]->mDuration / (float)itAnimation->second.pAIScene->mAnimations[0]->mTicksPerSecond;
+}
+
+
+sAnimationInfo* cSimpleAssimpSkinnedMesh::GetAnimationInfo(std::string animationName)
+{
+	//std::map< std::string /*animationfile*/,
+//	const aiScene* >::iterator itAnimation = this->mapAnimationNameTo_pScene.find(animationName);
+	std::map< std::string /*animation FRIENDLY name*/,
+		sAnimationInfo >::iterator itAnimation = this->mapAnimationFriendlyNameTo_pScene.find(animationName);
+
+	// Found it? 
+	if (itAnimation == this->mapAnimationFriendlyNameTo_pScene.end())
+	{	// Nope.
+		return NULL;
+	}
+
+	// This is scaling the animation from 0 to 1
+	return &itAnimation->second;
+}
+
+
+
+
 
 bool cSimpleAssimpSkinnedMesh::LoadMeshAnimation( const std::string &friendlyName,
-												  const std::string &filename )	// Only want animations
+												  const std::string &filename, bool hasExitTime )	// Only want animations
 {
 	// Already loaded this? 
 	std::map< std::string /*animation FRIENDLY name*/,
@@ -139,11 +177,16 @@ bool cSimpleAssimpSkinnedMesh::LoadMeshAnimation( const std::string &friendlyNam
 	unsigned int Flags = aiProcess_Triangulate | aiProcess_OptimizeMeshes | aiProcess_OptimizeGraph | aiProcess_JoinIdenticalVertices;
 
 	Assimp::Importer* pImporter = new Assimp::Importer();
-//	const aiScene* pAniScene = pImporter->ReadFile(filename.c_str(), Flags);
 	sAnimationInfo animInfo;
 	animInfo.friendlyName = friendlyName;
 	animInfo.fileName = filename;
 	animInfo.pAIScene = pImporter->ReadFile(animInfo.fileName.c_str(), Flags);
+	animInfo.bHasExitTime = hasExitTime;
+
+	//Get duration is seconds
+	animInfo.duration = animInfo.pAIScene->mAnimations[0]->mDuration / animInfo.pAIScene->mAnimations[0]->mTicksPerSecond;
+
+
 
 	if ( ! animInfo.pAIScene )
 	{
@@ -384,13 +427,6 @@ void cSimpleAssimpSkinnedMesh::ReadNodeHeirarchy(float AnimationTime,
 		// Combine the above transformations
 		NodeTransformation = TranslationM * RotationM * ScalingM;
 	}
-	//else
-	//{
-	//	// If there's no bone corresponding to this node, then it's something the animator used to 
-	//	//	help make or position the model or animation. The point is that it DOESN'T change
-	//	//	based on the animation frame, so take it just as is
-	//	NodeTransformation = AIMatrixToGLMMatrix( pNode->mTransformation );
-	//}
 
 	glm::mat4 ObjectBoneTransformation = ParentTransformMatrix * NodeTransformation;
 
@@ -402,8 +438,6 @@ void cSimpleAssimpSkinnedMesh::ReadNodeHeirarchy(float AnimationTime,
 		this->mBoneInfo[BoneIndex].FinalTransformation = this->mGlobalInverseTransformation 
 		                                                 * ObjectBoneTransformation 
 			                                             * this->mBoneInfo[BoneIndex].BoneOffset;
-		//this->mBoneInfo[BoneIndex].FinalTransformation = GlobalTransformation 
-		//	                                             * this->mBoneInfo[BoneIndex].BoneOffset;
 
 	}
 	else

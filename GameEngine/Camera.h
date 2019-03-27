@@ -172,9 +172,9 @@ public:
 
 	glm::vec3 getDirectionVector()
 	{
-		glm::vec3 orthoFront = Front - Position;
-		orthoFront.y = 0.0f;
-		return glm::normalize(orthoFront);
+		glm::vec3 forw = Front - Position;
+		forw.y = 0.0f;
+		return glm::normalize(forw);
 	}
 
 

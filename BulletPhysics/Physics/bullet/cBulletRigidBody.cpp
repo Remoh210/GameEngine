@@ -176,7 +176,7 @@ namespace nPhysics {
 			{
 				mMotionState = new btDefaultMotionState(startTransform);
 				btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, mMotionState, colShape, localInertia);
-				rbInfo.m_restitution = 0.3;
+				rbInfo.m_restitution = 0.0;
 				rbInfo.m_friction = 0;
 				mBody = new btRigidBody(rbInfo);
 				mBody->setAngularFactor(btVector3(0.0f, 1.0f, 0.0f));

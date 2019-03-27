@@ -4,26 +4,16 @@ cGameObject::cGameObject()
 {
 	this->position = glm::vec3(0.0f);
 	this->nonUniformScale = glm::vec3(1.0f);
-
-	//	this->preRotation = glm::vec3(0.0f);
-	//	this->postRotation = glm::vec3(0.0f);
 	this->setMeshOrientationEulerAngles(glm::vec3(0.0f, 0.0f, 0.0f));
-
-	//	this->m_meshQOrientation = glm::quat( glm::vec3(0.0f,0.0f,0.0f));
-
-		// 
 	this->bIsDebug = false;
 	this->bIsVisible = true;
 	this->bIsWireFrame = false;
-	// HACK: See class definition for why this is a hack
 	this->b_HACK_UsesOffscreenFBO = false;
 
 	// Set unique ID
 	this->m_uniqueID = cGameObject::m_NextID;
 	// Increment
 	cGameObject::m_NextID++;	// 32 bit - 4 billion
-
-//	this->objColour = glm::vec3(1.0f, 1.0f, 1.0f);	// white by default
 
 	this->materialDiffuse = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 	this->materialSpecular = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
@@ -36,11 +26,9 @@ cGameObject::cGameObject()
 	this->accel = glm::vec3(0.0f);
 	this->bIsUpdatedByPhysics = false;	// physics ignores by default
 	this->bIsUpdatedByPhysics = false;
-//	this->radius = 0.0f;
+
 
 	this->pDebugRenderer = NULL;
-
-	// Set shape to NULL
 	this->pTheShape = NULL;
 	this->shapeType = cGameObject::UNKOWN_SHAPE;
 	this->rigidBody = NULL;
@@ -48,7 +36,6 @@ cGameObject::cGameObject()
 
 
 
-	// Skinned mesh and animations:
 	this->pSimpleSkinnedMesh = NULL;
 	this->pAniState = NULL;
 
@@ -86,7 +73,7 @@ void cGameObject::setUniformScale(float scale)
 	return;
 }
 
-//static unsigned int m_NextID; //= 0;
+
 
 //static 
 unsigned int cGameObject::m_NextID = cGameObject::STARTING_ID_VALUE;

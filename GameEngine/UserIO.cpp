@@ -4,6 +4,7 @@
 #include "Camera.h"
 #include "cSceneManager.h"
 #include "cAnimationState.h"
+#include "GlobalCharacterControlls.h"
 //#include <vector>
 #include <iostream>
 //include "TextureCTextureFromBMP.h"
@@ -31,6 +32,8 @@ bool bIsRunning = false;
 
 bool IsPicked = false;
 void commandsInterface();
+
+bool IsShiftDown(GLFWwindow* window);
 
 cGameObject* CloseToObj(std::vector<cGameObject*> models);
 
@@ -81,6 +84,18 @@ void key_callback( GLFWwindow* window,
 	}
 
 
+	//Process Jump only once
+	cGameObject* ch = findObjectByFriendlyName("chan");
+	glm::vec3 vel;
+	vel = ch->rigidBody->GetVelocity();
+	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS && g_pCharacterController->GetCurrentAnimation() != "Run-jump")
+	{
+		glm::vec3 velj;
+		velj = ch->rigidBody->GetVelocity();
+		//ch->currentAnimation = "Run-jump";
+		velj.y = 17.0f;
+		ch->rigidBody->SetVelocity(velj);
+	}
 
 	//SAVE MODELS
 	if (key == GLFW_KEY_G && action == GLFW_PRESS)
@@ -100,7 +115,7 @@ void key_callback( GLFWwindow* window,
 	if (glfwGetKey(window, GLFW_KEY_K))
 	{
 		//SwitchToSolid(vec_pObjectsToDraw);
-		findObjectByFriendlyName("Cloth")->softBody->SwitchWind();
+		//findObjectByFriendlyName("Cloth")->softBody->SwitchWind();
 
 	}
 
@@ -387,42 +402,45 @@ void ProcessAsynKeys(GLFWwindow* window)
 	//									x axis = left and right
 	//									z axis = forward and backward
 	// 
-	cGameObject* ch = findObjectByFriendlyName("chan");
-	glm::vec3 vel;
-	vel = ch->rigidBody->GetVelocity();
-	
+
 	if (!bIsDebugMode) {
+
+
+		cGameObject* ch = findObjectByFriendlyName("chan");
+		glm::vec3 vel;
+		vel = ch->rigidBody->GetVelocity();
+
+
 		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 		{
 			glm::vec3 velVec;
 			glm::vec3 CamDir = camera.getDirectionVector();
-			
-			if (IsShiftDown(window)) {
-				velVec = CamDir * 80.0f;
-				ch->rigidBody->SetVelocity(velVec);
-				if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
-				{
-					ch->currentAnimation = "Run-jump";
-				}
-				else
-				{
+			std::cout << CamDir.x << " " << CamDir.y << " " << CamDir.z << std::endl;
+
+				if (IsShiftDown(window)) {
+					velVec = CamDir * 80.0f;
+					velVec.y = vel.y;
+
 					ch->currentAnimation = "Run-forward";
+					ch->rigidBody->SetVelocity(velVec);
+
+
 				}
-				
-			}
-			else{
-				velVec = CamDir * 30.0f;
-				ch->rigidBody->SetVelocity(velVec);
-				ch->currentAnimation = "Walk-forward";
-			}
-			
-			
+				else {
+					velVec = CamDir * 30.0f;
+					velVec.y = vel.y;
+					ch->rigidBody->SetVelocity(velVec);
+					ch->currentAnimation = "Walk-forward";
+				}
+
+
 		}
 		else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
 		{
 			glm::vec3 velVec;
 			glm::vec3 CamDir = camera.getDirectionVector();
 			velVec = -CamDir * 30.0f;
+			velVec.y = vel.y;
 			ch->rigidBody->SetVelocity(velVec);
 			ch->currentAnimation = "Walk-backward";
 
@@ -433,11 +451,12 @@ void ProcessAsynKeys(GLFWwindow* window)
 			glm::vec3 CamDir = camera.getDirectionVector();
 			//calculate Left
 			glm::vec3 right = glm::cross(CamDir, glm::vec3(0.0f, 1.0f, 0.0f));
-			
+
 			velVec = right * 30.0f;
+			velVec.y = vel.y;
 			ch->rigidBody->SetVelocity(velVec);
 			ch->currentAnimation = "Strafe-right";
-			
+
 
 
 		}
@@ -451,6 +470,7 @@ void ProcessAsynKeys(GLFWwindow* window)
 
 
 			velVec = left * 30.0f;
+			velVec.y = vel.y;
 			ch->rigidBody->SetVelocity(velVec);
 			ch->currentAnimation = "Strafe-left";
 
@@ -460,20 +480,14 @@ void ProcessAsynKeys(GLFWwindow* window)
 		else
 		{
 			ch->rigidBody->SetVelocity(glm::vec3(0.0f, vel.y, 0.0f));
-			ch->currentAnimation = "Idle";
+
 		}
-		//else if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		//	//ch->rigidBody->SetVelocity(glm::vec3(0.0f, vel.y, 50.0f));
-		//else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		//	//ch->rigidBody->SetVelocity(glm::vec3(0.0f, vel.y, -50.0f));
-	
-			
+
+
+
 	}
-	else
-	{
-		ch->currentAnimation = "Idle";
-		ch->rigidBody->SetVelocity(glm::vec3(0.0f, vel.y, 0.0f));
-	}
+
+
 	float cameraSpeed = CAMERA_SPEED_SLOW;
 	if ( glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS  )
 	{

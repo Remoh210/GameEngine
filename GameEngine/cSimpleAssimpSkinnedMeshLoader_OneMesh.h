@@ -13,16 +13,18 @@
 #include <glm/glm.hpp>
 
 #include "sVertex_xyz_rgba_n_uv2_bt_4Bones.h"
-
-// Used by the game object and the rendering
-//#include "../cMesh.h"			// For loading into the VAO manager
-//#include "cMeshObject.h"
 #include "cMesh.h"
-
-//#include "../sMeshDrawInfo.h"	// For the draw call
 
 //Inspired by this page: http://ogldev.atspace.co.uk/www/tutorial38/tutorial38.html
 
+struct sAnimationInfo
+{
+	std::string friendlyName;
+	std::string fileName;
+	float duration;
+	bool bHasExitTime;
+	const aiScene* pAIScene;
+};
 
 class cSimpleAssimpSkinnedMesh 
 {
@@ -47,29 +49,19 @@ private:
 	};
 
 public:
-	// Mesh and VAO and VBO infor
-	//unsigned int m_VBO_ID;				// Vertex buffer object 
+
 	unsigned int m_numberOfVertices;
-	//unsigned int m_indexBuf_ID;			// Index buffer referring to VBO
 	unsigned int m_numberOfIndices;
 	unsigned int m_numberOfTriangles;
-	//bool m_bVBO_created;
-	//// Remember: a VAO is a VBO+shaderProgram combination (i.e. you need 1 VAO ++PER++ VBO+shaderID)
-	//// (this is only an issue if you are using mulitple shaders; if you are using a single "uber" shader, you're fine)
-	//unsigned int m_VAO_ID;				// Vertex Array Object
-	//unsigned int m_shaderIDMatchingVAO;	// The shader prod ID matching this VBO
-	//bool m_bVAO_created;
-//	// Actual vertex data
-//	vert_XYZ_RGBA_N_STU_TanBi_4Bones* m_pVertexData;
 
 public:
 	cSimpleAssimpSkinnedMesh(void);
 	virtual ~cSimpleAssimpSkinnedMesh(void);
 
 	bool LoadMeshFromFile( const std::string &friendlyName, 
-						   const std::string &filename );		// mesh we draw
+						   const std::string &filename );		// lodaing  Mesh
 	bool LoadMeshAnimation( const std::string &friendlyName,
-							const std::string &filename );	// Only want animations
+							const std::string &filename, bool hasExitTime = false);	// lodaing only Animation
 
 	// Added to assist with the forward kinematics (id and bone names)
 	void GetListOfBoneIDandNames( std::vector<std::string> &vecBoneNames );
@@ -80,37 +72,22 @@ public:
 	const aiScene* pScene;		// "pretty" mesh we update and draw
 	Assimp::Importer mImporter;
 
-	struct sAnimationInfo
-	{
-		std::string friendlyName;
-		std::string fileName;
-		const aiScene* pAIScene;
-	};
 
-	//std::map< std::string /*animationfile*/,
-	//	      const aiScene* > mapAnimationNameTo_pScene;		// Animations
+
 	std::map< std::string /*animation FRIENDLY name*/,
 		      sAnimationInfo > mapAnimationFriendlyNameTo_pScene;		// Animations
 
 	// Looks in the animation map and returns the total time
 	float FindAnimationTotalTime( std::string animationName );
+	float GetDurationInSec(std::string animationName);
+	sAnimationInfo* GetAnimationInfo(std::string animationName);
 
-	// Creates a VBO, loads the current mesh, then creates a VAO for the current VBO+shader
-//	bool CreateVBOfromCurrentMesh(void);
-//	bool CreateVBOandVOAfromCurrentMesh( int shaderProgID, std::string &error );
+	
 
-	// Returns NULL (0) if there is no mesh at that index
+
 	cMesh* CreateMeshObjectFromCurrentModel( unsigned int meshIndex = 0 );
 
-	// The sMeshDrawInfo is used during the render call to lookup
-	//	VAO infomation. Also, the gross orientation of the model is from 
-	//	here. So this meshDrawInfo is the mesh bind pose, really.
-//	bool CreateMeshDrawInfoFromCurrentModel( sMeshDrawInfo &meshDrawInfo );
 
-//	void BoneTransform(float TimeInSeconds, 
-//					   std::vector<glm::mat4> &FinalTransformation, 
-//					   std::vector<glm::mat4> &Globals, 
-//					   std::vector<glm::mat4> &Offsets);
 	void BoneTransform(float TimeInSeconds, 
 					   std::string animationName,		// Now we can pick the animation
 					   std::vector<glm::mat4> &FinalTransformation, 

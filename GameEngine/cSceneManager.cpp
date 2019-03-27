@@ -395,7 +395,7 @@ bool cSceneManager::loadScene(std::string filename) {
 
 				std::string RunJump = (GameObject[i]["Animation"].HasMember("Run-jump")) ? GameObject[i]["Animation"]["Run-jump"].GetString() : "";
 				if (RunJump != "") {
-					curSkinnedMesh->LoadMeshAnimation("Run-jump", RunJump);
+					curSkinnedMesh->LoadMeshAnimation("Run-jump", RunJump, true);
 				}
 
 				std::string Jump1 = (GameObject[i]["Animation"].HasMember("Jump1")) ? GameObject[i]["Animation"]["Jump1"].GetString() : "";
