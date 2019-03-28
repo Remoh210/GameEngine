@@ -20,7 +20,7 @@ namespace nPhysics {
 		virtual void AddConstraint(iConstraint* constraint);
 		virtual void RemoveConstraint(iConstraint* constraint);
 		virtual std::pair<std::string, std::string> GetLastColPair();
-
+		virtual bool RayCast(glm::vec3& from, glm::vec3& to);
 		void Update(float dt);
 
 	protected:

@@ -55,6 +55,8 @@ cTextRend* g_textRenderer = NULL;
 int cou;
 int nbFrames = 0;
 int FPS = 0;
+
+bool RayHitted = false;
 std::vector<cAABB::sAABB_Triangle> vec_cur_AABB_tris;
 void UpdateWindowTitle(void);
 double currentTime = 0;
@@ -488,8 +490,15 @@ int main(void)
 		}
 		g_textRenderer->drawText(width, height, ("Gravity: " + std::to_string((int)g_Gravity.y)).c_str(), 150.0f);
 		
+		std::string strhited;
+		if (RayHitted)
+			strhited = "Ray has hit: yes";
+		else
+			strhited = "Ray has hit: no";
+
+		g_textRenderer->drawText(width, height, strhited.c_str(), 200.0f);
+		//g_textRenderer->drawText(width, height,"Ray hit: " + RayHitted ? "no": "yes" , 200.0f);
 		
-	
 
 
 
@@ -752,7 +761,37 @@ int main(void)
 				
 			}
 		}
-	
+
+		//ray casting
+		glm::vec3 from = player->position + glm::vec3(0.0f, 10.0f, 0.0f);
+
+		
+		glm::vec4 vecForwardDirection_ModelSpace = glm::vec4(0.0f, 0.0f, /**/1.0f/**/, 1.0f);
+		
+			// Now orientation
+			glm::quat qPlayerRotation = player->getQOrientation();
+			// Make a mat4x4 from that quaternion
+			glm::mat4 matPlayerRotation = glm::mat4(qPlayerRotation);
+		
+			glm::vec4 vecForwardDirection_WorldSpace = matPlayerRotation * vecForwardDirection_ModelSpace;
+		
+			// optional normalize
+			vecForwardDirection_WorldSpace = glm::normalize(vecForwardDirection_WorldSpace);
+			vecForwardDirection_WorldSpace *= 50.0f;
+			vecForwardDirection_WorldSpace = glm::vec4(player->position, 0.0f) + vecForwardDirection_WorldSpace;
+			glm::vec3 to = vecForwardDirection_WorldSpace;
+			to.y = 10.0f;
+
+		g_pDebugRendererACTUAL->addLine(from, to, glm::vec3(0.0f, 1.0f, 0.0f));
+		RayHitted = gPhysicsWorld->RayCast(from, to);
+		//if (gPhysicsWorld->RayCast(from, to))
+		//{
+		//	std::cout << "hit" << std::endl;
+		//}
+		//else
+		//{
+		//	std::cout << "notHit" << std::endl;
+		//}
 
 		UpdateWindowTitle();
 

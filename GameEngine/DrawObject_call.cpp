@@ -349,16 +349,27 @@ void DrawObject(cGameObject* pCurrentMesh,
 		pCurrentMesh->vecObjectBoneTransformation,  // final location of bones
 		vecOffsets);                 // local offset for each bone
 
-
-		playTime += deltaTime;		// Frame time, but we are going at 60HZ
+		
+				// Frame time, but we are going at 60HZ
+		playTime += deltaTime;
 		float dur = pCurrentMesh->pSimpleSkinnedMesh->GetDurationInSec(CurAnim);
-		if (playTime >= dur)
+		if (CurAnim == "Run-jump" && playTime >= dur)
+		{
+			playTime = dur;
+		}
+		else
 		{
 			
-			//playTime = 0;
+			if (playTime >= dur)
+			{
 
+				playTime = 0;
+
+			}
 		}
 
+		
+		
 		unsigned int numberOfBonesUsed = static_cast<unsigned int>(vecFinalTransformation.size());
 
 		GLint numBonesUsed_UniLoc = glGetUniformLocation(shaderProgramID, "numBonesUsed");

@@ -415,7 +415,7 @@ void ProcessAsynKeys(GLFWwindow* window)
 		{
 			glm::vec3 velVec;
 			glm::vec3 CamDir = camera.getDirectionVector();
-			std::cout << CamDir.x << " " << CamDir.y << " " << CamDir.z << std::endl;
+			//std::cout << CamDir.x << " " << CamDir.y << " " << CamDir.z << std::endl;
 
 				if (IsShiftDown(window)) {
 					velVec = CamDir * 80.0f;

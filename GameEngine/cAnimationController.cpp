@@ -1,5 +1,6 @@
 #include "cAnimationController.h"
 #include "cGameObject.h"
+#include "globalStuff.h"
 #include <iostream>
 
 
@@ -24,8 +25,14 @@ std::string cAnimationController::GetCurrentAnimation()
 
 	glm::vec3 vel = mActiveChar->rigidBody->GetVelocity();
 	glm::vec3 pos = mActiveChar->rigidBody->GetPosition();
+	//glm::vec3 from;
+	float height = 13.0f;
+	//from = glm::vec3(pos.x, pos.y -height, pos.z);
+
+	glm::vec3 to = glm::vec3(pos.x, pos.y - height, pos.z);
+	g_pDebugRendererACTUAL->addLine(pos, to, glm::vec3(1.0f, 0.0f, 0.0f));
 	//std::cout << mActiveChar->bHadCollision << std::endl;
-	if (!mActiveChar->bHadCollision)
+	if (!gPhysicsWorld->RayCast(pos, to))
 	{
 		return "Run-jump";
 	}

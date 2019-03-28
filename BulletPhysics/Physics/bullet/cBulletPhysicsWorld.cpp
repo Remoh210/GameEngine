@@ -8,6 +8,7 @@ std::pair<std::string, std::string> lastColNames;
 
 extern ContactAddedCallback	gContactAddedCallback;
 
+
 bool callbackFunc(btManifoldPoint& cp,
 	const btCollisionObjectWrapper* obj1, int id1, int index1,
 	const btCollisionObjectWrapper* obj2, int id2, int index2)
@@ -158,9 +159,16 @@ std::pair<std::string, std::string> nPhysics::cBulletPhysicsWorld::GetLastColPai
 	return lastColNames;
 }
 
+bool nPhysics::cBulletPhysicsWorld::RayCast(glm::vec3 & from, glm::vec3& to)
+{
+	btCollisionWorld::ClosestRayResultCallback res(nConvert::ToBullet(from), nConvert::ToBullet(to));
+	mDynamicsWorld->rayTest(nConvert::ToBullet(from), nConvert::ToBullet(to), res);
+	return res.hasHit();
+}
+
 void nPhysics::cBulletPhysicsWorld::Update(float dt)
 {
-	//Why??????????
+	//not working with 120hz monitor?
 	//mDynamicsWorld->stepSimulation(dt, 10);
 	mDynamicsWorld->stepSimulation(dt, 0);
 }
