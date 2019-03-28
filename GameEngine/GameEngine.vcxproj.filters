@@ -284,7 +284,7 @@
     <ClCompile Include="cSoundManager.cpp">
       <Filter>SoudManager</Filter>
     </ClCompile>
-    <ClCompile Include="CharacterController.cpp">
+    <ClCompile Include="cAnimationController.cpp">
       <Filter>CharacterController</Filter>
     </ClCompile>
   </ItemGroup>
@@ -445,11 +445,11 @@
     <ClInclude Include="cSoundManager.h">
       <Filter>SoudManager</Filter>
     </ClInclude>
-    <ClInclude Include="CharacterController.h">
-      <Filter>CharacterController</Filter>
-    </ClInclude>
     <ClInclude Include="GlobalCharacterControlls.h">
       <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="cAnimationController.h">
+      <Filter>CharacterController</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,8 @@
 #pragma once
-#include "cGameObject.h"
+#include <string>
 
+//forward declaration
+class cGameObject;
 
 enum eCharState
 {
@@ -9,10 +11,10 @@ enum eCharState
 
 };
 
-class cCharacterController
+class cAnimationController
 {
 public:
-	cCharacterController(cGameObject* ActiveChar);
+	cAnimationController(cGameObject* ActiveChar);
 
 	std::string GetCurrentAnimation();
 	//SetCharacter;

@@ -1,29 +1,31 @@
-#include "CharacterController.h"
+#include "cAnimationController.h"
+#include "cGameObject.h"
+#include <iostream>
 
 
-
-cCharacterController::cCharacterController(cGameObject* ActiveChar)
+cAnimationController::cAnimationController(cGameObject* ActiveChar)
 {
 	mActiveChar = ActiveChar;
 }
 
-void cCharacterController::walkForward()
+void cAnimationController::walkForward()
 {
 	if (mActiveChar->currentAnimation != "Run-jump") {
 		mActiveChar->currentAnimation = "Walk-forward";
 	}
 }
 
-void cCharacterController::JumpForward()
+void cAnimationController::JumpForward()
 {
 }
 
-std::string cCharacterController::GetCurrentAnimation()
+std::string cAnimationController::GetCurrentAnimation()
 {
 
 	glm::vec3 vel = mActiveChar->rigidBody->GetVelocity();
 	glm::vec3 pos = mActiveChar->rigidBody->GetPosition();
-	if (pos.y > 10.51f)
+	//std::cout << mActiveChar->bHadCollision << std::endl;
+	if (!mActiveChar->bHadCollision)
 	{
 		return "Run-jump";
 	}
@@ -38,7 +40,7 @@ std::string cCharacterController::GetCurrentAnimation()
 	
 }
 
-void cCharacterController::UpdateController()
+void cAnimationController::UpdateController()
 {
 
 	glm::vec3 vel = mActiveChar->rigidBody->GetVelocity();

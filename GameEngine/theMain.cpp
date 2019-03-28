@@ -6,7 +6,6 @@
 //
 #include "globalOpenGLStuff.h"
 #include "globalStuff.h"
-#include "GlobalCharacterControlls.h"
 
 #include <glm/glm.hpp>
 #include <glm/vec3.hpp> 
@@ -51,7 +50,6 @@ cSimpleDebugRenderer* g_simpleDubugRenderer = NULL;
 cSoundManager* g_pSoundManager = NULL;
 cLuaBrain* p_LuaScripts = NULL;
 cTextRend* g_textRenderer = NULL;
-cCharacterController* g_pCharacterController = NULL;
 
 //cCommandGroup sceneCommandGroup;
 int cou;
@@ -314,7 +312,6 @@ int main(void)
 	cGameObject* player = findObjectByFriendlyName("chan");
 	camera.setThirdPerson(player);
 
-	g_pCharacterController = new cCharacterController(player);
 	// Draw the "scene" (run the program)
 	while (!glfwWindowShouldClose(window))
     {
@@ -569,6 +566,8 @@ int main(void)
 		for (int i = 0; i < vec_pObjectsToDraw.size(); i++)
 		{
 			cGameObject* curMesh = vec_pObjectsToDraw[i];
+
+			
 			if (curMesh->rigidBody != NULL && curMesh->rigidBody->GetShape()->GetShapeType() != nPhysics::SHAPE_TYPE_PLANE) {
 				
 				float Totalheight;
@@ -587,11 +586,6 @@ int main(void)
 
 				}
 
-
-				
-
-				//Reset Collision
-				curMesh->rigidBody->SetCollision(false);
 			}
 
 
@@ -740,6 +734,25 @@ int main(void)
 			player->m_meshQOrientation = glm::toQuat(finalOrientation);
 		}
 
+
+		//Update collision flag
+		for (int i = 0; i < vec_pObjectsToDraw.size(); i++)
+		{
+			cGameObject* CurGo = vec_pObjectsToDraw[i];
+			if (CurGo->rigidBody != NULL)
+			{
+				//if (CurGo->friendlyName == "chan")
+				//{
+				//	std::cout<< "GO col: " << CurGo->bHadCollision << std::endl;
+				//	std::cout << "RB col: " << CurGo->rigidBody->GetCollision() << std::endl;
+				//}
+				CurGo->bHadCollision = CurGo->rigidBody->GetCollision();
+				CurGo->rigidBody->SetCollision(false);
+
+				
+			}
+		}
+	
 
 		UpdateWindowTitle();
 

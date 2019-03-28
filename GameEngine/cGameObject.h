@@ -11,6 +11,7 @@
 #include <Interfaces/iSoftBody.h>
 
 #include "DebugRenderer/iDebugRenderer.h"
+#include "cAnimationController.h"
 
 
 class cSimpleAssimpSkinnedMesh;	// Forward declare
@@ -98,7 +99,7 @@ public:
 	bool bIsWireFrame;	//  = true;  C++
 	bool bIsVisible;
 	bool bIsDebug;
-
+	bool bHadCollision;
 	bool b_HACK_UsesOffscreenFBO;
 
 	// ignore this for now...
@@ -170,9 +171,8 @@ public:
 	cSimpleAssimpSkinnedMesh*	pSimpleSkinnedMesh;
 	// HACK
 	std::string currentAnimation;
-
-
 	cAnimationState*	pAniState;
+	cAnimationController* pAnimController;
 
 	// Extent Values for skinned mesh
 	// These can be updated per frame, from the "update skinned mesh" call

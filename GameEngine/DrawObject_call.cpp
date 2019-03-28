@@ -319,7 +319,8 @@ void DrawObject(cGameObject* pCurrentMesh,
 	else
 	{
 		//if(pCurrentMesh->pSimpleSkinnedMesh->GetAnimationInfo(pCurrentMesh->currentAnimation)->bHasExitTime){}
-		std::string CurAnim = g_pCharacterController->GetCurrentAnimation();
+		std::string CurAnim = pCurrentMesh->pAnimController->GetCurrentAnimation();
+		//std::cout << CurAnim << std::endl;
 
 		if (CurAnim != prevAnim)
 		{

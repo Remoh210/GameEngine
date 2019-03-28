@@ -9,6 +9,8 @@ cGameObject::cGameObject()
 	this->bIsVisible = true;
 	this->bIsWireFrame = false;
 	this->b_HACK_UsesOffscreenFBO = false;
+	this->pAnimController = new cAnimationController(this);
+	this->bHadCollision = false;
 
 	// Set unique ID
 	this->m_uniqueID = cGameObject::m_NextID;

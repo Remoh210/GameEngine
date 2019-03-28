@@ -160,5 +160,7 @@ std::pair<std::string, std::string> nPhysics::cBulletPhysicsWorld::GetLastColPai
 
 void nPhysics::cBulletPhysicsWorld::Update(float dt)
 {
-	mDynamicsWorld->stepSimulation(dt, 10);
+	//Why??????????
+	//mDynamicsWorld->stepSimulation(dt, 10);
+	mDynamicsWorld->stepSimulation(dt, 0);
 }

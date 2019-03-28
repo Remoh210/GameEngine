@@ -88,7 +88,7 @@ void key_callback( GLFWwindow* window,
 	cGameObject* ch = findObjectByFriendlyName("chan");
 	glm::vec3 vel;
 	vel = ch->rigidBody->GetVelocity();
-	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS && g_pCharacterController->GetCurrentAnimation() != "Run-jump")
+	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS && ch->pAnimController->GetCurrentAnimation() != "Run-jump")
 	{
 		glm::vec3 velj;
 		velj = ch->rigidBody->GetVelocity();
