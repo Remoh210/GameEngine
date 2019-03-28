@@ -24,6 +24,7 @@
 #define GLM_ENABLE_EXPERIMENTAL		
 #include <glm/gtx/quaternion.hpp>	
 #include <glm/gtx/norm.hpp>	
+#include <Interfaces/iRigidBody.h>
 
 #include "cShaderManager.h"
 #include "cGameObject.h"
@@ -120,6 +121,8 @@ cAABBHierarchy* g_pTheTerrain = new cAABBHierarchy();
 bool loadConfig();
 cFBO* g_pFBOMain;
 
+
+nPhysics::iRigidBody* bodyHit = NULL;
 
 
 // Set up the off screen textures to draw to
@@ -500,10 +503,10 @@ int main(void)
 		g_textRenderer->drawText(width, height, ("Gravity: " + std::to_string((int)g_Gravity.y)).c_str(), 150.0f);
 		
 		std::string strhited;
-		if (RayHitted)
-			strhited = "Ray has hit: yes";
+		if (bodyHit)
+			strhited = "Ray Hitted: " + bodyHit->GetGOName();
 		else
-			strhited = "Ray has hit: no";
+			strhited = "Ray Hitted: Nothing";
 
 		g_textRenderer->drawText(width, height, strhited.c_str(), 200.0f);
 		//g_textRenderer->drawText(width, height,"Ray hit: " + RayHitted ? "no": "yes" , 200.0f);
@@ -808,8 +811,9 @@ int main(void)
 			to.y = 10.0f;
 
 		g_pDebugRendererACTUAL->addLine(from, to, glm::vec3(0.0f, 1.0f, 0.0f));
-		RayHitted = gPhysicsWorld->RayCast(from, to);
-		//if (gPhysicsWorld->RayCast(from, to))
+		
+		bodyHit = gPhysicsWorld->RayCastGetObject(from, to);
+
 		//{
 		//	std::cout << "hit" << std::endl;
 		//}

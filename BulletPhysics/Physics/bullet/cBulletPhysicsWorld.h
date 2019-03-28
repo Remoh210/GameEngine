@@ -1,6 +1,7 @@
 #pragma once
 #include <Interfaces/iPhysicsWorld.h>
 #include <Interfaces/iConstraint.h>
+//#include <Interfaces/iRigidBody.h>
 #include "btBulletDynamicsCommon.h"
 #include <stdio.h>
 #include <string>
@@ -21,6 +22,7 @@ namespace nPhysics {
 		virtual void RemoveConstraint(iConstraint* constraint);
 		virtual std::pair<std::string, std::string> GetLastColPair();
 		virtual bool RayCast(glm::vec3& from, glm::vec3& to);
+		virtual iRigidBody* RayCastGetObject(glm::vec3& from, glm::vec3& to);
 		void Update(float dt);
 
 	protected:

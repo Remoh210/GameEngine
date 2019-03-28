@@ -17,6 +17,7 @@ namespace nPhysics {
 		virtual void RemoveConstraint(iConstraint* constraint) = 0;
 		virtual std::pair<std::string, std::string> GetLastColPair() = 0;
 		virtual bool RayCast(glm::vec3& from, glm::vec3& to) = 0;
+		virtual iRigidBody* RayCastGetObject(glm::vec3& from, glm::vec3& to) = 0;
 		//SoftBody
 		//virtual bool AddBody(iSoftBody* body) = 0;
 		//virtual bool RemoveBody(iSoftBody* body) = 0;

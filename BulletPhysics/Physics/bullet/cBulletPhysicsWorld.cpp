@@ -163,7 +163,26 @@ bool nPhysics::cBulletPhysicsWorld::RayCast(glm::vec3 & from, glm::vec3& to)
 {
 	btCollisionWorld::ClosestRayResultCallback res(nConvert::ToBullet(from), nConvert::ToBullet(to));
 	mDynamicsWorld->rayTest(nConvert::ToBullet(from), nConvert::ToBullet(to), res);
+	//TODO: Return hit object
+	(cBulletRigidBody*)res.m_collisionObject->getUserPointer();
 	return res.hasHit();
+}
+
+nPhysics::iRigidBody* nPhysics::cBulletPhysicsWorld::RayCastGetObject(glm::vec3 & from, glm::vec3& to)
+{
+	btCollisionWorld::ClosestRayResultCallback resObject(nConvert::ToBullet(from), nConvert::ToBullet(to));
+	mDynamicsWorld->rayTest(nConvert::ToBullet(from), nConvert::ToBullet(to), resObject);
+	//TODO: Return hit object
+	//return dynamic_cast<nPhysics::cBulletRigidBody*>resObject.m_collisionObject->getUserPointer();
+	if (resObject.hasHit())
+	{
+		return ((nPhysics::iRigidBody*)resObject.m_collisionObject->getUserPointer());
+	}
+	else
+	{
+		return NULL;
+	}
+	//return resObject.hasHit();
 }
 
 void nPhysics::cBulletPhysicsWorld::Update(float dt)
