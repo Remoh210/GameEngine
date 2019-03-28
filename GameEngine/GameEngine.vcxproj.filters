@@ -287,6 +287,9 @@
     <ClCompile Include="cAnimationController.cpp">
       <Filter>CharacterController</Filter>
     </ClCompile>
+    <ClCompile Include="cCharacterManager.cpp">
+      <Filter>CharacterController</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="linmath.h">
@@ -449,6 +452,9 @@
       <Filter>Global</Filter>
     </ClInclude>
     <ClInclude Include="cAnimationController.h">
+      <Filter>CharacterController</Filter>
+    </ClInclude>
+    <ClInclude Include="cCharacterManager.h">
       <Filter>CharacterController</Filter>
     </ClInclude>
   </ItemGroup>

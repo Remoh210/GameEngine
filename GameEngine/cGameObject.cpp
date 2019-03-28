@@ -11,7 +11,8 @@ cGameObject::cGameObject()
 	this->b_HACK_UsesOffscreenFBO = false;
 	this->pAnimController = new cAnimationController(this);
 	this->bHadCollision = false;
-
+	this->bIsPlayer = false;
+	
 	// Set unique ID
 	this->m_uniqueID = cGameObject::m_NextID;
 	// Increment

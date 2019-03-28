@@ -618,7 +618,21 @@
       },
       {
            "Name": "capsule",
-           "Mesh": "capsule.ply",
+           "SkinnedMesh": "assets/models/FBX/DevilMage/devil_mage.fbx",
+           "Animation": {
+                   "Idle" : "assets/models/FBX/DevilMage/devilMage-Idle.fbx",
+                   "Walk-forward" : "assets/models/FBX/DevilMage/devilMage-walk-forward.fbx",
+                   "Walk-backward" : "assets/models/FBX/DevilMage/chan-walk-backward.fbx",
+                   "Run-forward" : "assets/models/FBX/DevilMage/chan-run-forward.fbx",
+                   "Strafe-left" : "assets/models/FBX/DevilMage/chan-strafe-left.fbx",
+                   "Strafe-right" : "assets/models/FBX/DevilMage/chan-strafe-right.fbx",
+                   "Run-jump" : "assets/models/FBX/DevilMage/chan-run-jump.fbx",
+                   "Action1" : "assets/models/FBX/DevilMage/chan-punch-left.fbx",
+                   "Action2" : "assets/models/FBX/DevilMage/chan-punch-right.fbx",
+                   "Action3" : "assets/models/FBX/DevilMage/chan-punch-3.fbx",
+                   "Action4" : "assets/models/FBX/DevilMage/chan-punch-4.fbx"
+
+                 },
            "Visible": true,
            "Use_Physics": true,
            "Wireframe": false,
@@ -645,13 +659,13 @@
                0.0
            ],
            "Scale": [
-               5.0,
-               5.0,
-               5.0
+               0.1,
+               0.1,
+               0.1
            ],
            "Textures": [
                {
-                   "Name": "earthTex.bmp",
+                   "Name": "devilMageTex.bmp",
                    "Strength": 1.0
                },
                {

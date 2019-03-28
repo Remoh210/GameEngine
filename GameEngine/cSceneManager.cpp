@@ -973,6 +973,7 @@ bool cSceneManager::loadScene(std::string filename) {
 					if (GameObject[i]["RigidBody"]["IsPlayer"].GetBool() == true) 
 					{
 						def.isPlayer = true;
+						CurModel->bIsPlayer = true;
 					}
 				}
 

@@ -101,6 +101,7 @@ public:
 	bool bIsDebug;
 	bool bHadCollision;
 	bool b_HACK_UsesOffscreenFBO;
+	bool bIsPlayer;
 
 	// ignore this for now...
 	// Around its own axis (NOT the origin)

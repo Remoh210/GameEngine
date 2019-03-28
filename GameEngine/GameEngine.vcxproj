@@ -160,6 +160,7 @@
     <ClCompile Include="cAssimpBasic.cpp" />
     <ClCompile Include="cAssimpBasic_Imp.cpp" />
     <ClCompile Include="cCameraChangeAnim.cpp" />
+    <ClCompile Include="cCharacterManager.cpp" />
     <ClCompile Include="cCommandGroup.cpp" />
     <ClCompile Include="cFBO.cpp" />
     <ClCompile Include="cFollowCurve.cpp" />
@@ -223,6 +224,7 @@
     <ClInclude Include="cAnimationState.h" />
     <ClInclude Include="cAssimpBasic.h" />
     <ClInclude Include="cAssimpBasic_Imp.h" />
+    <ClInclude Include="cCharacterManager.h" />
     <ClInclude Include="cCommandGroup.h" />
     <ClInclude Include="cFBO.h" />
     <ClInclude Include="cFollowObjectCommand.h" />

@@ -169,6 +169,6 @@ bool nPhysics::cBulletPhysicsWorld::RayCast(glm::vec3 & from, glm::vec3& to)
 void nPhysics::cBulletPhysicsWorld::Update(float dt)
 {
 	//not working with 120hz monitor?
-	//mDynamicsWorld->stepSimulation(dt, 10);
-	mDynamicsWorld->stepSimulation(dt, 0);
+	mDynamicsWorld->stepSimulation(dt, 10);
+	//mDynamicsWorld->stepSimulation(dt, 0);
 }

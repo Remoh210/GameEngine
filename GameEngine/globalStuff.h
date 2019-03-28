@@ -25,6 +25,7 @@
 #include "TextureManager/cBasicTextureManager.h"
 #include "DebugRenderer/iDebugRenderer.h"
 #include "DebugRenderer/cDebugRenderer.h"
+#include "cCharacterManager.h"
 // The commands
 #include "cCommandGroup.h"
 // And the commands
@@ -83,6 +84,7 @@ extern cLightManager* LightManager;
 extern cTextRend* g_textRenderer;
 extern cSimpleDebugRenderer* g_simpleDubugRenderer;
 extern cDebugRenderer* g_pDebugRendererACTUAL;
+extern cCharacterManager* g_pCharactermanager;
 
 extern cSimpleAssimpSkinnedMesh* g_pRPGSkinnedMesh; //= NULL;
 // 

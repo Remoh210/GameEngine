@@ -50,6 +50,7 @@ cSimpleDebugRenderer* g_simpleDubugRenderer = NULL;
 cSoundManager* g_pSoundManager = NULL;
 cLuaBrain* p_LuaScripts = NULL;
 cTextRend* g_textRenderer = NULL;
+cCharacterManager* g_pCharactermanager = NULL;
 
 //cCommandGroup sceneCommandGroup;
 int cou;
@@ -267,7 +268,8 @@ int main(void)
 	
 	LoadModelsIntoScene(::vec_pObjectsToDraw);
 	g_simpleDubugRenderer = new cSimpleDebugRenderer(findObjectByFriendlyName("DebugCapsule"), findObjectByFriendlyName("DebugSphere"), findObjectByFriendlyName("DebugCube"), program);
-
+	g_pCharactermanager = new cCharacterManager(vec_pObjectsToDraw);
+	g_pCharactermanager->setActiveChar("chan");
 	
 	
 	//for (unsigned int objIndex = 0;
@@ -311,7 +313,7 @@ int main(void)
 			}
 		}
 	}
-	cGameObject* player = findObjectByFriendlyName("chan");
+	cGameObject* player = g_pCharactermanager->getActiveChar();
 	camera.setThirdPerson(player);
 
 	// Draw the "scene" (run the program)
@@ -730,7 +732,7 @@ int main(void)
 		}
 
 
-
+		player = g_pCharactermanager->getActiveChar();
 		if (camera.mCameraType == THIRD_PERSON)
 		
 		{
@@ -761,7 +763,7 @@ int main(void)
 				
 			}
 		}
-
+		
 		//ray casting
 		glm::vec3 from = player->position + glm::vec3(0.0f, 10.0f, 0.0f);
 
