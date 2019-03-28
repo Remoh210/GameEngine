@@ -36,7 +36,7 @@ std::string cAnimationController::GetCurrentAnimation()
 	{
 		return "Run-jump";
 	}
-	if (abs(vel.x) < 1.01f, abs(vel.z) < 1.01f)
+	if (abs(vel.x) < 1.01f && abs(vel.z) < 1.01f)
 	{
 		return "Idle";
 	}

@@ -21,6 +21,10 @@
 #include <iostream>		
 #include <vector>	
 
+#define GLM_ENABLE_EXPERIMENTAL		
+#include <glm/gtx/quaternion.hpp>	
+#include <glm/gtx/norm.hpp>	
+
 #include "cShaderManager.h"
 #include "cGameObject.h"
 #include "cVAOMeshManager.h"
@@ -32,6 +36,9 @@
 #include "DebugRenderer/cDebugRenderer.h"
 #include "cLightHelper.h"
 
+
+//TEST
+glm::quat RotationBetweenVectors(glm::vec3 start, glm::vec3 dest);
 
 //Dll 
 HINSTANCE hGetProckDll = 0;
@@ -743,6 +750,22 @@ int main(void)
 			glm::vec3 worldUP(0.0f, 1.0f, 0.0f);
 			glm::mat4 finalOrientation = glm::inverse(glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), lookDirection, worldUP));
 			player->m_meshQOrientation = glm::toQuat(finalOrientation);
+
+
+			//camera.updateCameraVectors();
+			//glm::vec3 lookDirection = camera.Position - player->position;
+			//lookDirection.y = 1.0f;
+			//glm::quat rot1 = RotationBetweenVectors(glm::vec3(0.0f, 0.0f, 1.0f), -lookDirection);
+
+			//glm::vec3 desiredUp(0.0f, 1.0f, 0.0f);
+			//glm::vec3 right = glm::cross(-lookDirection, desiredUp);
+			//desiredUp = cross(right, -lookDirection);
+			//glm::vec3 newUp = rot1 * glm::vec3(0.0f, 1.0f, 0.0f);
+			//glm::quat rot2 = RotationBetweenVectors(newUp, desiredUp);
+			//glm::quat targetOrientation = rot2 * rot1;
+			//player->m_meshQOrientation = targetOrientation;
+
+
 		}
 
 
@@ -896,6 +919,40 @@ bool loadConfig()
 	//else if (language == "Japanese") { TextRend.setLang(JAPANESE); }
 	//else if (language == "Ukrainian") { TextRend.setLang(UKRAINAN); }
 	//else if (language == "Polish") { TextRend.setLang(POLSKA); }
+
+}
+
+
+glm::quat RotationBetweenVectors(glm::vec3 start, glm::vec3 dest) {
+	start = glm::normalize(start);
+	dest = glm::normalize(dest);
+
+	float cosTheta = dot(start, dest);
+	glm::vec3 rotationAxis;
+
+	if (cosTheta < -1 + 0.001f) {
+		// special case when vectors in opposite directions:
+		// there is no "ideal" rotation axis
+		// So guess one; any will do as long as it's perpendicular to start
+		rotationAxis = glm::cross(glm::vec3(0.0f, 0.0f, 1.0f), start);
+		if (glm::length2(rotationAxis) < 0.01) // bad luck, they were parallel, try again!
+			rotationAxis = glm::cross(glm::vec3(1.0f, 0.0f, 0.0f), start);
+
+		rotationAxis = normalize(rotationAxis);
+		return glm::angleAxis(glm::radians(180.0f), rotationAxis);
+	}
+
+	rotationAxis = cross(start, dest);
+
+	float s = sqrt((1 + cosTheta) * 2);
+	float invs = 1 / s;
+
+	return glm::quat(
+		s * 0.5f,
+		rotationAxis.x * invs,
+		rotationAxis.y * invs,
+		rotationAxis.z * invs
+	);
 
 }
 
