@@ -179,6 +179,7 @@ public:
 	cSimpleAssimpSkinnedMesh*	pSimpleSkinnedMesh;
 	// HACK
 	std::string currentAnimation;
+	std::string prevAnimation;
 	cAnimationState*	pAniState;
 	cAnimationController* pAnimController;
 

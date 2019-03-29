@@ -38,6 +38,7 @@ public:
 
 	
 	std::vector<sStateDetails> vecAnimationQueue;
+	sStateDetails activeAnimation;
 	sStateDetails defaultAnimation;
 };
 

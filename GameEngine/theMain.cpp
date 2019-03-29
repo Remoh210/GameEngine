@@ -58,7 +58,7 @@ cSimpleDebugRenderer* g_simpleDubugRenderer = NULL;
 cSoundManager* g_pSoundManager = NULL;
 cLuaBrain* p_LuaScripts = NULL;
 cTextRend* g_textRenderer = NULL;
-cCharacterManager* g_pCharactermanager = NULL;
+cCharacterManager* g_pCharacterManager = NULL;
 
 //cCommandGroup sceneCommandGroup;
 int cou;
@@ -278,8 +278,8 @@ int main(void)
 	
 	LoadModelsIntoScene(::vec_pObjectsToDraw);
 	g_simpleDubugRenderer = new cSimpleDebugRenderer(findObjectByFriendlyName("DebugCapsule"), findObjectByFriendlyName("DebugSphere"), findObjectByFriendlyName("DebugCube"), program);
-	g_pCharactermanager = new cCharacterManager(vec_pObjectsToDraw);
-	g_pCharactermanager->setActiveChar("chan");
+	g_pCharacterManager = new cCharacterManager(vec_pObjectsToDraw);
+	g_pCharacterManager->setActiveChar("chan");
 	
 	
 	//for (unsigned int objIndex = 0;
@@ -323,7 +323,7 @@ int main(void)
 			}
 		}
 	}
-	cGameObject* player = g_pCharactermanager->getActiveChar();
+	cGameObject* player = g_pCharacterManager->getActiveChar();
 	camera.setThirdPerson(player);
 
 	// Draw the "scene" (run the program)
@@ -591,9 +591,10 @@ int main(void)
 			
 			if (curMesh->rigidBody != NULL && curMesh->rigidBody->GetShape()->GetShapeType() != nPhysics::SHAPE_TYPE_PLANE) {
 				
-				float Totalheight;
-				Totalheight = curMesh->rigidBody->GetShape()->GetCapsuleRadius()*2 + 2.0f;
-				if (curMesh->friendlyName == "chan") { 
+
+				if (curMesh->rigidBody->GetShape()->GetShapeType() == nPhysics::SHAPE_TYPE_CAPSULE) {
+					float Totalheight;
+					Totalheight = curMesh->rigidBody->GetShape()->GetCapsuleRadius() * 2 + 2.0f;
 					curMesh->position = curMesh->rigidBody->GetPosition();
 					curMesh->position.y = curMesh->rigidBody->GetPosition().y - Totalheight;
 
@@ -742,7 +743,7 @@ int main(void)
 		}
 
 
-		player = g_pCharactermanager->getActiveChar();
+		player = g_pCharacterManager->getActiveChar();
 		if (camera.mCameraType == THIRD_PERSON)
 		
 		{
@@ -814,6 +815,10 @@ int main(void)
 		
 		bodyHit = gPhysicsWorld->RayCastGetObject(from, to);
 
+
+		//Kill Velocity for inactive characters
+		
+		g_pCharacterManager->setAllChatVel();
 		//{
 		//	std::cout << "hit" << std::endl;
 		//}

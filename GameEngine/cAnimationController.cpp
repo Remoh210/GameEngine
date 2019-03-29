@@ -31,14 +31,22 @@ std::string cAnimationController::GetCurrentAnimation()
 
 	glm::vec3 to = glm::vec3(pos.x, pos.y - height, pos.z);
 	g_pDebugRendererACTUAL->addLine(pos, to, glm::vec3(1.0f, 0.0f, 0.0f));
-	//std::cout << mActiveChar->bHadCollision << std::endl;
+
 	if (!gPhysicsWorld->RayCast(pos, to))
 	{
 		return "Run-jump";
 	}
 	if (abs(vel.x) < 1.01f && abs(vel.z) < 1.01f)
 	{
-		return "Idle";
+		if (mActiveChar->currentAnimation != "Action2")
+		{
+			return "Idle";
+		}
+		else
+		{
+			this->mActiveChar->currentAnimation;
+		}
+		
 	}
 	
 	

@@ -84,7 +84,7 @@ extern cLightManager* LightManager;
 extern cTextRend* g_textRenderer;
 extern cSimpleDebugRenderer* g_simpleDubugRenderer;
 extern cDebugRenderer* g_pDebugRendererACTUAL;
-extern cCharacterManager* g_pCharactermanager;
+extern cCharacterManager* g_pCharacterManager;
 
 extern cSimpleAssimpSkinnedMesh* g_pRPGSkinnedMesh; //= NULL;
 // 

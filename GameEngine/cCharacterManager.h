@@ -12,6 +12,7 @@ public:
 	void setActiveChar(cGameObject* newActiveChar);
 	void setActiveChar(std::string GoName);
 	void IterateChar();
+	void setAllChatVel();
 
 private:
 

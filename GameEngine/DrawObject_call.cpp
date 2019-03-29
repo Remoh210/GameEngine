@@ -324,14 +324,17 @@ void DrawObject(cGameObject* pCurrentMesh,
 	}
 	else
 	{
-		//if(pCurrentMesh->pSimpleSkinnedMesh->GetAnimationInfo(pCurrentMesh->currentAnimation)->bHasExitTime){}
-		std::string CurAnim = pCurrentMesh->pAnimController->GetCurrentAnimation();
-		//std::cout << CurAnim << std::endl;
 
-		if (CurAnim != prevAnim)
+		std::string CurAnim = pCurrentMesh->pAnimController->GetCurrentAnimation();
+		pCurrentMesh->pAniState->activeAnimation.name = CurAnim;
+		if (CurAnim != pCurrentMesh->prevAnimation)
 		{
-			playTime = 0.0f;
+			pCurrentMesh->pAniState->activeAnimation.currentTime = 0.0f;
 		}
+		pCurrentMesh->pAniState->activeAnimation.totalTime = pCurrentMesh->pSimpleSkinnedMesh->GetDurationInSec(CurAnim);
+		pCurrentMesh->pAniState->activeAnimation.frameStepTime = deltaTime;
+		pCurrentMesh->pAniState->activeAnimation.IncrementTime();
+
 
 
 		// It ++IS++ skinned mesh
@@ -339,25 +342,23 @@ void DrawObject(cGameObject* pCurrentMesh,
 
 		glUniform1f(bIsASkinnedMesh_LocID, (float)GL_TRUE);
 
-		// Also pass up the bone information...
-		std::vector< glm::mat4x4 > vecFinalTransformation;	// Replaced by	theMesh.vecFinalTransformation
+		// Also pass up the bone 
+		std::vector< glm::mat4x4 > vecFinalTransformation;	
 		std::vector< glm::mat4x4 > vecOffsets;
 
-		//		cAnimationState* pAniState = pCurrentMesh->pAniState->;
-				// Are there any animations in the queue?
-		//		if ( pCurrentMesh->pAniState->vecAnimationQueue.empty() )
+
 
 		pCurrentMesh->pSimpleSkinnedMesh->BoneTransform(
 			//0.0f,	// curFrameTime,
-			playTime,	// curFrameTime,
+			pCurrentMesh->pAniState->activeAnimation.currentTime,	// curFrameTime,
 		CurAnim,
 		vecFinalTransformation,		// Final bone transforms for mesh
 		pCurrentMesh->vecObjectBoneTransformation,  // final location of bones
 		vecOffsets);                 // local offset for each bone
 
 		
-				// Frame time, but we are going at 60HZ
-		playTime += deltaTime;
+
+		/*playTime += deltaTime;
 		float dur = pCurrentMesh->pSimpleSkinnedMesh->GetDurationInSec(CurAnim);
 		if (CurAnim == "Run-jump" && playTime >= dur)
 		{
@@ -372,7 +373,7 @@ void DrawObject(cGameObject* pCurrentMesh,
 				playTime = 0;
 
 			}
-		}
+		}*/
 
 		
 		
@@ -381,11 +382,7 @@ void DrawObject(cGameObject* pCurrentMesh,
 		GLint numBonesUsed_UniLoc = glGetUniformLocation(shaderProgramID, "numBonesUsed");
 		glUniform1i(numBonesUsed_UniLoc, numberOfBonesUsed);
 
-		//		const unsigned int TOTALNUMBEROFBONESTOPASSINTOTHESHADERASIDENTIYMATRIXVALUES = 99;
-		//		for ( unsigned int index = 0; index != numberOfBonesUsed; index++ )
-		//		{
-		//			vecFinalTransformation.push_back( glm::mat4(1.0f) );
-		//		}
+
 
 		glm::mat4x4* pBoneMatrixArray = &(vecFinalTransformation[0]);
 
@@ -435,12 +432,12 @@ void DrawObject(cGameObject* pCurrentMesh,
 				{
 					pCurrentMesh->maxXYZ_from_SM_Bones.z = boneBallLocation.z;
 				}
-			}//if ( boneIndex == 0 )
+			}
 			
 
 		}
 
-		prevAnim = CurAnim;
+		pCurrentMesh->prevAnimation = CurAnim;
 		
 		
 

@@ -163,8 +163,6 @@ bool nPhysics::cBulletPhysicsWorld::RayCast(glm::vec3 & from, glm::vec3& to)
 {
 	btCollisionWorld::ClosestRayResultCallback res(nConvert::ToBullet(from), nConvert::ToBullet(to));
 	mDynamicsWorld->rayTest(nConvert::ToBullet(from), nConvert::ToBullet(to), res);
-	//TODO: Return hit object
-	(cBulletRigidBody*)res.m_collisionObject->getUserPointer();
 	return res.hasHit();
 }
 
