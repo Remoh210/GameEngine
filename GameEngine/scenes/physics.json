@@ -616,72 +616,7 @@
              "IsPlayer" : true
           }
       },
-      {
-           "Name": "capsule",
-           "SkinnedMesh": "assets/models/FBX/DevilMage/devil_mage.fbx",
-           "Animation": {
-                   "Idle" : "assets/models/FBX/DevilMage/devilMage-Idle.fbx",
-                   "Walk-forward" : "assets/models/FBX/DevilMage/devilMage-walk-forward.fbx",
-                   "Walk-backward" : "assets/models/FBX/DevilMage/chan-walk-backward.fbx",
-                   "Run-forward" : "assets/models/FBX/DevilMage/chan-run-forward.fbx",
-                   "Strafe-left" : "assets/models/FBX/DevilMage/chan-strafe-left.fbx",
-                   "Strafe-right" : "assets/models/FBX/DevilMage/chan-strafe-right.fbx",
-                   "Run-jump" : "assets/models/FBX/DevilMage/chan-run-jump.fbx",
-                   "Action1" : "assets/models/FBX/DevilMage/chan-punch-left.fbx",
-                   "Action2" : "assets/models/FBX/DevilMage/chan-punch-right.fbx",
-                   "Action3" : "assets/models/FBX/DevilMage/chan-punch-3.fbx",
-                   "Action4" : "assets/models/FBX/DevilMage/chan-punch-4.fbx"
 
-                 },
-           "Visible": true,
-           "Use_Physics": true,
-           "Wireframe": false,
-           "Position": [
-               -80.0,
-               50.0,
-               -50.0
-           ],
-           "DiffuseRGB_Alpha": [
-               0.0,
-               0.0,
-               0.0,
-               1.0
-           ],
-           "SpecularRGB_Alpha": [
-               1.0,
-               1.0,
-               1.0,
-               100.0
-           ],
-           "Rotation": [
-               0.0,
-               0.0,
-               0.0
-           ],
-           "Scale": [
-               0.1,
-               0.1,
-               0.1
-           ],
-           "Textures": [
-               {
-                   "Name": "devilMageTex.bmp",
-                   "Strength": 1.0
-               },
-               {
-                   "Name": "testTex.bmp",
-                   "Strength": 0.0
-               }
-           ],
-           "RigidBody": {
-               "Type": "CAPSULE",
-               "Axis": 1,
-               "Radius": 5.0,
-               "Height": 30.0,
-               "Mass": 200.0,
-              "IsPlayer" : true
-           }
-       },
        {
             "Name": "rigidCube",
             "Mesh": "cube.ply",
@@ -1294,7 +1229,8 @@
             "Textures": [
                 {
                     "Name": "metal.bmp",
-                    "Strength": 1.0
+                    "Strength": 1.0,
+                    "Tile": 10.0
                 }
             ],
             "RigidBody": {
@@ -1344,7 +1280,8 @@
             "Textures": [
                 {
                     "Name": "metal.bmp",
-                    "Strength": 1.0
+                    "Strength": 1.0,
+                    "Tile": 10.0
                 }
             ],
             "RigidBody": {
@@ -1394,7 +1331,8 @@
             "Textures": [
                 {
                     "Name": "metal.bmp",
-                    "Strength": 1.0
+                    "Strength": 1.0,
+                    "Tile": 10.0
                 }
             ],
             "RigidBody": {
@@ -1444,7 +1382,8 @@
             "Textures": [
                 {
                     "Name": "Metal.bmp",
-                    "Strength": 1.0
+                    "Strength": 1.0,
+                    "Tile": 10.0
                 }
             ],
             "RigidBody": {
@@ -1494,7 +1433,8 @@
             "Textures": [
                 {
                     "Name": "Metal.bmp",
-                    "Strength": 1.0
+                    "Strength": 1.0,
+                    "Tile": 10.0
                 }
             ],
             "RigidBody": {

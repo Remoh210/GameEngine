@@ -53,9 +53,14 @@ struct sAOB
 
 struct sTextureInfo
 {
+	sTextureInfo()
+	{
+		textureTileMult = 1.0f;
+	};
 	std::string name;
 	int cachedTextureID; 	// Set to -1 by default
-	float strength;		
+	float strength;
+	float textureTileMult;
 };
 
 
@@ -96,6 +101,7 @@ public:
 
 	std::string meshName;	// Model to draw
 
+	
 	bool bIsWireFrame;	//  = true;  C++
 	bool bIsVisible;
 	bool bIsDebug;
@@ -168,6 +174,7 @@ public:
 
 	// Textures...
 	std::vector<sTextureInfo> vecTextures;
+	
 
 	cSimpleAssimpSkinnedMesh*	pSimpleSkinnedMesh;
 	// HACK

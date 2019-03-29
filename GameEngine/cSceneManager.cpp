@@ -112,8 +112,10 @@ bool cSceneManager::saveScene(std::string filename) {
 					rapidjson::Value TexObjValue(rapidjson::kObjectType);
 					rapidjson::Value TexName(CurModel->vecTextures[i].name.c_str(), allocator);
 					rapidjson::Value TexStrength(CurModel->vecTextures[i].strength);
+					rapidjson::Value TexTile(CurModel->vecTextures[i].textureTileMult);
 					TexObjValue.AddMember("Name", TexName, allocator);
 					TexObjValue.AddMember("Strength", TexStrength, allocator);
+					TexObjValue.AddMember("Tile", TexTile, allocator);
 					TexArray.PushBack(TexObjValue, allocator);
 				}
 				ObjValue.AddMember("Textures", TexArray, allocator);
@@ -499,6 +501,10 @@ bool cSceneManager::loadScene(std::string filename) {
 				sTextureInfo CurModelTex;
 				CurModelTex.name = TexArray[i]["Name"].GetString();
 				CurModelTex.strength = TexArray[i]["Strength"].GetFloat();
+				if (TexArray[i].HasMember("Tile"))
+				{
+					CurModelTex.textureTileMult = TexArray[i]["Tile"].GetFloat();
+				}
 				CurModel->vecTextures.push_back(CurModelTex);
 				//Creating Texture even if there is alreade same textue NEED FIX
 				::g_pTheTextureManager->Create2DTextureFromBMPFile(CurModelTex.name, true);

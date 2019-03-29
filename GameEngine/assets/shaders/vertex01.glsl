@@ -10,7 +10,8 @@ uniform mat4 matProj;		// P
 in vec4 vColour;		// rgba   	was "attribute"
 in vec4 vPosition;		// xyzw		was "attribute"
 in vec4 vNormal;		// normal xyz
-in vec4 vUV_x2;			// Texture coordinates (2 of them)
+in vec4 vUV_x2;	
+			// Texture coordinates (2 of them)
 in vec4 vTanXYZ;			// Tangent to the surface
 in vec4 vBiNormXYZ;		// bi-normal (or bi-tangent) to the surface
 //in float boneID[4];			//unsigned int boneID[4];
@@ -31,6 +32,7 @@ out vec4 vertBiNormXYZ;	// bi-normal (or bi-tangent) to the surface
 uniform sampler2D texHeightMap;
 uniform bool bUseHeightMap;			// "turn on" the vertex displacement
 uniform float heightMapRatio;		// Increase the range of the displacement
+uniform float texTiling;
 
 // For skinned mesh
 const int MAXNUMBEROFBONES = 100;
@@ -61,8 +63,8 @@ void main()
 	
     color = vColour;
 	
-	// Pass the texture coordinates out, unchanged.
-	vertUV_x2 = vUV_x2;
+	// Pass the texture coordinates out, multiplied by tile value
+	vertUV_x2 = vUV_x2 * texTiling;
 	
 	// Also pass the bi-tangent (bi-normal) and tangent to fragment
 	vertTanXYZ = vTanXYZ;		// Tangent to the surface

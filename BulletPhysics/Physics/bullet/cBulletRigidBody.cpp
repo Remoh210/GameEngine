@@ -203,6 +203,7 @@ namespace nPhysics {
 
 	cBulletRigidBody::~cBulletRigidBody()
 	{
+		mBody->setUserPointer(0);
 		delete mBody;
 		mBody = 0;
 		delete mMotionState;

@@ -504,9 +504,9 @@ int main(void)
 		
 		std::string strhited;
 		if (bodyHit)
-			strhited = "Ray Hitted: " + bodyHit->GetGOName();
+			strhited = "Ray Hit: " + bodyHit->GetGOName();
 		else
-			strhited = "Ray Hitted: Nothing";
+			strhited = "Ray Hit: Nothing";
 
 		g_textRenderer->drawText(width, height, strhited.c_str(), 200.0f);
 		//g_textRenderer->drawText(width, height,"Ray hit: " + RayHitted ? "no": "yes" , 200.0f);

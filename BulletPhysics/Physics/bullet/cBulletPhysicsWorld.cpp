@@ -176,7 +176,8 @@ nPhysics::iRigidBody* nPhysics::cBulletPhysicsWorld::RayCastGetObject(glm::vec3 
 	//return dynamic_cast<nPhysics::cBulletRigidBody*>resObject.m_collisionObject->getUserPointer();
 	if (resObject.hasHit())
 	{
-		return ((nPhysics::iRigidBody*)resObject.m_collisionObject->getUserPointer());
+		//return ((nPhysics::iRigidBody*)resObject.m_collisionObject->getUserPointer());
+		return reinterpret_cast<nPhysics::iRigidBody*>(resObject.m_collisionObject->getUserPointer());
 	}
 	else
 	{

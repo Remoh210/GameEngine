@@ -37,6 +37,8 @@ GLint tex07_UniLoc = -1;
 GLint texBW_0_UniLoc = -1;
 GLint texBW_1_UniLoc = -1;
 
+GLint texTiling = -1;
+
 // Texture sampler for off screen texture
 GLint texPass1OutputTexture_UniLoc = -1;
 
@@ -59,6 +61,8 @@ void BindTextures(cGameObject* pCurrentMesh, GLuint shaderProgramID)
 
 		texBW_0_UniLoc = glGetUniformLocation(shaderProgramID, "texBlendWeights[0]");	// uniform vec4 texBlendWeights[2];
 		texBW_1_UniLoc = glGetUniformLocation(shaderProgramID, "texBlendWeights[1]");	// uniform vec4 texBlendWeights[2];
+
+		texTiling = glGetUniformLocation(shaderProgramID, "texTiling");
 
 		HACK_bTextureUniformLocationsLoaded = true;
 
@@ -94,7 +98,7 @@ void BindTextures(cGameObject* pCurrentMesh, GLuint shaderProgramID)
 
 		// Connect the specific texture to THIS texture unit
 		std::string texName = pCurrentMesh->vecTextures[texBindIndex].name;
-
+		float tile = pCurrentMesh->vecTextures[texBindIndex].textureTileMult;
 		GLuint texID = ::g_pTheTextureManager->getTextureIDFromName(texName);
 
 		glBindTexture(GL_TEXTURE_2D, texID);
@@ -130,6 +134,7 @@ void BindTextures(cGameObject* pCurrentMesh, GLuint shaderProgramID)
 
 		// Set the blend weight (strengty)
 		blendWeights[texBindIndex] = pCurrentMesh->vecTextures[texBindIndex].strength;
+		glUniform1f(texTiling, tile);
 
 	}//for ( int texBindIndex
 
@@ -137,6 +142,7 @@ void BindTextures(cGameObject* pCurrentMesh, GLuint shaderProgramID)
 	glUniform4f(texBW_0_UniLoc, blendWeights[0], blendWeights[1], blendWeights[2], blendWeights[3]);
 	glUniform4f(texBW_1_UniLoc, blendWeights[4], blendWeights[5], blendWeights[6], blendWeights[7]);
 
+	
 	return;
 }
 
