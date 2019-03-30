@@ -266,6 +266,7 @@ void DrawObject(cGameObject* pCurrentMesh,
 		pCurrentMesh->nonUniformScale);
 	matModel = matModel * matScale;
 
+	pCurrentMesh->matTransform = matModel;
 
 	glUseProgram(shaderProgramID);
 

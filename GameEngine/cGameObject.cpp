@@ -29,7 +29,7 @@ cGameObject::cGameObject()
 	this->accel = glm::vec3(0.0f);
 	this->bIsUpdatedByPhysics = false;	// physics ignores by default
 	this->bIsUpdatedByPhysics = false;
-
+	this->matTransform = glm::mat4(1.0f);
 
 	this->pDebugRenderer = NULL;
 	this->pTheShape = NULL;
@@ -72,26 +72,19 @@ void cGameObject::setSpecularPower(float specPower)
 
 glm::vec3 cGameObject::getForward(glm::vec3 forwardModelSpace)
 {
-	//glm::vec4 vecForwardDirection_ModelSpace = glm::vec4(forwardModelSpace, 1.0f);
-	//glm::quat qPlayerRotation = this->getQOrientation();
-	//glm::mat4 matPlayerRotation = glm::mat4(qPlayerRotation);
-	//glm::vec4 vecForwardDirection_WorldSpace = matPlayerRotation * vecForwardDirection_ModelSpace;
-	//vecForwardDirection_WorldSpace = glm::normalize(vecForwardDirection_WorldSpace);
-	//return vecForwardDirection_WorldSpace;
 
-	glm::vec4 vecForwardDirection_ModelSpace = glm::vec4(0.0f, 0.0f, 1.0f, 1.0f);
 
-	// Now orientation
-	glm::quat qMig29Rotation = this->m_meshQOrientation;
+	glm::vec4 ForwModel = glm::vec4(0.0f, 0.0f, 1.0f, 1.0f);
+	glm::quat qOrientation = this->m_meshQOrientation;
 
-	glm::mat4 matQMig29rotation = glm::mat4(qMig29Rotation);
+	glm::mat4 matOrientation = glm::mat4(qOrientation);
 
-	glm::vec4 vecForwardDirection_WorldSpace = matQMig29rotation * vecForwardDirection_ModelSpace;
+	glm::vec4 vecForwardDirection_WorldSpace = matOrientation * ForwModel;
 
 	// optional normalize
 	vecForwardDirection_WorldSpace = glm::normalize(vecForwardDirection_WorldSpace);
-	glm::vec3 newve(vecForwardDirection_WorldSpace.x, vecForwardDirection_WorldSpace.y, vecForwardDirection_WorldSpace.z);
-	return newve;
+	glm::vec3 veccForw(vecForwardDirection_WorldSpace.x, vecForwardDirection_WorldSpace.y, vecForwardDirection_WorldSpace.z);
+	return veccForw;
 
 }
 

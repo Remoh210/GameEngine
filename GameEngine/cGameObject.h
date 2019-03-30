@@ -100,7 +100,7 @@ public:
 
 	void setUniformScale(float scale);
 	glm::vec3 nonUniformScale;
-
+	glm::mat4 matTransform;
 	std::string meshName;	// Model to draw
 
 	

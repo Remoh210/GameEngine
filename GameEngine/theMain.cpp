@@ -115,7 +115,7 @@ static void error_callback(int error, const char* description)
 {
     fprintf(stderr, "Error: %s\n", description);
 }
-
+glm::mat4 portal_view(glm::mat4 orig_view, cGameObject* src, cGameObject* dst);
 cAABBHierarchy* g_pTheTerrain = new cAABBHierarchy();
 
 bool loadConfig();
@@ -296,7 +296,8 @@ int main(void)
 	{
 		std::cout << "Debug renderer is OK" << std::endl;
 	}
-
+	glm::mat4x4 matProjection = glm::mat4(1.0f);
+	glm::mat4x4	matView = glm::mat4(1.0f);
 
 	//Physics Initialization
 	hGetProckDll = LoadLibraryA("BulletPhysics.dll");
@@ -383,8 +384,7 @@ int main(void)
 		int width, height;
 		width = 600;
 		height = 800;
-		glm::mat4x4 matProjection = glm::mat4(1.0f);
-		glm::mat4x4	matView = glm::mat4(1.0f);
+
 
 		glBindFramebuffer(GL_FRAMEBUFFER, FBO_Portal1->ID);		// Points to the "regular" frame buffer
 		FBO_Portal1->clearBuffers(true, true);
@@ -404,29 +404,25 @@ int main(void)
 
 		
 		glm::vec3 portal2CamEye = portal2->position;
-		portal2CamEye.y = portal2->position.y - 10.0f;
-		matView = glm::lookAt(portal2CamEye, portal2->getForward() * 2.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+		portal2CamEye.y = portal2->position.y;
+		//matView = glm::lookAt(portal2CamEye, portal2->getForward() * 2.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 		
+		glm::mat4 portal1View = portal_view(camera.GetViewMatrix(), portal, portal2);
+		//glm::mat4 tranMat = glm::translate(portal1View, -camera.Position);
 		//Mirror Test
 
 
-		matProjection = glm::perspective(0.8f,			// FOV
+		matProjection = glm::perspective(1.0f,			// FOV
 			ratio,		// Aspect ratio
 			0.1f,			// Near clipping plane
 			10000.0f);	// Far clipping plane
 
-		glUniform3f(eyeLocation_location, portal2CamEye.x, portal2CamEye.y, portal2CamEye.z);
+		glUniform3f(eyeLocation_location, camera.Position.x, camera.Position.y, camera.Position.z);
 
-		glUniformMatrix4fv(matView_location, 1, GL_FALSE, glm::value_ptr(matView));
+		glUniformMatrix4fv(matView_location, 1, GL_FALSE, glm::value_ptr(portal1View));
 		glUniformMatrix4fv(matProj_location, 1, GL_FALSE, glm::value_ptr(matProjection));
 
 		glm::mat4 matModel = glm::mat4(1.0f);	// identity
-		//portal->bIsVisible = true;
-		//glUniform1f(renderPassNumber_UniLoc, 2.0f);	// Tell shader it's the 2nd pass
-		//DrawObject(portal, matModel, program, FBO_Portal1);
-		//portal->bIsVisible = false;
-
-
 		DrawScene_Simple(vec_pObjectsToDraw, program, 1, FBO_Portal1);
 
 
@@ -435,7 +431,8 @@ int main(void)
 
 
 
-
+		glm::mat4x4 matProjection = glm::mat4(1.0f);
+		glm::mat4x4	matView = glm::mat4(1.0f);
 
 		//Second Portal
 		width = 600;
@@ -1001,6 +998,23 @@ int main(void)
 
 
 
+
+glm::mat4 portal_view(glm::mat4 orig_view, cGameObject* src, cGameObject* dst) {
+	orig_view = glm::translate(orig_view, -camera.Position);
+	glm::mat4 mv = orig_view * src->matTransform;
+	glm::mat4 portal_cam =
+		// 3. transformation from source portal to the camera - it's the
+		//    first portal's ModelView matrix:
+		mv
+
+		// 2. object is front-facing, the camera is facing the other way:
+		* glm::rotate(glm::mat4(1.0), glm::radians(180.0f), glm::vec3(0.0, 1.0, 0.0))
+		// 1. go the destination portal; using inverse, because camera
+		//    transformations are reversed compared to object
+		//    transformations:
+		* glm::inverse(dst->matTransform);
+	return portal_cam;
+}
 
 void UpdateWindowTitle(void)
 {
