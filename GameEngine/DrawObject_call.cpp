@@ -45,7 +45,7 @@ GLint texPass1OutputTexture_UniLoc = -1;
 
 
 // Will bind the textures in use for this object on this draw call
-void BindTextures(cGameObject* pCurrentMesh, GLuint shaderProgramID)
+void BindTextures(cGameObject* pCurrentMesh, GLuint shaderProgramID, cFBO* fbo)
 {
 
 	if (!HACK_bTextureUniformLocationsLoaded)
@@ -73,7 +73,7 @@ void BindTextures(cGameObject* pCurrentMesh, GLuint shaderProgramID)
 
 
 
-	if (pCurrentMesh->b_HACK_UsesOffscreenFBO)
+	if (pCurrentMesh->bFBO && fbo != NULL)
 	{
 
 
@@ -81,7 +81,7 @@ void BindTextures(cGameObject* pCurrentMesh, GLuint shaderProgramID)
 
 		glActiveTexture(GL_TEXTURE0 + FBO_Texture_Unit_Michael_Picked);
 
-		glBindTexture(GL_TEXTURE_2D, ::g_pFBOMain->colourTexture_0_ID);
+		glBindTexture(GL_TEXTURE_2D, fbo->colourTexture_0_ID);
 
 		glUniform1i(texPass1OutputTexture_UniLoc, FBO_Texture_Unit_Michael_Picked);
 
@@ -152,42 +152,75 @@ void BindTextures(cGameObject* pCurrentMesh, GLuint shaderProgramID)
 
 void DrawScene_Simple(std::vector<cGameObject*> vec_pMeshSceneObjects,
 	GLuint shaderProgramID,
-	unsigned int passNumber)
+	unsigned int passNumber, cFBO* fbo)
 {
+
+
+
+
+
+
+	//std::sort(vec_sorted_drawObj.begin(), vec_sorted_drawObj.end(), transp);
+//std::sort(vec_transObj.begin(), vec_transObj.end(), distToCam);
+
+	cGameObject* pSkyBox = findObjectByFriendlyName("SkyBoxObject");
+	// Place skybox object at camera location
+	pSkyBox->position = camera.Position;
+	pSkyBox->bIsVisible = true;
+	pSkyBox->bIsWireFrame = false;
+
+	//		glDisable( GL_CULL_FACE );		// Force drawing the sphere
+	//		                                // Could also invert the normals
+			// Draw the BACK facing (because the normals of the sphere face OUT and we 
+			//  are inside the centre of the sphere..
+	//		glCullFace( GL_FRONT );
+
+	// Bind the cube map texture to the cube map in the shader
+	GLuint cityTextureUNIT_ID = 30;			// Texture unit go from 0 to 79
+	glActiveTexture(cityTextureUNIT_ID + GL_TEXTURE0);	// GL_TEXTURE0 = 33984
+
+	int cubeMapTextureID = ::g_pTheTextureManager->getTextureIDFromName("CityCubeMap");
+
+	// Cube map is now bound to texture unit 30
+	//		glBindTexture( GL_TEXTURE_2D, cubeMapTextureID );
+	glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMapTextureID);
+
+	//uniform samplerCube textureSkyBox;
+	GLint skyBoxCubeMap_UniLoc = glGetUniformLocation(program, "textureSkyBox");
+	glUniform1i(skyBoxCubeMap_UniLoc, cityTextureUNIT_ID);
+
+	//uniform bool useSkyBoxTexture;
+	GLint useSkyBoxTexture_UniLoc = glGetUniformLocation(program, "useSkyBoxTexture");
+	glUniform1f(useSkyBoxTexture_UniLoc, (float)GL_TRUE);
+
+	glm::mat4 matIdentity = glm::mat4(1.0f);
+	DrawObject(pSkyBox, matIdentity, program, fbo);
+
+	//		glEnable( GL_CULL_FACE );
+	//		glCullFace( GL_BACK );
+
+	pSkyBox->bIsVisible = false;
+	glUniform1f(useSkyBoxTexture_UniLoc, (float)GL_FALSE);
+
+
+
+
+
+
+
+
+
+
+
 	for (unsigned int objIndex = 0;
 		objIndex != (unsigned int)vec_pMeshSceneObjects.size();
 		objIndex++)
 	{
 		cGameObject* pCurrentMesh = vec_pMeshSceneObjects[objIndex];
 		
-
-		if(pCurrentMesh->softBody != NULL)
-		{
-			size_t nodes = pCurrentMesh->softBody->NumNodes();
-			
-			for (size_t nodeIndex = 0; nodeIndex < nodes; nodeIndex++)
-			{
-				glm::vec3 nodePosition;
-				pCurrentMesh->softBody->GetNodePostion(nodeIndex, nodePosition); 
-				pCurrentMesh->bIsWireFrame = true;
-				pCurrentMesh->bDontLight = true;
-				pCurrentMesh->position = nodePosition;
-				float radius;
-				pCurrentMesh->softBody->GetNodeRadius(nodeIndex, radius);
-				pCurrentMesh->setUniformScale(radius);
-				glm::mat4x4 matModel = glm::mat4(1.0f);
-				DrawObject(pCurrentMesh, matModel, shaderProgramID);
-			}
-			
-		}
-
-		else
-		{
-			glm::mat4x4 matModel = glm::mat4(1.0f);
-			DrawObject(pCurrentMesh, matModel, shaderProgramID);
-		}
+		glm::mat4x4 matModel = glm::mat4(1.0f);
+		DrawObject(pCurrentMesh, matModel, shaderProgramID, fbo);
 		
-
 	}
 
 	return;
@@ -199,7 +232,7 @@ bool exited = false;
 
 void DrawObject(cGameObject* pCurrentMesh,
 	glm::mat4x4 &matModel,
-	GLuint shaderProgramID)
+	GLuint shaderProgramID, cFBO* fbo)
 {
 
 	// Is this object visible
@@ -211,7 +244,7 @@ void DrawObject(cGameObject* pCurrentMesh,
 
 
 	// Set up the texture binding for this object
-	BindTextures(pCurrentMesh, shaderProgramID);
+	BindTextures(pCurrentMesh, shaderProgramID, fbo);
 
 
 
@@ -333,8 +366,9 @@ void DrawObject(cGameObject* pCurrentMesh,
 		}
 		pCurrentMesh->pAniState->activeAnimation.totalTime = pCurrentMesh->pSimpleSkinnedMesh->GetDurationInSec(CurAnim);
 		pCurrentMesh->pAniState->activeAnimation.frameStepTime = deltaTime;
-		pCurrentMesh->pAniState->activeAnimation.IncrementTime();
-
+		if (fbo == NULL) {
+			pCurrentMesh->pAniState->activeAnimation.IncrementTime();
+		}
 
 
 		// It ++IS++ skinned mesh

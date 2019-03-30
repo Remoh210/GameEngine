@@ -9,6 +9,88 @@
     },
     "GameObjects": [
       {
+          "Name": "portal",
+          "Mesh": "portal.ply",
+          "Visible": false,
+          "Use_Physics": true,
+          "Wireframe": false,
+          "FBO" : true,
+          "Position": [
+              0.0,
+              20.0,
+              -299.5
+          ],
+          "DiffuseRGB_Alpha": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+          ],
+          "SpecularRGB_Alpha": [
+              1.0,
+              1.0,
+              1.0,
+              100.0
+          ],
+          "Rotation": [
+              0.0,
+              0.0,
+              0.0
+          ],
+          "Scale": [
+              10.0,
+              10.0,
+              10.0
+          ],
+          "Textures": [
+              {
+                  "Name": "testTex.bmp",
+                  "Strength": 1.0
+              }
+          ]
+      },
+      {
+          "Name": "portal2",
+          "Mesh": "portal.ply",
+          "Visible": false,
+          "Use_Physics": true,
+          "Wireframe": false,
+          "FBO" : true,
+          "Position": [
+              -299.0,
+              20.0,
+              0.5
+          ],
+          "DiffuseRGB_Alpha": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+          ],
+          "SpecularRGB_Alpha": [
+              1.0,
+              1.0,
+              1.0,
+              100.0
+          ],
+          "Rotation": [
+              0.0,
+              90.0,
+              0.0
+          ],
+          "Scale": [
+              10.0,
+              10.0,
+              10.0
+          ],
+          "Textures": [
+              {
+                  "Name": "testTex.bmp",
+                  "Strength": 1.0
+              }
+          ]
+      },
+      {
           "Name": "moon",
           "Mesh": "earth.ply",
           "Visible": true,
@@ -475,7 +557,7 @@
           "RigidBody": {
               "Type": "SPHERE_TO_SPHERE",
               "Radius": 15.0,
-              "Mass": 10.0,
+              "Mass": 4000.0,
               "Offset" : [
                   0.0,
                   15.0,
@@ -491,63 +573,6 @@
                   0.0,
                   0.0
               ]
-          }
-      },
-      {
-          "Name": "Cloth",
-          "Mesh": "Sphere_320.ply",
-          "Visible": false,
-          "Use_Physics": true,
-          "Wireframe": false,
-          "Position": [
-              10.0,
-              -220.277694702148439,
-              10.0
-          ],
-          "DiffuseRGB_Alpha": [
-              0.0,
-              1.0,
-              0.0,
-              1.0
-          ],
-          "SpecularRGB_Alpha": [
-              1.0,
-              1.0,
-              1.0,
-              100.0
-          ],
-          "Rotation": [
-              0.0,
-              0.0,
-              0.0
-          ],
-          "Scale": [
-              1.0,
-              1.0,
-              1.0
-          ],
-
-          "RigidBody": {
-              "Type": "CLOTH",
-              "SpringConstant" : 100.0,
-              "NumNodesAB": 10,
-              "NumNodesAC": 7,
-              "CornerA" : [
-                -20.0,
-                30.0,
-                -5.0
-              ],
-              "CornerB" : [
-                20.0,
-                30.0,
-                -5.0
-              ],
-            "CornerC" : [
-                -8.0,
-                18.0,
-                -5.0
-              ]
-
           }
       },
       {
@@ -1003,7 +1028,7 @@
                     20.0,
                     0.0
                 ],
-                "Mass": 20.0
+                "Mass": 5000.0
             }
       },
       {
@@ -1209,7 +1234,7 @@
           "RigidBody": {
               "Type": "SPHERE",
               "Radius": 15.0,
-              "Mass": 15.0
+              "Mass": 4000.0
           }
       },
       {

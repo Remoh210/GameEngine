@@ -1,27 +1,36 @@
 !!Run on Debug or Release x64!!
 
+Instead of rolling I'm also made "strafe with casting spell" animation
+since I'm going to use it for Game Jam
+
+There is also "pushing" animation 
+I've made all spheres ridiculously heavy, so try to push them!
+
+Also I left debugging lines for ray cast
+
 Controls:
 
------------camera------------
-Enter - switch FLY/THIRD PERSON camera
+-----------Character------------
+
 
 Third Person:
-(Character has capsule collider)
-W + Mouse - move forward
-hold shift to move faster
+WASD + Mouse - Move
+S/D - Strafe
+Hold Shift + W - run
+Hold Mouse left button - Prepare to cast spell
 
-Fly:
-WASD + Mouse - move camera
-EQ - move camera Up/Down
------------camera------------
+9/8 - change character
+
+
+-----------Character------------
 
 -----------other-------------
-T - switch between spheres
+Enter - switch FLY/THIRD PERSON camera
+T - switch between objects
 ctrl + WASD - apply velocity in camera looking direction
 
 Additional controls:
 Arrows Up/Down change gravity
-Space - lift selected rigidbody up
 G - lift All rigidbodies up
 -----------other-------------
 

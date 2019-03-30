@@ -327,6 +327,11 @@ bool cSceneManager::loadScene(std::string filename) {
 		CurModel->bIsUpdatedByPhysics = GameObject[i]["Use_Physics"].GetBool();
 		CurModel->bIsWireFrame = GameObject[i]["Wireframe"].GetBool();
 
+		if (GameObject[i].HasMember("FBO"))
+		{
+			CurModel->bFBO = GameObject[i]["FBO"].GetBool();
+		}
+
 		//if ply;
 		if(GameObject[i].HasMember("Mesh"))
 		{

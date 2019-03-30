@@ -96,6 +96,8 @@ public:
 	void setQOrientation(glm::quat newOrientation){ this->m_meshQOrientation = newOrientation; }
 
 
+	glm::vec3 getForward(glm::vec3 forwardModelSpace = glm::vec3(0.0f, 0.0f, 1.0f));
+
 	void setUniformScale(float scale);
 	glm::vec3 nonUniformScale;
 
@@ -106,7 +108,7 @@ public:
 	bool bIsVisible;
 	bool bIsDebug;
 	bool bHadCollision;
-	bool b_HACK_UsesOffscreenFBO;
+	bool bFBO;
 	bool bIsPlayer;
 
 	// ignore this for now...

@@ -114,10 +114,10 @@ void loadLights(std::string filename, std::vector<sLight*> lights);
 
 void DrawObject( cGameObject* pCurrentMesh,
 				 glm::mat4x4 &matModel, 
-				 GLuint shaderProgramID );
+				 GLuint shaderProgramID, cFBO* fbo = NULL);
 void DrawScene_Simple(std::vector<cGameObject*> vec_pMeshSceneObjects,
 	GLuint shaderProgramID,
-	unsigned int passNumber);
+	unsigned int passNumber, cFBO* fbo = NULL);
 
 void LoadSkinnedMeshModel(std::vector<cGameObject*> &vec_pObjectsToDraw,
 	unsigned int shaderProgramID);

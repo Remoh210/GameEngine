@@ -14,7 +14,7 @@ in vec4 vertBiNormXYZ;		// bi-normal (or bi-tangent) to the surface
 
 uniform vec4 objectDiffuse;		// becomes objectDiffuse in the shader
 uniform vec4 objectSpecular;	// rgb + a, which is the power)
-
+uniform float texTiling;
 uniform vec3 eyeLocation;		// This is in "world space"  
 
 // Set this to true (1), and the vertex colour is used
@@ -109,7 +109,8 @@ uniform vec4 texBlendWeights[2];	// x is 0, y is 1, z is 2
 
 uniform float wholeObjectAlphaTransparency;
 
-
+//Copying UV to mult by tile value
+vec4 tiledUV = vertUV_x2;
 
 void main()
 {
@@ -122,7 +123,20 @@ void main()
 	// Are we in the 2nd pass? 
 	if ( int(renderPassNumber) == 2 )
 	{ 
-//		vec3 ObjectColour = texture( texObjectColour, vertUV_x2.st ).rgb;
+// //		vec3 ObjectColour = texture( texObjectColour, vertUV_x2.st ).rgb;
+// //		vec3 ObjectNormal = texture( texObjectColour, vertUV_x2.st ).rgb;
+	
+		// // 2nd pass (very simple)
+		// vec4 texRecticle = texture( texture00, vertUV_x2.st ).rgba;
+		// if (texRecticle.g > 0.5 && texRecticle.r < 0.5)
+		// {
+			// texRecticle *= 0.15;
+		// }
+		
+
+		// finalOutputColour.rgb = texture( texPass1OutputTexture, vertUV_x2.st + 0.007*vec2( sin(1024.0*vertUV_x2.s),cos(768.0*vertUV_x2.t))).rgb
+		                           // + texRecticle.rgb;
+		//		vec3 ObjectColour = texture( texObjectColour, vertUV_x2.st ).rgb;
 //		vec3 ObjectNormal = texture( texObjectColour, vertUV_x2.st ).rgb;
 	
 		// 2nd pass (very simple)
@@ -132,14 +146,9 @@ void main()
 			texRecticle *= 0.15;
 		}
 		
-		finalOutputColour.rgb = texture( texPass1OutputTexture, vertUV_x2.st + 0.007*vec2( sin(1024.0*vertUV_x2.s),cos(768.0*vertUV_x2.t))).rgb
-		                           + texRecticle.rgb;
-		
-//		float bw =   0.2126f * finalOutputColour.r
-//                   + 0.7152f * finalOutputColour.g 
-//				   + 0.0722f * finalOutputColour.b;
-//		
-//		finalOutputColour.rgb = vec3(bw,bw,bw);
+
+		finalOutputColour.rgb = texture( texPass1OutputTexture, vertUV_x2.st).rgb;
+
 		
 		finalOutputColour.a = 1.0f;
 		return;
@@ -148,8 +157,10 @@ void main()
 	
 	// We are in the 1st (main) pass
 
-
-
+	
+	tiledUV.s *= texTiling;
+	tiledUV.t *= texTiling;
+	
 	vec4 materialDiffuse = vec4(0.0f, 0.0f, 0.0f, 1.0f);
 	
 	// FOR NOW, I'm adding the bi-normal and tangent here
@@ -236,14 +247,14 @@ void main()
 		//gl_FragColor = vec4(objectColour, 1.0);
 //		materialDiffuse = objectDiffuse;
 
-		vec4 tex0Col = texture( texture00, vertUV_x2.st ).rgba;
-		vec4 tex1Col = texture( texture01, vertUV_x2.st ).rgba;
-		vec4 tex2Col = texture( texture02, vertUV_x2.st ).rgba;
-		vec4 tex3Col = texture( texture03, vertUV_x2.st ).rgba;
-		vec4 tex4Col = texture( texture04, vertUV_x2.st ).rgba;
-		vec4 tex5Col = texture( texture05, vertUV_x2.st ).rgba;
-		vec4 tex6Col = texture( texture06, vertUV_x2.st ).rgba;
-		vec4 tex7Col = texture( texture07, vertUV_x2.st ).rgba;
+		vec4 tex0Col = texture( texture00, tiledUV.st ).rgba;
+		vec4 tex1Col = texture( texture01, tiledUV.st ).rgba;
+		vec4 tex2Col = texture( texture02, tiledUV.st ).rgba;
+		vec4 tex3Col = texture( texture03, tiledUV.st ).rgba;
+		vec4 tex4Col = texture( texture04, tiledUV.st ).rgba;
+		vec4 tex5Col = texture( texture05, tiledUV.st ).rgba;
+		vec4 tex6Col = texture( texture06, tiledUV.st ).rgba;
+		vec4 tex7Col = texture( texture07, tiledUV.st ).rgba;
 		
 		materialDiffuse =  objectDiffuse
 						  + (tex0Col * texBlendWeights[0].x) 	 // 0

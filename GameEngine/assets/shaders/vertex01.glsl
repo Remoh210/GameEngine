@@ -32,7 +32,7 @@ out vec4 vertBiNormXYZ;	// bi-normal (or bi-tangent) to the surface
 uniform sampler2D texHeightMap;
 uniform bool bUseHeightMap;			// "turn on" the vertex displacement
 uniform float heightMapRatio;		// Increase the range of the displacement
-uniform float texTiling;
+
 
 // For skinned mesh
 const int MAXNUMBEROFBONES = 100;
@@ -63,8 +63,8 @@ void main()
 	
     color = vColour;
 	
-	// Pass the texture coordinates out, multiplied by tile value
-	vertUV_x2 = vUV_x2 * texTiling;
+	// Pass the texture coordinates out;
+	vertUV_x2 = vUV_x2;
 	
 	// Also pass the bi-tangent (bi-normal) and tangent to fragment
 	vertTanXYZ = vTanXYZ;		// Tangent to the surface

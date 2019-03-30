@@ -121,6 +121,9 @@ cAABBHierarchy* g_pTheTerrain = new cAABBHierarchy();
 bool loadConfig();
 cFBO* g_pFBOMain;
 
+cFBO* FBO_Portal1;
+cFBO* FBO_Portal2;
+
 
 nPhysics::iRigidBody* bodyHit = NULL;
 
@@ -217,6 +220,39 @@ int main(void)
 	::g_pSceneManager->setBasePath("scenes");
 	::LightManager = new cLightManager();
 	::g_pFBOMain = new cFBO();
+
+	FBO_Portal1 = new cFBO();
+	FBO_Portal2 = new cFBO();
+
+
+	std::string FBOErrorString;
+	if (::g_pFBOMain->init(800, 600, FBOErrorString))
+	{
+		std::cout << "Framebuffer 1 is good to go!" << std::endl;
+	}
+	else
+	{
+		std::cout << "Framebuffer 1 is NOT complete" << std::endl;
+	}
+
+
+	if (FBO_Portal1->init(800, 600, FBOErrorString))
+	{
+		std::cout << "Framebuffer 2 is good to go!" << std::endl;
+	}
+	else
+	{
+		std::cout << "Framebuffer 2 is NOT complete" << std::endl;
+	}
+
+	if (FBO_Portal2->init(800, 600, FBOErrorString))
+	{
+		std::cout << "Framebuffer 3 is good to go!" << std::endl;
+	}
+	else
+	{
+		std::cout << "Framebuffer 3 is NOT complete" << std::endl;
+	}
 	
 	
 	//Set Up FBO
@@ -324,7 +360,13 @@ int main(void)
 		}
 	}
 	cGameObject* player = g_pCharacterManager->getActiveChar();
+	cGameObject* portal = findObjectByFriendlyName("portal");
+	cGameObject* portal2 = findObjectByFriendlyName("portal2");
 	camera.setThirdPerson(player);
+
+
+
+
 
 	// Draw the "scene" (run the program)
 	while (!glfwWindowShouldClose(window))
@@ -334,8 +376,143 @@ int main(void)
 		::pTheShaderManager->useShaderProgram( "BasicUberShader" );
 
 
+
+
+		//First Portal
+		float ratio;
+		int width, height;
+		width = 600;
+		height = 800;
+		glm::mat4x4 matProjection = glm::mat4(1.0f);
+		glm::mat4x4	matView = glm::mat4(1.0f);
+
+		glBindFramebuffer(GL_FRAMEBUFFER, FBO_Portal1->ID);		// Points to the "regular" frame buffer
+		FBO_Portal1->clearBuffers(true, true);
+
+													// Get the size of the actual (screen) frame buffer
+//		glfwGetFramebufferSize(window, &width, &height);
+		ratio = width / (float)height;
+		glViewport(0, 0, width, height);
+
+		glEnable(GL_DEPTH);		// Enables the KEEPING of the depth information
+		glEnable(GL_DEPTH_TEST);	// When drawing, checked the existing depth
+		glEnable(GL_CULL_FACE);	// Discared "back facing" triangles
+
+
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+
+		
+		glm::vec3 portal2CamEye = portal2->position;
+		portal2CamEye.y = portal2->position.y - 10.0f;
+		matView = glm::lookAt(portal2CamEye, portal2->getForward() * 2.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+		
+		//Mirror Test
+
+
+		matProjection = glm::perspective(0.8f,			// FOV
+			ratio,		// Aspect ratio
+			0.1f,			// Near clipping plane
+			10000.0f);	// Far clipping plane
+
+		glUniform3f(eyeLocation_location, portal2CamEye.x, portal2CamEye.y, portal2CamEye.z);
+
+		glUniformMatrix4fv(matView_location, 1, GL_FALSE, glm::value_ptr(matView));
+		glUniformMatrix4fv(matProj_location, 1, GL_FALSE, glm::value_ptr(matProjection));
+
+		glm::mat4 matModel = glm::mat4(1.0f);	// identity
+		//portal->bIsVisible = true;
+		//glUniform1f(renderPassNumber_UniLoc, 2.0f);	// Tell shader it's the 2nd pass
+		//DrawObject(portal, matModel, program, FBO_Portal1);
+		//portal->bIsVisible = false;
+
+
+		DrawScene_Simple(vec_pObjectsToDraw, program, 1, FBO_Portal1);
+
+
+
+
+
+
+
+
+
+		//Second Portal
+		width = 600;
+		height = 800;
+		matProjection = glm::mat4(1.0f);
+		matView = glm::mat4(1.0f);
+
+		glBindFramebuffer(GL_FRAMEBUFFER, FBO_Portal2->ID);		// Points to the "regular" frame buffer
+		FBO_Portal2->clearBuffers(true, true);
+													// Get the size of the actual (screen) frame buffer
+//		glfwGetFramebufferSize(window, &width, &height);
+		ratio = width / (float)height;
+		glViewport(0, 0, width, height);
+
+		glEnable(GL_DEPTH);		// Enables the KEEPING of the depth information
+		glEnable(GL_DEPTH_TEST);	// When drawing, checked the existing depth
+		glEnable(GL_CULL_FACE);	// Discared "back facing" triangles
+
+
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+
+
+		glm::vec3 portal1CamEye = portal->position;
+		portal1CamEye.y = portal->position.y - 10.0f;
+		matView = glm::lookAt(portal1CamEye, portal->getForward() * 2.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+
+		//Mirror Test
+
+
+		matProjection = glm::perspective(0.8f,			// FOV
+			ratio,		// Aspect ratio
+			0.1f,			// Near clipping plane
+			10000.0f);	// Far clipping plane
+
+		glUniform3f(eyeLocation_location, portal1CamEye.x, portal1CamEye.y, portal1CamEye.z);
+
+		glUniformMatrix4fv(matView_location, 1, GL_FALSE, glm::value_ptr(matView));
+		glUniformMatrix4fv(matProj_location, 1, GL_FALSE, glm::value_ptr(matProjection));
+
+		matModel = glm::mat4(1.0f);	// identity
+
+		DrawScene_Simple(vec_pObjectsToDraw, program, 1, FBO_Portal2);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		//
+		
 		// Set for the 1st pass
 		glBindFramebuffer(GL_FRAMEBUFFER, g_FBO);		// Point output to FBO
+
+
 
 		//**********************************************************
 		// Clear the offscreen frame buffer
@@ -346,16 +523,18 @@ int main(void)
 		glClearBufferfv(GL_DEPTH, 0, &one);
 		//**********************************************************
 
-
-		glUniform1f(renderPassNumber_UniLoc, 1.0f);	// Tell shader it's the 1st pass
-
-        float ratio;
-        int width, height;
+		
 
 
+		//glUniform1f(renderPassNumber_UniLoc, 1.0f);	// Tell shader it's the 1st pass
 
-		glm::mat4x4 matProjection = glm::mat4(1.0f);
-		glm::mat4x4	matView = glm::mat4(1.0f);
+        ratio;
+        width, height;
+
+
+
+		matProjection = glm::mat4(1.0f);
+		matView = glm::mat4(1.0f);
  
 
         glfwGetFramebufferSize(window, &width, &height);
@@ -389,58 +568,33 @@ int main(void)
 		LightManager->CopyLightValuesToShader();
 			
 
-		
-
-
-
-	
-
-
-		//std::sort(vec_sorted_drawObj.begin(), vec_sorted_drawObj.end(), transp);
-		//std::sort(vec_transObj.begin(), vec_transObj.end(), distToCam);
-		
-		cGameObject* pSkyBox = findObjectByFriendlyName("SkyBoxObject");
-		// Place skybox object at camera location
-		pSkyBox->position = camera.Position;
-		pSkyBox->bIsVisible = true;
-		pSkyBox->bIsWireFrame = false;
-
-		//		glDisable( GL_CULL_FACE );		// Force drawing the sphere
-		//		                                // Could also invert the normals
-				// Draw the BACK facing (because the normals of the sphere face OUT and we 
-				//  are inside the centre of the sphere..
-		//		glCullFace( GL_FRONT );
-
-		// Bind the cube map texture to the cube map in the shader
-		GLuint cityTextureUNIT_ID = 30;			// Texture unit go from 0 to 79
-		glActiveTexture(cityTextureUNIT_ID + GL_TEXTURE0);	// GL_TEXTURE0 = 33984
-
-		int cubeMapTextureID = ::g_pTheTextureManager->getTextureIDFromName("CityCubeMap");
-
-		// Cube map is now bound to texture unit 30
-		//		glBindTexture( GL_TEXTURE_2D, cubeMapTextureID );
-		glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMapTextureID);
-
-		//uniform samplerCube textureSkyBox;
-		GLint skyBoxCubeMap_UniLoc = glGetUniformLocation(program, "textureSkyBox");
-		glUniform1i(skyBoxCubeMap_UniLoc, cityTextureUNIT_ID);
-
-		//uniform bool useSkyBoxTexture;
-		GLint useSkyBoxTexture_UniLoc = glGetUniformLocation(program, "useSkyBoxTexture");
-		glUniform1f(useSkyBoxTexture_UniLoc, (float)GL_TRUE);
-
-		glm::mat4 matIdentity = glm::mat4(1.0f);
-		DrawObject(pSkyBox, matIdentity, program);
-
-		//		glEnable( GL_CULL_FACE );
-		//		glCullFace( GL_BACK );
-
-		pSkyBox->bIsVisible = false;
-		glUniform1f(useSkyBoxTexture_UniLoc, (float)GL_FALSE);
-
-
-
+		glUniform1f(renderPassNumber_UniLoc, 2.0f);
+		portal->bIsVisible = true;
+		portal2->bIsVisible = true;
+		matModel = glm::mat4(1.0f);	// identity
+		DrawObject(portal, matModel, program, FBO_Portal1);
+		matModel = glm::mat4(1.0f);	// identity
+		DrawObject(portal2, matModel, program, FBO_Portal2);
+		portal->bIsVisible = false;
+		portal2->bIsVisible = false;
+		glUniform1f(renderPassNumber_UniLoc, 1.0f);
 		DrawScene_Simple(vec_pObjectsToDraw, program, 1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		 
 //		DrawScene_Simple(vec_non_transObj, program, 1);
 //		DrawScene_Simple(vec_transObj, program, 1);
 
@@ -791,25 +945,17 @@ int main(void)
 			}
 		}
 		
-		//ray casting
+		
+
+
+
+		//Ray Cast
 		glm::vec3 from = player->position + glm::vec3(0.0f, 10.0f, 0.0f);
 
-		
-		glm::vec4 vecForwardDirection_ModelSpace = glm::vec4(0.0f, 0.0f, /**/1.0f/**/, 1.0f);
-		
-			// Now orientation
-			glm::quat qPlayerRotation = player->getQOrientation();
-			// Make a mat4x4 from that quaternion
-			glm::mat4 matPlayerRotation = glm::mat4(qPlayerRotation);
-		
-			glm::vec4 vecForwardDirection_WorldSpace = matPlayerRotation * vecForwardDirection_ModelSpace;
-		
-			// optional normalize
-			vecForwardDirection_WorldSpace = glm::normalize(vecForwardDirection_WorldSpace);
-			vecForwardDirection_WorldSpace *= 50.0f;
-			vecForwardDirection_WorldSpace = glm::vec4(player->position, 0.0f) + vecForwardDirection_WorldSpace;
-			glm::vec3 to = vecForwardDirection_WorldSpace;
-			to.y = 10.0f;
+		glm::vec3 to = player->getForward();
+		to *= 50.0f;
+		to = to + player->position;
+		to.y = 10.0f;
 
 		g_pDebugRendererACTUAL->addLine(from, to, glm::vec3(0.0f, 1.0f, 0.0f));
 		

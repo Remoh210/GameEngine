@@ -401,10 +401,7 @@ void ProcessAsynKeys(GLFWwindow* window)
 	const float CAMERA_SPEED_SLOW = 5.0f;
 	const float CAMERA_SPEED_FAST = 10.0f;
 
-	// WASD + q = "up", e = down		y axis = up and down
-	//									x axis = left and right
-	//									z axis = forward and backward
-	// 
+
 
 	if (!bIsDebugMode) {
 
@@ -418,29 +415,25 @@ void ProcessAsynKeys(GLFWwindow* window)
 		{
 			glm::vec3 velVec;
 			glm::vec3 CamDir = camera.getDirectionVector();
-			//std::cout << CamDir.x << " " << CamDir.y << " " << CamDir.z << std::endl;
 
+			//Ray Cast
 			glm::vec3 from = ch->position + glm::vec3(0.0f, 10.0f, 0.0f);
-			glm::vec4 vecForwardDirection_ModelSpace = glm::vec4(0.0f, 0.0f, /**/1.0f/**/, 1.0f);
-			glm::quat qPlayerRotation = ch->getQOrientation();
-			glm::mat4 matPlayerRotation = glm::mat4(qPlayerRotation);
-			glm::vec4 vecForwardDirection_WorldSpace = matPlayerRotation * vecForwardDirection_ModelSpace;
-			vecForwardDirection_WorldSpace = glm::normalize(vecForwardDirection_WorldSpace);
-			vecForwardDirection_WorldSpace *= 20.0f;
-			vecForwardDirection_WorldSpace = glm::vec4(ch->position, 0.0f) + vecForwardDirection_WorldSpace;
-			glm::vec3 to = vecForwardDirection_WorldSpace;
-			to.y = 5.0f;
-
+			glm::vec3 to = ch->getForward();
+			to *= 18.0f;
+			to = to + ch->position;
+			to.y = 8.0f;
 			g_pDebugRendererACTUAL->addLine(from, to, glm::vec3(1.0f, 1.0f, 0.0f));
-
-			
 			nPhysics::iRigidBody* hitRb = gPhysicsWorld->RayCastGetObject(from, to);
 
 			if (hitRb && hitRb->GetMass() > 3000.f)
 			{
-				if (glm::length(hitRb->GetVelocity()) > glm::length(ch->rigidBody->GetVelocity()))
+				glm::vec3 rbVel = hitRb->GetVelocity();
+				glm::vec3 playerVel = ch->rigidBody->GetVelocity();
+				float playerVelLength = glm::length(playerVel);
+				float RbVelLength = glm::length(rbVel);
+				if (RbVelLength > playerVelLength)
 				{
-					hitRb->SetVelocity(ch->rigidBody->GetVelocity());
+					hitRb->SetVelocity(glm::normalize(rbVel) * playerVelLength);
 				}
 
 				velVec = CamDir * 18.0f;

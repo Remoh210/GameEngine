@@ -8,7 +8,7 @@ cGameObject::cGameObject()
 	this->bIsDebug = false;
 	this->bIsVisible = true;
 	this->bIsWireFrame = false;
-	this->b_HACK_UsesOffscreenFBO = false;
+	this->bFBO = false;
 	this->pAnimController = new cAnimationController(this);
 	this->bHadCollision = false;
 	this->bIsPlayer = false;
@@ -69,6 +69,31 @@ void cGameObject::setSpecularPower(float specPower)
 	return;
 }
 
+
+glm::vec3 cGameObject::getForward(glm::vec3 forwardModelSpace)
+{
+	//glm::vec4 vecForwardDirection_ModelSpace = glm::vec4(forwardModelSpace, 1.0f);
+	//glm::quat qPlayerRotation = this->getQOrientation();
+	//glm::mat4 matPlayerRotation = glm::mat4(qPlayerRotation);
+	//glm::vec4 vecForwardDirection_WorldSpace = matPlayerRotation * vecForwardDirection_ModelSpace;
+	//vecForwardDirection_WorldSpace = glm::normalize(vecForwardDirection_WorldSpace);
+	//return vecForwardDirection_WorldSpace;
+
+	glm::vec4 vecForwardDirection_ModelSpace = glm::vec4(0.0f, 0.0f, 1.0f, 1.0f);
+
+	// Now orientation
+	glm::quat qMig29Rotation = this->m_meshQOrientation;
+
+	glm::mat4 matQMig29rotation = glm::mat4(qMig29Rotation);
+
+	glm::vec4 vecForwardDirection_WorldSpace = matQMig29rotation * vecForwardDirection_ModelSpace;
+
+	// optional normalize
+	vecForwardDirection_WorldSpace = glm::normalize(vecForwardDirection_WorldSpace);
+	glm::vec3 newve(vecForwardDirection_WorldSpace.x, vecForwardDirection_WorldSpace.y, vecForwardDirection_WorldSpace.z);
+	return newve;
+
+}
 
 void cGameObject::setUniformScale(float scale)
 {
