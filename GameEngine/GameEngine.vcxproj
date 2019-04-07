@@ -255,6 +255,7 @@
     <ClInclude Include="globalOpenGLStuff.h" />
     <ClInclude Include="globalStuff.h" />
     <ClInclude Include="cTextRend.h" />
+    <ClInclude Include="PostEffect.h" />
     <ClInclude Include="iCommand.h" />
     <ClInclude Include="linmath.h" />
     <ClInclude Include="ParticleSystem.h" />

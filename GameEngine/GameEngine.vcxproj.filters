@@ -111,6 +111,9 @@
     <Filter Include="CharacterController">
       <UniqueIdentifier>{397bdc3a-0e5a-4f72-a093-1e8f938f70f7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\PostEffect">
+      <UniqueIdentifier>{d8b4af33-6499-44b2-81ad-6d60dee9c611}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="theMain.cpp">
@@ -456,6 +459,9 @@
     </ClInclude>
     <ClInclude Include="cCharacterManager.h">
       <Filter>CharacterController</Filter>
+    </ClInclude>
+    <ClInclude Include="PostEffect.h">
+      <Filter>Source Files\PostEffect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

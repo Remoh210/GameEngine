@@ -123,28 +123,6 @@ void main()
 	// Are we in the 2nd pass? 
 	if ( int(renderPassNumber) == 2 )
 	{ 
-// //		vec3 ObjectColour = texture( texObjectColour, vertUV_x2.st ).rgb;
-// //		vec3 ObjectNormal = texture( texObjectColour, vertUV_x2.st ).rgb;
-	
-		// // 2nd pass (very simple)
-		// vec4 texRecticle = texture( texture00, vertUV_x2.st ).rgba;
-		// if (texRecticle.g > 0.5 && texRecticle.r < 0.5)
-		// {
-			// texRecticle *= 0.15;
-		// }
-		
-
-		// finalOutputColour.rgb = texture( texPass1OutputTexture, vertUV_x2.st + 0.007*vec2( sin(1024.0*vertUV_x2.s),cos(768.0*vertUV_x2.t))).rgb
-		                           // + texRecticle.rgb;
-		//		vec3 ObjectColour = texture( texObjectColour, vertUV_x2.st ).rgb;
-//		vec3 ObjectNormal = texture( texObjectColour, vertUV_x2.st ).rgb;
-	
-		// 2nd pass (very simple)
-		vec4 texRecticle = texture( texture00, vertUV_x2.st ).rgba;
-		if (texRecticle.g > 0.5 && texRecticle.r < 0.5)
-		{
-			texRecticle *= 0.15;
-		}
 		
 
 		finalOutputColour.rgb = texture( texPass1OutputTexture, vertUV_x2.st).rgb;
@@ -471,6 +449,7 @@ void main()
 		// Drop the amount of current colour by a little bit...
 		finalOutputColour *= ( 1.0f - amountToAdd );
 		// ... and add the reflective colour
+		//finalOutputColour.rgb += ( amountToAdd * rgbReflect );
 		finalOutputColour.rgb += ( amountToAdd * rgbReflect );
 	}
 	

@@ -110,6 +110,8 @@ public:
 	bool bHadCollision;
 	bool bFBO;
 	bool bIsPlayer;
+	bool bReflection;
+	bool bRefraction;
 
 	// ignore this for now...
 	// Around its own axis (NOT the origin)

@@ -280,6 +280,8 @@ void DrawObject(cGameObject* pCurrentMesh,
 	GLint matView_location = glGetUniformLocation(shaderProgramID, "matView");
 	GLint matProj_location = glGetUniformLocation(shaderProgramID, "matProj");
 	GLint bDontUseLighting_UniLoc = glGetUniformLocation(shaderProgramID, "bDontUseLighting");
+	GLint bAddReflect_UniLoc = glGetUniformLocation(program, "bAddReflect");
+	GLint bAddRefract_UniLoc = glGetUniformLocation(program, "bAddRefract");
 
 	glUniformMatrix4fv(matModel_location, 1, GL_FALSE, glm::value_ptr(matModel));
 	glUniformMatrix4fv(matModelInvTrans_location, 1, GL_FALSE, glm::value_ptr(matModelInvTrans));
@@ -337,6 +339,27 @@ void DrawObject(cGameObject* pCurrentMesh,
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		glEnable(GL_CULL_FACE);	// Discared "back facing" triangles
 	}
+
+	if (pCurrentMesh->bRefraction)
+	{
+		glUniform1f(bAddRefract_UniLoc, (float)GL_TRUE);
+	}
+	else
+	{
+		glUniform1f(bAddRefract_UniLoc, (float)GL_FALSE);
+	}
+
+	if (pCurrentMesh->bReflection)
+	{
+		glUniform1f(bAddReflect_UniLoc, (float)GL_TRUE);
+	}
+	else
+	{
+		glUniform1f(bAddReflect_UniLoc, (float)GL_FALSE);
+	}
+
+
+	
 
 	// *****************************************************************
 	//  ___ _   _                  _ __  __        _    

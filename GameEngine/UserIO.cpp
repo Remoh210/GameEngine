@@ -10,7 +10,6 @@
 //include "TextureCTextureFromBMP.h"
 float speed = 50.0f;
 int index = 0;
-// This has all the keyboard, mouse, and controller stuff
 int SphIndex = 0;
 extern sLight* pTheOneLight;	//  = NULL;
 extern cLightManager* LightManager;
@@ -35,7 +34,6 @@ void commandsInterface();
 
 bool IsShiftDown(GLFWwindow* window);
 
-cGameObject* CloseToObj(std::vector<cGameObject*> models);
 
 cGameObject* cloesetObj;
 
@@ -573,120 +571,120 @@ void ProcessAsynKeys(GLFWwindow* window)
 	//LIGHT CONTROL*********************************************************************************************************
 	if ( IsCtrlDown(window) )
 	{
-		if (glfwGetKey(window, GLFW_KEY_W)) {
-
-			//glm::vec3 CamDir = glm::vec3(camera.Front.x, 0.0f, camera.Front.z);
-			//CamDir = glm::normalize(CamDir);
-			glm::vec3 velVec = vec_pSpheres[SphIndex]->rigidBody->GetVelocity();
-			////lets add some speed
-			glm::vec3 CamDir = camera.Front;
-			CamDir = glm::normalize(CamDir);
-			CamDir.y = 0.0f;
-			velVec += CamDir * 200.0f * (float)deltaTime;
-			//velVec.y = 5.0f;
-			vec_pSpheres[SphIndex]->rigidBody->SetVelocity(velVec);
-		}
-		if (glfwGetKey(window, GLFW_KEY_S)) {
-			//glm::vec3 CamDir = glm::vec3(camera.Front.x, 0.0f, camera.Front.z);
-			//CamDir = glm::normalize(CamDir);
-			glm::vec3 velVec = vec_pSpheres[SphIndex]->rigidBody->GetVelocity();
-			////lets add some speed
-			glm::vec3 CamDir = camera.Front;
-			CamDir = glm::normalize(CamDir);
-			CamDir.y = 0.0f;
-			velVec += -CamDir * 200.0f * (float)deltaTime;
-			//velVec.y = 5.0f;
-			vec_pSpheres[SphIndex]->rigidBody->SetVelocity(velVec);
-		}
-
-		if (glfwGetKey(window, GLFW_KEY_D)) {
-			//glm::vec3 CamDir = glm::vec3(camera.Front.x, 0.0f, camera.Front.z);
-			//CamDir = glm::normalize(CamDir);
-			glm::vec3 velVec = vec_pSpheres[SphIndex]->rigidBody->GetVelocity();
-			////lets add some speed
-			glm::vec3 CamDir = camera.Right;
-			CamDir = glm::normalize(CamDir);
-			CamDir.y = 0.0f;
-			velVec += CamDir * 200.0f * (float)deltaTime;
-			//velVec.y = 5.0f;
-			vec_pSpheres[SphIndex]->rigidBody->SetVelocity(velVec);
-		}
-		if (glfwGetKey(window, GLFW_KEY_A)) {
-			//glm::vec3 CamDir = glm::vec3(camera.Front.x, 0.0f, camera.Front.z);
-//CamDir = glm::normalize(CamDir);
-			glm::vec3 velVec = vec_pSpheres[SphIndex]->rigidBody->GetVelocity();
-			////lets add some speed
-			glm::vec3 CamDir = camera.Right;
-			CamDir = glm::normalize(CamDir);
-			CamDir.y = 0.0f;
-			velVec += - CamDir * 200.0f * (float)deltaTime;
-			//velVec.y = 5.0f;
-			vec_pSpheres[SphIndex]->rigidBody->SetVelocity(velVec);
-		}
+//		if (glfwGetKey(window, GLFW_KEY_W)) {
+//
+//			//glm::vec3 CamDir = glm::vec3(camera.Front.x, 0.0f, camera.Front.z);
+//			//CamDir = glm::normalize(CamDir);
+//			glm::vec3 velVec = vec_pSpheres[SphIndex]->rigidBody->GetVelocity();
+//			////lets add some speed
+//			glm::vec3 CamDir = camera.Front;
+//			CamDir = glm::normalize(CamDir);
+//			CamDir.y = 0.0f;
+//			velVec += CamDir * 200.0f * (float)deltaTime;
+//			//velVec.y = 5.0f;
+//			vec_pSpheres[SphIndex]->rigidBody->SetVelocity(velVec);
+//		}
+//		if (glfwGetKey(window, GLFW_KEY_S)) {
+//			//glm::vec3 CamDir = glm::vec3(camera.Front.x, 0.0f, camera.Front.z);
+//			//CamDir = glm::normalize(CamDir);
+//			glm::vec3 velVec = vec_pSpheres[SphIndex]->rigidBody->GetVelocity();
+//			////lets add some speed
+//			glm::vec3 CamDir = camera.Front;
+//			CamDir = glm::normalize(CamDir);
+//			CamDir.y = 0.0f;
+//			velVec += -CamDir * 200.0f * (float)deltaTime;
+//			//velVec.y = 5.0f;
+//			vec_pSpheres[SphIndex]->rigidBody->SetVelocity(velVec);
+//		}
+//
+//		if (glfwGetKey(window, GLFW_KEY_D)) {
+//			//glm::vec3 CamDir = glm::vec3(camera.Front.x, 0.0f, camera.Front.z);
+//			//CamDir = glm::normalize(CamDir);
+//			glm::vec3 velVec = vec_pSpheres[SphIndex]->rigidBody->GetVelocity();
+//			////lets add some speed
+//			glm::vec3 CamDir = camera.Right;
+//			CamDir = glm::normalize(CamDir);
+//			CamDir.y = 0.0f;
+//			velVec += CamDir * 200.0f * (float)deltaTime;
+//			//velVec.y = 5.0f;
+//			vec_pSpheres[SphIndex]->rigidBody->SetVelocity(velVec);
+//		}
+//		if (glfwGetKey(window, GLFW_KEY_A)) {
+//			//glm::vec3 CamDir = glm::vec3(camera.Front.x, 0.0f, camera.Front.z);
+////CamDir = glm::normalize(CamDir);
+//			glm::vec3 velVec = vec_pSpheres[SphIndex]->rigidBody->GetVelocity();
+//			////lets add some speed
+//			glm::vec3 CamDir = camera.Right;
+//			CamDir = glm::normalize(CamDir);
+//			CamDir.y = 0.0f;
+//			velVec += - CamDir * 200.0f * (float)deltaTime;
+//			//velVec.y = 5.0f;
+//			vec_pSpheres[SphIndex]->rigidBody->SetVelocity(velVec);
+//		}
 		
-		//if ( glfwGetKey( window, GLFW_KEY_W ) )	{	LightManager->vecLights.at(lightIndex)->position.z += cameraSpeed;	}
-		//if ( glfwGetKey( window, GLFW_KEY_S ) )	{	LightManager->vecLights.at(lightIndex)->position.z -= cameraSpeed;	}
-		//if ( glfwGetKey( window, GLFW_KEY_A ) )	{	LightManager->vecLights.at(lightIndex)->position.x -= cameraSpeed;	}
-		//if ( glfwGetKey( window, GLFW_KEY_D ) ) {	LightManager->vecLights.at(lightIndex)->position.x += cameraSpeed;	}
-		//if ( glfwGetKey( window, GLFW_KEY_Q ) )	{	LightManager->vecLights.at(lightIndex)->position.y += cameraSpeed;	}
-		//if ( glfwGetKey( window, GLFW_KEY_E ) )	{	LightManager->vecLights.at(lightIndex)->position.y -= cameraSpeed;	}
+		if ( glfwGetKey( window, GLFW_KEY_W ) )	{	LightManager->vecLights.at(lightIndex)->position.z += cameraSpeed;	}
+		if ( glfwGetKey( window, GLFW_KEY_S ) )	{	LightManager->vecLights.at(lightIndex)->position.z -= cameraSpeed;	}
+		if ( glfwGetKey( window, GLFW_KEY_A ) )	{	LightManager->vecLights.at(lightIndex)->position.x -= cameraSpeed;	}
+		if ( glfwGetKey( window, GLFW_KEY_D ) ) {	LightManager->vecLights.at(lightIndex)->position.x += cameraSpeed;	}
+		if ( glfwGetKey( window, GLFW_KEY_Q ) )	{	LightManager->vecLights.at(lightIndex)->position.y += cameraSpeed;	}
+		if ( glfwGetKey( window, GLFW_KEY_E ) )	{	LightManager->vecLights.at(lightIndex)->position.y -= cameraSpeed;	}
 
 
-		////change colour of the light
-		//if ( glfwGetKey( window, GLFW_KEY_Z ) )	{   LightManager->vecLights.at(lightIndex)->diffuse = glm::vec4(0.0f, 0.0f, 1.0f, 1.0f); 	}//Red
-		//if ( glfwGetKey( window, GLFW_KEY_X ) )	{   LightManager->vecLights.at(lightIndex)->diffuse = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f);	}//Green
-		//if ( glfwGetKey( window, GLFW_KEY_C ) )	{   LightManager->vecLights.at(lightIndex)->diffuse = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);    }//Blue
-		//if ( glfwGetKey( window, GLFW_KEY_V ) )	{	LightManager->vecLights.at(lightIndex)->diffuse = glm::vec4(1.0f, 1.0f, 0.0f, 1.0f);	}
-		//if ( glfwGetKey( window, GLFW_KEY_B ) )	{	LightManager->vecLights.at(lightIndex)->diffuse = glm::vec4(0.0f, 1.0f, 1.0f, 1.0f);	}
+		//change colour of the light
+		if ( glfwGetKey( window, GLFW_KEY_Z ) )	{   LightManager->vecLights.at(lightIndex)->diffuse = glm::vec4(0.0f, 0.0f, 1.0f, 1.0f); 	}//Red
+		if ( glfwGetKey( window, GLFW_KEY_X ) )	{   LightManager->vecLights.at(lightIndex)->diffuse = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f);	}//Green
+		if ( glfwGetKey( window, GLFW_KEY_C ) )	{   LightManager->vecLights.at(lightIndex)->diffuse = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);    }//Blue
+		if ( glfwGetKey( window, GLFW_KEY_V ) )	{	LightManager->vecLights.at(lightIndex)->diffuse = glm::vec4(1.0f, 1.0f, 0.0f, 1.0f);	}
+		if ( glfwGetKey( window, GLFW_KEY_B ) )	{	LightManager->vecLights.at(lightIndex)->diffuse = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);	}
 
 
-		////change lightype
-		//if (glfwGetKey(window, GLFW_KEY_1)) { LightManager->vecLights.at(lightIndex)->SetLightType(sLight::POINT_LIGHT); }//
-		//if (glfwGetKey(window, GLFW_KEY_2)) { LightManager->vecLights.at(lightIndex)->SetLightType(sLight::SPOT_LIGHT); }//
+		//change lightype
+		if (glfwGetKey(window, GLFW_KEY_1)) { LightManager->vecLights.at(lightIndex)->SetLightType(sLight::POINT_LIGHT); }//
+		if (glfwGetKey(window, GLFW_KEY_2)) { LightManager->vecLights.at(lightIndex)->SetLightType(sLight::SPOT_LIGHT); }//
 
-		////Change Light LookAt
-		//if (glfwGetKey(window, GLFW_KEY_R)) { LightManager->vecLights.at(lightIndex)->SetRelativeDirectionByLookAt(vec_pObjectsToDraw.at(index)->position); }
-
-
-
-		////Change SpotCone
-		//if (glfwGetKey(window, GLFW_KEY_T))
-		//{
-		//	LightManager->vecLights.at(lightIndex)->param1.y -= 0.1f;
-
-		//}
-
-
-		//if (glfwGetKey(window, GLFW_KEY_Y))
-		//{
-		//	LightManager->vecLights.at(lightIndex)->param1.y += 0.1f;
-
-		//}
-
-
-		//if (glfwGetKey(window, GLFW_KEY_U))
-		//{
-		//	LightManager->vecLights.at(lightIndex)->param1.z -= 0.1f;
-		//}
-
-
-		//if (glfwGetKey(window, GLFW_KEY_I))
-		//{
-		//	LightManager->vecLights.at(lightIndex)->param1.z += 0.1f;
-		//}
+		//Change Light LookAt
+		if (glfwGetKey(window, GLFW_KEY_R)) { LightManager->vecLights.at(lightIndex)->SetRelativeDirectionByLookAt(vec_pObjectsToDraw.at(index)->position); }
 
 
 
+		//Change SpotCone
+		if (glfwGetKey(window, GLFW_KEY_T))
+		{
+			LightManager->vecLights.at(lightIndex)->param1.y -= 0.1f;
 
-		////change attenuation:
+		}
 
-		////Linear
-		//if ( glfwGetKey( window, GLFW_KEY_LEFT)  )	{ LightManager->vecLights.at(lightIndex)->atten.y *= 1.05f; }
-		//if ( glfwGetKey( window, GLFW_KEY_RIGHT) )  { LightManager->vecLights.at(lightIndex)->atten.y *= 0.95f; }
 
-		////Quadratic
-		//if ( glfwGetKey( window, GLFW_KEY_DOWN) )   { LightManager->vecLights.at(lightIndex)->atten.z *= 0.95f; }
-		//if ( glfwGetKey( window, GLFW_KEY_UP)   )	{ LightManager->vecLights.at(lightIndex)->atten.z *= 1.05f; }
+		if (glfwGetKey(window, GLFW_KEY_Y))
+		{
+			LightManager->vecLights.at(lightIndex)->param1.y += 0.1f;
+
+		}
+
+
+		if (glfwGetKey(window, GLFW_KEY_U))
+		{
+			LightManager->vecLights.at(lightIndex)->param1.z -= 0.1f;
+		}
+
+
+		if (glfwGetKey(window, GLFW_KEY_I))
+		{
+			LightManager->vecLights.at(lightIndex)->param1.z += 0.1f;
+		}
+
+
+
+
+		//change attenuation:
+
+		//Linear
+		if ( glfwGetKey( window, GLFW_KEY_LEFT)  )	{ LightManager->vecLights.at(lightIndex)->atten.y *= 1.05f; }
+		if ( glfwGetKey( window, GLFW_KEY_RIGHT) )  { LightManager->vecLights.at(lightIndex)->atten.y *= 0.95f; }
+
+		//Quadratic
+		if ( glfwGetKey( window, GLFW_KEY_DOWN) )   { LightManager->vecLights.at(lightIndex)->atten.z *= 0.95f; }
+		if ( glfwGetKey( window, GLFW_KEY_UP)   )	{ LightManager->vecLights.at(lightIndex)->atten.z *= 1.05f; }
 		
 
 	}

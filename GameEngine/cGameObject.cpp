@@ -2,6 +2,8 @@
 
 cGameObject::cGameObject()
 {
+	this->bReflection = false;
+	this->bRefraction = false;
 	this->position = glm::vec3(0.0f);
 	this->nonUniformScale = glm::vec3(1.0f);
 	this->setMeshOrientationEulerAngles(glm::vec3(0.0f, 0.0f, 0.0f));

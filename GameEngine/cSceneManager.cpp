@@ -332,6 +332,16 @@ bool cSceneManager::loadScene(std::string filename) {
 			CurModel->bFBO = GameObject[i]["FBO"].GetBool();
 		}
 
+		if (GameObject[i].HasMember("Reflection"))
+		{
+			CurModel->bRefraction = GameObject[i]["Reflection"].GetBool();
+		}
+
+		if (GameObject[i].HasMember("Refraction"))
+		{
+			CurModel->bRefraction = GameObject[i]["Refraction"].GetBool();
+		}
+
 		//if ply;
 		if(GameObject[i].HasMember("Mesh"))
 		{
