@@ -175,7 +175,7 @@ struct RenderTarget {
 struct ScreenGeo {
   uint32 vao, vbo;
   ScreenGeo() {
-    // calls initialization stuff here!
+    //initialization stuff here
     glGenVertexArrays(1, &vao);
     glGenBuffers(1, &vbo);
     glBindVertexArray(vao);
@@ -498,4 +498,4 @@ struct ChromAberrationEffect : public PostEffect {
 	Shader ChromAberration_shader;
 };
 
-} // namespace post_fx
+} // namespace postEffect

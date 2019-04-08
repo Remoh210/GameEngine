@@ -1,5 +1,12 @@
 !!Run on Debug or Release x64!!
 
+--Graphics--
+There is 2 portals: static and dynamic with second textures
+Some of objects are reflective
+bloom and chromatic aberration as post-processing effects 
+
+
+--Animation--
 Instead of rolling I'm also made "strafe with casting spell" animation
 since I'm going to use it for Game Jam
 

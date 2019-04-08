@@ -93,6 +93,8 @@ uniform sampler2D texture07;
 uniform float renderPassNumber;	// 1 = 1st pass, 2nd for offscreen to quad
 uniform sampler2D texPass1OutputTexture;
 uniform sampler2D texPass1OutputTexture2;
+uniform vec2 FBOtexBlendWeights;
+uniform float time;
 
 
 // Cube map texture (NOT a sampler3D)
@@ -123,10 +125,19 @@ void main()
 	// Are we in the 2nd pass? 
 	if ( int(renderPassNumber) == 2 )
 	{ 
+		float newTime = time * 0.03;
+		vec4 FBO_Texture1 = texture( texPass1OutputTexture, vertUV_x2.st);
 		
+		
+		vec4 FBO_Texture2 = texture( texture00, vec2(vertUV_x2.s + newTime, vertUV_x2.t) );
+		//finalOutputColour.rgb = texture( texPass1OutputTexture, vertUV_x2.st).rgb;
 
-		finalOutputColour.rgb = texture( texPass1OutputTexture, vertUV_x2.st).rgb;
-
+		
+		
+		
+		finalOutputColour = (FBO_Texture1 * FBOtexBlendWeights.x) 	 
+		                  + (FBO_Texture2 * FBOtexBlendWeights.y);     
+		
 		
 		finalOutputColour.a = 1.0f;
 		return;
@@ -449,7 +460,6 @@ void main()
 		// Drop the amount of current colour by a little bit...
 		finalOutputColour *= ( 1.0f - amountToAdd );
 		// ... and add the reflective colour
-		//finalOutputColour.rgb += ( amountToAdd * rgbReflect );
 		finalOutputColour.rgb += ( amountToAdd * rgbReflect );
 	}
 	

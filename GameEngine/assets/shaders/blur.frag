@@ -20,20 +20,8 @@ void main() {
     }
   }
 
-  //FragColor = mix( vec4(result.xxx, 1.0), texture(scene_texture, TexCoords), .5
-  //FragColor = mix( texture(image, TexCoords), texture(scene_texture, TexCoords), .5);
-  // result = vec3(
-  //   pow(result.r, 3),
-  //   pow(result.g, 3),
-  //   pow(result.b, 3)
-  // );
-//   result = pow(result, vec3(1.0 / 2.2));
-//   float intensity = result.x + result.y + result.z;
-//  intensity = smoothstep( threshold,  threshold + 0.25, intensity * 0.3333333);  
+ 
 FragColor = vec4(
     result ,
     1.0);
-//   FragColor = vec4(
-//     result * intensity + texture(scene_texture, TexCoords).xyz,
-//     1.0);
 }

@@ -129,7 +129,7 @@ GLuint g_FBO = 0;
 GLuint g_FBO_colourTexture = 0;
 GLuint g_FBO_depthTexture = 0;
 GLint g_FBO_SizeInPixes = 512; // = 512 the WIDTH of the framebuffer, in pixels;
-#include <functional>
+
 
 
 
@@ -167,10 +167,10 @@ int main(void) {
   cShaderManager::cShader vertexShader;
   cShaderManager::cShader fragmentShader;
 
-  vertexShader.fileName = "vertex01.glsl";
+  vertexShader.fileName = "vertex01.vert";
   vertexShader.shaderType = cShaderManager::cShader::VERTEX_SHADER;
 
-  fragmentShader.fileName = "fragment01.glsl";
+  fragmentShader.fileName = "fragment01.frag";
   fragmentShader.shaderType = cShaderManager::cShader::FRAGMENT_SHADER;
 
   if (pTheShaderManager->createProgramFromFile(
@@ -351,9 +351,9 @@ int main(void) {
 
   // Draw the "scene" (run the program)
   while (!glfwWindowShouldClose(window)) {
-#pragma region Main rendering pipeline
-    {
+
 #pragma region framebuffer for portal 1
+
       // Switch to the shader we want
       ::pTheShaderManager->useShaderProgram("BasicUberShader");
 
@@ -381,13 +381,10 @@ int main(void) {
 
       glm::vec3 portal2CamEye = portal2->position;
       portal2CamEye.y = portal2->position.y;
-      // matView = glm::lookAt(portal2CamEye, portal2->getForward() * 2.0f,
-      // glm::vec3(0.0f, 1.0f, 0.0f));
 
       glm::mat4 portal1View =
           portal_view(camera.GetViewMatrix(), portal, portal2);
-      // glm::mat4 tranMat = glm::translate(portal1View, -camera.Position);
-      // Mirror Test
+
 
       matProjection = glm::perspective(1.0f,      // FOV
                                        ratio,     // Aspect ratio
@@ -458,10 +455,11 @@ int main(void) {
       glBindFramebuffer(GL_FRAMEBUFFER, g_FBO); // Point output to FBO
 
 #pragma endregion
-      {
-        // Render target state must be inside of scope operator for the next set of OpenGL commands.
-        RenderTarget::State render_target_state(scene_texture);
-#pragma region main render pipe
+     
+#pragma region main render
+	  
+		  // Render target state must be inside of scope operator for the next set of OpenGL commands.
+		  RenderTarget::State render_target_state(scene_texture);
         // Set for the 1st pass
 
         //**********************************************************
@@ -472,6 +470,8 @@ int main(void) {
         glClearBufferfv(GL_COLOR, 0, &zero);
         glClearBufferfv(GL_DEPTH, 0, &one);
         //**********************************************************
+
+
 
         // glUniform1f(renderPassNumber_UniLoc, 1.0f);	// Tell shader it's the
         // 1st pass
@@ -526,25 +526,20 @@ int main(void) {
         
 
 #pragma endregion
-      }
-    }
-#pragma endregion
+      
     
-    // Post FX
+    // Post VFX
     {
       
-      //glm::mat4x4 view_matrix = camera.GetViewMatrix();
-      //glm::mat4x4 projection_matrix =  glm::perspective(1.0f, screen_quad.width / (float) screen_quad.height, 0.1f, 15000.0f);
 
 	  bloom_effect.execute(bloom_result, scene_texture.color, bloom_strength, bloom_blur_iterations, bloom_threshold);
 
 	  ChromAbEffect.execute(ChromAberrationEffect, bloom_result.texture);
       
       
-      
-
-      
-
+  
+    
+	  //Draw main screen quad
       screen_quad.draw_with_texture(ChromAberrationEffect.texture);
     }
     

@@ -13,6 +13,4 @@ void main() {
 	color.a = 1.0; 
  
 	FragColor = color;
-	//FragColor.rgb = texture2D(image, TexCoords).rgb;
-	//FragColor.a = 1.0;
 }

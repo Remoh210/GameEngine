@@ -21,7 +21,7 @@
 
 //std::map<std::string /*name*/, cParticleEmitter* > g_map_pParticleEmitters;
 
-
+float Timer;
 
 
 bool HACK_bTextureUniformLocationsLoaded = false;
@@ -41,6 +41,10 @@ GLint texTiling = -1;
 
 // Texture sampler for off screen texture
 GLint texPass1OutputTexture_UniLoc = -1;
+GLint texPass1OutputTexture2_UniLoc = -1;
+GLint FBO_texBW_1_UniLoc = -1;
+
+GLint time_Uniloc = -1;
 
 
 
@@ -68,22 +72,52 @@ void BindTextures(cGameObject* pCurrentMesh, GLuint shaderProgramID, cFBO* fbo)
 
 
 		texPass1OutputTexture_UniLoc = glGetUniformLocation(shaderProgramID, "texPass1OutputTexture");
-
+		texPass1OutputTexture2_UniLoc = glGetUniformLocation(shaderProgramID, "texPass1OutputTexture2");
+		texPass1OutputTexture2_UniLoc = glGetUniformLocation(shaderProgramID, "texPass1OutputTexture2");
+		FBO_texBW_1_UniLoc = glGetUniformLocation(shaderProgramID, "FBOtexBlendWeights");
+		//used to offset texture, to make "water" effect
+		time_Uniloc = glGetUniformLocation(shaderProgramID, "time");
 	}
 
+	//passind time
 
 
 	if (pCurrentMesh->bFBO && fbo != NULL)
 	{
+		Timer += deltaTime;
+		glUniform1f(time_Uniloc, Timer);
 
 
-		int FBO_Texture_Unit_Michael_Picked = 1;
+		int FBO_Texture_Unit = 1;
 
-		glActiveTexture(GL_TEXTURE0 + FBO_Texture_Unit_Michael_Picked);
+		glActiveTexture(GL_TEXTURE0 + FBO_Texture_Unit);
 
 		glBindTexture(GL_TEXTURE_2D, fbo->colourTexture_0_ID);
 
-		glUniform1i(texPass1OutputTexture_UniLoc, FBO_Texture_Unit_Michael_Picked);
+		glUniform1i(texPass1OutputTexture_UniLoc, FBO_Texture_Unit);
+
+
+
+
+
+
+		int FBO_Texture_Unit2 = 0;
+
+		glActiveTexture(GL_TEXTURE0 + FBO_Texture_Unit2);
+
+		// Connect the specific texture to THIS texture unit
+		std::string texName = pCurrentMesh->vecTextures[0].name;
+
+		GLuint texID = ::g_pTheTextureManager->getTextureIDFromName(texName);
+
+		glBindTexture(GL_TEXTURE_2D, texID);
+
+		glUniform1i(texPass1OutputTexture2_UniLoc, FBO_Texture_Unit2);
+
+
+		
+		glUniform2f(FBO_texBW_1_UniLoc, 0.5, 0.5f);
+
 
 		return;
 	}

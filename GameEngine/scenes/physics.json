@@ -44,8 +44,8 @@
           ],
           "Textures": [
               {
-                  "Name": "testTex.bmp",
-                  "Strength": 1.0
+                  "Name": "neonTex.bmp",
+                  "Strength": 0.5
               }
           ]
       },
@@ -85,7 +85,7 @@
           ],
           "Textures": [
               {
-                  "Name": "testTex.bmp",
+                  "Name": "neonTex.bmp",
                   "Strength": 1.0
               }
           ]
@@ -839,7 +839,7 @@
                  1.0,
                  1.0,
                  1.0,
-                 40.0
+                 100.0
              ],
              "Rotation": [
                  0.0,
