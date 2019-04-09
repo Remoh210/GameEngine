@@ -61,11 +61,11 @@ public:
 		b_controlledByScript = false;
 		//if(target != NULL)
 		//{
-			mCameraType = THIRD_PERSON;
+		mCameraType = THIRD_PERSON;
 		//}
 		//else
 		//{
-			mCameraType = FREE;
+		mCameraType = FREE;
 		//}
 		glm::mat4 newViewMat = glm::mat4(0.0f);
 	}
@@ -96,7 +96,7 @@ public:
 			return glm::lookAt(Position, Position + Front, Up);
 			break;
 		case THIRD_PERSON:
-			return glm::lookAt(Position, mTarget->position, glm::vec3(0.0f, 1.0f, 0.0f));
+			return glm::lookAt(Position, mTarget->position + glm::vec3(0.0f, 5.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 			break;
 		default:
 			break;
@@ -198,7 +198,7 @@ public:
 		{
 		case FREE:
 		{
-			glm::vec3 front;
+			glm::vec3 front(0.0f, 0.0f, -1.0f);
 			front.x = cos(glm::radians(Yaw)) * cos(glm::radians(Pitch));
 			front.y = sin(glm::radians(Pitch));
 			front.z = sin(glm::radians(Yaw)) * cos(glm::radians(Pitch));
@@ -211,19 +211,16 @@ public:
 		{
 			// LookAt by GameObject
 			Front = mTarget->position;
-			//front = m_cameraGO->position;
-			//Front += glm::vec3(0.0f, 50.5f, 0.0f);
-
-			// Calculate a direction to guide the new position of the camera
-			// related to the center of the Point of Interest
 			glm::vec3 posDirection;
 			posDirection.x = cos(glm::radians(Yaw)) * cos(glm::radians(Pitch));
 			posDirection.y = sin(glm::radians(-Pitch));
 			posDirection.z = sin(glm::radians(Yaw)) * cos(glm::radians(Pitch));
 			posDirection = glm::normalize(posDirection);
 
+			if (posDirection.y < 0.05f)
+				posDirection.y = 0.05f;
 			// Project the new position and assign        
-			Position = Front + posDirection * 50.0f;
+			Position = Front + posDirection * 40.0f;
 		}
 		break;
 		default:
@@ -235,8 +232,8 @@ public:
 	}
 
 private:
-	
-	
+
+
 };
 
 

@@ -14,7 +14,7 @@ namespace PostEffect {
 typedef unsigned int uint32;
 typedef int int32;
 
-//Istead of ply quad
+//Instead of ply quad
 namespace fullscreen_quad {
 // p.x p.y uv.x uv.y
 const float quadVertices[] = {
