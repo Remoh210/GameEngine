@@ -155,6 +155,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="cAABB.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="cAnimationCurveCommand.cpp" />
     <ClCompile Include="cAnimationState.cpp" />
     <ClCompile Include="cAssimpBasic.cpp" />

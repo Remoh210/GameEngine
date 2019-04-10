@@ -10,8 +10,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameEngine", "GameEngine\Ga
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Physics_Interfaces", "Physics_Interfaces\Physics_Interfaces.vcxproj", "{D62DA76F-9D9F-40B5-A183-E25D886DFF18}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimplePhysics", "SimplePhysics\SimplePhysics.vcxproj", "{F6A4CFFF-BF94-4DE8-A9A6-0C1A07A7AC83}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BulletPhysics", "BulletPhysics\BulletPhysics.vcxproj", "{E3A9F462-FC4D-48DD-B144-EF8BB9CE5E2C}"
 EndProject
 Global
@@ -38,14 +36,6 @@ Global
 		{D62DA76F-9D9F-40B5-A183-E25D886DFF18}.Release|x64.Build.0 = Release|x64
 		{D62DA76F-9D9F-40B5-A183-E25D886DFF18}.Release|x86.ActiveCfg = Release|Win32
 		{D62DA76F-9D9F-40B5-A183-E25D886DFF18}.Release|x86.Build.0 = Release|Win32
-		{F6A4CFFF-BF94-4DE8-A9A6-0C1A07A7AC83}.Debug|x64.ActiveCfg = Debug|x64
-		{F6A4CFFF-BF94-4DE8-A9A6-0C1A07A7AC83}.Debug|x64.Build.0 = Debug|x64
-		{F6A4CFFF-BF94-4DE8-A9A6-0C1A07A7AC83}.Debug|x86.ActiveCfg = Debug|Win32
-		{F6A4CFFF-BF94-4DE8-A9A6-0C1A07A7AC83}.Debug|x86.Build.0 = Debug|Win32
-		{F6A4CFFF-BF94-4DE8-A9A6-0C1A07A7AC83}.Release|x64.ActiveCfg = Release|x64
-		{F6A4CFFF-BF94-4DE8-A9A6-0C1A07A7AC83}.Release|x64.Build.0 = Release|x64
-		{F6A4CFFF-BF94-4DE8-A9A6-0C1A07A7AC83}.Release|x86.ActiveCfg = Release|Win32
-		{F6A4CFFF-BF94-4DE8-A9A6-0C1A07A7AC83}.Release|x86.Build.0 = Release|Win32
 		{E3A9F462-FC4D-48DD-B144-EF8BB9CE5E2C}.Debug|x64.ActiveCfg = Debug|x64
 		{E3A9F462-FC4D-48DD-B144-EF8BB9CE5E2C}.Debug|x64.Build.0 = Debug|x64
 		{E3A9F462-FC4D-48DD-B144-EF8BB9CE5E2C}.Debug|x86.ActiveCfg = Debug|Win32

@@ -67,7 +67,6 @@ void key_callback( GLFWwindow* window,
 						  int mods)
 {
 
-
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 	{
 		
@@ -134,7 +133,6 @@ void key_callback( GLFWwindow* window,
 
 
 	}
-
 	//if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
 	//{
 	//	vec_pSpheres[SphIndex]->rigidBody->SetVelocity(vec_pSpheres[SphIndex]->rigidBody->GetVelocity() + glm::vec3(0.0f, 40.0f, 0.0f));
@@ -400,6 +398,34 @@ void ProcessAsynKeys(GLFWwindow* window)
 	const float CAMERA_SPEED_FAST = 10.0f;
 
 
+	//*********************************************** Joystick Controlls**********************************************************************
+
+	if (glfwJoystickPresent(GLFW_JOYSTICK_1))
+	{
+		int count;
+		const float* axes = glfwGetJoystickAxes(GLFW_JOYSTICK_1, &count);
+		const unsigned char* buttons = glfwGetJoystickButtons(GLFW_JOYSTICK_1, &count);
+
+		if (std::abs(axes[2]) > 0.2f || std::abs(axes[5]) > 0.2f)
+		{
+			camera.ProcessJoystickMovement(axes[2] * deltaTime, axes[5] * deltaTime);
+		}
+
+			
+			//left sticks
+			if (std::abs(axes[0]) > 0.2f ) { std::cout << "axis[0]: " << axes[0] << std::endl; }
+			if (std::abs(axes[1]) > 0.2f) { std::cout << "axis[1]: " << axes[1] << std::endl; }
+			//right stick horizontal
+			if (std::abs(axes[2]) > 0.2f) { std::cout << "axis[2]: " << axes[2] << std::endl; }
+			//right stick up
+			if (std::abs(axes[5]) > 0.2f) { std::cout << "axis[5]: " << axes[5] << std::endl; }
+			
+			//Trigers
+			if (axes[3] > -1.0f) { std::cout << "axis[3]: " << axes[3] << std::endl; }
+			if (axes[4] > -1.0f) { std::cout << "axis[4]: " << axes[4] << std::endl; }
+		//}
+	}
+
 
 	if (!bIsDebugMode) {
 
@@ -409,6 +435,41 @@ void ProcessAsynKeys(GLFWwindow* window)
 		vel = ch->rigidBody->GetVelocity();
 
 
+
+
+		if (IsMBLDown(window))
+		{
+
+
+			//Ray Cast
+			glm::vec3 from = ch->position + glm::vec3(0.0f, 10.0f, 0.0f);
+			glm::vec3 to = ch->getForward();
+			to *= 50.0f;
+			to = to + ch->position;
+			to.y = 20.0f;
+			g_pDebugRendererACTUAL->addLine(from, to, glm::vec3(1.0f, 1.0f, 0.0f));
+			nPhysics::iRigidBody* hitRb = gPhysicsWorld->RayCastGetObject(from, to);
+
+			if (hitRb)
+			{
+				//Get Direction
+				to.y = 20.0f;
+				glm::vec3 dir = to - hitRb->GetPosition();
+				dir = glm::normalize(dir);
+				
+
+				if (glm::distance(hitRb->GetPosition(), to) > 2.0f)
+				{
+					hitRb->SetVelocity(dir * 30.0f);
+				
+				}
+				else
+				{
+					hitRb->SetVelocity(glm::vec3(0.0f));
+				}
+
+			}
+		}
 		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 		{
 			glm::vec3 velVec;

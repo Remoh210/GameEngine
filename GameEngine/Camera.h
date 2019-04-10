@@ -122,6 +122,9 @@ public:
 			Position -= WorldUp * velocity;
 	}
 
+
+	void ProcessLeftJoystick(Camera_Movement direction, float deltaTime);
+
 	// Processes input received from a mouse input system. Expects the offset value in both the x and y direction.
 	void ProcessMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch = true)
 	{
@@ -143,6 +146,9 @@ public:
 		// Update Front, Right and Up Vectors using the updated Euler angles
 		updateCameraVectors();
 	}
+
+
+	void ProcessJoystickMovement(float xoffset, float yoffset, GLboolean constrainPitch = true);
 
 
 	void setThirdPerson(cGameObject* target)

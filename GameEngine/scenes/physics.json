@@ -1376,9 +1376,9 @@
             ],
             "Textures": [
                 {
-                    "Name": "metal.bmp",
+                    "Name": "wallTex.bmp",
                     "Strength": 1.0,
-                    "Tile": 10.0
+                    "Tile": 20.0
                 }
             ],
             "RigidBody": {
@@ -1427,9 +1427,9 @@
             ],
             "Textures": [
                 {
-                    "Name": "metal.bmp",
+                    "Name": "OldWallTex.bmp",
                     "Strength": 1.0,
-                    "Tile": 10.0
+                    "Tile": 20.0
                 }
             ],
             "RigidBody": {
