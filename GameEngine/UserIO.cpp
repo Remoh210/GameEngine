@@ -397,6 +397,10 @@ void ProcessAsynKeys(GLFWwindow* window)
 	const float CAMERA_SPEED_SLOW = 5.0f;
 	const float CAMERA_SPEED_FAST = 10.0f;
 
+	cGameObject* ch = g_pCharacterManager->getActiveChar();
+	glm::vec3 vel;
+	vel = ch->rigidBody->GetVelocity();
+
 
 	//*********************************************** Joystick Controlls**********************************************************************
 
@@ -411,28 +415,115 @@ void ProcessAsynKeys(GLFWwindow* window)
 			camera.ProcessJoystickMovement(axes[2] * deltaTime, axes[5] * deltaTime);
 		}
 
-			
-			//left sticks
-			if (std::abs(axes[0]) > 0.2f ) { std::cout << "axis[0]: " << axes[0] << std::endl; }
-			if (std::abs(axes[1]) > 0.2f) { std::cout << "axis[1]: " << axes[1] << std::endl; }
-			//right stick horizontal
-			if (std::abs(axes[2]) > 0.2f) { std::cout << "axis[2]: " << axes[2] << std::endl; }
-			//right stick up
-			if (std::abs(axes[5]) > 0.2f) { std::cout << "axis[5]: " << axes[5] << std::endl; }
-			
-			//Trigers
-			if (axes[3] > -1.0f) { std::cout << "axis[3]: " << axes[3] << std::endl; }
-			if (axes[4] > -1.0f) { std::cout << "axis[4]: " << axes[4] << std::endl; }
+		
+
+
+		//Jump
+
+		if (buttons[1] == GLFW_PRESS && ch->pAnimController->GetCurrentAnimation() != "Run-jump")
+		{
+			glm::vec3 vel;
+			vel = ch->rigidBody->GetVelocity();
+			vel.y = 17.0f;
+			ch->rigidBody->SetVelocity(vel);
+		}
+
+
+		if (axes[1] < -0.2f)
+		{
+			glm::vec3 velVec;
+			glm::vec3 CamDir = camera.getDirectionVector();
+
+			//Ray Cast
+			glm::vec3 from = ch->position + glm::vec3(0.0f, 10.0f, 0.0f);
+			glm::vec3 to = ch->getForward();
+			to *= 18.0f;
+			to = to + ch->position;
+			to.y = 8.0f;
+			g_pDebugRendererACTUAL->addLine(from, to, glm::vec3(1.0f, 1.0f, 0.0f));
+			nPhysics::iRigidBody* hitRb = gPhysicsWorld->RayCastGetObject(from, to);
+
+			if (hitRb && hitRb->GetMass() > 3000.f)
+			{
+				glm::vec3 rbVel = hitRb->GetVelocity();
+				glm::vec3 playerVel = ch->rigidBody->GetVelocity();
+				float playerVelLength = glm::length(playerVel);
+				float RbVelLength = glm::length(rbVel);
+				if (RbVelLength > playerVelLength)
+				{
+					hitRb->SetVelocity(glm::normalize(rbVel) * playerVelLength);
+				}
+
+				velVec = CamDir * 18.0f;
+				velVec.y = vel.y;
+				ch->rigidBody->SetVelocity(velVec);
+				ch->currentAnimation = "Action3";
+			}
+			else if (axes[1] < -0.7f) {
+				velVec = CamDir * 80.0f;
+				velVec.y = vel.y;
+
+				ch->currentAnimation = "Run-forward";
+				ch->rigidBody->SetVelocity(velVec);
+
+			}
+			else if (axes[4] > -0.5f)
+			{
+				velVec = CamDir * 30.0f;
+				velVec.y = vel.y;
+				ch->rigidBody->SetVelocity(velVec);
+				ch->currentAnimation = "Action1";
+
+			}
+			else {
+				velVec = CamDir * 30.0f;
+				velVec.y = vel.y;
+				ch->rigidBody->SetVelocity(velVec);
+				ch->currentAnimation = "Walk-forward";
+			}
+
+		}
+		else if (axes[4] > -0.5f)
+		{
+			ch->currentAnimation = "Action2";
+			ch->rigidBody->SetVelocity(glm::vec3(0.0f, vel.y, 0.0f));
+
+		}
+		//else
+		//{
+		//	ch->currentAnimation = "Idle";
+		//	ch->rigidBody->SetVelocity(glm::vec3(0.0f, vel.y, 0.0f));
+
 		//}
+
+
+		   
+		//Print some axes info 
+		if (std::abs(axes[0]) > 0.2f ) { std::cout << "axis[0]: " << axes[0] << std::endl; }
+		if (std::abs(axes[1]) > 0.2f) { std::cout << "axis[1]: " << axes[1] << std::endl; }
+		//right stick horizontal
+		if (std::abs(axes[2]) > 0.2f) { std::cout << "axis[2]: " << axes[2] << std::endl; }
+		//right stick up
+		if (std::abs(axes[5]) > 0.2f) { std::cout << "axis[5]: " << axes[5] << std::endl; }
+		
+		//Trigers
+		if (axes[3] > -1.0f) { std::cout << "axis[3]: " << axes[3] << std::endl; }
+		if (axes[4] > -1.0f) { std::cout << "axis[4]: " << axes[4] << std::endl; }
+
+		if (buttons[0] == GLFW_PRESS) { std::cout << "buttons[0]: Pressed" << std::endl; }
+		if (buttons[1] == GLFW_PRESS) { std::cout << "buttons[1]: Pressed" << std::endl; }
+		if (buttons[2] == GLFW_PRESS) { std::cout << "buttons[2]: Pressed" << std::endl; }
+		if (buttons[3] == GLFW_PRESS) { std::cout << "buttons[3]: Pressed" << std::endl; }
+		if (buttons[4] == GLFW_PRESS) { std::cout << "buttons[4]: Pressed" << std::endl; }
+		if (buttons[5] == GLFW_PRESS) { std::cout << "buttons[5]: Pressed" << std::endl; }
+		
 	}
 
 
 	if (!bIsDebugMode) {
 
 
-		cGameObject* ch = g_pCharacterManager->getActiveChar();
-		glm::vec3 vel;
-		vel = ch->rigidBody->GetVelocity();
+
 
 
 
