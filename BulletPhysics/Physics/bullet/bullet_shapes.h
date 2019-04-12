@@ -1,6 +1,8 @@
 #pragma once
 #include <Interfaces/iShape.h>
 #include <Interfaces/shapes.h>
+#include <Interfaces/GL_Vertex.h>
+#include <Interfaces/GL_Triangle.h>
 #include "btBulletCollisionCommon.h"
 
 namespace nPhysics
@@ -111,6 +113,25 @@ namespace nPhysics
 		glm::vec3 mHalfExtents;
 		cBulletBoxShape(const cBulletBoxShape& other) : iBoxShape(other) {}
 		cBulletBoxShape& operator=(const cBulletBoxShape& other) { return *this; }
+		btCollisionShape* mBulletShape;
+
+
+	};
+
+	class cBulletMeshCollider : public iMeshCollider
+	{
+	public:
+		cBulletMeshCollider(const GL_Triangle* triangles, size_t numOfTriangles);
+		virtual ~cBulletMeshCollider();
+		inline btCollisionShape* GetBulletShape()
+		{
+			return mBulletShape;
+		}
+
+	protected:
+		glm::vec3 mHalfExtents;
+		cBulletMeshCollider(const cBulletMeshCollider& other) : iMeshCollider(other) {}
+		cBulletMeshCollider& operator=(const cBulletMeshCollider& other) { return *this; }
 		btCollisionShape* mBulletShape;
 
 

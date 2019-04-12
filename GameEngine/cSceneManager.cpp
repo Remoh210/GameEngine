@@ -11,6 +11,7 @@
 #include <rapidjson/writer.h>
 #include <rapidjson/stringbuffer.h>
 #include <rapidjson/prettywriter.h>
+#include <Interfaces/GL_Triangle.h>
 
 #include <rapidjson/writer.h>
 #include <cstdio>
@@ -624,6 +625,43 @@ bool cSceneManager::loadScene(std::string filename) {
 			}
 
 
+
+
+			if (type == "MESH_COLLIDER")
+			{
+				nPhysics::iShape* CurShape = NULL;
+				nPhysics::sRigidBodyDef def;
+				def.Orientation = CurModel->getMeshOrientationEulerAngles();
+				def.Position = CurModel->position;
+				def.GameObjectName = CurModel->friendlyName;
+
+				nPhysics::GL_Triangle* GLTriangle = new nPhysics::GL_Triangle[curModelInfo.pMeshData->numberOfTriangles];
+				for (int i = 0; i < curModelInfo.pMeshData->numberOfTriangles; i++)
+				{
+
+					GLTriangle[i].vertex1[0] = curModelInfo.pMeshData->pVertices[curModelInfo.pMeshData->pTriangles[i].vertex_ID_0].x;
+					GLTriangle[i].vertex1[1] = curModelInfo.pMeshData->pVertices[curModelInfo.pMeshData->pTriangles[i].vertex_ID_0].y;
+					GLTriangle[i].vertex1[2] = curModelInfo.pMeshData->pVertices[curModelInfo.pMeshData->pTriangles[i].vertex_ID_0].z;
+
+					GLTriangle[i].vertex2[0] = curModelInfo.pMeshData->pVertices[curModelInfo.pMeshData->pTriangles[i].vertex_ID_1].x;
+					GLTriangle[i].vertex2[1] = curModelInfo.pMeshData->pVertices[curModelInfo.pMeshData->pTriangles[i].vertex_ID_1].y;
+					GLTriangle[i].vertex2[2] = curModelInfo.pMeshData->pVertices[curModelInfo.pMeshData->pTriangles[i].vertex_ID_1].z;
+
+					GLTriangle[i].vertex3[0] = curModelInfo.pMeshData->pVertices[curModelInfo.pMeshData->pTriangles[i].vertex_ID_2].x;
+					GLTriangle[i].vertex3[1] = curModelInfo.pMeshData->pVertices[curModelInfo.pMeshData->pTriangles[i].vertex_ID_2].y;
+					GLTriangle[i].vertex3[2] = curModelInfo.pMeshData->pVertices[curModelInfo.pMeshData->pTriangles[i].vertex_ID_2].z;
+
+				}
+
+				CurShape = gPhysicsFactory->CreateMeshCollider(GLTriangle, curModelInfo.pMeshData->numberOfTriangles);
+
+				def.Scale = glm::vec3(CurModel->nonUniformScale.x, CurModel->nonUniformScale.y, CurModel->nonUniformScale.z);
+				nPhysics::iRigidBody* rigidBody = gPhysicsFactory->CreateRigidBody(def, CurShape);
+				CurModel->rigidBody = rigidBody;
+				gPhysicsWorld->AddBody(rigidBody);
+
+			}
+
 			
 			if (type == "SPHERE")
 			{
@@ -834,19 +872,21 @@ bool cSceneManager::loadScene(std::string filename) {
 
 				nPhysics::iShape* CurShape = NULL;
 				nPhysics::sRigidBodyDef def;
-
+				def.Scale = glm::vec3(CurModel->nonUniformScale.x, CurModel->nonUniformScale.y, CurModel->nonUniformScale.x);
 				//in Radians
 				def.Position = CurModel->position;
 				def.Mass = GameObject[i]["RigidBody"]["Mass"].GetFloat();
 				def.GameObjectName = CurModel->friendlyName;
-				const rapidjson::Value& ExtentsArray = GameObject[i]["RigidBody"]["HalfExtents"];
-				glm::vec3 hE;
-				for (int i = 0; i < 3; i++)
-				{
-					hE[i] = ExtentsArray[i].GetFloat();
-				}
 
-				CurShape = gPhysicsFactory->CreateBoxShape(hE);
+				//const rapidjson::Value& ExtentsArray = GameObject[i]["RigidBody"]["HalfExtents"];
+				//glm::vec3 hE;
+				//for (int i = 0; i < 3; i++)
+				//{
+				//	hE[i] = ExtentsArray[i].GetFloat();
+				//}
+				glm::vec3 halfExtents(curModelInfo.maxX * CurModel->nonUniformScale.x, curModelInfo.maxY * CurModel->nonUniformScale.y, 
+					curModelInfo.maxZ * CurModel->nonUniformScale.z);
+				CurShape = gPhysicsFactory->CreateBoxShape(halfExtents);
 
 				nPhysics::iRigidBody* rigidBody = gPhysicsFactory->CreateRigidBody(def, CurShape);
 				CurModel->rigidBody = rigidBody;
@@ -867,12 +907,14 @@ bool cSceneManager::loadScene(std::string filename) {
 				
 				
 
-				const rapidjson::Value& ExtentsArray = GameObject[i]["RigidBody"]["HalfExtents"];
-				glm::vec3 hE;
-				for (int i = 0; i < 3; i++)
-				{
-					hE[i] = ExtentsArray[i].GetFloat();
-				}
+				//const rapidjson::Value& ExtentsArray = GameObject[i]["RigidBody"]["HalfExtents"];
+				//glm::vec3 hE;
+				//for (int i = 0; i < 3; i++)
+				//{
+				//	hE[i] = ExtentsArray[i].GetFloat();
+				//}
+				glm::vec3 halfExtents(curModelInfo.maxX * CurModel->nonUniformScale.x, curModelInfo.maxY * CurModel->nonUniformScale.y,
+					curModelInfo.maxZ * CurModel->nonUniformScale.z);
 
 				const rapidjson::Value& pivotAray = GameObject[i]["RigidBody"]["Pivot"];
 				glm::vec3 pivot;
@@ -888,7 +930,7 @@ bool cSceneManager::loadScene(std::string filename) {
 					axis[i] = axisArray[i].GetFloat();
 				}
 
-				CurShape = gPhysicsFactory->CreateBoxShape(hE);
+				CurShape = gPhysicsFactory->CreateBoxShape(halfExtents);
 
 				nPhysics::iRigidBody* rigidBody = gPhysicsFactory->CreateRigidBody(def, CurShape);
 				CurModel->rigidBody = rigidBody;

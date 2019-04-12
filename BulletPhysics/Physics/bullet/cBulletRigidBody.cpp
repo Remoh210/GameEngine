@@ -192,6 +192,35 @@ namespace nPhysics {
 
 			break;
 		}
+		case nPhysics::SHAPE_TYPE_MESH:
+		{
+			btCollisionShape* colShape = dynamic_cast<cBulletMeshCollider*>(shape)->GetBulletShape();
+			btTransform startTransform;
+			colShape->setLocalScaling(nConvert::ToBullet(def.Scale));
+			startTransform.setIdentity();
+
+			btScalar mass(0.0f);
+			btVector3 localInertia(0, 0, 0);
+
+			startTransform.setOrigin(nConvert::ToBullet(def.Position));
+			startTransform.setRotation(nConvert::ToBullet(def.quatOrientation));
+
+
+			mMotionState = new btDefaultMotionState(startTransform);
+			btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, mMotionState, colShape, localInertia);
+			rbInfo.m_restitution = 0.9;
+			rbInfo.m_friction = 10.2;
+			mBody = new btRigidBody(rbInfo);
+			mBody->setLinearVelocity(nConvert::ToBullet(def.Velocity));
+			mBody->setAngularVelocity(nConvert::ToBullet(def.AngularVelocity));
+			mBody->setSleepingThresholds(0.0f, 0.0f);
+
+
+			mBody->setCollisionFlags(mBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+			mBody->setUserPointer(this);
+
+			break;
+		}
 		default:
 		{
 

@@ -43,6 +43,11 @@ namespace nPhysics
 		return new cBulletBoxShape(halfExtents);
 	}
 
+	iMeshCollider * cBulletPhysicsFactory::CreateMeshCollider(const GL_Triangle* triangles, size_t numOfTriangles)
+	{
+		return new cBulletMeshCollider(triangles, numOfTriangles);
+	}
+
 	iConstraint * cBulletPhysicsFactory::CreatHingeConstraint(iRigidBody * rb, const glm::vec3 & pivot, const glm::vec3 & axis)
 	{
 		return new cBulletHingeConstraint((cBulletRigidBody*)rb, nConvert::ToBullet(pivot), nConvert::ToBullet(axis));

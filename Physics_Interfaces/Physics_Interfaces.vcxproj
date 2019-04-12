@@ -127,6 +127,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Interfaces\eConstraintType.h" />
+    <ClInclude Include="Interfaces\GL_Triangle.h" />
+    <ClInclude Include="Interfaces\GL_Vertex.h" />
     <ClInclude Include="Interfaces\iConstraint.h" />
     <ClInclude Include="Interfaces\eBodyType.h" />
     <ClInclude Include="Interfaces\iCilinderShape.h" />

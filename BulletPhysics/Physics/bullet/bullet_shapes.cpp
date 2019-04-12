@@ -167,4 +167,28 @@ namespace nPhysics
 	{
 	}
 
+
+
+	cBulletMeshCollider::cBulletMeshCollider(const GL_Triangle * triangles, size_t numOfTriangles)
+	{
+		btTriangleMesh* triangleMesh = new btTriangleMesh();
+		for (int i = 0; i < numOfTriangles; i++)
+		{
+			GL_Triangle curTri = triangles[i];
+			btVector3 vertex1(curTri.vertex1[0], curTri.vertex1[1], curTri.vertex1[2]);
+			btVector3 vertex2(curTri.vertex2[0], curTri.vertex2[1], curTri.vertex2[2]);
+			btVector3 vertex3(curTri.vertex3[0], curTri.vertex3[1], curTri.vertex3[2]);
+
+			triangleMesh->addTriangle(vertex1, vertex2, vertex3);
+
+		}
+
+		this->mBulletShape =  new btBvhTriangleMeshShape(triangleMesh, true);
+		
+	}
+
+	cBulletMeshCollider::~cBulletMeshCollider()
+	{
+	}
+
 }

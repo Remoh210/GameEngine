@@ -70,4 +70,18 @@ namespace nPhysics
 		iBoxShape(const iBoxShape& other) : iShape(other) {}
 		iBoxShape& operator=(const iBoxShape& other) { return *this; }
 	};
+
+
+
+	class iMeshCollider : public iShape
+	{
+	public:
+		virtual ~iMeshCollider() {}
+
+
+	protected:
+		iMeshCollider() : iShape(SHAPE_TYPE_MESH) {}
+		iMeshCollider(const iMeshCollider& other) : iShape(other) {}
+		iMeshCollider& operator=(const iMeshCollider& other) { return *this; }
+	};
 }

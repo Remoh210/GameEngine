@@ -11,6 +11,7 @@ namespace nPhysics
 	{
 		sRigidBodyDef() 
 			: Mass(0.0f) 
+			, Scale(1.0f, 1.0f, 1.0f)
 			, Position(0.0f, 0.0f, 0.0f)
 			, Velocity(0.0f, 0.0f, 0.0f)
 			, Orientation(0.0f, 0.0f, 0.0f)
@@ -23,6 +24,7 @@ namespace nPhysics
 		float Mass;
 		glm::vec3 Position;
 		glm::vec3 Velocity;
+		glm::vec3 Scale;
 		bool isPlayer;
 		std::string GameObjectName;
 		glm::vec3 Orientation; //Euler Angles

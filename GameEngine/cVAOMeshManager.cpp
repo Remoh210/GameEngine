@@ -80,6 +80,7 @@ bool cVAOMeshManager::LoadModelIntoVAO(
 		this->m_AppendTextToLastError("Model ", false);
 		this->m_AppendTextToLastError(drawInfo.meshFileName, false);
 		this->m_AppendTextToLastError(" was already loaded.");
+		drawInfo = (*itModel).second;
 		return false;
 	}
 

@@ -140,6 +140,139 @@
           }
       },
       {
+        "Name": "walls",
+        "Mesh": "walls.ply",
+        "Visible": true,
+        "Use_Physics": true,
+        "Wireframe": false,
+        "Position": [
+            0.0,
+            50.0,
+            30.0
+        ],
+        "DiffuseRGB_Alpha": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+        ],
+        "SpecularRGB_Alpha": [
+            1.0,
+            1.0,
+            1.0,
+            100.0
+        ],
+        "Rotation": [
+            0.0,
+            0.0,
+            0.0
+        ],
+        "Scale": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "Textures": [
+            {
+                "Name": "wallTex.bmp",
+                "Strength": 1.0,
+                "Tile" : 20
+            }
+        ],
+        "RigidBody": {
+            "Type": "MESH_COLLIDER",
+            "Mass": 0.0
+        }
+    },
+    {
+        "Name": "doorFrame",
+        "Mesh": "door/doorFrame.ply",
+        "Visible": true,
+        "Use_Physics": true,
+        "Wireframe": false,
+        "Position": [
+            0.0,
+            10.0,
+            0.0
+        ],
+        "DiffuseRGB_Alpha": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+        ],
+        "SpecularRGB_Alpha": [
+            1.0,
+            1.0,
+            1.0,
+            100.0
+        ],
+        "Rotation": [
+            0.0,
+            0.0,
+            0.0
+        ],
+        "Scale": [
+            1.0,
+            1.0,
+            1.0
+        ],
+        "Textures": [
+            {
+                "Name": "door/stoneTex.bmp",
+                "Strength": 1.0
+            }
+        ],
+        "RigidBody": {
+            "Type": "MESH_COLLIDER",
+            "Mass": 0.0
+        }
+    },
+    {
+        "Name": "door",
+        "Mesh": "door/door.ply",
+        "Visible": true,
+        "Use_Physics": true,
+        "Wireframe": false,
+        "Position": [
+            0.0,
+            10.0,
+            0.0
+        ],
+        "DiffuseRGB_Alpha": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+        ],
+        "SpecularRGB_Alpha": [
+            1.0,
+            1.0,
+            1.0,
+            100.0
+        ],
+        "Rotation": [
+            0.0,
+            0.0,
+            0.0
+        ],
+        "Scale": [
+            1.0,
+            1.0,
+            1.0
+        ],
+        "Textures": [
+            {
+                "Name": "door/doorTex.bmp",
+                "Strength": 1.0
+            }
+        ],
+        "RigidBody": {
+            "Type": "MESH_COLLIDER",
+            "Mass": 0.0
+        }
+    },
+      {
         "Name": "moon",
         "Mesh": "earth.ply",
         "Visible": true,
