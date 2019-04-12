@@ -325,8 +325,6 @@ int main(void) {
     }
   }
   cGameObject *player = g_pCharacterManager->getActiveChar();
-  cGameObject *portal = findObjectByFriendlyName("portal");
-  cGameObject *portal2 = findObjectByFriendlyName("portal2");
   camera.setThirdPerson(player);
 #pragma endregion
   using namespace PostEffect;
@@ -351,11 +349,11 @@ int main(void) {
 
   // Draw the "scene" (run the program)
   while (!glfwWindowShouldClose(window)) {
-
+	  ::pTheShaderManager->useShaderProgram("BasicUberShader");
 #pragma region framebuffer for portal 1
 
       // Switch to the shader we want
-      ::pTheShaderManager->useShaderProgram("BasicUberShader");
+      
 
       // First Portal
       float ratio;
@@ -363,98 +361,9 @@ int main(void) {
       width = 600;
       height = 800;
 
-      glBindFramebuffer(
-          GL_FRAMEBUFFER,
-          FBO_Portal1->ID); // Points to the "regular" frame buffer
-      FBO_Portal1->clearBuffers(true, true);
-
-      // Get the size of the actual (screen) frame buffer
-      //		glfwGetFramebufferSize(window, &width, &height);
-      ratio = width / (float)height;
-      glViewport(0, 0, width, height);
-
-      glEnable(GL_DEPTH);      // Enables the KEEPING of the depth information
-      glEnable(GL_DEPTH_TEST); // When drawing, checked the existing depth
-      glEnable(GL_CULL_FACE);  // Discared "back facing" triangles
-
-      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-      glm::vec3 portal2CamEye = portal2->position;
-      portal2CamEye.y = portal2->position.y;
-
-      glm::mat4 portal1View =
-          portal_view(camera.GetViewMatrix(), portal, portal2);
 
 
-      matProjection = glm::perspective(1.0f,      // FOV
-                                       ratio,     // Aspect ratio
-                                       0.1f,      // Near clipping plane
-                                       10000.0f); // Far clipping plane
 
-      glUniform3f(eyeLocation_location, camera.Position.x, camera.Position.y,
-                  camera.Position.z);
-
-      glUniformMatrix4fv(matView_location, 1, GL_FALSE,
-                         glm::value_ptr(portal1View));
-      glUniformMatrix4fv(matProj_location, 1, GL_FALSE,
-                         glm::value_ptr(matProjection));
-
-      glm::mat4 matModel = glm::mat4(1.0f); // identity
-      DrawScene_Simple(vec_pObjectsToDraw, program, 1, FBO_Portal1);
-
-#pragma endregion
-#pragma region framebuffer fpr portal 2
-
-      glm::mat4x4 matProjection = glm::mat4(1.0f);
-      glm::mat4x4 matView = glm::mat4(1.0f);
-
-      // Second Portal
-      width = 600;
-      height = 800;
-      matProjection = glm::mat4(1.0f);
-      matView = glm::mat4(1.0f);
-
-      glBindFramebuffer(
-          GL_FRAMEBUFFER,
-          FBO_Portal2->ID); // Points to the "regular" frame buffer
-      FBO_Portal2->clearBuffers(true, true);
-      // Get the size of the actual (screen) frame buffer
-      //		glfwGetFramebufferSize(window, &width, &height);
-      ratio = width / (float)height;
-      glViewport(0, 0, width, height);
-
-      glEnable(GL_DEPTH);      // Enables the KEEPING of the depth information
-      glEnable(GL_DEPTH_TEST); // When drawing, checked the existing depth
-      glEnable(GL_CULL_FACE);  // Discared "back facing" triangles
-
-      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-      glm::vec3 portal1CamEye = portal->position;
-      portal1CamEye.y = portal->position.y - 10.0f;
-      matView = glm::lookAt(portal1CamEye, portal->getForward() * 2.0f,
-                            glm::vec3(0.0f, 1.0f, 0.0f));
-
-      // Mirror Test
-
-      matProjection = glm::perspective(0.8f,      // FOV
-                                       ratio,     // Aspect ratio
-                                       0.1f,      // Near clipping plane
-                                       10000.0f); // Far clipping plane
-
-      glUniform3f(eyeLocation_location, portal1CamEye.x, portal1CamEye.y,
-                  portal1CamEye.z);
-
-      glUniformMatrix4fv(matView_location, 1, GL_FALSE,
-                         glm::value_ptr(matView));
-      glUniformMatrix4fv(matProj_location, 1, GL_FALSE,
-                         glm::value_ptr(matProjection));
-
-      matModel = glm::mat4(1.0f); // identity
-
-      DrawScene_Simple(vec_pObjectsToDraw, program, 1, FBO_Portal2);
-      glBindFramebuffer(GL_FRAMEBUFFER, g_FBO); // Point output to FBO
-
-#pragma endregion
      
 #pragma region main render
 	  
@@ -512,15 +421,15 @@ int main(void) {
                            glm::value_ptr(matProjection));
         LightManager->CopyLightValuesToShader();
 
-        glUniform1f(renderPassNumber_UniLoc, 2.0f);
-        portal->bIsVisible = true;
-        portal2->bIsVisible = true;
-        matModel = glm::mat4(1.0f); // identity
-        DrawObject(portal, matModel, program, FBO_Portal1);
-        matModel = glm::mat4(1.0f); // identity
-        DrawObject(portal2, matModel, program, FBO_Portal2);
-        portal->bIsVisible = false;
-        portal2->bIsVisible = false;
+        //glUniform1f(renderPassNumber_UniLoc, 2.0f);
+        //portal->bIsVisible = true;
+        //portal2->bIsVisible = true;
+        //matModel = glm::mat4(1.0f); // identity
+        //DrawObject(portal, matModel, program, FBO_Portal1);
+        //matModel = glm::mat4(1.0f); // identity
+        //DrawObject(portal2, matModel, program, FBO_Portal2);
+        //portal->bIsVisible = false;
+       // portal2->bIsVisible = false;
         glUniform1f(renderPassNumber_UniLoc, 1.0f);
         DrawScene_Simple(vec_pObjectsToDraw, program, 1);
         
@@ -687,8 +596,8 @@ int main(void) {
       cGameObject *curMesh = vec_pObjectsToDraw[i];
 
       if (curMesh->rigidBody != NULL &&
-          curMesh->rigidBody->GetShape()->GetShapeType() !=
-              nPhysics::SHAPE_TYPE_PLANE) {
+          curMesh->rigidBody->GetMass() !=
+              0.0f) {
 
         if (curMesh->rigidBody->GetShape()->GetShapeType() ==
             nPhysics::SHAPE_TYPE_CAPSULE) {
@@ -707,51 +616,51 @@ int main(void) {
       }
     }
 
-    if (bIsDebugMode) {
-      // Call the debug renderer
-      for (int i = 0; i < vec_pObjectsToDraw.size(); i++) {
-        cGameObject *curObj = vec_pObjectsToDraw[i];
-        // curObj->bIsVisible = false;
-        curObj->bDontLight = true;
-        if (curObj->rigidBody != NULL) {
-          if (curObj->rigidBody->GetShape()->GetShapeType() ==
-              nPhysics::SHAPE_TYPE_SPHERE) {
+    //if (bIsDebugMode) {
+    //  // Call the debug renderer
+    //  for (int i = 0; i < vec_pObjectsToDraw.size(); i++) {
+    //    cGameObject *curObj = vec_pObjectsToDraw[i];
+    //    // curObj->bIsVisible = false;
+    //    curObj->bDontLight = true;
+    //    if (curObj->rigidBody != NULL) {
+    //      if (curObj->rigidBody->GetShape()->GetShapeType() ==
+    //          nPhysics::SHAPE_TYPE_SPHERE) {
 
-            float rad;
-            curObj->rigidBody->GetShape()->GetSphereRadius(rad);
-            g_simpleDubugRenderer->drawCube(curObj->rigidBody->GetPosition(),
-                                            rad);
-          }
+    //        float rad;
+    //        curObj->rigidBody->GetShape()->GetSphereRadius(rad);
+    //        g_simpleDubugRenderer->drawCube(curObj->rigidBody->GetPosition(),
+    //                                        rad);
+    //      }
 
-          // if (curObj->rigidBody->GetShape()->GetShapeType() ==
-          // nPhysics::SHAPE_TYPE_PLANE) {
-          //	//curObj->bIsWireFrame = true;
-          //	//curObj->bIsVisible = true;
-          //	//glm::mat4 matIden = glm::mat4(1.0f);
-          //	//DrawObject(curObj, matIden, program);
-          //}
-        }
-        if (curObj->softBody != NULL) {
+    //      // if (curObj->rigidBody->GetShape()->GetShapeType() ==
+    //      // nPhysics::SHAPE_TYPE_PLANE) {
+    //      //	//curObj->bIsWireFrame = true;
+    //      //	//curObj->bIsVisible = true;
+    //      //	//glm::mat4 matIden = glm::mat4(1.0f);
+    //      //	//DrawObject(curObj, matIden, program);
+    //      //}
+    //    }
+    //    if (curObj->softBody != NULL) {
 
-          glm::vec3 max;
-          glm::vec3 min;
-          glm::vec3 center;
-          curObj->softBody->GetAABB(min, max);
-          center = (min + max) / 2.0f;
-          float size = glm::distance(min, max) / 2.0f;
-          g_simpleDubugRenderer->drawCube(center, size);
-        }
-      }
-    } else {
-      for (int i = 0; i < vec_pObjectsToDraw.size(); i++) {
-        cGameObject *curObj = vec_pObjectsToDraw[i];
-        if (!curObj->bIsDebug) {
-          curObj->bIsVisible = true;
-          curObj->bIsWireFrame = false;
-          curObj->bDontLight = false;
-        }
-      }
-    }
+    //      glm::vec3 max;
+    //      glm::vec3 min;
+    //      glm::vec3 center;
+    //      curObj->softBody->GetAABB(min, max);
+    //      center = (min + max) / 2.0f;
+    //      float size = glm::distance(min, max) / 2.0f;
+    //      g_simpleDubugRenderer->drawCube(center, size);
+    //    }
+    //  }
+    //} else {
+    //  for (int i = 0; i < vec_pObjectsToDraw.size(); i++) {
+    //    cGameObject *curObj = vec_pObjectsToDraw[i];
+    //    if (!curObj->bIsDebug) {
+    //      curObj->bIsVisible = true;
+    //      curObj->bIsWireFrame = false;
+    //      curObj->bDontLight = false;
+    //    }
+    //  }
+    //}
 
 #pragma endregion
 #pragma region whatever

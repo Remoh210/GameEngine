@@ -145,8 +145,8 @@ void key_callback( GLFWwindow* window,
 
 	if (glfwGetKey(window, GLFW_KEY_BACKSPACE))
 	{
-		SwapThePhysics();
-		//::g_pSceneManager->saveScene("output.json");
+		//SwapThePhysics();
+		::g_pSceneManager->saveScene("output.json");
 		//::g_pSceneManager->loadScene("scene1.json");
 		//CreateModels("Models.txt", g_pTheVAOMeshManager, program);
 
@@ -168,20 +168,36 @@ void key_callback( GLFWwindow* window,
 	if (glfwGetKey(window, GLFW_KEY_R))
 	{
 
+		vec_pObjectsToDraw[index]->nonUniformScale *= 1.2;
+
+	}
+	if (glfwGetKey(window, GLFW_KEY_Y))
+	{
+
+		vec_pObjectsToDraw[index]->nonUniformScale /= 1.2;
 
 	}
 	if (key == GLFW_KEY_T && action == GLFW_PRESS)
 	{
-		vec_pSpheres[SphIndex]->vecTextures[0].strength = 1.0f;
-		vec_pSpheres[SphIndex]->vecTextures[1].strength = 0.0f;
-
-		if (SphIndex < (vec_pSpheres.size() - 1)) {
-			SphIndex = SphIndex + 1;
+		if(vec_pObjectsToDraw[index]->vecTextures.size() > 1)
+		{
+			vec_pObjectsToDraw[index]->vecTextures[0].strength = 1.0f;
+			vec_pObjectsToDraw[index]->vecTextures[1].strength = 0.0f;
 		}
-		else { SphIndex = 0; }
-		//vec_pSpheres.at(SphIndex)->vecTextures[0].strength = 0.0f;
-		vec_pSpheres[SphIndex]->vecTextures[0].strength = 0.0f;
-		vec_pSpheres[SphIndex]->vecTextures[1].strength = 1.0f;
+
+
+		if (index < (vec_pObjectsToDraw.size() - 1)) {
+			index = index + 1;
+		}
+		else { index = 0; }
+
+		if (vec_pObjectsToDraw[index]->vecTextures.size() > 1)
+		{
+			//vec_pSpheres.at(SphIndex)->vecTextures[0].strength = 0.0f;
+			vec_pObjectsToDraw[index]->vecTextures[0].strength = 0.0f;
+			vec_pObjectsToDraw[index]->vecTextures[1].strength = 1.0f;
+		}
+
 
 	}
 
@@ -395,7 +411,7 @@ bool AreAllModifiersUp(GLFWwindow* window)
 void ProcessAsynKeys(GLFWwindow* window)
 {
 	const float CAMERA_SPEED_SLOW = 5.0f;
-	const float CAMERA_SPEED_FAST = 10.0f;
+	const float CAMERA_SPEED_FAST = 20.0f;
 
 	cGameObject* ch = g_pCharacterManager->getActiveChar();
 	glm::vec3 vel;
@@ -691,10 +707,10 @@ void ProcessAsynKeys(GLFWwindow* window)
 
 
 	float cameraSpeed = CAMERA_SPEED_SLOW;
-	//if ( glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS  )
-	//{
-	//	cameraSpeed = CAMERA_SPEED_FAST;
-	//}
+	if ( glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS  )
+	{
+		cameraSpeed = CAMERA_SPEED_FAST;
+	}
 	
 	// If no keys are down, move the camera
 	if ( AreAllModifiersUp(window) )
@@ -846,12 +862,13 @@ void ProcessAsynKeys(GLFWwindow* window)
 	//OBJECT CONTROL***********************************************************
 	if ( IsAltDown(window) )
 	{	//Object Postiton
-		if ( glfwGetKey( window, GLFW_KEY_W	) )	{ vec_pObjectsToDraw.at(index)->position.z -= cameraSpeed; }
-		if ( glfwGetKey( window, GLFW_KEY_S ) )	{ vec_pObjectsToDraw.at(index)->position.z += cameraSpeed; }
-		if ( glfwGetKey( window, GLFW_KEY_A ) )	{ vec_pObjectsToDraw.at(index)->position.x -= cameraSpeed; }
-		if ( glfwGetKey( window, GLFW_KEY_D ) ) { vec_pObjectsToDraw.at(index)->position.x += cameraSpeed; }
-		if ( glfwGetKey( window, GLFW_KEY_Q ) )	{ vec_pObjectsToDraw.at(index)->position.y -= cameraSpeed; }
-		if ( glfwGetKey( window, GLFW_KEY_E ) )	{ vec_pObjectsToDraw.at(index)->position.y += cameraSpeed; }
+
+		if ( glfwGetKey( window, GLFW_KEY_W	) )	{ vec_pObjectsToDraw.at(index)->position.z -= cameraSpeed * deltaTime; }
+		if ( glfwGetKey( window, GLFW_KEY_S ) )	{ vec_pObjectsToDraw.at(index)->position.z += cameraSpeed * deltaTime; }
+		if ( glfwGetKey( window, GLFW_KEY_A ) )	{ vec_pObjectsToDraw.at(index)->position.x -= cameraSpeed * deltaTime; }
+		if ( glfwGetKey( window, GLFW_KEY_D ) ) { vec_pObjectsToDraw.at(index)->position.x += cameraSpeed * deltaTime; }
+		if ( glfwGetKey( window, GLFW_KEY_Q ) )	{ vec_pObjectsToDraw.at(index)->position.y -= cameraSpeed * deltaTime; }
+		if ( glfwGetKey( window, GLFW_KEY_E ) )	{ vec_pObjectsToDraw.at(index)->position.y += cameraSpeed * deltaTime; }
 
 		////Object Rotation
 		if (glfwGetKey(window, GLFW_KEY_RIGHT)) { vec_pObjectsToDraw.at(index)->adjMeshOrientationEulerAngles(0.0f, 0.1f, 0.0f, false); }
@@ -861,8 +878,8 @@ void ProcessAsynKeys(GLFWwindow* window)
 		//if ( glfwGetKey( window, GLFW_KEY_X ) )		{ vec_pObjectsToDraw.at(index)->postRotation.z += 0.1f; }
 		//if ( glfwGetKey( window, GLFW_KEY_C ) )		{ vec_pObjectsToDraw.at(index)->postRotation.z -= 0.1f; }
 
-		if (glfwGetKey(window, GLFW_KEY_V)) { vec_pObjectsToDraw.at(index)->nonUniformScale += 0.2f; }
-		if (glfwGetKey(window, GLFW_KEY_B)) { vec_pObjectsToDraw.at(index)->nonUniformScale -= 0.2f; }
+		if (glfwGetKey(window, GLFW_KEY_V)) { vec_pObjectsToDraw.at(index)->nonUniformScale += 1.2f * deltaTime; }
+		if (glfwGetKey(window, GLFW_KEY_B)) { vec_pObjectsToDraw.at(index)->nonUniformScale -= 1.2f * deltaTime; }
 
 
 

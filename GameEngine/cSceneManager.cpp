@@ -96,7 +96,28 @@ bool cSceneManager::saveScene(std::string filename) {
 			}
 
 			ObjValue.AddMember("Name", FriendlyName, allocator);
-			ObjValue.AddMember("Mesh", MeshName, allocator);
+
+			if(CurModel->pSimpleSkinnedMesh == NULL)
+			{
+				ObjValue.AddMember("Mesh", MeshName, allocator);
+			}
+			else
+			{
+				rapidjson::Value SkinnedMesh(CurModel->meshName.c_str(), allocator);
+				ObjValue.AddMember("SkinnedMesh", MeshName, allocator);
+
+				rapidjson::Value AnimObj(rapidjson::kObjectType);
+				for (std::map<std::string, sAnimationInfo>::iterator it = CurModel->pSimpleSkinnedMesh->mapAnimationFriendlyNameTo_pScene.begin();
+					it != CurModel->pSimpleSkinnedMesh->mapAnimationFriendlyNameTo_pScene.end(); ++it)
+				{
+					it->first;
+					rapidjson::Value key(it->first.c_str(), allocator);
+					rapidjson::Value val(it->second.fileName.c_str(), allocator);
+					AnimObj.AddMember(key, val, allocator);
+				}
+				ObjValue.AddMember("Animation", AnimObj, allocator);
+			}
+
 			ObjValue.AddMember("Visible", Visible, allocator);
 			ObjValue.AddMember("Use_Physics", UsePhysics, allocator);
 			ObjValue.AddMember("Wireframe", WireFrame, allocator);
@@ -155,9 +176,47 @@ bool cSceneManager::saveScene(std::string filename) {
 						}
 						PhysObjValue.AddMember("Normal", NormalArray, allocator);
 					}
+						break;
+					case nPhysics::SHAPE_TYPE_BOX:
+					{
+
+						PhysObjValue.AddMember("Type", "BOX", allocator);
+
+					}
+						break;
+					case nPhysics::SHAPE_TYPE_CAPSULE:
+					{
+
+						PhysObjValue.AddMember("Type", "CAPSULE", allocator);
+
+
+						int Axis = CurModel->rigidBody->GetShape()->GetCapsuleAxis();
+						float heigth = CurModel->rigidBody->GetShape()->GetCapsuleHeight();
+						float radius = CurModel->rigidBody->GetShape()->GetCapsuleRadius();
+						PhysObjValue.AddMember("Axis", Axis, allocator);
+						PhysObjValue.AddMember("Radius", radius, allocator);
+						PhysObjValue.AddMember("Height", heigth, allocator);
+
+						if (CurModel->bIsPlayer == true)
+						{
+							PhysObjValue.AddMember("IsPlayer", true, allocator);
+						}
+
+
+
+					}
+						break;
+					case nPhysics::SHAPE_TYPE_MESH:
+					{
+
+						PhysObjValue.AddMember("Type", "MESH_COLLIDER", allocator);
+
+					}
+						break;
 					default:
 						break;
 					}
+
 
 
 					PhysObjValue.AddMember("Mass", CurModel->rigidBody->GetMass(), allocator);
@@ -878,14 +937,21 @@ bool cSceneManager::loadScene(std::string filename) {
 				def.Mass = GameObject[i]["RigidBody"]["Mass"].GetFloat();
 				def.GameObjectName = CurModel->friendlyName;
 
-				//const rapidjson::Value& ExtentsArray = GameObject[i]["RigidBody"]["HalfExtents"];
-				//glm::vec3 hE;
-				//for (int i = 0; i < 3; i++)
-				//{
-				//	hE[i] = ExtentsArray[i].GetFloat();
-				//}
-				glm::vec3 halfExtents(curModelInfo.maxX * CurModel->nonUniformScale.x, curModelInfo.maxY * CurModel->nonUniformScale.y, 
-					curModelInfo.maxZ * CurModel->nonUniformScale.z);
+				glm::vec3 halfExtents;
+				if (GameObject[i]["RigidBody"].HasMember("HalfExtents"))
+				{
+					const rapidjson::Value& ExtentsArray = GameObject[i]["RigidBody"]["HalfExtents"];
+					for (int i = 0; i < 3; i++)
+					{
+						halfExtents[i] = ExtentsArray[i].GetFloat();
+					}
+				}
+				else
+				{
+					halfExtents = glm::vec3(curModelInfo.maxX * CurModel->nonUniformScale.x, curModelInfo.maxY * CurModel->nonUniformScale.y,
+						curModelInfo.maxZ * CurModel->nonUniformScale.z);
+
+				}
 				CurShape = gPhysicsFactory->CreateBoxShape(halfExtents);
 
 				nPhysics::iRigidBody* rigidBody = gPhysicsFactory->CreateRigidBody(def, CurShape);
@@ -905,16 +971,23 @@ bool cSceneManager::loadScene(std::string filename) {
 				def.Mass = GameObject[i]["RigidBody"]["Mass"].GetFloat();
 				def.GameObjectName = CurModel->friendlyName;
 				
-				
+				glm::vec3 halfExtents;
+				if (GameObject[i]["RigidBody"].HasMember("HalfExtents"))
+				{
+					const rapidjson::Value& ExtentsArray = GameObject[i]["RigidBody"]["HalfExtents"];
+					for (int i = 0; i < 3; i++)
+					{
+						halfExtents[i] = ExtentsArray[i].GetFloat();
+					}
+				}
+				else
+				{
+					halfExtents = glm::vec3(curModelInfo.maxX * CurModel->nonUniformScale.x, curModelInfo.maxY * CurModel->nonUniformScale.y,
+						curModelInfo.maxZ * CurModel->nonUniformScale.z);
 
-				//const rapidjson::Value& ExtentsArray = GameObject[i]["RigidBody"]["HalfExtents"];
-				//glm::vec3 hE;
-				//for (int i = 0; i < 3; i++)
-				//{
-				//	hE[i] = ExtentsArray[i].GetFloat();
-				//}
-				glm::vec3 halfExtents(curModelInfo.maxX * CurModel->nonUniformScale.x, curModelInfo.maxY * CurModel->nonUniformScale.y,
-					curModelInfo.maxZ * CurModel->nonUniformScale.z);
+				}
+
+
 
 				const rapidjson::Value& pivotAray = GameObject[i]["RigidBody"]["Pivot"];
 				glm::vec3 pivot;
