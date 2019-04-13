@@ -159,6 +159,7 @@ namespace nPhysics
 	}
 
 	cBulletBoxShape::cBulletBoxShape(const glm::vec3 & halfExtents)
+		:mHalfExtents(halfExtents)
 	{
 		this->mBulletShape = new btBoxShape(nConvert::ToBullet(halfExtents));
 	}

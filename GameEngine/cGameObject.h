@@ -112,7 +112,7 @@ public:
 	bool bIsPlayer;
 	bool bReflection;
 	bool bRefraction;
-
+	bool bExtentsFromMesh;
 	bool bSave;
 
 	// ignore this for now...

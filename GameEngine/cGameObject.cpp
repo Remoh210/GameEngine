@@ -15,6 +15,7 @@ cGameObject::cGameObject()
 	this->pAnimController = new cAnimationController(this);
 	this->bHadCollision = false;
 	this->bIsPlayer = false;
+	this->bExtentsFromMesh = true;
 	
 	// Set unique ID
 	this->m_uniqueID = cGameObject::m_NextID;

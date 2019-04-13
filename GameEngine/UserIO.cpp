@@ -151,18 +151,18 @@ void key_callback( GLFWwindow* window,
 		//CreateModels("Models.txt", g_pTheVAOMeshManager, program);
 
 	}
-	if (glfwGetKey(window, GLFW_KEY_UP))
-	{
-		g_Gravity.y += 5.0f;
-		gPhysicsWorld->SetGravity(g_Gravity);
+	//if (glfwGetKey(window, GLFW_KEY_UP))
+	//{
+	//	g_Gravity.y += 5.0f;
+	//	gPhysicsWorld->SetGravity(g_Gravity);
 
-	}
-	if (glfwGetKey(window, GLFW_KEY_DOWN))
-	{
-		g_Gravity.y -= 5.0f;
-		gPhysicsWorld->SetGravity(g_Gravity);
+	//}
+	//if (glfwGetKey(window, GLFW_KEY_DOWN))
+	//{
+	//	g_Gravity.y -= 5.0f;
+	//	gPhysicsWorld->SetGravity(g_Gravity);
 
-	}
+	//}
 
 
 	if (glfwGetKey(window, GLFW_KEY_R))
@@ -871,12 +871,12 @@ void ProcessAsynKeys(GLFWwindow* window)
 		if ( glfwGetKey( window, GLFW_KEY_E ) )	{ vec_controlable.at(index)->position.y += cameraSpeed * deltaTime; }
 
 		////Object Rotation
-		if (glfwGetKey(window, GLFW_KEY_RIGHT)) { vec_controlable.at(index)->adjMeshOrientationEulerAngles(0.0f, 1.1f * deltaTime, 0.0f, false); }
-		if (glfwGetKey(window, GLFW_KEY_LEFT)) { vec_controlable.at(index)->adjMeshOrientationEulerAngles(0.0f, -1.1f * deltaTime, 0.0f, false);}
-		//if ( glfwGetKey( window, GLFW_KEY_UP ) )	{ vec_pObjectsToDraw.at(index)->postRotation.x += 0.1f; }
-		//if ( glfwGetKey( window, GLFW_KEY_DOWN ) )	{ vec_pObjectsToDraw.at(index)->postRotation.x -= 0.1f; }
-		//if ( glfwGetKey( window, GLFW_KEY_X ) )		{ vec_pObjectsToDraw.at(index)->postRotation.z += 0.1f; }
-		//if ( glfwGetKey( window, GLFW_KEY_C ) )		{ vec_pObjectsToDraw.at(index)->postRotation.z -= 0.1f; }
+		if (glfwGetKey(window, GLFW_KEY_RIGHT))		{ vec_controlable.at(index)->adjMeshOrientationEulerAngles(0.0f, 1.0f * deltaTime, 0.0f, false); }
+		if (glfwGetKey(window, GLFW_KEY_LEFT))		{ vec_controlable.at(index)->adjMeshOrientationEulerAngles(0.0f, -1.0f * deltaTime, 0.0f, false);}
+		if ( glfwGetKey( window, GLFW_KEY_UP ) )	{ vec_controlable.at(index)->adjMeshOrientationEulerAngles(0.0f, 0.0f, 1.0f * deltaTime, false); }
+		if (glfwGetKey(window, GLFW_KEY_DOWN))		{ vec_controlable.at(index)->adjMeshOrientationEulerAngles(0.0f, 0.0f, -1.0f * deltaTime, false); }
+		if ( glfwGetKey( window, GLFW_KEY_X ) )		{ vec_controlable.at(index)->adjMeshOrientationEulerAngles(1.0f * deltaTime, 0.0f, 0.0f, false); }
+		if (glfwGetKey(window, GLFW_KEY_C))			{ vec_controlable.at(index)->adjMeshOrientationEulerAngles(-1.0f * deltaTime, 0.0f, 0.0f, false); }
 
 		if (glfwGetKey(window, GLFW_KEY_V)) { vec_controlable.at(index)->nonUniformScale += 1.2f * deltaTime; }
 		if (glfwGetKey(window, GLFW_KEY_B)) { vec_controlable.at(index)->nonUniformScale -= 1.2f * deltaTime; }

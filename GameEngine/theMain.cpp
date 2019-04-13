@@ -340,10 +340,12 @@ int main(void) {
 
 
 
-  for (int i = 0; i < vec_pObjectsToDraw.size(); i++) {
-	  if (vec_pObjectsToDraw[i]->meshName != "wall/brick_wall.ply");
+  for (int i = 0; i < vec_pObjectsToDraw.size(); i++) 
+  {
+	  cGameObject* go = vec_pObjectsToDraw[i];
+	  if (go->bSave)
 	  {
-		  vec_controlable.push_back(vec_pObjectsToDraw[i]);
+		  vec_controlable.push_back(go);
 	  }
 	  
   }
@@ -604,7 +606,7 @@ int main(void) {
             nPhysics::SHAPE_TYPE_CAPSULE) {
           float Totalheight;
           Totalheight =
-              curMesh->rigidBody->GetShape()->GetCapsuleRadius() * 2 + 2.0f;
+              curMesh->rigidBody->GetShape()->GetCapsuleRadius() + 3.8f;
           curMesh->position = curMesh->rigidBody->GetPosition();
           curMesh->position.y =
               curMesh->rigidBody->GetPosition().y - Totalheight;

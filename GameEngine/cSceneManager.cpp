@@ -182,6 +182,17 @@ bool cSceneManager::saveScene(std::string filename) {
 
 						PhysObjValue.AddMember("Type", "BOX", allocator);
 
+						if (!CurModel->bExtentsFromMesh)
+						{
+							rapidjson::Value halfExtentsArray(rapidjson::kArrayType);
+							glm::vec3 halfExtents = CurModel->rigidBody->GetShape()->GetHalfExtents();
+							for (int i = 0; i < 3; i++) {
+								rapidjson::Value temp(halfExtents[i]);
+								halfExtentsArray.PushBack(temp, allocator);
+							}
+							PhysObjValue.AddMember("HalfExtents", halfExtentsArray, allocator);
+						}
+
 					}
 						break;
 					case nPhysics::SHAPE_TYPE_CAPSULE:
@@ -875,16 +886,32 @@ bool cSceneManager::loadScene(std::string filename) {
 				def.Position = CurModel->position;
 				def.Mass = GameObject[i]["RigidBody"]["Mass"].GetFloat();
 				def.GameObjectName = CurModel->friendlyName;
+				def.quatOrientation = CurModel->m_meshQOrientation;
 
-				const rapidjson::Value& ExtentsArray = GameObject[i]["RigidBody"]["HalfExtents"];
-				glm::vec3 hE;
-				for (int i = 0; i < 3; i++)
+				glm::vec3 halfExtents;
+				if (GameObject[i]["RigidBody"].HasMember("HalfExtents"))
 				{
-					hE[i] = ExtentsArray[i].GetFloat();
+					CurModel->bExtentsFromMesh = false;
+					const rapidjson::Value& ExtentsArray = GameObject[i]["RigidBody"]["HalfExtents"];
+					for (int i = 0; i < 3; i++)
+					{
+						halfExtents[i] = ExtentsArray[i].GetFloat();
+					}
+					halfExtents.x * CurModel->nonUniformScale.x;
+					halfExtents.y * CurModel->nonUniformScale.y;
+					halfExtents.z * CurModel->nonUniformScale.z;
 				}
+				else
+				{
+					halfExtents = glm::vec3(curModelInfo.maxX * CurModel->nonUniformScale.x, curModelInfo.maxY * CurModel->nonUniformScale.y,
+						curModelInfo.maxZ * CurModel->nonUniformScale.z);
+
+				}
+				CurShape = gPhysicsFactory->CreateBoxShape(halfExtents);
+
 				int axis = GameObject[i]["RigidBody"]["Axis"].GetInt();
 
-				CurShape = gPhysicsFactory->CreateCylinderShape(hE, axis);
+				CurShape = gPhysicsFactory->CreateCylinderShape(halfExtents, axis);
 
 				nPhysics::iRigidBody* rigidBody = gPhysicsFactory->CreateRigidBody(def, CurShape);
 				CurModel->rigidBody = rigidBody;
@@ -896,7 +923,7 @@ bool cSceneManager::loadScene(std::string filename) {
 			{
 				nPhysics::iShape* CurShape = NULL;
 				nPhysics::sRigidBodyDef def;
-
+				def.quatOrientation = CurModel->m_meshQOrientation;
 				//in Radians
 				def.Position = CurModel->position;
 				def.Mass = GameObject[i]["RigidBody"]["Mass"].GetFloat();
@@ -936,15 +963,20 @@ bool cSceneManager::loadScene(std::string filename) {
 				def.Position = CurModel->position;
 				def.Mass = GameObject[i]["RigidBody"]["Mass"].GetFloat();
 				def.GameObjectName = CurModel->friendlyName;
+				def.quatOrientation = CurModel->m_meshQOrientation;
 
 				glm::vec3 halfExtents;
 				if (GameObject[i]["RigidBody"].HasMember("HalfExtents"))
 				{
+					CurModel->bExtentsFromMesh = false;
 					const rapidjson::Value& ExtentsArray = GameObject[i]["RigidBody"]["HalfExtents"];
 					for (int i = 0; i < 3; i++)
 					{
 						halfExtents[i] = ExtentsArray[i].GetFloat();
 					}
+					halfExtents.x * CurModel->nonUniformScale.x;
+					halfExtents.y * CurModel->nonUniformScale.y;
+					halfExtents.z * CurModel->nonUniformScale.z;
 				}
 				else
 				{
