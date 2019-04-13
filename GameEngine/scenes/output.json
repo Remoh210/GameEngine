@@ -2,9 +2,9 @@
     "Camera": {
         "Speed": 500.0,
         "Position": [
-            870.4609375,
-            7.719274520874023,
-            333.126953125
+            36.73337936401367,
+            15.89996337890625,
+            191.24850463867188
         ]
     },
     "GameObjects": [
@@ -157,15 +157,15 @@
             ]
         },
         {
-            "Name": "door",
-            "Mesh": "door/door.ply",
+            "Name": "lake",
+            "Mesh": "env_objects/lake.ply",
             "Visible": true,
             "Use_Physics": true,
             "Wireframe": false,
             "Position": [
-                9.298027038574219,
-                11.690866470336914,
-                46.62093734741211
+                -522.7196044921875,
+                47.88542938232422,
+                613.6705932617188
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -180,9 +180,54 @@
                 100.0
             ],
             "Rotation": [
-                0.000037807836633874106,
-                0.09298508614301682,
-                0.000013203638445702382
+                0.00004570435339701362,
+                -0.1597217619419098,
+                -0.0000211660753848264
+            ],
+            "Scale": [
+                56.7680778503418,
+                56.7680778503418,
+                56.7680778503418
+            ],
+            "Textures": [
+                {
+                    "Name": "grass.bmp",
+                    "Strength": 1.0,
+                    "Tile": 10.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "MESH_COLLIDER",
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "door",
+            "Mesh": "door/door.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                14.877734184265137,
+                11.690916061401368,
+                48.646095275878909
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                -0.0032572501804679634,
+                9.461339950561524,
+                -0.000006931012649147306
             ],
             "Scale": [
                 1.100000023841858,
@@ -231,7 +276,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.7401676177978517,
+                -3.7401669025421144,
                 0.0
             ],
             "Scale": [
@@ -281,7 +326,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.7401676177978517,
+                -3.7401669025421144,
                 0.0
             ],
             "Scale": [
@@ -331,7 +376,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.7401676177978517,
+                -3.7401669025421144,
                 0.0
             ],
             "Scale": [
@@ -381,7 +426,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.7401676177978517,
+                -3.7401669025421144,
                 0.0
             ],
             "Scale": [
@@ -431,7 +476,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.7401676177978517,
+                -3.7401669025421144,
                 0.0
             ],
             "Scale": [
@@ -780,7 +825,7 @@
                 100.0
             ],
             "Rotation": [
-                4.723852157592773,
+                4.7238616943359379,
                 81.111083984375,
                 -171.34976196289063
             ],
@@ -807,65 +852,15 @@
             }
         },
         {
-            "Name": "grave1",
-            "Mesh": "env_objects/grave.ply",
-            "Visible": true,
-            "Use_Physics": true,
-            "Wireframe": false,
-            "Position": [
-                867.3106079101563,
-                3.6503658294677736,
-                258.56927490234377
-            ],
-            "DiffuseRGB_Alpha": [
-                0.0,
-                0.0,
-                0.0,
-                1.0
-            ],
-            "SpecularRGB_Alpha": [
-                1.0,
-                1.0,
-                1.0,
-                100.0
-            ],
-            "Rotation": [
-                -4.7101423206186158e-8,
-                3.4153943061828615,
-                -2.5855706464739116e-9
-            ],
-            "Scale": [
-                0.14924466609954835,
-                0.14924466609954835,
-                0.14924466609954835
-            ],
-            "Textures": [
-                {
-                    "Name": "env_objects/graveTex.bmp",
-                    "Strength": 0.0,
-                    "Tile": 1.0
-                },
-                {
-                    "Name": "testTex.bmp",
-                    "Strength": 1.0,
-                    "Tile": 1.0
-                }
-            ],
-            "RigidBody": {
-                "Type": "BOX",
-                "Mass": 0.0
-            }
-        },
-        {
             "Name": "log1",
             "Mesh": "env_objects/log.ply",
             "Visible": true,
             "Use_Physics": true,
             "Wireframe": false,
             "Position": [
-                265.5542907714844,
+                265.556884765625,
                 2.15576171875,
-                -562.7379760742188
+                -562.7437744140625
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -880,9 +875,9 @@
                 100.0
             ],
             "Rotation": [
-                -179.9997100830078,
-                86.92400360107422,
-                -179.99984741210938
+                -179.9996795654297,
+                86.79356384277344,
+                -179.9998321533203
             ],
             "Scale": [
                 2.0894219875335695,
@@ -913,9 +908,9 @@
             "Use_Physics": true,
             "Wireframe": false,
             "Position": [
-                65.38923645019531,
-                10.035280227661133,
-                240.7868194580078
+                65.39511108398438,
+                10.035279273986817,
+                240.78683471679688
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -930,9 +925,9 @@
                 100.0
             ],
             "Rotation": [
-                0.00000225302960643603,
-                0.022385895252227784,
-                -0.000008724573490326293
+                8.854111683831434e-7,
+                0.02202546037733555,
+                -0.000007242770152515732
             ],
             "Scale": [
                 10.0,
@@ -1163,9 +1158,9 @@
             "Use_Physics": true,
             "Wireframe": false,
             "Position": [
-                -757.7916870117188,
+                -581.5006713867188,
                 26.63753318786621,
-                -288.9991149902344
+                -274.8621826171875
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -1218,7 +1213,7 @@
             "Use_Physics": true,
             "Wireframe": false,
             "Position": [
-                -293.8949890136719,
+                -419.69580078125,
                 26.63753318786621,
                 -284.0051574707031
             ],
@@ -1273,9 +1268,9 @@
             "Use_Physics": true,
             "Wireframe": false,
             "Position": [
-                -768.9176635742188,
+                -682.281005859375,
                 26.63753318786621,
-                -772.4798583984375
+                -647.39794921875
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -1302,12 +1297,12 @@
             "Textures": [
                 {
                     "Name": "trees/treeTex.bmp",
-                    "Strength": 0.0,
+                    "Strength": 1.0,
                     "Tile": 1.0
                 },
                 {
                     "Name": "testTex.bmp",
-                    "Strength": 1.0,
+                    "Strength": 0.0,
                     "Tile": 1.0
                 }
             ],
@@ -1328,9 +1323,229 @@
             "Use_Physics": true,
             "Wireframe": false,
             "Position": [
-                -294.8155212402344,
+                -381.4125061035156,
                 26.63753318786621,
-                -780.5294799804688
+                -653.2030029296875
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                2.0442986681246112e-7,
+                -0.0008507537422701716,
+                -2.0829597247029597e-7
+            ],
+            "Scale": [
+                10.0,
+                10.0,
+                10.0
+            ],
+            "Textures": [
+                {
+                    "Name": "trees/treeTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "HalfExtents": [
+                    1.5,
+                    10.5,
+                    1.5
+                ],
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "dead_tree5",
+            "Mesh": "trees/dead_tree.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                -737.1143798828125,
+                26.63753318786621,
+                -323.3357849121094
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                2.0442986681246112e-7,
+                -0.0008507537422701716,
+                -2.0829597247029597e-7
+            ],
+            "Scale": [
+                10.0,
+                10.0,
+                10.0
+            ],
+            "Textures": [
+                {
+                    "Name": "trees/treeTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "HalfExtents": [
+                    1.5,
+                    10.5,
+                    1.5
+                ],
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "dead_tree6",
+            "Mesh": "trees/dead_tree.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                -333.914306640625,
+                26.63753318786621,
+                -318.9636535644531
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                2.0442986681246112e-7,
+                -0.0008507537422701716,
+                -2.0829597247029597e-7
+            ],
+            "Scale": [
+                10.0,
+                10.0,
+                10.0
+            ],
+            "Textures": [
+                {
+                    "Name": "trees/treeTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "HalfExtents": [
+                    1.5,
+                    10.5,
+                    1.5
+                ],
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "dead_tree7",
+            "Mesh": "trees/dead_tree.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                -753.9715576171875,
+                26.63753318786621,
+                -756.2545166015625
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                2.0442986681246112e-7,
+                -0.0008507537422701716,
+                -2.0829597247029597e-7
+            ],
+            "Scale": [
+                10.0,
+                10.0,
+                10.0
+            ],
+            "Textures": [
+                {
+                    "Name": "trees/treeTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "HalfExtents": [
+                    1.5,
+                    10.5,
+                    1.5
+                ],
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "dead_tree8",
+            "Mesh": "trees/dead_tree.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                -305.1247253417969,
+                26.63753318786621,
+                -760.6539916992188
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -1383,9 +1598,9 @@
             "Use_Physics": true,
             "Wireframe": false,
             "Position": [
-                -600.3447265625,
+                -532.9486083984375,
                 47.30282211303711,
-                -461.0091857910156
+                -369.368408203125
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -1432,7 +1647,392 @@
             }
         },
         {
-            "Name": "oak_tree1",
+            "Name": "polar_tree2",
+            "Mesh": "trees/polar_tree.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                -730.4286499023438,
+                47.30282211303711,
+                -443.5560607910156
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "Scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "Textures": [
+                {
+                    "Name": "trees/polar_treeTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "HalfExtents": [
+                    10.5,
+                    30.5,
+                    10.5
+                ],
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "polar_tree3",
+            "Mesh": "trees/polar_tree.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                -424.7228698730469,
+                47.30282211303711,
+                -431.8621520996094
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "Scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "Textures": [
+                {
+                    "Name": "trees/polar_treeTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "HalfExtents": [
+                    10.5,
+                    30.5,
+                    10.5
+                ],
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "polar_tree4",
+            "Mesh": "trees/polar_tree.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                -573.6571655273438,
+                47.30282211303711,
+                -589.9628295898438
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "Scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "Textures": [
+                {
+                    "Name": "trees/polar_treeTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "HalfExtents": [
+                    10.5,
+                    30.5,
+                    10.5
+                ],
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "polar_tree5",
+            "Mesh": "trees/polar_tree.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                -450.5745849609375,
+                47.30282211303711,
+                -569.1943359375
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "Scale": [
+                1.2000000476837159,
+                1.2000000476837159,
+                1.2000000476837159
+            ],
+            "Textures": [
+                {
+                    "Name": "trees/polar_treeTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "HalfExtents": [
+                    10.5,
+                    30.5,
+                    10.5
+                ],
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "polar_tree6",
+            "Mesh": "trees/polar_tree.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                -773.6785888671875,
+                47.30282211303711,
+                -563.40185546875
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "Scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "Textures": [
+                {
+                    "Name": "trees/polar_treeTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "HalfExtents": [
+                    10.5,
+                    30.5,
+                    10.5
+                ],
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "polar_tree7",
+            "Mesh": "trees/polar_tree.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                -499.38848876953127,
+                47.30282211303711,
+                -273.6090393066406
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "Scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "Textures": [
+                {
+                    "Name": "trees/polar_treeTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "HalfExtents": [
+                    10.5,
+                    30.5,
+                    10.5
+                ],
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "polar_tree8",
+            "Mesh": "trees/polar_tree.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                -578.6500244140625,
+                47.30282211303711,
+                -484.9468078613281
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "Scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "Textures": [
+                {
+                    "Name": "trees/polar_treeTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "HalfExtents": [
+                    10.5,
+                    30.5,
+                    10.5
+                ],
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "oak_tree0",
             "Mesh": "trees/oak_tree.ply",
             "Visible": true,
             "Use_Physics": true,
@@ -1440,7 +2040,392 @@
             "Position": [
                 -670.8785400390625,
                 29.60320281982422,
-                -364.63873291015627
+                -277.1923828125
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "Scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "Textures": [
+                {
+                    "Name": "trees/oak_treeTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "HalfExtents": [
+                    10.5,
+                    30.5,
+                    10.5
+                ],
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "oak_tree1",
+            "Mesh": "trees/oak_tree.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                -420.3211364746094,
+                29.60320281982422,
+                -358.751220703125
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "Scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "Textures": [
+                {
+                    "Name": "trees/oak_treeTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "HalfExtents": [
+                    10.5,
+                    30.5,
+                    10.5
+                ],
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "oak_tree2",
+            "Mesh": "trees/oak_tree.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                -362.7691345214844,
+                29.60320281982422,
+                -558.7334594726563
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "Scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "Textures": [
+                {
+                    "Name": "trees/oak_treeTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "HalfExtents": [
+                    10.5,
+                    30.5,
+                    10.5
+                ],
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "oak_tree3",
+            "Mesh": "trees/oak_tree.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                -673.3929443359375,
+                29.60320281982422,
+                -537.630859375
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "Scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "Textures": [
+                {
+                    "Name": "trees/oak_treeTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "HalfExtents": [
+                    10.5,
+                    30.5,
+                    10.5
+                ],
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "oak_tree5",
+            "Mesh": "trees/oak_tree.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                -515.5380859375,
+                29.60320281982422,
+                -701.8132934570313
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "Scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "Textures": [
+                {
+                    "Name": "trees/oak_treeTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "HalfExtents": [
+                    10.5,
+                    30.5,
+                    10.5
+                ],
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "oak_tree6",
+            "Mesh": "trees/oak_tree.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                -655.8369140625,
+                29.60320281982422,
+                -720.0733032226563
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "Scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "Textures": [
+                {
+                    "Name": "trees/oak_treeTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "HalfExtents": [
+                    10.5,
+                    30.5,
+                    10.5
+                ],
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "oak_tree7",
+            "Mesh": "trees/oak_tree.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                -366.0755920410156,
+                29.60320281982422,
+                -229.0132598876953
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "Scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "Textures": [
+                {
+                    "Name": "trees/oak_treeTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "HalfExtents": [
+                    10.5,
+                    30.5,
+                    10.5
+                ],
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "oak_tree8",
+            "Mesh": "trees/oak_tree.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                -670.8785400390625,
+                29.60320281982422,
+                -370.4920349121094
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -1493,7 +2478,7 @@
             "Use_Physics": true,
             "Wireframe": false,
             "Position": [
-                381.2693176269531,
+                381.2698669433594,
                 6.917588233947754,
                 -43.37797927856445
             ],
@@ -1510,9 +2495,9 @@
                 100.0
             ],
             "Rotation": [
-                -4.5660465275432218e-7,
-                0.000850767595693469,
-                -1.914054621465766e-7
+                -5.219909553488833e-7,
+                0.0008507251623086631,
+                -2.830977905432519e-7
             ],
             "Scale": [
                 15.086135864257813,
@@ -1557,9 +2542,9 @@
             "Use_Physics": true,
             "Wireframe": false,
             "Position": [
-                848.2931518554688,
-                -0.050002098083496097,
-                300.7506103515625
+                8.757102012634278,
+                -0.05000019073486328,
+                214.97457885742188
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -1574,9 +2559,9 @@
                 100000.0
             ],
             "Rotation": [
-                180.0,
-                -34.399085998535159,
-                -180.0
+                0.0,
+                -49.699440002441409,
+                0.0
             ],
             "Scale": [
                 0.05000000074505806,
@@ -1865,14 +2850,14 @@
             "Name": "MainLight",
             "Type": "POINT_LIGHT",
             "Position": [
-                2226.0,
-                255.0,
+                2406.0,
+                425.0,
                 15.0
             ],
             "Attenuation": [
                 0.0,
-                0.001957775792106986,
-                1.5458526680944829e-9,
+                0.0013739888090640307,
+                4.10160350128308e-9,
                 -431602080.0
             ],
             "DiffuseRGB_Alpha": [
