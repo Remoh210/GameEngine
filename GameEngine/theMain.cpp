@@ -78,7 +78,7 @@ bool collided = false;
 // for collision
 std::vector<cGameObject *> vec_pObjectsToDraw;
 // for physics
-std::vector<cGameObject *> vec_pSpheres;
+std::vector<cGameObject *> vec_controlable;
 unsigned int numberOfObjectsToDraw = 0;
 
 unsigned int SCR_WIDTH = 1000;
@@ -315,15 +315,6 @@ int main(void) {
   GLint renderPassNumber_UniLoc =
       glGetUniformLocation(program, "renderPassNumber");
 
-  // Copy All Spheres to new Vec to manipulate them later
-  for (int i = 0; i < vec_pObjectsToDraw.size(); i++) {
-    if (vec_pObjectsToDraw[i]->rigidBody != NULL) {
-      if (vec_pObjectsToDraw[i]->rigidBody->GetShape()->GetShapeType() !=
-          nPhysics::SHAPE_TYPE_PLANE) {
-        vec_pSpheres.push_back(vec_pObjectsToDraw[i]);
-      }
-    }
-  }
   cGameObject *player = g_pCharacterManager->getActiveChar();
   camera.setThirdPerson(player);
 #pragma endregion
@@ -346,6 +337,16 @@ int main(void) {
   float bloom_strength = 5.f;
   int bloom_blur_iterations = 20;
   float bloom_threshold = 0.65f;
+
+
+
+  for (int i = 0; i < vec_pObjectsToDraw.size(); i++) {
+	  if (vec_pObjectsToDraw[i]->meshName != "wall/brick_wall.ply");
+	  {
+		  vec_controlable.push_back(vec_pObjectsToDraw[i]);
+	  }
+	  
+  }
 
   // Draw the "scene" (run the program)
   while (!glfwWindowShouldClose(window)) {

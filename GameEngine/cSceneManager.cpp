@@ -55,7 +55,7 @@ bool cSceneManager::saveScene(std::string filename) {
 	     myArray.SetArray() */
 	for (std::vector<cGameObject*>::iterator it = vec_pObjectsToDraw.begin(); it != vec_pObjectsToDraw.end(); ++it) {
 		cGameObject* CurModel = *it;
-		if (!CurModel->bIsDebug) {
+		if (!CurModel->bIsDebug && CurModel->bSave) {
 			rapidjson::Value ObjValue(rapidjson::kObjectType);
 			rapidjson::Value FriendlyName(CurModel->friendlyName.c_str(), allocator);
 			rapidjson::Value MeshName(CurModel->meshName.c_str(), allocator);
@@ -690,7 +690,7 @@ bool cSceneManager::loadScene(std::string filename) {
 			{
 				nPhysics::iShape* CurShape = NULL;
 				nPhysics::sRigidBodyDef def;
-				def.Orientation = CurModel->getMeshOrientationEulerAngles();
+				def.quatOrientation = CurModel->m_meshQOrientation;
 				def.Position = CurModel->position;
 				def.GameObjectName = CurModel->friendlyName;
 
@@ -726,7 +726,7 @@ bool cSceneManager::loadScene(std::string filename) {
 			{
 				nPhysics::iShape* CurShape = NULL;
 				nPhysics::sRigidBodyDef def;
-				def.Orientation = CurModel->getMeshOrientationEulerAngles();
+				def.quatOrientation = CurModel->m_meshQOrientation;
 				def.Position = CurModel->position;
 				def.GameObjectName = CurModel->friendlyName;
 
@@ -744,7 +744,7 @@ bool cSceneManager::loadScene(std::string filename) {
 			{
 				nPhysics::iShape* CurShape = NULL;
 				nPhysics::sRigidBodyDef def;
-				def.Orientation = CurModel->getMeshOrientationEulerAngles();
+				def.quatOrientation = CurModel->m_meshQOrientation;
 				def.Position = CurModel->position;
 				def.GameObjectName = CurModel->friendlyName;
 

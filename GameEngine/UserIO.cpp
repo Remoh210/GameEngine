@@ -97,8 +97,8 @@ void key_callback( GLFWwindow* window,
 	//SAVE MODELS
 	if (key == GLFW_KEY_G && action == GLFW_PRESS)
 	{
-		for (int i = 0; i < vec_pSpheres.size(); i++) {
-			vec_pSpheres[i]->rigidBody->SetVelocity(vec_pSpheres[i]->rigidBody->GetVelocity() + glm::vec3(0.0f, 40.0f, 0.0f));
+		for (int i = 0; i < vec_controlable.size(); i++) {
+			vec_controlable[i]->rigidBody->SetVelocity(vec_controlable[i]->rigidBody->GetVelocity() + glm::vec3(0.0f, 40.0f, 0.0f));
 		}
 	}
 
@@ -168,34 +168,34 @@ void key_callback( GLFWwindow* window,
 	if (glfwGetKey(window, GLFW_KEY_R))
 	{
 
-		vec_pObjectsToDraw[index]->nonUniformScale *= 1.2;
+		vec_controlable[index]->nonUniformScale *= 1.2;
 
 	}
 	if (glfwGetKey(window, GLFW_KEY_Y))
 	{
 
-		vec_pObjectsToDraw[index]->nonUniformScale /= 1.2;
+		vec_controlable[index]->nonUniformScale /= 1.2;
 
 	}
 	if (key == GLFW_KEY_T && action == GLFW_PRESS)
 	{
-		if(vec_pObjectsToDraw[index]->vecTextures.size() > 1)
+		if(vec_controlable[index]->vecTextures.size() > 1)
 		{
-			vec_pObjectsToDraw[index]->vecTextures[0].strength = 1.0f;
-			vec_pObjectsToDraw[index]->vecTextures[1].strength = 0.0f;
+			vec_controlable[index]->vecTextures[0].strength = 1.0f;
+			vec_controlable[index]->vecTextures[1].strength = 0.0f;
 		}
 
 
-		if (index < (vec_pObjectsToDraw.size() - 1)) {
+		if (index < (vec_controlable.size() - 1)) {
 			index = index + 1;
 		}
 		else { index = 0; }
 
-		if (vec_pObjectsToDraw[index]->vecTextures.size() > 1)
+		if (vec_controlable[index]->vecTextures.size() > 1)
 		{
 			//vec_pSpheres.at(SphIndex)->vecTextures[0].strength = 0.0f;
-			vec_pObjectsToDraw[index]->vecTextures[0].strength = 0.0f;
-			vec_pObjectsToDraw[index]->vecTextures[1].strength = 1.0f;
+			vec_controlable[index]->vecTextures[0].strength = 0.0f;
+			vec_controlable[index]->vecTextures[1].strength = 1.0f;
 		}
 
 
@@ -253,12 +253,12 @@ void key_callback( GLFWwindow* window,
 	//Chose the model
 	if (key == GLFW_KEY_M && action == GLFW_PRESS)
 	{
-		if (index < (vec_pObjectsToDraw.size() - 1)) {
+		if (index < (vec_controlable.size() - 1)) {
 			
 			index = index + 1;
 		}
 		else { index = 0; }
-		std::cout << "Model " << vec_pObjectsToDraw.at(index)->meshName << " is Chosen" << std::endl;
+		std::cout << "Model " << vec_controlable.at(index)->friendlyName << " is Chosen" << std::endl;
 	}
 
 
@@ -411,7 +411,7 @@ bool AreAllModifiersUp(GLFWwindow* window)
 void ProcessAsynKeys(GLFWwindow* window)
 {
 	const float CAMERA_SPEED_SLOW = 5.0f;
-	const float CAMERA_SPEED_FAST = 20.0f;
+	const float CAMERA_SPEED_FAST = 100.0f;
 
 	cGameObject* ch = g_pCharacterManager->getActiveChar();
 	glm::vec3 vel;
@@ -811,7 +811,7 @@ void ProcessAsynKeys(GLFWwindow* window)
 		if (glfwGetKey(window, GLFW_KEY_2)) { LightManager->vecLights.at(lightIndex)->SetLightType(sLight::SPOT_LIGHT); }//
 
 		//Change Light LookAt
-		if (glfwGetKey(window, GLFW_KEY_R)) { LightManager->vecLights.at(lightIndex)->SetRelativeDirectionByLookAt(vec_pObjectsToDraw.at(index)->position); }
+		if (glfwGetKey(window, GLFW_KEY_R)) { LightManager->vecLights.at(lightIndex)->SetRelativeDirectionByLookAt(vec_controlable.at(index)->position); }
 
 
 
@@ -863,43 +863,43 @@ void ProcessAsynKeys(GLFWwindow* window)
 	if ( IsAltDown(window) )
 	{	//Object Postiton
 
-		if ( glfwGetKey( window, GLFW_KEY_W	) )	{ vec_pObjectsToDraw.at(index)->position.z -= cameraSpeed * deltaTime; }
-		if ( glfwGetKey( window, GLFW_KEY_S ) )	{ vec_pObjectsToDraw.at(index)->position.z += cameraSpeed * deltaTime; }
-		if ( glfwGetKey( window, GLFW_KEY_A ) )	{ vec_pObjectsToDraw.at(index)->position.x -= cameraSpeed * deltaTime; }
-		if ( glfwGetKey( window, GLFW_KEY_D ) ) { vec_pObjectsToDraw.at(index)->position.x += cameraSpeed * deltaTime; }
-		if ( glfwGetKey( window, GLFW_KEY_Q ) )	{ vec_pObjectsToDraw.at(index)->position.y -= cameraSpeed * deltaTime; }
-		if ( glfwGetKey( window, GLFW_KEY_E ) )	{ vec_pObjectsToDraw.at(index)->position.y += cameraSpeed * deltaTime; }
+		if ( glfwGetKey( window, GLFW_KEY_W	) )	{ vec_controlable.at(index)->position.z -= cameraSpeed * deltaTime; }
+		if ( glfwGetKey( window, GLFW_KEY_S ) )	{ vec_controlable.at(index)->position.z += cameraSpeed * deltaTime; }
+		if ( glfwGetKey( window, GLFW_KEY_A ) )	{ vec_controlable.at(index)->position.x -= cameraSpeed * deltaTime; }
+		if ( glfwGetKey( window, GLFW_KEY_D ) ) { vec_controlable.at(index)->position.x += cameraSpeed * deltaTime; }
+		if ( glfwGetKey( window, GLFW_KEY_Q ) )	{ vec_controlable.at(index)->position.y -= cameraSpeed * deltaTime; }
+		if ( glfwGetKey( window, GLFW_KEY_E ) )	{ vec_controlable.at(index)->position.y += cameraSpeed * deltaTime; }
 
 		////Object Rotation
-		if (glfwGetKey(window, GLFW_KEY_RIGHT)) { vec_pObjectsToDraw.at(index)->adjMeshOrientationEulerAngles(0.0f, 0.1f, 0.0f, false); }
-		if (glfwGetKey(window, GLFW_KEY_LEFT)) {vec_pObjectsToDraw.at(index)->adjMeshOrientationEulerAngles(0.0f, -0.1f, 0.0f, false);}
+		if (glfwGetKey(window, GLFW_KEY_RIGHT)) { vec_controlable.at(index)->adjMeshOrientationEulerAngles(0.0f, 1.1f * deltaTime, 0.0f, false); }
+		if (glfwGetKey(window, GLFW_KEY_LEFT)) { vec_controlable.at(index)->adjMeshOrientationEulerAngles(0.0f, -1.1f * deltaTime, 0.0f, false);}
 		//if ( glfwGetKey( window, GLFW_KEY_UP ) )	{ vec_pObjectsToDraw.at(index)->postRotation.x += 0.1f; }
 		//if ( glfwGetKey( window, GLFW_KEY_DOWN ) )	{ vec_pObjectsToDraw.at(index)->postRotation.x -= 0.1f; }
 		//if ( glfwGetKey( window, GLFW_KEY_X ) )		{ vec_pObjectsToDraw.at(index)->postRotation.z += 0.1f; }
 		//if ( glfwGetKey( window, GLFW_KEY_C ) )		{ vec_pObjectsToDraw.at(index)->postRotation.z -= 0.1f; }
 
-		if (glfwGetKey(window, GLFW_KEY_V)) { vec_pObjectsToDraw.at(index)->nonUniformScale += 1.2f * deltaTime; }
-		if (glfwGetKey(window, GLFW_KEY_B)) { vec_pObjectsToDraw.at(index)->nonUniformScale -= 1.2f * deltaTime; }
+		if (glfwGetKey(window, GLFW_KEY_V)) { vec_controlable.at(index)->nonUniformScale += 1.2f * deltaTime; }
+		if (glfwGetKey(window, GLFW_KEY_B)) { vec_controlable.at(index)->nonUniformScale -= 1.2f * deltaTime; }
 
 
 
 		if (glfwGetKey(window, GLFW_KEY_UP))
 		{
-			if (vec_pObjectsToDraw.at(index)->vecTextures.size() > 1)
+			if (vec_controlable.at(index)->vecTextures.size() > 1)
 			{
-				vec_pObjectsToDraw.at(index)->vecTextures.at(1).strength += 0.002f;
-				vec_pObjectsToDraw.at(index)->vecTextures.at(0).strength -= 0.002f;
+				vec_controlable.at(index)->vecTextures.at(1).strength += 0.002f;
+				vec_controlable.at(index)->vecTextures.at(0).strength -= 0.002f;
 			}
 			else { std::cout << vec_pObjectsToDraw.at(index)->friendlyName << " has only one texture" << std::endl; }
 		}
 		if (glfwGetKey(window, GLFW_KEY_DOWN))
 		{
-			if (vec_pObjectsToDraw.at(index)->vecTextures.size() > 1)
+			if (vec_controlable.at(index)->vecTextures.size() > 1)
 			{
-				vec_pObjectsToDraw.at(index)->vecTextures.at(1).strength -= 0.002f;
-				vec_pObjectsToDraw.at(index)->vecTextures.at(0).strength += 0.002f;
+				vec_controlable.at(index)->vecTextures.at(1).strength -= 0.002f;
+				vec_controlable.at(index)->vecTextures.at(0).strength += 0.002f;
 			}
-			else { std::cout << vec_pObjectsToDraw.at(index)->friendlyName << " has only one texture" << std::endl; }
+			else { std::cout << vec_controlable.at(index)->friendlyName << " has only one texture" << std::endl; }
 		}
 
 		
@@ -936,7 +936,7 @@ void ManageScene(GLFWwindow* window)
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 	bMouseInWindow = false;
 	std::cout << "Save or Load? -s for save, -l for load, -c for cancel." << std::endl;
-	std::cout << "-m to move selected object: " << vec_pObjectsToDraw[index]->friendlyName << std::endl;
+	std::cout << "-m to move selected object: " << vec_controlable[index]->friendlyName << std::endl;
 	std::cout << "Enter Answer: " << std::endl;
 	std::cout << "->";
 	std::cin >> Answer;
@@ -951,7 +951,7 @@ void ManageScene(GLFWwindow* window)
 			g_pSceneManager->saveScene("scene2.json");
 		}
 		else if (Answer == "3") {
-			saveModelInfo("Models3.txt", vec_pObjectsToDraw);
+			saveModelInfo("Models3.txt", vec_controlable);
 			saveLightInfo("lights3.txt", LightManager->vecLights);
 			saveCameraInfo("camera3.txt");
 		}
@@ -962,17 +962,17 @@ void ManageScene(GLFWwindow* window)
 		std::cout << "->";
 		std::cin >> Answer;
 		if (Answer == "1") {
-			loadModels("Models.txt", vec_pObjectsToDraw);
+			loadModels("Models.txt", vec_controlable);
 			loadLights("lights.txt", LightManager->vecLights);
 			loadCameraInfo("camera.txt");
 		}
 		else if (Answer == "2") {
-			loadModels("Models2.txt", vec_pObjectsToDraw);
+			loadModels("Models2.txt", vec_controlable);
 			loadLights("lights2.txt", LightManager->vecLights);
 			loadCameraInfo("camera2.txt");
 		}
 		else if (Answer == "3") {
-			loadModels("Models3.txt", vec_pObjectsToDraw);
+			loadModels("Models3.txt", vec_controlable);
 			loadLights("lights3.txt", LightManager->vecLights);
 			loadCameraInfo("camera3.txt");
 		}
@@ -1005,7 +1005,7 @@ void commandsInterface()
 
 	//std::vector<sNVPair> vecInitValues;
 
-	//sNVPair ObjectToMove;	ObjectToMove.pMeshObj = vec_pObjectsToDraw[index];	
+	//sNVPair ObjectToMove;	ObjectToMove.pMeshObj = vec_controlable[index];	
 
 	std::cout << "Move object" << std::endl;
 	std::cout << "1 - Move to object" << std::endl;
@@ -1016,7 +1016,7 @@ void commandsInterface()
 
 	if(Answer == "1")
 	{
-		for (int i = 0; i < vec_pObjectsToDraw.size(); i++) { std::cout << vec_pObjectsToDraw[i]->friendlyName << std::endl; }
+		for (int i = 0; i < vec_controlable.size(); i++) { std::cout << vec_controlable[i]->friendlyName << std::endl; }
 		std::cout << "Enter The name of the object: " << std::endl;
 		std::cout << "->";
 		std::cin >> Answer;

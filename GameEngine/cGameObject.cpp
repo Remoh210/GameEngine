@@ -2,6 +2,7 @@
 
 cGameObject::cGameObject()
 {
+	this->bSave = true;
 	this->bReflection = false;
 	this->bRefraction = false;
 	this->position = glm::vec3(0.0f);

@@ -78,7 +78,7 @@ extern cFBO* g_pFBOMain;
 
 extern cVAOMeshManager* g_pTheVAOMeshManager;
 extern std::vector< cGameObject* > vec_pObjectsToDraw;
-extern std::vector< cGameObject* > vec_pSpheres;
+extern std::vector< cGameObject* > vec_controlable;
 extern cSceneManager* g_pSceneManager;
 extern cLightManager* LightManager;
 extern cTextRend* g_textRenderer;

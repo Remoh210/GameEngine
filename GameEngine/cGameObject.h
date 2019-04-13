@@ -113,6 +113,8 @@ public:
 	bool bReflection;
 	bool bRefraction;
 
+	bool bSave;
+
 	// ignore this for now...
 	// Around its own axis (NOT the origin)
 	//glm::vec3 orientation;

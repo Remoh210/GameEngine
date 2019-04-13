@@ -1,10 +1,10 @@
 {
     "Camera": {
-        "Speed": 500.0,
+        "Speed": 100.0,
         "Position": [
-            193.4344482421875,
-            14.049509048461914,
-            -140.11305236816407
+            64.30614471435547,
+            19.95340919494629,
+            -134.64370727539063
         ]
     },
     "GameObjects": [
@@ -163,9 +163,9 @@
             "Use_Physics": true,
             "Wireframe": false,
             "Position": [
-                9.375589370727539,
+                9.404642105102539,
                 11.690865516662598,
-                46.584346771240237
+                46.57571029663086
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -180,9 +180,9 @@
                 100.0
             ],
             "Rotation": [
-                0.000033214862924069169,
-                0.027867965400218965,
-                0.00001863646502897609
+                0.000028280775950406679,
+                0.03667141869664192,
+                0.000020770459741470405
             ],
             "Scale": [
                 1.100000023841858,
@@ -263,9 +263,9 @@
             "Use_Physics": true,
             "Wireframe": false,
             "Position": [
-                65.34264373779297,
+                65.3310317993164,
                 10.035280227661133,
-                240.72743225097657
+                240.6977081298828
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -280,9 +280,9 @@
                 100.0
             ],
             "Rotation": [
-                -3.964910604281613e-7,
-                -0.022216591984033586,
-                -0.000009050701009982732
+                1.0379891790535112e-7,
+                -0.022310540080070497,
+                -0.00000625043094260036
             ],
             "Scale": [
                 10.0,
@@ -313,9 +313,9 @@
             "Use_Physics": true,
             "Wireframe": false,
             "Position": [
-                972.5390014648438,
+                969.9902954101563,
                 67.36847686767578,
-                974.9818115234375
+                991.3854370117188
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -338,6 +338,706 @@
                 13.258722305297852,
                 13.258722305297852,
                 13.258722305297852
+            ],
+            "Textures": [
+                {
+                    "Name": "wall/brickTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "brick_wall1",
+            "Mesh": "wall/brick_wall.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                872.3526000976563,
+                39.40435791015625,
+                987.460205078125
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "Scale": [
+                10.0,
+                10.0,
+                10.0
+            ],
+            "Textures": [
+                {
+                    "Name": "wall/brickTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "brick_wall2",
+            "Mesh": "wall/brick_wall.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                738.7474975585938,
+                39.3986701965332,
+                987.460205078125
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "Scale": [
+                10.0,
+                10.0,
+                10.0
+            ],
+            "Textures": [
+                {
+                    "Name": "wall/brickTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "brick_wall3",
+            "Mesh": "wall/brick_wall.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                605.221435546875,
+                39.38443374633789,
+                987.4584350585938
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "Scale": [
+                10.0,
+                10.0,
+                10.0
+            ],
+            "Textures": [
+                {
+                    "Name": "wall/brickTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "brick_wall4",
+            "Mesh": "wall/brick_wall.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                472.0,
+                39.40435791015625,
+                987.460205078125
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "Scale": [
+                10.0,
+                10.0,
+                10.0
+            ],
+            "Textures": [
+                {
+                    "Name": "wall/brickTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "brick_wall5",
+            "Mesh": "wall/brick_wall.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                339.0,
+                39.3986701965332,
+                987.460205078125
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "Scale": [
+                10.0,
+                10.0,
+                10.0
+            ],
+            "Textures": [
+                {
+                    "Name": "wall/brickTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "brick_wall6",
+            "Mesh": "wall/brick_wall.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                206.0,
+                39.38443374633789,
+                987.4584350585938
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "Scale": [
+                10.0,
+                10.0,
+                10.0
+            ],
+            "Textures": [
+                {
+                    "Name": "wall/brickTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "brick_wall7",
+            "Mesh": "wall/brick_wall.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                72.35260009765625,
+                39.40435791015625,
+                987.460205078125
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "Scale": [
+                10.0,
+                10.0,
+                10.0
+            ],
+            "Textures": [
+                {
+                    "Name": "wall/brickTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "brick_wall8",
+            "Mesh": "wall/brick_wall.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                -60.74749755859375,
+                39.3986701965332,
+                987.460205078125
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "Scale": [
+                10.0,
+                10.0,
+                10.0
+            ],
+            "Textures": [
+                {
+                    "Name": "wall/brickTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "brick_wall9",
+            "Mesh": "wall/brick_wall.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                -193.221435546875,
+                39.38443374633789,
+                987.4584350585938
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "Scale": [
+                10.0,
+                10.0,
+                10.0
+            ],
+            "Textures": [
+                {
+                    "Name": "wall/brickTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "brick_wall10",
+            "Mesh": "wall/brick_wall.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                -326.29998779296877,
+                39.40435791015625,
+                987.460205078125
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "Scale": [
+                10.0,
+                10.0,
+                10.0
+            ],
+            "Textures": [
+                {
+                    "Name": "wall/brickTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "brick_wall11",
+            "Mesh": "wall/brick_wall.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                -459.0,
+                39.3986701965332,
+                987.460205078125
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "Scale": [
+                10.0,
+                10.0,
+                10.0
+            ],
+            "Textures": [
+                {
+                    "Name": "wall/brickTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "brick_wall12",
+            "Mesh": "wall/brick_wall.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                -592.0,
+                39.38443374633789,
+                987.4584350585938
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "Scale": [
+                10.0,
+                10.0,
+                10.0
+            ],
+            "Textures": [
+                {
+                    "Name": "wall/brickTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "brick_wall13",
+            "Mesh": "wall/brick_wall.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                -725.2999877929688,
+                39.3986701965332,
+                987.460205078125
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "Scale": [
+                10.0,
+                10.0,
+                10.0
+            ],
+            "Textures": [
+                {
+                    "Name": "wall/brickTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "brick_wall14",
+            "Mesh": "wall/brick_wall.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Wireframe": false,
+            "Position": [
+                -858.2999877929688,
+                39.38443374633789,
+                987.4584350585938
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "Scale": [
+                10.0,
+                10.0,
+                10.0
             ],
             "Textures": [
                 {
@@ -407,15 +1107,15 @@
             }
         },
         {
-            "Name": "brick_tower3",
-            "Mesh": "wall/brick_tower.ply",
+            "Name": "brick_wall15",
+            "Mesh": "wall/brick_wall.ply",
             "Visible": true,
             "Use_Physics": true,
             "Wireframe": false,
             "Position": [
-                970.0822143554688,
-                70.16584777832031,
-                -960.2007446289063
+                -987.3378295898438,
+                39.16835403442383,
+                885.7774658203125
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -431,63 +1131,13 @@
             ],
             "Rotation": [
                 0.0,
-                -0.0,
+                89.98021697998047,
                 0.0
             ],
             "Scale": [
-                13.761566162109375,
-                13.761566162109375,
-                13.761566162109375
-            ],
-            "Textures": [
-                {
-                    "Name": "wall/brickTex.bmp",
-                    "Strength": 1.0,
-                    "Tile": 1.0
-                },
-                {
-                    "Name": "testTex.bmp",
-                    "Strength": 0.0,
-                    "Tile": 1.0
-                }
-            ],
-            "RigidBody": {
-                "Type": "BOX",
-                "Mass": 0.0
-            }
-        },
-        {
-            "Name": "brick_tower4",
-            "Mesh": "wall/brick_tower.ply",
-            "Visible": true,
-            "Use_Physics": true,
-            "Wireframe": false,
-            "Position": [
-                -973.5399169921875,
-                75.7862777709961,
-                -957.6431274414063
-            ],
-            "DiffuseRGB_Alpha": [
-                0.0,
-                0.0,
-                0.0,
-                1.0
-            ],
-            "SpecularRGB_Alpha": [
-                1.0,
-                1.0,
-                1.0,
-                100.0
-            ],
-            "Rotation": [
-                0.0,
-                -0.0,
-                0.0
-            ],
-            "Scale": [
-                17.96875,
-                17.96875,
-                17.96875
+                10.0,
+                10.0,
+                10.0
             ],
             "Textures": [
                 {
@@ -513,9 +1163,9 @@
             "Use_Physics": true,
             "Wireframe": false,
             "Position": [
-                381.2649230957031,
+                381.2638244628906,
                 6.917588233947754,
-                -43.39583206176758
+                -43.40475845336914
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -530,9 +1180,9 @@
                 100.0
             ],
             "Rotation": [
-                2.0442986681246112e-7,
+                1.1209455408334179e-7,
                 -0.0008507537422701716,
-                -2.0829597247029597e-7
+                -1.916915124411389e-7
             ],
             "Scale": [
                 15.086135864257813,
@@ -577,9 +1227,9 @@
             "Use_Physics": true,
             "Wireframe": false,
             "Position": [
-                179.39706420898438,
+                70.61531066894531,
                 0.4999980926513672,
-                -105.19367980957031
+                -100.26697540283203
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -595,7 +1245,7 @@
             ],
             "Rotation": [
                 0.0,
-                -21.899843215942384,
+                10.399765968322754,
                 0.0
             ],
             "Scale": [
