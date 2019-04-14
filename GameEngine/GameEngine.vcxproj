@@ -278,8 +278,12 @@
   <ItemGroup>
     <None Include="assets\scripts\example.lua" />
     <None Include="assets\scripts\trig.lua" />
-    <None Include="assets\shaders\fragment01.glsl" />
-    <None Include="assets\shaders\vertex01.glsl" />
+    <None Include="assets\shaders\bloom.frag" />
+    <None Include="assets\shaders\blur.frag" />
+    <None Include="assets\shaders\blur.vert" />
+    <None Include="assets\shaders\ChromAberration.frag" />
+    <None Include="assets\shaders\fragment01.frag" />
+    <None Include="assets\shaders\vertex01.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

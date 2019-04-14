@@ -6,6 +6,7 @@ in vec4 color;			// in from the vertex shader
 in vec4 vertPosWorld;
 in vec4 vertNormal;		// "Model space" (only rotation)
 in vec4 vertUV_x2;		// Texture coordinates
+in vec4 viewSpace;
 // NOTE: for now, these aren't being used, so they are ALMOST 
 //   clamped to zero, then added to the colour (so the compiler won't turf them)
 in vec4 vertTanXYZ;			// Tangent to the surface
@@ -114,6 +115,9 @@ uniform float wholeObjectAlphaTransparency;
 //Copying UV to mult by tile value
 vec4 tiledUV = vertUV_x2;
 
+const vec3 fogColor = vec3(0.5, 0.5,0.5);
+const float FogDensity = 0.0024;
+
 void main()
 {
 	// output black to all layers
@@ -160,6 +164,19 @@ void main()
 	
 	vec4 materialSpecular = objectSpecular;
 
+
+
+//Fog**********
+
+
+float dist = 0;
+float fogFactor = 0;
+dist = length(viewSpace);
+
+
+
+
+
 	// is this the skybox texture?
 	if (useSkyBoxTexture == true)
 	{
@@ -175,6 +192,13 @@ void main()
 		
 		finalOutputNormal.rgb = vertNormal.xyz;
 		finalOutputNormal.a = 1.0f;
+
+
+   fogFactor = 1.0 /exp( (dist * FogDensity)* (dist * FogDensity));
+   fogFactor = clamp( fogFactor, 0.0, 1.0 );
+ 
+   finalOutputColour.rgb = mix(fogColor, finalOutputColour.rgb, fogFactor);
+
 		return;
 	}
 	
@@ -429,7 +453,19 @@ void main()
 	// finalOutputColour.rgb = materialDiffuse.rgb * textureLod(textureSkyBox, 
 	// 		norm, 4).rgb * ambientAmount;
 
+
+
+
+	//Apply Fog
 	finalOutputColour.rgb += materialDiffuse.rgb  * ambientAmount;
+
+   fogFactor = 1.0 /exp( (dist * FogDensity)* (dist * FogDensity));
+   fogFactor = clamp( fogFactor, 0.0, 1.0 );
+ 
+   finalOutputColour.rgb = mix(fogColor, finalOutputColour.rgb, fogFactor);
+
+
+
 
 	finalOutputColour.a = wholeObjectAlphaTransparency;
 	

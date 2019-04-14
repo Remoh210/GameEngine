@@ -404,10 +404,15 @@ int main(void) {
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+
         matProjection = glm::perspective(1.0f,      // FOV
                                          ratio,     // Aspect ratio
                                          0.1f,      // Near clipping plane
                                          15000.0f); // Far clipping plane
+
+
+		glUniform1f(renderPassNumber_UniLoc, 1.0f);
+
 
         matView = camera.GetViewMatrix();
 
@@ -433,7 +438,7 @@ int main(void) {
         //DrawObject(portal2, matModel, program, FBO_Portal2);
         //portal->bIsVisible = false;
        // portal2->bIsVisible = false;
-        glUniform1f(renderPassNumber_UniLoc, 1.0f);
+
         DrawScene_Simple(vec_pObjectsToDraw, program, 1);
         
 

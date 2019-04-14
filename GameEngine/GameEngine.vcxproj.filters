@@ -114,6 +114,9 @@
     <Filter Include="Source Files\PostEffect">
       <UniqueIdentifier>{d8b4af33-6499-44b2-81ad-6d60dee9c611}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shader Stuff\Shaders\Post_effects">
+      <UniqueIdentifier>{ca69ff91-1502-43e5-8824-875bb8ef372e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="theMain.cpp">
@@ -468,17 +471,29 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\shaders\fragment01.glsl">
-      <Filter>Shader Stuff\Shaders</Filter>
-    </None>
-    <None Include="assets\shaders\vertex01.glsl">
-      <Filter>Shader Stuff\Shaders</Filter>
-    </None>
     <None Include="assets\scripts\trig.lua">
       <Filter>Scripting\LuaScripts</Filter>
     </None>
     <None Include="assets\scripts\example.lua">
       <Filter>Scripting\LuaScripts</Filter>
+    </None>
+    <None Include="assets\shaders\fragment01.frag">
+      <Filter>Shader Stuff\Shaders</Filter>
+    </None>
+    <None Include="assets\shaders\vertex01.vert">
+      <Filter>Shader Stuff\Shaders</Filter>
+    </None>
+    <None Include="assets\shaders\ChromAberration.frag">
+      <Filter>Shader Stuff\Shaders\Post_effects</Filter>
+    </None>
+    <None Include="assets\shaders\blur.vert">
+      <Filter>Shader Stuff\Shaders\Post_effects</Filter>
+    </None>
+    <None Include="assets\shaders\blur.frag">
+      <Filter>Shader Stuff\Shaders\Post_effects</Filter>
+    </None>
+    <None Include="assets\shaders\bloom.frag">
+      <Filter>Shader Stuff\Shaders\Post_effects</Filter>
     </None>
   </ItemGroup>
 </Project>

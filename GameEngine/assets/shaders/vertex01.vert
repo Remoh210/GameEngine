@@ -26,7 +26,7 @@ out vec4 vertNormal;	// "Model space"
 out vec4 vertUV_x2;		// To the next shader stage
 out vec4 vertTanXYZ;	// Tangent to the surface
 out vec4 vertBiNormXYZ;	// bi-normal (or bi-tangent) to the surface
-
+out vec4 viewSpace; //For fog
 
 // Note, we're in the VERTEX shader now, baby!
 uniform sampler2D texHeightMap;
@@ -96,7 +96,7 @@ void main()
 		
 		vertPosWorld = matModel * vec4(posTemp, 1.0);
 		
-		
+		viewSpace = matView * matModel * vec4(posTemp,1);
 		
 		// Transforms the normal into "world space"
 		// Remove all scaling and transformation from model
@@ -129,7 +129,10 @@ void main()
 		gl_Position = MVP * vec4(posTemp, 1.0f);			// ON SCREEN
 		
 		vertPosWorld = matModel * vec4(posTemp, 1.0f);
+
+
 		
+		viewSpace = matView * matModel * vec4(posTemp,1);
 		// Transforms the normal into "world space"
 		// Remove all scaling and transformation from model
 		// Leaving ONLY rotation... 
