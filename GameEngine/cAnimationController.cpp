@@ -26,7 +26,7 @@ std::string cAnimationController::GetCurrentAnimation()
 	glm::vec3 vel = mActiveChar->rigidBody->GetVelocity();
 	glm::vec3 pos = mActiveChar->rigidBody->GetPosition();
 	//glm::vec3 from;
-	float height = 13.0f;
+	float height = 7.0f;
 	//from = glm::vec3(pos.x, pos.y -height, pos.z);
 
 	glm::vec3 to = glm::vec3(pos.x, pos.y - height, pos.z);

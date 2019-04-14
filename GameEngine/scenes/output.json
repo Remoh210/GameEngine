@@ -2632,7 +2632,7 @@
             "RigidBody": {
                 "Type": "CAPSULE",
                 "Axis": 1,
-                "Radius": 5.0,
+                "Radius": 2.5,
                 "Height": 15.0,
                 "IsPlayer": true,
                 "Mass": 200.0
@@ -2682,9 +2682,9 @@
                 -180.0
             ],
             "Scale": [
-                0.10000000149011612,
-                0.10000000149011612,
-                0.10000000149011612
+                0.05,
+                0.05,
+                0.05
             ],
             "Textures": [
                 {
@@ -2701,8 +2701,8 @@
             "RigidBody": {
                 "Type": "CAPSULE",
                 "Axis": 1,
-                "Radius": 5.0,
-                "Height": 30.0,
+                "Radius": 2.5,
+                "Height": 15.0,
                 "IsPlayer": true,
                 "Mass": 200.0
             }
@@ -2818,10 +2818,10 @@
             ]
         },
         {
-            "Name": "DebugCube",
-            "Mesh": "cube.ply",
+            "Name": "ramp",
+            "Mesh": "ramp.ply",
             "Visible": true,
-            "Use_Physics": false,
+            "Use_Physics": true,
             "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
@@ -2830,7 +2830,7 @@
                 0.0
             ],
             "DiffuseRGB_Alpha": [
-                1.0,
+                0.0,
                 0.0,
                 0.0,
                 1.0
@@ -2839,7 +2839,7 @@
                 1.0,
                 1.0,
                 1.0,
-                1.0
+                100.0
             ],
             "Rotation": [
                 0.0,
@@ -2850,112 +2850,23 @@
                 20.0,
                 20.0,
                 20.0
-            ]
-        },
-        {
-            "Name": "DebugCube",
-            "Mesh": "cube.ply",
-            "Visible": true,
-            "Use_Physics": false,
-            "Use_HeighMap": false,
-            "Wireframe": false,
-            "Position": [
-                0.0,
-                0.0,
-                0.0
             ],
-            "DiffuseRGB_Alpha": [
-                1.0,
-                0.0,
-                0.0,
-                1.0
+            "Textures": [
+                {
+                    "Name": "stoneTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 10.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 10.0
+                }
             ],
-            "SpecularRGB_Alpha": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-            ],
-            "Rotation": [
-                0.0,
-                -0.0,
-                0.0
-            ],
-            "Scale": [
-                20.0,
-                20.0,
-                20.0
-            ]
-        },
-        {
-            "Name": "DebugCube",
-            "Mesh": "cube.ply",
-            "Visible": true,
-            "Use_Physics": false,
-            "Use_HeighMap": false,
-            "Wireframe": false,
-            "Position": [
-                0.0,
-                0.0,
-                0.0
-            ],
-            "DiffuseRGB_Alpha": [
-                1.0,
-                0.0,
-                0.0,
-                1.0
-            ],
-            "SpecularRGB_Alpha": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-            ],
-            "Rotation": [
-                0.0,
-                -0.0,
-                0.0
-            ],
-            "Scale": [
-                20.0,
-                20.0,
-                20.0
-            ]
-        },
-        {
-            "Name": "DebugCube",
-            "Mesh": "cube.ply",
-            "Visible": true,
-            "Use_Physics": false,
-            "Use_HeighMap": false,
-            "Wireframe": false,
-            "Position": [
-                0.0,
-                0.0,
-                0.0
-            ],
-            "DiffuseRGB_Alpha": [
-                1.0,
-                0.0,
-                0.0,
-                1.0
-            ],
-            "SpecularRGB_Alpha": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-            ],
-            "Rotation": [
-                0.0,
-                -0.0,
-                0.0
-            ],
-            "Scale": [
-                20.0,
-                20.0,
-                20.0
-            ]
+            "RigidBody": {
+                "Type": "MESH_COLLIDER",
+                "Mass": 0.0
+            }
         }
     ],
     "Lights": [

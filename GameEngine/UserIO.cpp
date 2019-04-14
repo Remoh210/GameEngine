@@ -416,7 +416,11 @@ void ProcessAsynKeys(GLFWwindow* window)
 	cGameObject* ch = g_pCharacterManager->getActiveChar();
 	glm::vec3 vel;
 	vel = ch->rigidBody->GetVelocity();
-
+	//prevent sliding jump
+	if (vel.y > 17.0f)
+	{
+		vel.y = 17.0f;
+	}
 
 	//*********************************************** Joystick Controlls**********************************************************************
 
