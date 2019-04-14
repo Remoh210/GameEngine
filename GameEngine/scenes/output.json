@@ -2770,17 +2770,18 @@
             "Visible": true,
             "Use_Physics": true,
             "Use_HeighMap": true,
+            "Reflection": true,
             "Wireframe": false,
             "Position": [
                 -516.3553466796875,
-                28.942607879638673,
+                33.942607879638673,
                 611.8703002929688
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
                 0.0,
                 0.0,
-                1.0
+                0.6
             ],
             "SpecularRGB_Alpha": [
                 1.0,

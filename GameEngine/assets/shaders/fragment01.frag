@@ -117,7 +117,7 @@ vec4 tiledUV = vertUV_x2;
 
 const vec3 fogColor = vec3(0.5, 0.5,0.5);
 //const float FogDensity = 0.008;
-const float FogDensity = 0.000;
+const float FogDensity = 0.0005;
 void main()
 {
 	// output black to all layers
