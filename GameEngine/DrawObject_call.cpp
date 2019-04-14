@@ -33,6 +33,9 @@ GLint tex04_UniLoc = -1;
 GLint tex05_UniLoc = -1;
 GLint tex06_UniLoc = -1;
 GLint tex07_UniLoc = -1;
+//High map
+GLint texHM_UniLoc = -1;
+
 
 GLint texBW_0_UniLoc = -1;
 GLint texBW_1_UniLoc = -1;
@@ -62,6 +65,7 @@ void BindTextures(cGameObject* pCurrentMesh, GLuint shaderProgramID, cFBO* fbo)
 		tex05_UniLoc = glGetUniformLocation(shaderProgramID, "texture05");		// uniform sampler2D texture05;
 		tex06_UniLoc = glGetUniformLocation(shaderProgramID, "texture06");		// uniform sampler2D texture06;
 		tex07_UniLoc = glGetUniformLocation(shaderProgramID, "texture07");		// uniform sampler2D texture07;
+		texHM_UniLoc = glGetUniformLocation(shaderProgramID, "texHeightMap");
 
 		texBW_0_UniLoc = glGetUniformLocation(shaderProgramID, "texBlendWeights[0]");	// uniform vec4 texBlendWeights[2];
 		texBW_1_UniLoc = glGetUniformLocation(shaderProgramID, "texBlendWeights[1]");	// uniform vec4 texBlendWeights[2];
@@ -80,7 +84,8 @@ void BindTextures(cGameObject* pCurrentMesh, GLuint shaderProgramID, cFBO* fbo)
 	}
 
 	//passind time
-
+	Timer += deltaTime;
+	glUniform1f(time_Uniloc, Timer);
 
 	if (pCurrentMesh->bFBO && fbo != NULL)
 	{
@@ -149,9 +154,12 @@ void BindTextures(cGameObject* pCurrentMesh, GLuint shaderProgramID, cFBO* fbo)
 		case 2:
 			glUniform1i(tex02_UniLoc, texBindIndex);
 			break;
-		case 3:
-			glUniform1i(tex03_UniLoc, texBindIndex);
+		case 3: //3rd for heighmap
+			glUniform1i(texHM_UniLoc, texBindIndex);
 			break;
+		//case 3: //3rd for heighmap
+		//	glUniform1i(tex03_UniLoc, texBindIndex);
+		//	break;
 		case 4:		// uniform sampler2D texture04  AND texBlendWeights[1].x;
 			glUniform1i(tex04_UniLoc, texBindIndex);
 			break;
@@ -176,6 +184,14 @@ void BindTextures(cGameObject* pCurrentMesh, GLuint shaderProgramID, cFBO* fbo)
 	glUniform4f(texBW_0_UniLoc, blendWeights[0], blendWeights[1], blendWeights[2], blendWeights[3]);
 	glUniform4f(texBW_1_UniLoc, blendWeights[4], blendWeights[5], blendWeights[6], blendWeights[7]);
 
+
+
+	//if (pCurrentMesh)
+	//{
+	//	glActiveTexture(GL_TEXTURE0 + 8);
+	//	glUniform1i(texHM_UniLoc, 8);
+
+	//}
 	
 	return;
 }
@@ -314,6 +330,7 @@ void DrawObject(cGameObject* pCurrentMesh,
 	GLint matView_location = glGetUniformLocation(shaderProgramID, "matView");
 	GLint matProj_location = glGetUniformLocation(shaderProgramID, "matProj");
 	GLint bDontUseLighting_UniLoc = glGetUniformLocation(shaderProgramID, "bDontUseLighting");
+	GLint bUseHeighMap_UniLoc = glGetUniformLocation(shaderProgramID, "bUseHeightMap");
 	GLint bAddReflect_UniLoc = glGetUniformLocation(program, "bAddReflect");
 	GLint bAddRefract_UniLoc = glGetUniformLocation(program, "bAddRefract");
 
@@ -361,6 +378,15 @@ void DrawObject(cGameObject* pCurrentMesh,
 	else
 	{
 		glUniform1f(bDontUseLighting_UniLoc, (float)GL_FALSE);
+	}
+
+	if (pCurrentMesh->bUseHeighMap)
+	{
+		glUniform1f(bUseHeighMap_UniLoc, (float)GL_TRUE);
+	}
+	else
+	{
+		glUniform1f(bUseHeighMap_UniLoc, (float)GL_FALSE);
 	}
 
 	if (pCurrentMesh->bIsWireFrame)

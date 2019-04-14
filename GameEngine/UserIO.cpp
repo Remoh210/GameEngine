@@ -878,8 +878,8 @@ void ProcessAsynKeys(GLFWwindow* window)
 		if ( glfwGetKey( window, GLFW_KEY_X ) )		{ vec_controlable.at(index)->adjMeshOrientationEulerAngles(1.0f * deltaTime, 0.0f, 0.0f, false); }
 		if (glfwGetKey(window, GLFW_KEY_C))			{ vec_controlable.at(index)->adjMeshOrientationEulerAngles(-1.0f * deltaTime, 0.0f, 0.0f, false); }
 
-		if (glfwGetKey(window, GLFW_KEY_V)) { vec_controlable.at(index)->nonUniformScale += 1.2f * deltaTime; }
-		if (glfwGetKey(window, GLFW_KEY_B)) { vec_controlable.at(index)->nonUniformScale -= 1.2f * deltaTime; }
+		if (glfwGetKey(window, GLFW_KEY_V)) { vec_controlable.at(index)->nonUniformScale += cameraSpeed * deltaTime; }
+		if (glfwGetKey(window, GLFW_KEY_B)) { vec_controlable.at(index)->nonUniformScale -= cameraSpeed * deltaTime; }
 
 
 

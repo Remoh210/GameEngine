@@ -106,7 +106,7 @@ uniform bool useSkyBoxTexture;
 uniform bool bAddReflect;		// Add reflection
 uniform bool bAddRefract;		// Add refraction
 uniform float refractionIndex;
-
+uniform bool bUseHeightMap;	
 // This is 4 x 2 floats or 8 floats
 uniform vec4 texBlendWeights[2];	// x is 0, y is 1, z is 2
 
@@ -116,8 +116,8 @@ uniform float wholeObjectAlphaTransparency;
 vec4 tiledUV = vertUV_x2;
 
 const vec3 fogColor = vec3(0.5, 0.5,0.5);
-const float FogDensity = 0.0024;
-
+//const float FogDensity = 0.008;
+const float FogDensity = 0.000;
 void main()
 {
 	// output black to all layers
@@ -129,30 +129,46 @@ void main()
 	// Are we in the 2nd pass? 
 	if ( int(renderPassNumber) == 2 )
 	{ 
-		float newTime = time * 0.03;
-		vec4 FBO_Texture1 = texture( texPass1OutputTexture, vertUV_x2.st);
+		// float newTime = time * 0.03;
+		// vec4 FBO_Texture1 = texture( texPass1OutputTexture, vertUV_x2.st);
 		
 		
-		vec4 FBO_Texture2 = texture( texture00, vec2(vertUV_x2.s + newTime, vertUV_x2.t) );
-		//finalOutputColour.rgb = texture( texPass1OutputTexture, vertUV_x2.st).rgb;
+		// vec4 FBO_Texture2 = texture( texture00, vec2(vertUV_x2.s + newTime, vertUV_x2.t) );
+		// //finalOutputColour.rgb = texture( texPass1OutputTexture, vertUV_x2.st).rgb;
 
 		
 		
 		
-		finalOutputColour = (FBO_Texture1 * FBOtexBlendWeights.x) 	 
-		                  + (FBO_Texture2 * FBOtexBlendWeights.y);     
+		// finalOutputColour = (FBO_Texture1 * FBOtexBlendWeights.x) 	 
+		//                   + (FBO_Texture2 * FBOtexBlendWeights.y);     
 		
 		
-		finalOutputColour.a = 1.0f;
-		return;
+		// finalOutputColour.a = 1.0f;
+		// return;
 	}
 	
 	
 	// We are in the 1st (main) pass
 
 	
-	tiledUV.s *= texTiling;
-	tiledUV.t *= texTiling;
+
+
+
+
+
+	if(bUseHeightMap)
+	{
+		tiledUV.s *= 15.0;
+		tiledUV.t *= 15.0;
+		float newTime = time * 0.00005;
+		tiledUV.s *= newTime;
+		tiledUV.t *= newTime;
+	}
+	else
+	{
+		tiledUV.s *= texTiling;
+		tiledUV.t *= texTiling;
+	}
 	
 	vec4 materialDiffuse = vec4(0.0f, 0.0f, 0.0f, 1.0f);
 	
@@ -195,7 +211,7 @@ dist = length(viewSpace);
 
 
    fogFactor = 1.0 /exp( (dist * FogDensity)* (dist * FogDensity));
-   fogFactor = clamp( fogFactor, 0.0, 1.0 );
+   fogFactor = clamp( fogFactor, 0.1, 1.0 );
  
    finalOutputColour.rgb = mix(fogColor, finalOutputColour.rgb, fogFactor);
 
@@ -456,13 +472,9 @@ dist = length(viewSpace);
 
 
 
-	//Apply Fog
-	finalOutputColour.rgb += materialDiffuse.rgb  * ambientAmount;
 
-   fogFactor = 1.0 /exp( (dist * FogDensity)* (dist * FogDensity));
-   fogFactor = clamp( fogFactor, 0.0, 1.0 );
- 
-   finalOutputColour.rgb = mix(fogColor, finalOutputColour.rgb, fogFactor);
+
+
 
 
 
@@ -535,7 +547,27 @@ dist = length(viewSpace);
 		
 	}//if(bIsParticleImposter)
 
-	
+
+
+	//Apply ambient
+	finalOutputColour.rgb += materialDiffuse.rgb  * ambientAmount;
+
+
+
+		//Apply Fog
+
+	// float be = (10.0 - viewSpace.y) * 0.004;//0.004 is just a factor; change it if you want
+	// float bi = (10.0 - viewSpace.y) * 0.001;//0.001 is just a factor; change it if you want
+
+	// float ext = exp(-dist * be);
+	// float insc = exp(-dist * bi);
+ 
+	// finalOutputColour.rgb = lightColor * ext + fogColor * (1 - insc);
+
+   fogFactor = 1.0 /exp( (dist * FogDensity)* (dist * FogDensity));
+   fogFactor = clamp( fogFactor, 0.1, 1.0 );
+ 
+   finalOutputColour.rgb = mix(fogColor, finalOutputColour.rgb, fogFactor);
 	
 	// All done.
 }

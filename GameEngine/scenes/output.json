@@ -2,9 +2,9 @@
     "Camera": {
         "Speed": 500.0,
         "Position": [
-            36.73337936401367,
-            15.89996337890625,
-            191.24850463867188
+            -163.63429260253907,
+            276.5426025390625,
+            1046.6197509765626
         ]
     },
     "GameObjects": [
@@ -13,6 +13,7 @@
             "Mesh": "earth.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 193.62152099609376,
@@ -64,6 +65,7 @@
             "Mesh": "earth.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 748.79052734375,
@@ -115,6 +117,7 @@
             "Mesh": "door/doorFrame.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 1.0332461595535279,
@@ -134,9 +137,9 @@
                 100.0
             ],
             "Rotation": [
-                180.0,
+                -180.0,
                 5.865976333618164,
-                180.0
+                -180.0
             ],
             "Scale": [
                 1.0,
@@ -161,6 +164,7 @@
             "Mesh": "env_objects/lake.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -522.7196044921875,
@@ -180,8 +184,8 @@
                 100.0
             ],
             "Rotation": [
-                0.00004570435339701362,
-                -0.1597217619419098,
+                0.00004570435703499243,
+                -0.15972177684307099,
                 -0.0000211660753848264
             ],
             "Scale": [
@@ -191,7 +195,7 @@
             ],
             "Textures": [
                 {
-                    "Name": "grass.bmp",
+                    "Name": "grassTex.bmp",
                     "Strength": 1.0,
                     "Tile": 10.0
                 }
@@ -206,11 +210,12 @@
             "Mesh": "door/door.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
-                14.877734184265137,
-                11.690916061401368,
-                48.646095275878909
+                14.87348461151123,
+                11.69086742401123,
+                48.641422271728519
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -225,9 +230,9 @@
                 100.0
             ],
             "Rotation": [
-                -0.0032572501804679634,
-                9.461339950561524,
-                -0.000006931012649147306
+                -0.00008420226367888972,
+                9.314208030700684,
+                0.000010607129297568463
             ],
             "Scale": [
                 1.100000023841858,
@@ -256,6 +261,7 @@
             "Mesh": "cottage/cottage.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 618.2454223632813,
@@ -276,7 +282,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.7401669025421144,
+                -3.740166425704956,
                 0.0
             ],
             "Scale": [
@@ -306,6 +312,7 @@
             "Mesh": "cottage/cottage.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 605.9288940429688,
@@ -326,7 +333,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.7401669025421144,
+                -3.740166425704956,
                 0.0
             ],
             "Scale": [
@@ -356,6 +363,7 @@
             "Mesh": "cottage/cottage.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 608.9964599609375,
@@ -376,7 +384,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.7401669025421144,
+                -3.740166425704956,
                 0.0
             ],
             "Scale": [
@@ -406,6 +414,7 @@
             "Mesh": "cottage/cottage.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 840.0146484375,
@@ -426,7 +435,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.7401669025421144,
+                -3.740166425704956,
                 0.0
             ],
             "Scale": [
@@ -456,6 +465,7 @@
             "Mesh": "cottage/cottage.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 840.8143310546875,
@@ -476,7 +486,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.7401669025421144,
+                -3.740166425704956,
                 0.0
             ],
             "Scale": [
@@ -506,6 +516,7 @@
             "Mesh": "farm_house.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 857.6336059570313,
@@ -525,9 +536,9 @@
                 100.0
             ],
             "Rotation": [
-                180.0,
+                -180.0,
                 -1.1668442487716675,
-                -180.0
+                180.0
             ],
             "Scale": [
                 1.7380889654159547,
@@ -556,6 +567,7 @@
             "Mesh": "fantasy_house.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 611.3331909179688,
@@ -575,9 +587,9 @@
                 100.0
             ],
             "Rotation": [
-                180.0,
+                -180.0,
                 89.45284271240235,
-                180.0
+                -180.0
             ],
             "Scale": [
                 2.0894219875335695,
@@ -606,6 +618,7 @@
             "Mesh": "fantasy_house.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 837.556640625,
@@ -625,9 +638,9 @@
                 100.0
             ],
             "Rotation": [
-                180.0,
+                -180.0,
                 89.45284271240235,
-                180.0
+                -180.0
             ],
             "Scale": [
                 2.0894219875335695,
@@ -656,6 +669,7 @@
             "Mesh": "fantasy_house.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 843.3413696289063,
@@ -675,9 +689,9 @@
                 100.0
             ],
             "Rotation": [
-                180.0,
+                -180.0,
                 89.45284271240235,
-                180.0
+                -180.0
             ],
             "Scale": [
                 2.0894219875335695,
@@ -706,6 +720,7 @@
             "Mesh": "fantasy_house.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 611.1971435546875,
@@ -725,9 +740,9 @@
                 100.0
             ],
             "Rotation": [
-                180.0,
+                -180.0,
                 89.45284271240235,
-                180.0
+                -180.0
             ],
             "Scale": [
                 2.0894219875335695,
@@ -756,6 +771,7 @@
             "Mesh": "env_objects/statue.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 730.3412475585938,
@@ -806,6 +822,7 @@
             "Mesh": "env_objects/cart.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 748.7920532226563,
@@ -825,7 +842,7 @@
                 100.0
             ],
             "Rotation": [
-                4.7238616943359379,
+                4.723867416381836,
                 81.111083984375,
                 -171.34976196289063
             ],
@@ -856,11 +873,12 @@
             "Mesh": "env_objects/log.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
-                265.556884765625,
+                265.55816650390627,
                 2.15576171875,
-                -562.7437744140625
+                -562.7466430664063
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -875,9 +893,9 @@
                 100.0
             ],
             "Rotation": [
-                -179.9996795654297,
-                86.79356384277344,
-                -179.9998321533203
+                -179.9997100830078,
+                86.72816467285156,
+                -179.99984741210938
             ],
             "Scale": [
                 2.0894219875335695,
@@ -906,11 +924,12 @@
             "Mesh": "Portal_cube.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
-                65.39511108398438,
-                10.035279273986817,
-                240.78683471679688
+                65.39805603027344,
+                10.035280227661133,
+                240.79444885253907
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -925,9 +944,9 @@
                 100.0
             ],
             "Rotation": [
-                8.854111683831434e-7,
-                0.02202546037733555,
-                -0.000007242770152515732
+                -0.00000205102696781978,
+                -0.0016560782678425313,
+                -0.000008199522198992782
             ],
             "Scale": [
                 10.0,
@@ -956,6 +975,7 @@
             "Mesh": "wall/brick_tower.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 972.5390014648438,
@@ -1006,6 +1026,7 @@
             "Mesh": "wall/brick_tower.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -964.9511108398438,
@@ -1056,6 +1077,7 @@
             "Mesh": "wall/brick_tower.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 970.0822143554688,
@@ -1106,6 +1128,7 @@
             "Mesh": "wall/brick_tower.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -973.5399169921875,
@@ -1156,6 +1179,7 @@
             "Mesh": "trees/dead_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -581.5006713867188,
@@ -1211,6 +1235,7 @@
             "Mesh": "trees/dead_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -419.69580078125,
@@ -1266,6 +1291,7 @@
             "Mesh": "trees/dead_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -682.281005859375,
@@ -1321,6 +1347,7 @@
             "Mesh": "trees/dead_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -381.4125061035156,
@@ -1376,6 +1403,7 @@
             "Mesh": "trees/dead_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -737.1143798828125,
@@ -1431,6 +1459,7 @@
             "Mesh": "trees/dead_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -333.914306640625,
@@ -1486,6 +1515,7 @@
             "Mesh": "trees/dead_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -753.9715576171875,
@@ -1541,6 +1571,7 @@
             "Mesh": "trees/dead_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -305.1247253417969,
@@ -1596,6 +1627,7 @@
             "Mesh": "trees/polar_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -532.9486083984375,
@@ -1651,6 +1683,7 @@
             "Mesh": "trees/polar_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -730.4286499023438,
@@ -1706,6 +1739,7 @@
             "Mesh": "trees/polar_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -424.7228698730469,
@@ -1761,6 +1795,7 @@
             "Mesh": "trees/polar_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -573.6571655273438,
@@ -1816,6 +1851,7 @@
             "Mesh": "trees/polar_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -450.5745849609375,
@@ -1871,6 +1907,7 @@
             "Mesh": "trees/polar_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -773.6785888671875,
@@ -1926,6 +1963,7 @@
             "Mesh": "trees/polar_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -499.38848876953127,
@@ -1981,6 +2019,7 @@
             "Mesh": "trees/polar_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -578.6500244140625,
@@ -2036,6 +2075,7 @@
             "Mesh": "trees/oak_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -670.8785400390625,
@@ -2091,6 +2131,7 @@
             "Mesh": "trees/oak_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -420.3211364746094,
@@ -2146,6 +2187,7 @@
             "Mesh": "trees/oak_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -362.7691345214844,
@@ -2201,6 +2243,7 @@
             "Mesh": "trees/oak_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -673.3929443359375,
@@ -2256,6 +2299,7 @@
             "Mesh": "trees/oak_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -515.5380859375,
@@ -2311,6 +2355,7 @@
             "Mesh": "trees/oak_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -655.8369140625,
@@ -2366,6 +2411,7 @@
             "Mesh": "trees/oak_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -366.0755920410156,
@@ -2421,6 +2467,7 @@
             "Mesh": "trees/oak_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -670.8785400390625,
@@ -2476,11 +2523,12 @@
             "Mesh": "boat.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
-                381.2698669433594,
+                381.2701416015625,
                 6.917588233947754,
-                -43.37797927856445
+                -43.380210876464847
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -2495,9 +2543,9 @@
                 100.0
             ],
             "Rotation": [
-                -5.219909553488833e-7,
-                0.0008507251623086631,
-                -2.830977905432519e-7
+                5.164204139873618e-7,
+                0.001701465342193842,
+                -1.842049499600762e-7
             ],
             "Scale": [
                 15.086135864257813,
@@ -2540,10 +2588,11 @@
             },
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 8.757102012634278,
-                -0.05000019073486328,
+                -0.050002098083496097,
                 214.97457885742188
             ],
             "DiffuseRGB_Alpha": [
@@ -2560,7 +2609,7 @@
             ],
             "Rotation": [
                 0.0,
-                -49.699440002441409,
+                0.000002732075699896086,
                 0.0
             ],
             "Scale": [
@@ -2608,6 +2657,7 @@
             },
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -93.81448364257813,
@@ -2627,9 +2677,9 @@
                 100.0
             ],
             "Rotation": [
-                -180.0,
+                180.0,
                 -56.699974060058597,
-                180.0
+                -180.0
             ],
             "Scale": [
                 0.10000000149011612,
@@ -2662,6 +2712,7 @@
             "Mesh": "plane_floor.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 0.0,
@@ -2692,8 +2743,13 @@
             ],
             "Textures": [
                 {
-                    "Name": "grass.bmp",
+                    "Name": "grassTex.bmp",
                     "Strength": 1.0,
+                    "Tile": 60.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
                     "Tile": 60.0
                 }
             ],
@@ -2709,10 +2765,63 @@
             }
         },
         {
+            "Name": "water",
+            "Mesh": "highResPlane.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Use_HeighMap": true,
+            "Wireframe": false,
+            "Position": [
+                -516.3553466796875,
+                28.942607879638673,
+                611.8703002929688
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "Scale": [
+                158.98683166503907,
+                158.98683166503907,
+                158.98683166503907
+            ],
+            "Textures": [
+                {
+                    "Name": "waterTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "height_maps/waterHM.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                }
+            ]
+        },
+        {
             "Name": "DebugCube",
             "Mesh": "cube.ply",
             "Visible": true,
             "Use_Physics": false,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 0.0,
@@ -2747,6 +2856,7 @@
             "Mesh": "cube.ply",
             "Visible": true,
             "Use_Physics": false,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 0.0,
@@ -2781,6 +2891,7 @@
             "Mesh": "cube.ply",
             "Visible": true,
             "Use_Physics": false,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 0.0,
@@ -2815,6 +2926,7 @@
             "Mesh": "cube.ply",
             "Visible": true,
             "Use_Physics": false,
+            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 0.0,

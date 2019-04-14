@@ -1,7 +1,7 @@
 #version 420 
 // vertex01.glsl
 
-//uniform mat4 MVP;		
+	
 uniform mat4 matModel;		// M
 uniform mat4 matModelInvTrans;	// inverse(transpose(matModel))
 uniform mat4 matView;		// V
@@ -11,11 +11,10 @@ in vec4 vColour;		// rgba   	was "attribute"
 in vec4 vPosition;		// xyzw		was "attribute"
 in vec4 vNormal;		// normal xyz
 in vec4 vUV_x2;	
-			// Texture coordinates (2 of them)
+			
 in vec4 vTanXYZ;			// Tangent to the surface
 in vec4 vBiNormXYZ;		// bi-normal (or bi-tangent) to the surface
-//in float boneID[4];			//unsigned int boneID[4];
-//in float boneWeight[4];		//float boneWeights[4];
+
 in vec4 vBoneID;		// really passing it as 4 values
 in vec4 vBoneWeight;	
 
@@ -28,11 +27,12 @@ out vec4 vertTanXYZ;	// Tangent to the surface
 out vec4 vertBiNormXYZ;	// bi-normal (or bi-tangent) to the surface
 out vec4 viewSpace; //For fog
 
-// Note, we're in the VERTEX shader now, baby!
-uniform sampler2D texHeightMap;
-uniform bool bUseHeightMap;			// "turn on" the vertex displacement
-uniform float heightMapRatio;		// Increase the range of the displacement
 
+
+uniform sampler2D texHeightMap;
+uniform bool bUseHeightMap;			
+uniform float heightMapRatio;		
+uniform float time;
 
 // For skinned mesh
 const int MAXNUMBEROFBONES = 100;
@@ -40,7 +40,6 @@ uniform mat4 bones[MAXNUMBEROFBONES];
 // Pass the acutal number you are using to control how often this loops
 uniform int numBonesUsed;			
 uniform bool bIsASkinnedMesh;	// True to do the skinned mesh
-
 void main()
 {
 	// Make a copy of the "model space" vertex
@@ -49,14 +48,20 @@ void main()
 	// Apply vertex displacement?
 	if ( bUseHeightMap )
 	{
-		// Note: I'm only sampling ONE of the colours, because it's black and white
-		// Returns 0.0 to 1.0
-		float height = texture( texHeightMap, vUV_x2.st ).r;
+
+		vec2 tiledUV = vUV_x2.st * 15.0;
+		float newTime = time * 0.00005;
+		float height = texture( texHeightMap, vec2(vUV_x2.s + newTime, vUV_x2.t + newTime) ).r;
+		//float height = clamp( HM_Color, 0.1, 1.0 );
+
+
+
+		float HeightRatio = 0.05;
+		height = height * HeightRatio;
 		
-		height = height * heightMapRatio;
-		
-		posTemp.y = 0.0f;		// "Flatten" the mesh
+		//posTemp.y = 0.0f;		// "Flatten" the mesh
 		posTemp.y = height;		// Set the heigth
+
 		// You could also "adjust" an existing mesh
 	
 	}//if ( bUseHeightMap )

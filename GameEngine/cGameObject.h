@@ -114,6 +114,7 @@ public:
 	bool bRefraction;
 	bool bExtentsFromMesh;
 	bool bSave;
+	bool bUseHeighMap;
 
 	// ignore this for now...
 	// Around its own axis (NOT the origin)
