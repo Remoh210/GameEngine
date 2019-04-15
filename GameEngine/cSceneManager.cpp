@@ -537,6 +537,11 @@ bool cSceneManager::loadScene(std::string filename) {
 					curSkinnedMesh->LoadMeshAnimation("Action7", Action7);
 				}
 
+				std::string Fall = (GameObject[i]["Animation"].HasMember("Fall")) ? GameObject[i]["Animation"]["Fall"].GetString() : "";
+				if (Fall != "") {
+					curSkinnedMesh->LoadMeshAnimation("Fall", Fall);
+				}
+
 
 				
 

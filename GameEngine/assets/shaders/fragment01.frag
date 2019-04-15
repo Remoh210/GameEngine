@@ -75,7 +75,7 @@ const int POINT_LIGHT_TYPE = 0;
 const int SPOT_LIGHT_TYPE = 1;
 const int DIRECTIONAL_LIGHT_TYPE = 2;
 
-const int NUMBEROFLIGHTS = 10;
+const int NUMBEROFLIGHTS = 20;
 uniform sLight theLights[NUMBEROFLIGHTS];  	// 80 uniforms
 
 // CAN'T put texture samplers into an array (sadly)
@@ -117,7 +117,8 @@ vec4 tiledUV = vertUV_x2;
 
 const vec3 fogColor = vec3(0.5, 0.5,0.5);
 //const float FogDensity = 0.008;
-const float FogDensity = 0.0005;
+const float FogDensity = 0.0008;
+float ambientAmount = 0.2;
 void main()
 {
 	// output black to all layers
@@ -359,14 +360,46 @@ dist = length(viewSpace);
 
 			// TODO: Still need to do specular, but this gives you an idea
 			finalOutputColour.rgb = finalObjectColour.rgb;
+			finalOutputColour.rgb += materialDiffuse.rgb  * ambientAmount;
 			finalOutputColour.a = wholeObjectAlphaTransparency;
 
 			// Also output the normal to colour #1
 			finalOutputNormal.rgb = vertNormal.xyz;
 			finalOutputNormal.r = 1.0f;
 			finalOutputNormal.a = 1.0f;
-			return;		
+
+
+	// // Add any reflection or refraction 
+  // 	if ( bAddRefract )
+  // 	{
+  // 		float amountToAdd = 0.25f;
+  // 		// Drop the amount of current colour by a little bit...
+  // 		finalOutputColour *= ( 1.0f - amountToAdd );
+  // 		// ... and add the refractive colour		
+  // 		finalOutputColour.rgb += ( amountToAdd * rgbRefract );
+  // 	}
+  // 	if ( bAddReflect )
+  // 	{
+  // 		float amountToAdd = 0.25f;
+  // 		// Drop the amount of current colour by a little bit...
+  // 		finalOutputColour *= ( 1.0f - amountToAdd );
+  // 		// ... and add the reflective colour
+  // 		finalOutputColour.rgb += ( amountToAdd * rgbReflect );
+  // 	}
+
+
+	// 				//Apply Fog
+
+  //  	fogFactor = 1.0 /exp( (dist * FogDensity)* (dist * FogDensity));
+  //  	fogFactor = clamp( fogFactor, 0.1, 1.0 );
+ 
+  //  	finalOutputColour.rgb = mix(fogColor, finalOutputColour.rgb, fogFactor);
+
+
+		//	return;		
 		}
+		else
+		{
 		
 		// Assume it's a point light 
 		// intLightType = 0
@@ -463,18 +496,8 @@ dist = length(viewSpace);
 	
 	finalOutputColour.rgb = finalObjectColour.rgb;
 
-	
-	// CHANGED
-	float ambientAmount = 0.2;
-	// finalOutputColour.rgb = materialDiffuse.rgb * textureLod(textureSkyBox, 
-	// 		norm, 4).rgb * ambientAmount;
 
-
-
-
-
-
-
+	}
 
 
 
@@ -556,18 +579,9 @@ dist = length(viewSpace);
 
 		//Apply Fog
 
-	// float be = (10.0 - viewSpace.y) * 0.004;//0.004 is just a factor; change it if you want
-	// float bi = (10.0 - viewSpace.y) * 0.001;//0.001 is just a factor; change it if you want
-
-	// float ext = exp(-dist * be);
-	// float insc = exp(-dist * bi);
- 
-	// finalOutputColour.rgb = lightColor * ext + fogColor * (1 - insc);
-
    fogFactor = 1.0 /exp( (dist * FogDensity)* (dist * FogDensity));
    fogFactor = clamp( fogFactor, 0.1, 1.0 );
  
    finalOutputColour.rgb = mix(fogColor, finalOutputColour.rgb, fogFactor);
 	
-	// All done.
 }

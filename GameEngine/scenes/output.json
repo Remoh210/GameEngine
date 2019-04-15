@@ -1223,9 +1223,9 @@
             "RigidBody": {
                 "Type": "BOX",
                 "HalfExtents": [
-                    1.5,
                     10.5,
-                    1.5
+                    30.5,
+                    10.5
                 ],
                 "Mass": 0.0
             }
@@ -1279,9 +1279,9 @@
             "RigidBody": {
                 "Type": "BOX",
                 "HalfExtents": [
-                    1.5,
                     10.5,
-                    1.5
+                    30.5,
+                    10.5
                 ],
                 "Mass": 0.0
             }
@@ -1335,9 +1335,9 @@
             "RigidBody": {
                 "Type": "BOX",
                 "HalfExtents": [
-                    1.5,
                     10.5,
-                    1.5
+                    30.5,
+                    10.5
                 ],
                 "Mass": 0.0
             }
@@ -1391,9 +1391,9 @@
             "RigidBody": {
                 "Type": "BOX",
                 "HalfExtents": [
-                    1.5,
                     10.5,
-                    1.5
+                    30.5,
+                    10.5
                 ],
                 "Mass": 0.0
             }
@@ -1447,9 +1447,9 @@
             "RigidBody": {
                 "Type": "BOX",
                 "HalfExtents": [
-                    1.5,
                     10.5,
-                    1.5
+                    30.5,
+                    10.5
                 ],
                 "Mass": 0.0
             }
@@ -1503,9 +1503,9 @@
             "RigidBody": {
                 "Type": "BOX",
                 "HalfExtents": [
-                    1.5,
                     10.5,
-                    1.5
+                    30.5,
+                    10.5
                 ],
                 "Mass": 0.0
             }
@@ -1559,9 +1559,9 @@
             "RigidBody": {
                 "Type": "BOX",
                 "HalfExtents": [
-                    1.5,
                     10.5,
-                    1.5
+                    30.5,
+                    10.5
                 ],
                 "Mass": 0.0
             }
@@ -2674,7 +2674,7 @@
                 1.0,
                 1.0,
                 1.0,
-                100.0
+                100000.0
             ],
             "Rotation": [
                 180.0,
@@ -2872,7 +2872,35 @@
     "Lights": [
         {
             "Name": "MainLight",
-            "Type": "POINT_LIGHT",
+            "Type": "DIRECTIONAL_LIGHT",
+            "Position": [
+                2406.0,
+                425.0,
+                15.0
+            ],
+            "Direction" :
+            [
+                0.3,
+                -1.0,
+                0.0
+            ],
+            "Attenuation": [
+                0.0,
+                0.0013739888090640307,
+                4.10160350128308e-9,
+                -431602080.0
+            ],
+            "DiffuseRGB_Alpha": [
+                0.6,
+                0.6,
+                0.6,
+                1.0
+            ],
+            "Turned": "ON"
+        },
+        {
+            "Name": "MainLightOLD",
+            "Type": "SPOT_LIGHT",
             "Position": [
                 2406.0,
                 425.0,
@@ -2890,7 +2918,7 @@
                 1.0,
                 1.0
             ],
-            "Turned": "ON"
+            "Turned": "OFF"
         },
         {
             "Name": "Torch_Light0",

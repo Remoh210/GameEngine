@@ -49,9 +49,9 @@ void main()
 	if ( bUseHeightMap )
 	{
 
-		vec2 tiledUV = vUV_x2.st * 15.0;
+		vec2 tiledUV = vUV_x2.st * 0.3;
 		float newTime = time * 0.00005;
-		float height = texture( texHeightMap, vec2(vUV_x2.s + newTime, vUV_x2.t + newTime) ).r;
+		float height = texture( texHeightMap, vec2(tiledUV.s + newTime, tiledUV.t + newTime) ).r;
 		//float height = clamp( HM_Color, 0.1, 1.0 );
 
 

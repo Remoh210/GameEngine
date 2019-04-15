@@ -31,7 +31,7 @@ bool bIsRunning = false;
 
 bool IsPicked = false;
 void commandsInterface();
-
+int contrMode = 1;
 bool IsShiftDown(GLFWwindow* window);
 
 
@@ -105,17 +105,34 @@ void key_callback( GLFWwindow* window,
 	//LOAD MODELS
 	if (key == GLFW_KEY_H && action == GLFW_PRESS)
 	{
-		SwitchToWireFrame(vec_pObjectsToDraw);
+		//contrMode = 1;
+		//SwitchToWireFrame(vec_pObjectsToDraw);
 	}
 	
 
 	if (glfwGetKey(window, GLFW_KEY_K))
 	{
-		//SwitchToSolid(vec_pObjectsToDraw);
+		//contrMode = 0;
+	    //SwitchToSolid(vec_pObjectsToDraw);
 		//findObjectByFriendlyName("Cloth")->softBody->SwitchWind();
 
 	}
 
+	if (glfwGetKey(window, GLFW_KEY_1))
+	{
+		contrMode = 1;
+		//SwitchToSolid(vec_pObjectsToDraw);
+		//findObjectByFriendlyName("Cloth")->softBody->SwitchWind();
+
+	}
+	if (glfwGetKey(window, GLFW_KEY_2))
+	{
+		contrMode = 2;
+		//SwitchToSolid(vec_pObjectsToDraw);
+		//findObjectByFriendlyName("Cloth")->softBody->SwitchWind();
+
+	}
+	
 
 	if (key == GLFW_KEY_ENTER && action == GLFW_PRESS)
 	{
@@ -424,7 +441,7 @@ void ProcessAsynKeys(GLFWwindow* window)
 
 	//*********************************************** Joystick Controlls**********************************************************************
 
-	if (glfwJoystickPresent(GLFW_JOYSTICK_1))
+	if (glfwJoystickPresent(GLFW_JOYSTICK_1) && contrMode == 1)
 	{
 		int count;
 		const float* axes = glfwGetJoystickAxes(GLFW_JOYSTICK_1, &count);
@@ -438,6 +455,41 @@ void ProcessAsynKeys(GLFWwindow* window)
 		
 
 
+
+		if(axes[4] > -0.5f)
+		{
+			//Ray Cast
+			glm::vec3 from = ch->position + glm::vec3(0.0f, 10.0f, 0.0f);
+			glm::vec3 to = ch->getForward();
+			to *= 50.0f;
+			to = to + ch->position;
+			to.y += 12.0f;
+			g_pDebugRendererACTUAL->addLine(from, to, glm::vec3(1.0f, 1.0f, 0.0f));
+			nPhysics::iRigidBody* hitRb = gPhysicsWorld->RayCastGetObject(from, to);
+
+			if (hitRb)
+			{
+				//Get Direction
+				//to.y = 20.0f;
+				glm::vec3 dir = to - hitRb->GetPosition();
+				dir = glm::normalize(dir);
+
+
+				if (glm::distance(hitRb->GetPosition(), to) > 2.0f)
+				{
+					hitRb->SetVelocity(dir * 30.0f);
+
+				}
+				else
+				{
+					hitRb->SetVelocity(glm::vec3(0.0f));
+				}
+
+			}
+		}
+
+
+
 		//Jump
 
 		if (buttons[1] == GLFW_PRESS && ch->pAnimController->GetCurrentAnimation() != "Run-jump")
@@ -448,11 +500,10 @@ void ProcessAsynKeys(GLFWwindow* window)
 			ch->rigidBody->SetVelocity(vel);
 		}
 
-
+		glm::vec3 velVec;
+		glm::vec3 CamDir = camera.getDirectionVector();
 		if (axes[1] < -0.2f)
 		{
-			glm::vec3 velVec;
-			glm::vec3 CamDir = camera.getDirectionVector();
 
 			//Ray Cast
 			glm::vec3 from = ch->position + glm::vec3(0.0f, 10.0f, 0.0f);
@@ -486,7 +537,16 @@ void ProcessAsynKeys(GLFWwindow* window)
 				ch->currentAnimation = "Run-forward";
 				ch->rigidBody->SetVelocity(velVec);
 
+				if (buttons[1] == GLFW_PRESS && ch->pAnimController->GetCurrentAnimation() != "Run-jump")
+				{
+					glm::vec3 vel;
+					vel = ch->rigidBody->GetVelocity();
+					vel.y = 17.0f;
+					ch->rigidBody->SetVelocity(vel);
+				}
+
 			}
+			//Casting gravity beam
 			else if (axes[4] > -0.5f)
 			{
 				velVec = CamDir * 30.0f;
@@ -503,18 +563,71 @@ void ProcessAsynKeys(GLFWwindow* window)
 			}
 
 		}
+		//walk Backward
+		else if (axes[1] > 0.2f)
+		{
+			velVec = -CamDir * 18.0f;
+			velVec.y = vel.y;
+			ch->currentAnimation = "Walk-backward";
+			ch->rigidBody->SetVelocity(velVec);
+
+		}
+		//strafe
+		else if (axes[0] > 0.2f)
+		{
+			//calculate Left
+			glm::vec3 left = glm::cross(CamDir, glm::vec3(0.0f, 1.0f, 0.0f));
+
+
+
+			velVec = left * 25.0f;
+			velVec.y = vel.y;
+			ch->rigidBody->SetVelocity(velVec);
+
+			if (axes[4] > -0.5f)
+			{
+				ch->currentAnimation = "Action5";
+			}
+			else
+			{
+				ch->currentAnimation = "Strafe-right";
+			}
+
+		}
+		else if (axes[0] < -0.2f)
+		{
+			//calculate Left
+			glm::vec3 left = -glm::cross(CamDir, glm::vec3(0.0f, 1.0f, 0.0f));
+
+
+
+			velVec = left * 25.0f;
+			velVec.y = vel.y;
+			ch->rigidBody->SetVelocity(velVec);
+
+			if (axes[4] > -0.5f)
+			{
+				ch->currentAnimation = "Action4";
+			}
+			else
+			{
+				ch->currentAnimation = "Strafe-left";
+			}
+
+		}
 		else if (axes[4] > -0.5f)
 		{
 			ch->currentAnimation = "Action2";
 			ch->rigidBody->SetVelocity(glm::vec3(0.0f, vel.y, 0.0f));
 
 		}
-		//else
-		//{
-		//	ch->currentAnimation = "Idle";
-		//	ch->rigidBody->SetVelocity(glm::vec3(0.0f, vel.y, 0.0f));
+		else
+		{
+			ch->currentAnimation = "Idle";
+			vel = ch->rigidBody->GetVelocity();
+			ch->rigidBody->SetVelocity(glm::vec3(0.0f, vel.y, 0.0f));
 
-		//}
+		}
 
 
 		   
@@ -540,7 +653,7 @@ void ProcessAsynKeys(GLFWwindow* window)
 	}
 
 
-	if (!bIsDebugMode) {
+	if (!bIsDebugMode && contrMode == 2) {
 
 
 
@@ -557,14 +670,14 @@ void ProcessAsynKeys(GLFWwindow* window)
 			glm::vec3 to = ch->getForward();
 			to *= 50.0f;
 			to = to + ch->position;
-			to.y = 20.0f;
+			to.y += 12.0f;
 			g_pDebugRendererACTUAL->addLine(from, to, glm::vec3(1.0f, 1.0f, 0.0f));
 			nPhysics::iRigidBody* hitRb = gPhysicsWorld->RayCastGetObject(from, to);
 
 			if (hitRb)
 			{
 				//Get Direction
-				to.y = 20.0f;
+				//to.y = 20.0f;
 				glm::vec3 dir = to - hitRb->GetPosition();
 				dir = glm::normalize(dir);
 				
@@ -704,8 +817,6 @@ void ProcessAsynKeys(GLFWwindow* window)
 			ch->rigidBody->SetVelocity(glm::vec3(0.0f, vel.y, 0.0f));
 
 		}
-
-
 
 	}
 
