@@ -427,6 +427,8 @@ bool AreAllModifiersUp(GLFWwindow* window)
 
 void ProcessAsynKeys(GLFWwindow* window)
 {
+
+
 	const float CAMERA_SPEED_SLOW = 5.0f;
 	const float CAMERA_SPEED_FAST = 100.0f;
 
@@ -438,6 +440,17 @@ void ProcessAsynKeys(GLFWwindow* window)
 	{
 		vel.y = 17.0f;
 	}
+
+
+
+
+
+	if (glfwGetKey(window, GLFW_KEY_7) == GLFW_PRESS)
+	{
+		cGameObject* testtt = findObjectByFriendlyName("boat");
+		testtt->rigidBody->ApplyImpulse(glm::vec3(0.0f, 200.0f, 0.0f), glm::vec3(5.0f, 0.0f, 5.0f));
+	}
+
 
 	//*********************************************** Joystick Controlls**********************************************************************
 

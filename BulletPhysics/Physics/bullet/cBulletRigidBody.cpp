@@ -332,6 +332,22 @@ namespace nPhysics {
 		//btVector3 vel = this->mBody->setMotionState()
 	}
 
+	void cBulletRigidBody::ApplyForce(glm::vec3 force, glm::vec3 relPos)
+	{
+		this->mBody->applyForce(nConvert::ToBullet(force), nConvert::ToBullet(relPos));
+	}
+
+	void cBulletRigidBody::ApplyImpulse(glm::vec3 force, glm::vec3 relPos)
+	{
+		mBody->applyImpulse(nConvert::ToBullet(force), nConvert::ToBullet(relPos));
+	}
+
+	void cBulletRigidBody::SetGravity(glm::vec3 gravity)
+	{
+		mBody->setGravity(nConvert::ToBullet(gravity));
+	}
+
+
 	void cBulletRigidBody::SetEulerRotation(glm::vec3 rotation)
 	{
 	}

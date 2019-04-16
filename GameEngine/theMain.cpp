@@ -20,6 +20,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <vector>
+#include "BehaviourManager.h"
+#include "WanderBehaviour.h"
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <Interfaces/iRigidBody.h>
@@ -86,8 +88,10 @@ std::vector<cGameObject *> vec_pObjectsToDraw;
 std::vector<cGameObject *> vec_controlable;
 unsigned int numberOfObjectsToDraw = 0;
 
+
+
 unsigned int SCR_WIDTH = 1000;
-unsigned int SCR_HEIGHT = 800;
+unsigned int SCR_HEIGHT = 900;
 std::string title = "Default";
 std::string scene = "Scene1.json";
 
@@ -299,6 +303,9 @@ int main(void) {
   g_pCharacterManager = new cCharacterManager(vec_pObjectsToDraw);
   g_pCharacterManager->setActiveChar("chan");
 
+
+
+
   // for (unsigned int objIndex = 0;
   //	objIndex != (unsigned int)vec_pObjectsToDraw.size();
   //	objIndex++)
@@ -354,6 +361,9 @@ int main(void) {
   for (int i = 0; i < vec_pObjectsToDraw.size(); i++) 
   {
 	  cGameObject* go = vec_pObjectsToDraw[i];
+
+	  go->InitPosition = go->position;
+
 	  if (go->bSave)
 	  {
 		  vec_controlable.push_back(go);
@@ -361,6 +371,49 @@ int main(void) {
 	  
   }
 
+
+
+
+
+
+
+
+
+
+  BehaviourManager* behavManager = new BehaviourManager();
+
+  cGameObject* pPlayer = findObjectByFriendlyName("chan");
+  cGameObject* pWanderEnemy = findObjectByFriendlyName("Devil-Mage");
+
+
+  //pApproachEnemy->initPos = pApproachEnemy->position;
+  //pWanderEnemy->initPos = pWanderEnemy->position;
+  //pPursueEnemy->initPos = pPursueEnemy->position;
+  //pSeekEnemy->initPos = pSeekEnemy->position;
+
+  //Initialize Behaviours
+
+  WanderBehaviour* wander = new WanderBehaviour(pWanderEnemy, 20.2f, 300.2f, 0.0f, glm::vec3(0.0f), 30.0f, -30.0f, pPlayer); //(Agent, Target, maxSpeed, WanderOrigin , UpLimit, DownLimit)
+  behavManager->SetBehaviour(pWanderEnemy, wander);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
   // Draw the "scene" (run the program)
   while (!glfwWindowShouldClose(window)) {
 	  ::pTheShaderManager->useShaderProgram("BasicUberShader");
@@ -660,8 +713,8 @@ int main(void) {
 	std::string PairS = gPhysicsWorld->GetLastColPair().second;
 
 	if (!collidedA) {
-		if (PairF == "chan" && PairS == "ghostSphere1" ||
-			PairS == "chan" && PairF == "ghostSphere1") {
+		if (PairF == "artifact_1" && PairS == "ghostSphere1" ||
+			PairS == "artifact_1" && PairF == "ghostSphere1") {
 
 			collidedA = true;
 			gameCounter += 1;
@@ -669,8 +722,8 @@ int main(void) {
 	}
 
 	if (!collidedB) {
-		if (PairF == "chan" && PairS == "ghostSphere2" ||
-			PairS == "chan" && PairF == "ghostSphere2") {
+		if (PairF == "artifact_2" && PairS == "ghostSphere1" ||
+			PairS == "artifact_2" && PairF == "ghostSphere1") {
 
 			collidedA = true;
 			gameCounter += 1;
@@ -678,8 +731,8 @@ int main(void) {
 	}
 
 	if (!collidedC) {
-		if (PairF == "chan" && PairS == "ghostSphere3" ||
-			PairS == "chan" && PairF == "ghostSphere3") {
+		if (PairF == "artifact_3" && PairS == "ghostSphere1" ||
+			PairS == "artifact_3" && PairF == "ghostSphere1") {
 
 			collidedA = true;
 			gameCounter += 1;
@@ -687,8 +740,8 @@ int main(void) {
 	}
 
 	if (!collidedC) {
-		if (PairF == "chan" && PairS == "ghostSphere4" ||
-			PairS == "chan" && PairF == "ghostSphere4") {
+		if (PairF == "artifact_4" && PairS == "ghostSphere1" ||
+			PairS == "artifact_4" && PairF == "ghostSphere1") {
 
 			collidedA = true;
 			gameCounter += 1;
@@ -719,6 +772,10 @@ int main(void) {
         }
       }
     }
+
+
+
+
 
     //if (bIsDebugMode) {
     //  // Call the debug renderer
@@ -772,7 +829,7 @@ int main(void) {
     //::p_LuaScripts->UpdateCG(deltaTime);
     //::p_LuaScripts->Update(deltaTime);
 
-  
+	behavManager->update(deltaTime);
 
     player = g_pCharacterManager->getActiveChar();
     if (camera.mCameraType == THIRD_PERSON)
@@ -831,7 +888,7 @@ int main(void) {
 
     // Kill Velocity for inactive characters
 
-    g_pCharacterManager->setAllChatVel();
+    //g_pCharacterManager->setAllChatVel();
     //{
     //	std::cout << "hit" << std::endl;
     //}

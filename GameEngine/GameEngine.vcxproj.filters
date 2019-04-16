@@ -117,6 +117,9 @@
     <Filter Include="Shader Stuff\Shaders\Post_effects">
       <UniqueIdentifier>{ca69ff91-1502-43e5-8824-875bb8ef372e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Behaviour">
+      <UniqueIdentifier>{f59ba40f-f060-4972-8ad3-364cbaa52a9c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="theMain.cpp">
@@ -299,6 +302,15 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
+    <ClCompile Include="WanderBehaviour.cpp">
+      <Filter>Behaviour</Filter>
+    </ClCompile>
+    <ClCompile Include="BehaviourManager.cpp">
+      <Filter>Behaviour</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLoop.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="linmath.h">
@@ -468,6 +480,15 @@
     </ClInclude>
     <ClInclude Include="PostEffect.h">
       <Filter>Source Files\PostEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="WanderBehaviour.h">
+      <Filter>Behaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour.h">
+      <Filter>Behaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviourManager.h">
+      <Filter>Behaviour</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

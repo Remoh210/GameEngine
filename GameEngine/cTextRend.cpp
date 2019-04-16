@@ -40,7 +40,7 @@ GLboolean cTextRend::initfreetype() {
 		fprintf(stderr, "unable to init free type\n");
 		return GL_FALSE;
 	}
-
+	//if (FT_New_Face(mft, "assets/fonts/unifont-11.0.03.ttf", 0, &mface))
 	if (FT_New_Face(mft, "assets/fonts/ARIALUNI.TTF", 0, &mface))
 	{
 		fprintf(stderr, "unable to open font\n");

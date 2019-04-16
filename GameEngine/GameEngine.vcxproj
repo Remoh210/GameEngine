@@ -154,6 +154,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BehaviourManager.cpp" />
     <ClCompile Include="cAABB.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="cAnimationCurveCommand.cpp" />
@@ -192,6 +193,7 @@
     <ClCompile Include="DrawObject_call.cpp" />
     <ClCompile Include="Error\CErrorLog.cpp" />
     <ClCompile Include="Error\COpenGLError.cpp" />
+    <ClCompile Include="GameLoop.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="HotSwap.cpp" />
     <ClCompile Include="LoadModels.cpp" />
@@ -216,8 +218,11 @@
     <ClCompile Include="TextureManager\CTextureFromBMP.cpp" />
     <ClCompile Include="theMain.cpp" />
     <ClCompile Include="UserIO.cpp" />
+    <ClCompile Include="WanderBehaviour.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Behaviour.h" />
+    <ClInclude Include="BehaviourManager.h" />
     <ClInclude Include="cAABB.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraChangeanimr.h" />
@@ -274,6 +279,7 @@
     <ClInclude Include="TextureManager\C24BitBMPpixel.h" />
     <ClInclude Include="TextureManager\cBasicTextureManager.h" />
     <ClInclude Include="TextureManager\CTextureFromBMP.h" />
+    <ClInclude Include="WanderBehaviour.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\scripts\example.lua" />

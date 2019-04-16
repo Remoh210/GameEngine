@@ -36,6 +36,10 @@ namespace nPhysics
 		virtual void SettAccel(glm::vec3 accel) = 0;
 		//virtual void GetAABB(glm::vec3& minBoundsOut, glm::vec3& maxBoundsOut) = 0;
 
+		virtual void ApplyForce(glm::vec3 force, glm::vec3 relPos = glm::vec3(0.0f)) = 0;
+		virtual void ApplyImpulse(glm::vec3 force, glm::vec3 relPos = glm::vec3(0.0f)) = 0;
+		virtual void SetGravity(glm::vec3 gravity) = 0;
+
 
 	protected:
 		iRigidBody(){}

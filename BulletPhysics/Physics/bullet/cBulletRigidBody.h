@@ -28,6 +28,9 @@ namespace nPhysics
 		virtual std::string GetGOName();
 
 		virtual void SetPosition(glm::vec3 position);
+		virtual void ApplyForce(glm::vec3 force, glm::vec3 relPos = glm::vec3(0.0f));
+		virtual void ApplyImpulse(glm::vec3 force, glm::vec3 relPos = glm::vec3(0.0f));
+		virtual void SetGravity(glm::vec3 gravity);
 		virtual void SetEulerRotation(glm::vec3 rotation);
 		virtual void SetMatRotation(glm::mat4 rotation);
 		virtual void SetMass(float mass);
