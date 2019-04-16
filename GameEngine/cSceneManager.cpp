@@ -158,6 +158,14 @@ bool cSceneManager::saveScene(std::string filename) {
 						float r = 0.0f;
 						CurModel->rigidBody->GetShape()->GetSphereRadius(r);
 						PhysObjValue.AddMember("Radius", r, allocator);
+
+						
+						if (CurModel->bIsGhost)
+						{
+							rapidjson::Value isGhost(CurModel->bIsGhost);
+							PhysObjValue.AddMember("IsGhost", isGhost, allocator);
+						}
+						
 					}
 						break;
 					case nPhysics::SHAPE_TYPE_PLANE:
@@ -755,6 +763,13 @@ bool cSceneManager::loadScene(std::string filename) {
 				float radius = GameObject[i]["RigidBody"]["Radius"].GetFloat();
 				CurShape = gPhysicsFactory->CreateSphereShape(radius);
 				def.Mass = GameObject[i]["RigidBody"]["Mass"].GetFloat();
+
+
+				if (GameObject[i]["RigidBody"].HasMember("IsGhost"))
+				{
+					def.isGhostShape = GameObject[i]["RigidBody"]["IsGhost"].GetBool();
+					CurModel->bIsGhost = def.isGhostShape;
+				}
 
 				nPhysics::iRigidBody* rigidBody = gPhysicsFactory->CreateRigidBody(def, CurShape);
 				CurModel->rigidBody = rigidBody;

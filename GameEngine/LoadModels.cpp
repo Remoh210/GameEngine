@@ -403,6 +403,7 @@ void LoadModelsIntoScene( std::vector<cGameObject*> &vec_pObjectsToDraw )
 		pDebugSphere->position = glm::vec3(-100.0f, 10.0f, 0.0f);
 		pDebugSphere->bIsUpdatedByPhysics = true;
 		pDebugSphere->bIsDebug = true;
+		pDebugSphere->bSave = false;
 		pDebugSphere->bIsVisible = false;
 		pDebugSphere->pDebugRenderer = ::g_pDebugRenderer;
 		vec_pObjectsToDraw.push_back(pDebugSphere);
@@ -443,105 +444,105 @@ void LoadModelsIntoScene( std::vector<cGameObject*> &vec_pObjectsToDraw )
 		vec_pObjectsToDraw.push_back(pDebugcapsule);
 	}
 	
-	//::g_pTheTextureManager->SetBasePath("assets/textures");
-	//sModelDrawInfo wallDrawInfo;
-	//wallDrawInfo.meshFileName = "wall/brick_wall.ply";
-	//g_pTheVAOMeshManager->FindDrawInfoByModelName(wallDrawInfo);
-	//{
+	::g_pTheTextureManager->SetBasePath("assets/textures");
+	sModelDrawInfo wallDrawInfo;
+	wallDrawInfo.meshFileName = "wall/brick_wall.ply";
+	g_pTheVAOMeshManager->FindDrawInfoByModelName(wallDrawInfo);
+	{
 
-	//	glm::vec3 pos(1005.3f, 39.4f, 987.46f);
-	//	glm::vec3 rot(0.0f);
-	//	//glm::vec3 pos(0.0f);
-	//	for (int i = 0; i < 58; i++)
-	//	{
-	//		if(i < 14)
-	//		{
-	//			pos.x -= 133.3;
-	//			
-	//		}
-	//		else if (i == 15)
-	//		{
-	//			pos.z -= 100;
-	//			pos.x = -995.0f;
-	//			rot.y = 90.0f;
-	//		}
-	//		else if (i > 15 && i < 29)
-	//		{
-	//			pos.x = -995.0f;
-	//			rot.y = 90.0f;
-	//			pos.z -= 133.3;
-	//		}
-	//		else if (i == 29)
-	//		{
-	//			pos.z -= 143.3;
-	//			pos.x += 133.3f;
-	//			//pos.z += 100;
-	//			rot.y = 180.0f;
-	//		}
-	//		else if (i > 29 && i < 43)
-	//		{
-	//			//pos.z -= 143.3;
-	//			pos.x += 133.3f;
-	//			//pos.z += 100;
-	//			rot.y = 180.0f;
-	//		}
-	//		else if (i == 43)
-	//		{
-	//			pos.x += 115.3f;
+		glm::vec3 pos(1005.3f, 39.4f, 987.46f);
+		glm::vec3 rot(0.0f);
+		//glm::vec3 pos(0.0f);
+		for (int i = 0; i < 58; i++)
+		{
+			if(i < 14)
+			{
+				pos.x -= 133.3;
+				
+			}
+			else if (i == 15)
+			{
+				pos.z -= 100;
+				pos.x = -995.0f;
+				rot.y = 90.0f;
+			}
+			else if (i > 15 && i < 29)
+			{
+				pos.x = -995.0f;
+				rot.y = 90.0f;
+				pos.z -= 133.3;
+			}
+			else if (i == 29)
+			{
+				pos.z -= 143.3;
+				pos.x += 133.3f;
+				//pos.z += 100;
+				rot.y = 180.0f;
+			}
+			else if (i > 29 && i < 43)
+			{
+				//pos.z -= 143.3;
+				pos.x += 133.3f;
+				//pos.z += 100;
+				rot.y = 180.0f;
+			}
+			else if (i == 43)
+			{
+				pos.x += 115.3f;
 
-	//			pos.z += 133.0f;
-	//			rot.y = 270.0f;
-	//		}
-	//		else if(i > 44)
-	//		{
-	//			pos.z += 133.0f;
-	//		}
-
-
-	//		cGameObject* pWall = new cGameObject();
-	//		pWall->setDiffuseColour(glm::vec3(0.0f, 0.0f, 0.0f));
-	//		pWall->friendlyName = "brick_wall" + std::to_string(i);
-	//		float scale = 10.0f;
-	//		pWall->nonUniformScale = glm::vec3(scale, scale, scale);
-	//		pWall->setMeshOrientationEulerAngles(rot, true);
-	//		pWall->meshName = "wall/brick_wall.ply";
-	//		pWall->bIsWireFrame = false;
-	//		pWall->bDontLight = false;
-	//		pWall->position = pos;
-	//		pWall->bIsVisible = true;
-	//		pWall->setSpecularPower(100.0f);
-	//		pWall->bSave = false;
-	//		
-	//		
-	//		sTextureInfo CurModelTex;
-	//		CurModelTex.name = "wall/brickTex.bmp";
-	//		CurModelTex.strength = 1.0f;
-	//		::g_pTheTextureManager->Create2DTextureFromBMPFile(CurModelTex.name, true);
-	//		pWall->vecTextures.push_back(CurModelTex);
-
-	//		
-	//		glm::vec3 halfExtents = glm::vec3(wallDrawInfo.maxX * scale, wallDrawInfo.maxY * scale,
-	//			wallDrawInfo.maxZ * scale);
+				pos.z += 133.0f;
+				rot.y = 270.0f;
+			}
+			else if(i > 44)
+			{
+				pos.z += 133.0f;
+			}
 
 
-	//		nPhysics::iShape* CurShape = NULL;
-	//		nPhysics::sRigidBodyDef def;
-	//		//in Radians
-	//		def.Position = pWall->position;
-	//		def.Mass = 0.0f;
-	//		def.quatOrientation = pWall->m_meshQOrientation;
-	//		def.GameObjectName = pWall->friendlyName;
+			cGameObject* pWall = new cGameObject();
+			pWall->setDiffuseColour(glm::vec3(0.0f, 0.0f, 0.0f));
+			pWall->friendlyName = "brick_wall" + std::to_string(i);
+			float scale = 10.0f;
+			pWall->nonUniformScale = glm::vec3(scale, scale, scale);
+			pWall->setMeshOrientationEulerAngles(rot, true);
+			pWall->meshName = "wall/brick_wall.ply";
+			pWall->bIsWireFrame = false;
+			pWall->bDontLight = false;
+			pWall->position = pos;
+			pWall->bIsVisible = true;
+			pWall->setSpecularPower(100.0f);
+			pWall->bSave = false;
+			
+			
+			sTextureInfo CurModelTex;
+			CurModelTex.name = "wall/brickTex.bmp";
+			CurModelTex.strength = 1.0f;
+			::g_pTheTextureManager->Create2DTextureFromBMPFile(CurModelTex.name, true);
+			pWall->vecTextures.push_back(CurModelTex);
 
-	//		CurShape = gPhysicsFactory->CreateBoxShape(halfExtents);
+			
+			glm::vec3 halfExtents = glm::vec3(wallDrawInfo.maxX * scale, wallDrawInfo.maxY * scale,
+				wallDrawInfo.maxZ * scale);
 
-	//		nPhysics::iRigidBody* rigidBody = gPhysicsFactory->CreateRigidBody(def, CurShape);
-	//		pWall->rigidBody = rigidBody;
-	//		gPhysicsWorld->AddBody(rigidBody);
 
-	//		vec_pObjectsToDraw.push_back(pWall);
-	//	}
-	//	
-	//}
+			nPhysics::iShape* CurShape = NULL;
+			nPhysics::sRigidBodyDef def;
+			//in Radians
+			def.Position = pWall->position;
+			def.Mass = 0.0f;
+			def.quatOrientation = pWall->m_meshQOrientation;
+			def.GameObjectName = pWall->friendlyName;
+
+			CurShape = gPhysicsFactory->CreateBoxShape(halfExtents);
+
+			nPhysics::iRigidBody* rigidBody = gPhysicsFactory->CreateRigidBody(def, CurShape);
+			pWall->rigidBody = rigidBody;
+			gPhysicsWorld->AddBody(rigidBody);
+
+			vec_pObjectsToDraw.push_back(pWall);
+		}
+		
+	}
 
 
 	////Graves

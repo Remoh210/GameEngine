@@ -19,13 +19,19 @@ in vec4 vBoneID;		// really passing it as 4 values
 in vec4 vBoneWeight;	
 
 
-out vec4 color;			// exit to fragment
-out vec4 vertPosWorld;	// "World space"
-out vec4 vertNormal;	// "Model space"
-out vec4 vertUV_x2;		// To the next shader stage
-out vec4 vertTanXYZ;	// Tangent to the surface
-out vec4 vertBiNormXYZ;	// bi-normal (or bi-tangent) to the surface
-out vec4 viewSpace; //For fog
+
+
+struct sVSOut
+{
+	vec4 color;			// exit to fragment
+	vec4 vertPosWorld;	// "World space"
+	vec4 vertNormal;	// "Model space"
+	vec4 vertUV_x2;		// To the next shader stage
+	vec4 vertTanXYZ;	// Tangent to the surface
+	vec4 vertBiNormXYZ;	// bi-normal (or bi-tangent) to the surface
+	vec4 viewSpace;     //For fog
+};
+out sVSOut vsOutput;
 
 
 
@@ -49,14 +55,14 @@ void main()
 	if ( bUseHeightMap )
 	{
 
-		vec2 tiledUV = vUV_x2.st * 0.3;
+		vec2 tiledUV = vUV_x2.st * 0.2;
 		float newTime = time * 0.00005;
 		float height = texture( texHeightMap, vec2(tiledUV.s + newTime, tiledUV.t + newTime) ).r;
 		//float height = clamp( HM_Color, 0.1, 1.0 );
 
 
 
-		float HeightRatio = 0.05;
+		float HeightRatio = 0.08;
 		height = height * HeightRatio;
 		
 		//posTemp.y = 0.0f;		// "Flatten" the mesh
@@ -66,14 +72,14 @@ void main()
 	
 	}//if ( bUseHeightMap )
 	
-    color = vColour;
+    vsOutput.color = vColour;
 	
 	// Pass the texture coordinates out;
-	vertUV_x2 = vUV_x2;
+	vsOutput.vertUV_x2 = vUV_x2;
 	
 	// Also pass the bi-tangent (bi-normal) and tangent to fragment
-	vertTanXYZ = vTanXYZ;		// Tangent to the surface
-	vertBiNormXYZ = vBiNormXYZ;		// bi-normal (or bi-tangent) to the surface
+	vsOutput.vertTanXYZ = vTanXYZ;		// Tangent to the surface
+	vsOutput.vertBiNormXYZ = vBiNormXYZ;		// bi-normal (or bi-tangent) to the surface
 
 	
 	// Skinned mesh or not?
@@ -99,9 +105,9 @@ void main()
 		mat4 MVP = matProj * matView * matModel;
 		gl_Position = MVP * vertPositionFromBones;			// ON SCREEN
 		
-		vertPosWorld = matModel * vec4(posTemp, 1.0);
+		vsOutput.vertPosWorld = matModel * vec4(posTemp, 1.0);
 		
-		viewSpace = matView * matModel * vec4(posTemp,1);
+		vsOutput.viewSpace = matView * matModel * vec4(posTemp,1);
 		
 		// Transforms the normal into "world space"
 		// Remove all scaling and transformation from model
@@ -112,19 +118,19 @@ void main()
 		
 		vec4 vNormBone = matBoneTransform_InTrans * vec4(normalize(vNormal.xyz),1.0f);
 		
-		vertNormal = matModelInvTrans * vNormBone;
+		vsOutput.vertNormal = matModelInvTrans * vNormBone;
 		
 		
 		// And then you do the same for the binormal and bitangent
 		vec4 vTanXYZ_Bone = matBoneTransform_InTrans * vTanXYZ;
-		vertTanXYZ = matModelInvTrans * vTanXYZ_Bone;
+		vsOutput.vertTanXYZ = matModelInvTrans * vTanXYZ_Bone;
 		
 		vec4 vBiNormXYZ_Bone = matBoneTransform_InTrans * vBiNormXYZ;
-		vertBiNormXYZ = matModelInvTrans * vBiNormXYZ_Bone;
+		vsOutput.vertBiNormXYZ = matModelInvTrans * vBiNormXYZ_Bone;
 		
 		
 		// Debug: make green if this flag is set
-		color.rgb = vec3(0.0f, 1.0f, 0.0f);
+		vsOutput.color.rgb = vec3(0.0f, 1.0f, 0.0f);
 	}
 	else
 	{
@@ -133,15 +139,15 @@ void main()
 		mat4 MVP = matProj * matView * matModel;
 		gl_Position = MVP * vec4(posTemp, 1.0f);			// ON SCREEN
 		
-		vertPosWorld = matModel * vec4(posTemp, 1.0f);
+		vsOutput.vertPosWorld = matModel * vec4(posTemp, 1.0f);
 
 
 		
-		viewSpace = matView * matModel * vec4(posTemp,1);
+		vsOutput.viewSpace = matView * matModel * vec4(posTemp,1);
 		// Transforms the normal into "world space"
 		// Remove all scaling and transformation from model
 		// Leaving ONLY rotation... 
-		vertNormal = matModelInvTrans * vec4(normalize(vNormal.xyz),1.0f);
+		vsOutput.vertNormal = matModelInvTrans * vec4(normalize(vNormal.xyz),1.0f);
 	
 	}//if ( bIsASkinnedMesh )
 	

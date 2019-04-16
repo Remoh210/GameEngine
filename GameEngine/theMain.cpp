@@ -64,6 +64,8 @@ int cou;
 int nbFrames = 0;
 int FPS = 0;
 
+int gameCounter = 0;
+
 bool RayHitted = false;
 std::vector<cAABB::sAABB_Triangle> vec_cur_AABB_tris;
 void UpdateWindowTitle(void);
@@ -75,6 +77,9 @@ bool bIsDebugMode = false;
 // for collision
 float time = 0.0f;
 bool collided = false;
+bool collidedA = false;
+bool collidedB = false;
+bool collidedC = false;
 // for collision
 std::vector<cGameObject *> vec_pObjectsToDraw;
 // for physics
@@ -166,6 +171,7 @@ int main(void) {
 
   cShaderManager::cShader vertexShader;
   cShaderManager::cShader fragmentShader;
+  cShaderManager::cShader geometryShader;
 
   vertexShader.fileName = "vertex01.vert";
   vertexShader.shaderType = cShaderManager::cShader::VERTEX_SHADER;
@@ -173,8 +179,13 @@ int main(void) {
   fragmentShader.fileName = "fragment01.frag";
   fragmentShader.shaderType = cShaderManager::cShader::FRAGMENT_SHADER;
 
+  geometryShader.fileName = "geometry.glsl";
+  geometryShader.shaderType = cShaderManager::cShader::GEOMETRY_SHADER;
+
   if (pTheShaderManager->createProgramFromFile(
-          "BasicUberShader", vertexShader,
+          "BasicUberShader", 
+			vertexShader,
+			geometryShader,	
           fragmentShader)) { // Shaders are OK
     std::cout << "Compiled shaders OK." << std::endl;
   } else {
@@ -334,9 +345,9 @@ int main(void) {
 
 
 
-  float bloom_strength = 5.f;
+  float bloom_strength = 10.0f;
   int bloom_blur_iterations = 20;
-  float bloom_threshold = 0.65f;
+  float bloom_threshold = 0.55f;
 
 
 
@@ -438,9 +449,51 @@ int main(void) {
         //DrawObject(portal2, matModel, program, FBO_Portal2);
         //portal->bIsVisible = false;
        // portal2->bIsVisible = false;
-
+		
         DrawScene_Simple(vec_pObjectsToDraw, program, 1);
         
+		for (std::vector<sLight *>::iterator it = LightManager->vecLights.begin();
+			it != LightManager->vecLights.end(); ++it) {
+
+			sLight *CurLight = *it;
+			if (CurLight->AtenSphere == true) {
+
+				cGameObject *pDebugSphere = findObjectByFriendlyName("DebugSphere");
+				pDebugSphere->bIsVisible = true;
+				pDebugSphere->bDontLight = true;
+				glm::vec4 oldDiffuse = pDebugSphere->materialDiffuse;
+				glm::vec3 oldScale = pDebugSphere->nonUniformScale;
+				pDebugSphere->setDiffuseColour(
+					glm::vec3(255.0f / 255.0f, 105.0f / 255.0f, 180.0f / 255.0f));
+				pDebugSphere->bUseVertexColour = false;
+				pDebugSphere->position = glm::vec3(CurLight->position);
+				glm::mat4 matBall(1.0f);
+
+				pDebugSphere->materialDiffuse = oldDiffuse;
+				pDebugSphere->setUniformScale(0.1f); // Position
+				DrawObject(pDebugSphere, matBall, program);
+
+				const float ACCURACY_OF_DISTANCE = 0.0001f;
+				const float INFINITE_DISTANCE = 10000.0f;
+
+				float distance90Percent = pLightHelper->calcApproxDistFromAtten(
+					0.90f, ACCURACY_OF_DISTANCE, INFINITE_DISTANCE, CurLight->atten.x,
+					CurLight->atten.y, CurLight->atten.z);
+
+				pDebugSphere->setUniformScale(distance90Percent); // 90% brightness
+				// pDebugSphere->objColour = glm::vec3(1.0f,1.0f,0.0f);
+				pDebugSphere->setDiffuseColour(glm::vec3(1.0f, 1.0f, 0.0f));
+				DrawObject(pDebugSphere, matBall, program);
+
+
+
+				//			pDebugSphere->objColour = oldColour;
+				pDebugSphere->materialDiffuse = oldDiffuse;
+				pDebugSphere->nonUniformScale = oldScale;
+				pDebugSphere->bIsVisible = false;
+			}
+		}
+
 
 #pragma endregion
       
@@ -535,8 +588,9 @@ int main(void) {
           strhited = "Ray Hit: " + bodyHit->GetGOName();
         else
           strhited = "Ray Hit: Nothing";
-
+		std::string artCount = "Artifacts found : " + std::to_string(gameCounter) + " Out of 3";
         g_textRenderer->drawText(screen_quad.width, screen_quad.height, strhited.c_str(), 200.0f);
+		g_textRenderer->drawText(screen_quad.width, screen_quad.height, artCount.c_str(), 250.0f);
         // g_textRenderer->drawText(width, height,"Ray hit: " + RayHitted ?
         // "no": "yes" , 200.0f);
 
@@ -579,26 +633,68 @@ int main(void) {
 
     // Collision listner, kind of....
 
-    std::string PairF = gPhysicsWorld->GetLastColPair().first;
-    std::string PairS = gPhysicsWorld->GetLastColPair().second;
-    if (PairF == "chan" && PairS == "HingeCube" ||
-        PairS == "chan" && PairF == "HingeCube") {
+    //std::string PairF = gPhysicsWorld->GetLastColPair().first;
+    //std::string PairS = gPhysicsWorld->GetLastColPair().second;
+    //if (PairF == "chan" && PairS == "HingeCube" ||
+    //    PairS == "chan" && PairF == "HingeCube") {
 
-      collided = true;
-    }
-    if (collided) {
-      cGameObject *hgcube = findObjectByFriendlyName("HingeCube");
-      time += deltaTime;
-      if (time < 2.0f) {
-        hgcube->vecTextures[1].strength = 1.0f;
-        time += deltaTime;
+    //  collided = true;
+    //}
+    //if (collided) {
+    //  cGameObject *hgcube = findObjectByFriendlyName("HingeCube");
+    //  time += deltaTime;
+    //  if (time < 2.0f) {
+    //    hgcube->vecTextures[1].strength = 1.0f;
+    //    time += deltaTime;
 
-      } else {
-        hgcube->vecTextures[1].strength = 0.0f;
-        time = 0.f;
-        collided = false;
-      }
-    }
+    //  } else {
+    //    hgcube->vecTextures[1].strength = 0.0f;
+    //    time = 0.f;
+    //    collided = false;
+    //  }
+    //}
+		
+
+
+	std::string PairF = gPhysicsWorld->GetLastColPair().first;
+	std::string PairS = gPhysicsWorld->GetLastColPair().second;
+
+	if (!collidedA) {
+		if (PairF == "chan" && PairS == "ghostSphere1" ||
+			PairS == "chan" && PairF == "ghostSphere1") {
+
+			collidedA = true;
+			gameCounter += 1;
+		}
+	}
+
+	if (!collidedB) {
+		if (PairF == "chan" && PairS == "ghostSphere2" ||
+			PairS == "chan" && PairF == "ghostSphere2") {
+
+			collidedA = true;
+			gameCounter += 1;
+		}
+	}
+
+	if (!collidedC) {
+		if (PairF == "chan" && PairS == "ghostSphere3" ||
+			PairS == "chan" && PairF == "ghostSphere3") {
+
+			collidedA = true;
+			gameCounter += 1;
+		}
+	}
+
+	if (!collidedC) {
+		if (PairF == "chan" && PairS == "ghostSphere4" ||
+			PairS == "chan" && PairF == "ghostSphere4") {
+
+			collidedA = true;
+			gameCounter += 1;
+		}
+	}
+
 
     for (int i = 0; i < vec_pObjectsToDraw.size(); i++) {
       cGameObject *curMesh = vec_pObjectsToDraw[i];
@@ -676,75 +772,7 @@ int main(void) {
     //::p_LuaScripts->UpdateCG(deltaTime);
     //::p_LuaScripts->Update(deltaTime);
 
-    for (std::vector<sLight *>::iterator it = LightManager->vecLights.begin();
-         it != LightManager->vecLights.end(); ++it) {
-
-      sLight *CurLight = *it;
-      if (CurLight->AtenSphere == true) {
-
-        cGameObject *pDebugSphere = findObjectByFriendlyName("DebugSphere");
-        pDebugSphere->bIsVisible = true;
-        pDebugSphere->bDontLight = true;
-        glm::vec4 oldDiffuse = pDebugSphere->materialDiffuse;
-        glm::vec3 oldScale = pDebugSphere->nonUniformScale;
-        pDebugSphere->setDiffuseColour(
-            glm::vec3(255.0f / 255.0f, 105.0f / 255.0f, 180.0f / 255.0f));
-        pDebugSphere->bUseVertexColour = false;
-        pDebugSphere->position = glm::vec3(CurLight->position);
-        glm::mat4 matBall(1.0f);
-
-        pDebugSphere->materialDiffuse = oldDiffuse;
-        pDebugSphere->setUniformScale(0.1f); // Position
-        DrawObject(pDebugSphere, matBall, program);
-
-        const float ACCURACY_OF_DISTANCE = 0.0001f;
-        const float INFINITE_DISTANCE = 10000.0f;
-
-        float distance90Percent = pLightHelper->calcApproxDistFromAtten(
-            0.90f, ACCURACY_OF_DISTANCE, INFINITE_DISTANCE, CurLight->atten.x,
-            CurLight->atten.y, CurLight->atten.z);
-
-        pDebugSphere->setUniformScale(distance90Percent); // 90% brightness
-        // pDebugSphere->objColour = glm::vec3(1.0f,1.0f,0.0f);
-        pDebugSphere->setDiffuseColour(glm::vec3(1.0f, 1.0f, 0.0f));
-        DrawObject(pDebugSphere, matBall, program);
-
-        //			pDebugSphere->objColour =
-        //glm::vec3(0.0f,1.0f,0.0f);
-        //// 50% brightness
-        pDebugSphere->setDiffuseColour(glm::vec3(0.0f, 1.0f, 0.0f));
-        float distance50Percent = pLightHelper->calcApproxDistFromAtten(
-            0.50f, ACCURACY_OF_DISTANCE, INFINITE_DISTANCE, CurLight->atten.x,
-            CurLight->atten.y, CurLight->atten.z);
-        pDebugSphere->setUniformScale(distance50Percent);
-        DrawObject(pDebugSphere, matBall, program);
-
-        //			pDebugSphere->objColour =
-        //glm::vec3(1.0f,0.0f,0.0f);
-        //// 25% brightness
-        pDebugSphere->setDiffuseColour(glm::vec3(1.0f, 0.0f, 0.0f));
-        float distance25Percent = pLightHelper->calcApproxDistFromAtten(
-            0.25f, ACCURACY_OF_DISTANCE, INFINITE_DISTANCE, CurLight->atten.x,
-            CurLight->atten.y, CurLight->atten.z);
-        pDebugSphere->setUniformScale(distance25Percent);
-        DrawObject(pDebugSphere, matBall, program);
-
-        float distance1Percent = pLightHelper->calcApproxDistFromAtten(
-            0.01f, ACCURACY_OF_DISTANCE, INFINITE_DISTANCE, CurLight->atten.x,
-            CurLight->atten.y, CurLight->atten.z);
-        //			pDebugSphere->objColour =
-        //glm::vec3(0.0f,0.0f,1.0f);
-        //// 1% brightness
-        pDebugSphere->setDiffuseColour(glm::vec3(0.0f, 0.0f, 1.0f));
-        pDebugSphere->setUniformScale(distance1Percent);
-        DrawObject(pDebugSphere, matBall, program);
-
-        //			pDebugSphere->objColour = oldColour;
-        pDebugSphere->materialDiffuse = oldDiffuse;
-        pDebugSphere->nonUniformScale = oldScale;
-        pDebugSphere->bIsVisible = false;
-      }
-    }
+  
 
     player = g_pCharacterManager->getActiveChar();
     if (camera.mCameraType == THIRD_PERSON)

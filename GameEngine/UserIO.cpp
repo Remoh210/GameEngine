@@ -31,7 +31,7 @@ bool bIsRunning = false;
 
 bool IsPicked = false;
 void commandsInterface();
-int contrMode = 1;
+int contrMode = 2;
 bool IsShiftDown(GLFWwindow* window);
 
 
@@ -291,7 +291,7 @@ void key_callback( GLFWwindow* window,
 	}
 
 
-	if (key == GLFW_KEY_9 && action == GLFW_PRESS)
+	if (key == GLFW_KEY_4 && action == GLFW_PRESS)
 	{
 
 		g_pCharacterManager->setActiveChar("chan");
@@ -299,7 +299,7 @@ void key_callback( GLFWwindow* window,
 
 	}
 
-	if (key == GLFW_KEY_8 && action == GLFW_PRESS)
+	if (key == GLFW_KEY_5 && action == GLFW_PRESS)
 	{
 
 		g_pCharacterManager->setActiveChar("Devil-Mage");

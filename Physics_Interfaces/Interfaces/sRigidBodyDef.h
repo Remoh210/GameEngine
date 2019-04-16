@@ -18,6 +18,7 @@ namespace nPhysics
 			, AngularVelocity(0.0f, 0.0f, 0.0f)
 			, GameObjectName("undefined")
 			, isPlayer(false)
+			, isGhostShape(false)
 		{
 
 		}
@@ -26,6 +27,7 @@ namespace nPhysics
 		glm::vec3 Velocity;
 		glm::vec3 Scale;
 		bool isPlayer;
+		bool isGhostShape;
 		std::string GameObjectName;
 		glm::vec3 Orientation; //Euler Angles
 		glm::vec3 AngularVelocity;

@@ -32,6 +32,9 @@ namespace nPhysics {
 				colShape->calculateLocalInertia(mass, localInertia);
 			}
 
+
+
+
 			btRigidBody::btRigidBodyConstructionInfo rbInfo(0, 0, colShape, localInertia);
 			rbInfo.m_restitution = 0.9;
 			rbInfo.m_friction = 10.0;
@@ -70,6 +73,11 @@ namespace nPhysics {
 			mBody->setSleepingThresholds(0.0f, 0.0f);
 
 			mBody->setCollisionFlags(mBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+			if (def.isGhostShape)
+			{
+				mBody->setCollisionFlags(mBody->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
+			}
+			
 			mBody->setUserPointer(this);
 
 			break;
@@ -103,6 +111,10 @@ namespace nPhysics {
 			mBody->setSleepingThresholds(0.0f, 0.0f);
 
 			mBody->setCollisionFlags(mBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+			if (def.isGhostShape)
+			{
+				mBody->setCollisionFlags(mBody->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
+			}
 			mBody->setUserPointer(this);
 
 			break;
@@ -136,6 +148,10 @@ namespace nPhysics {
 			mBody->setSleepingThresholds(0.0f, 0.0f);
 
 			mBody->setCollisionFlags(mBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+			if (def.isGhostShape)
+			{
+				mBody->setCollisionFlags(mBody->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
+			}
 			mBody->setUserPointer(this);
 
 			break;
@@ -188,6 +204,10 @@ namespace nPhysics {
 			}
 
 			mBody->setCollisionFlags(mBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+			if (def.isGhostShape)
+			{
+				mBody->setCollisionFlags(mBody->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
+			}
 			mBody->setUserPointer(this);
 
 			break;
@@ -217,6 +237,10 @@ namespace nPhysics {
 
 
 			mBody->setCollisionFlags(mBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+			if (def.isGhostShape)
+			{
+				mBody->setCollisionFlags(mBody->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
+			}
 			mBody->setUserPointer(this);
 
 			break;

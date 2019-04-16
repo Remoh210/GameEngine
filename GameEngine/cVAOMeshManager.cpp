@@ -426,21 +426,21 @@ bool cVAOMeshManager::m_LoadMeshInfo_Into_VAO(
 		(void*)offsetof(sVertex_xyz_rgba_n_uv2_bt_4Bones, u0));
 
 	// Add the other 4 things we now have in the Skinned Mesh vertex layout
-	//glEnableVertexAttribArray(vpos_vTanXYZ_Location);
-	//glVertexAttribPointer(vpos_vTanXYZ_Location  ,		// vTanXYZ
-				//		   4,					// vec4 
-				//		   GL_FLOAT, 
-				//		   GL_FALSE,
-	//                       sizeof(sVertex_xyz_rgba_n_uv2_bt_4Bones),	// size in bytes //sizeof(float) * 9,		// was 6 
-				//		   (void*) offsetof( sVertex_xyz_rgba_n_uv2_bt_4Bones, tx ) );
+	glEnableVertexAttribArray(vpos_vTanXYZ_Location);
+	glVertexAttribPointer(vpos_vTanXYZ_Location  ,		// vTanXYZ
+						   4,					// vec4 
+						   GL_FLOAT, 
+						   GL_FALSE,
+	                       sizeof(sVertex_xyz_rgba_n_uv2_bt_4Bones),	// size in bytes //sizeof(float) * 9,		// was 6 
+						   (void*) offsetof( sVertex_xyz_rgba_n_uv2_bt_4Bones, tx ) );
 
-	//glEnableVertexAttribArray(vpos_vBiNormXYZ_Location );
-	//glVertexAttribPointer(vpos_vBiNormXYZ_Location   ,		// vBiNormXYZ
-				//		   4,								// vec4 
-				//		   GL_FLOAT, 
-				//		   GL_FALSE,
-	//                       sizeof(sVertex_xyz_rgba_n_uv2_bt_4Bones),	// size in bytes //sizeof(float) * 9,		// was 6 
-				//		   (void*) offsetof( sVertex_xyz_rgba_n_uv2_bt_4Bones, bx ) );
+	glEnableVertexAttribArray(vpos_vBiNormXYZ_Location );
+	glVertexAttribPointer(vpos_vBiNormXYZ_Location   ,		// vBiNormXYZ
+						   4,								// vec4 
+						   GL_FLOAT, 
+						   GL_FALSE,
+	                       sizeof(sVertex_xyz_rgba_n_uv2_bt_4Bones),	// size in bytes //sizeof(float) * 9,		// was 6 
+						   (void*) offsetof( sVertex_xyz_rgba_n_uv2_bt_4Bones, bx ) );
 
 	glEnableVertexAttribArray(vpos_vBoneID_Location);
 	glVertexAttribPointer(vpos_vBoneID_Location,		// vBoneID

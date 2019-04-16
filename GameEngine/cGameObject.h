@@ -115,6 +115,7 @@ public:
 	bool bExtentsFromMesh;
 	bool bSave;
 	bool bUseHeighMap;
+	bool bIsGhost;
 
 	// ignore this for now...
 	// Around its own axis (NOT the origin)

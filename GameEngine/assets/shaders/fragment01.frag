@@ -1,16 +1,27 @@
 #version 420 
 //fragment01.glsl
 
-// In from a previous stage (vertex shader)
-in vec4 color;			// in from the vertex shader
-in vec4 vertPosWorld;
-in vec4 vertNormal;		// "Model space" (only rotation)
-in vec4 vertUV_x2;		// Texture coordinates
-in vec4 viewSpace;
-// NOTE: for now, these aren't being used, so they are ALMOST 
-//   clamped to zero, then added to the colour (so the compiler won't turf them)
-in vec4 vertTanXYZ;			// Tangent to the surface
-in vec4 vertBiNormXYZ;		// bi-normal (or bi-tangent) to the surface
+
+
+
+struct sGSOut
+{
+	vec4 color;		
+	vec4 vertPosWorld;	// "World space"
+	vec4 vertNormal;	// "Model space"
+	vec4 vertUV_x2;		// To the next shader stage
+	vec4 vertTanXYZ;	// Tangent to the surface
+	vec4 vertBiNormXYZ;	// bi-normal (or bi-tangent) to the surface
+  vec4 viewSpace;     //For fog
+};
+
+in sGSOut gsOuput;
+
+
+
+
+
+
 
 
 uniform vec4 objectDiffuse;		// becomes objectDiffuse in the shader
@@ -113,14 +124,32 @@ uniform vec4 texBlendWeights[2];	// x is 0, y is 1, z is 2
 uniform float wholeObjectAlphaTransparency;
 
 //Copying UV to mult by tile value
-vec4 tiledUV = vertUV_x2;
+
 
 const vec3 fogColor = vec3(0.5, 0.5,0.5);
 //const float FogDensity = 0.008;
-const float FogDensity = 0.0008;
-float ambientAmount = 0.2;
+const float FogDensity = 0.00008;
+float ambientAmount = 0.12;
 void main()
 {
+
+// In from a previous stage (geom shader)
+	vec4 color         = gsOuput.color;			                   // in from the vertex shader
+	vec4 vertPosWorld  = gsOuput.vertPosWorld;
+	vec4 vertNormal    = gsOuput.vertNormal;              // "Model space" (only rotation)
+	vec4 vertUV_x2		 = gsOuput.vertUV_x2;               // Texture coordinates
+	vec4 viewSpace     = gsOuput.viewSpace;  
+	vec4 vertTanXYZ  	 = gsOuput.vertTanXYZ;  		               // Tangent to the surface
+	vec4 vertBiNormXYZ = gsOuput.vertBiNormXYZ;  		              // bi-normal (or bi-tangent) to the surface
+
+
+	vec4 tiledUV = vertUV_x2;
+
+
+
+
+
+
 	// output black to all layers
 	finalOutputColour = vec4( 0.0f, 0.0f, 0.0f, 1.0f );
 	finalOutputNormal = vec4( 0.0f, 0.0f, 0.0f, 1.0f );
@@ -497,7 +526,7 @@ dist = length(viewSpace);
 	finalOutputColour.rgb = finalObjectColour.rgb;
 
 
-	}
+	}//else
 
 
 
