@@ -46,6 +46,9 @@ uniform mat4 bones[MAXNUMBEROFBONES];
 // Pass the acutal number you are using to control how often this loops
 uniform int numBonesUsed;			
 uniform bool bIsASkinnedMesh;	// True to do the skinned mesh
+
+
+
 void main()
 {
 	// Make a copy of the "model space" vertex

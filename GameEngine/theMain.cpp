@@ -355,7 +355,7 @@ int main(void) {
 
   float bloom_strength = 10.0f;
   int bloom_blur_iterations = 5;
-  float bloom_threshold = 0.55f;
+  float bloom_threshold = 0.65f;
 
 
 
@@ -396,9 +396,9 @@ int main(void) {
 
   //Initialize Behaviours
 
-  WanderBehaviour* wander1 = new WanderBehaviour(pWanderEnemy1, 20.2f, 300.2f, 4.0f, glm::vec3(0.0f), 200.0f, -100.0f, pPlayer); //(Agent, Target, maxSpeed, WanderOrigin , UpLimit, DownLimit)
-  WanderBehaviour* wander2 = new WanderBehaviour(pWanderEnemy2, 20.2f, 300.2f, 4.0f, glm::vec3(0.0f), 200.0f, -100.0f, pPlayer); //(Agent, Target, maxSpeed, WanderOrigin , UpLimit, DownLimit)
-  WanderBehaviour* wander3 = new WanderBehaviour(pWanderEnemy3, 20.2f, 300.2f, 4.0f, glm::vec3(0.0f), 200.0f, -100.0f, pPlayer); //(Agent, Target, maxSpeed, WanderOrigin , UpLimit, DownLimit)
+  WanderBehaviour* wander1 = new WanderBehaviour(pWanderEnemy1, 20.2f, 300.2f, 4.0f, glm::vec3(0.0f), 100.0f, -100.0f, pPlayer); //(Agent, Target, maxSpeed, WanderOrigin , UpLimit, DownLimit)
+  WanderBehaviour* wander2 = new WanderBehaviour(pWanderEnemy2, 20.2f, 300.2f, 4.0f, glm::vec3(0.0f), 100.0f, -100.0f, pPlayer); //(Agent, Target, maxSpeed, WanderOrigin , UpLimit, DownLimit)
+  WanderBehaviour* wander3 = new WanderBehaviour(pWanderEnemy3, 20.2f, 300.2f, 4.0f, glm::vec3(0.0f), 100.0f, -100.0f, pPlayer); //(Agent, Target, maxSpeed, WanderOrigin , UpLimit, DownLimit)
   behavManager->SetBehaviour(pWanderEnemy1, wander1);
   behavManager->SetBehaviour(pWanderEnemy2, wander2);
   behavManager->SetBehaviour(pWanderEnemy3, wander3);
@@ -626,31 +626,34 @@ int main(void) {
         g_textRenderer->drawText(screen_quad.width, screen_quad.height,
                                  ("FPS: " + std::to_string(FPS)).c_str());
 
-        switch (physics_library) {
-        case SIMPLE:
-          g_textRenderer->drawText(screen_quad.width, screen_quad.height,
-                                   ("Physics: My crappy physics"), 100.0f);
-          break;
-        case BULLET:
-          g_textRenderer->drawText(screen_quad.width, screen_quad.height, ("Physics: Bullet"), 100.0f);
-          break;
-        case UNKNOWN:
-          break;
-        default:
-          break;
-        }
-        g_textRenderer->drawText(
-            screen_quad.width, screen_quad.height,
-            ("Gravity: " + std::to_string((int)g_Gravity.y)).c_str(), 150.0f);
+        //switch (physics_library) {
+        //case SIMPLE:
+        //  g_textRenderer->drawText(screen_quad.width, screen_quad.height,
+        //                           ("Physics: My crappy physics"), 100.0f);
+        //  break;
+        //case BULLET:
+        //  g_textRenderer->drawText(screen_quad.width, screen_quad.height, ("Physics: Bullet"), 100.0f);
+        //  break;
+        //case UNKNOWN:
+        //  break;
+        //default:
+        //  break;
+        //}
+        //g_textRenderer->drawText(
+        //    screen_quad.width, screen_quad.height,
+        //    ("Gravity: " + std::to_string((int)g_Gravity.y)).c_str(), 150.0f);
 
         std::string strhited;
-        if (bodyHit)
+       /* if (bodyHit)
           strhited = "Ray Hit: " + bodyHit->GetGOName();
         else
-          strhited = "Ray Hit: Nothing";
-		std::string artCount = "Artifacts found : " + std::to_string(gameCounter) + " Out of 3";
-        g_textRenderer->drawText(screen_quad.width, screen_quad.height, strhited.c_str(), 200.0f);
-		g_textRenderer->drawText(screen_quad.width, screen_quad.height, artCount.c_str(), 250.0f);
+          strhited = "Ray Hit: Nothing";*/
+		std::string artCount = "Artifacts found : " + std::to_string(gameCounter) + " out of 3";
+        //g_textRenderer->drawText(screen_quad.width, screen_quad.height, strhited.c_str(), 100.0f);
+		g_textRenderer->drawText(screen_quad.width, screen_quad.height, artCount.c_str(), 150.0f);
+		if (gameCounter > 3) {
+			g_textRenderer->drawText(screen_quad.width, screen_quad.height, ("Conradulations! You Win!"), 200.0f);
+		}
         // g_textRenderer->drawText(width, height,"Ray hit: " + RayHitted ?
         // "no": "yes" , 200.0f);
 
@@ -724,6 +727,11 @@ int main(void) {
 			PairS == "artifact_1" && PairF == "ghostSphere1") {
 
 			collidedA = true;
+			cGameObject* artifact = findObjectByFriendlyName("artifact_1");
+			artifact->bIsVisible = false;
+			gPhysicsWorld->RemoveBody(artifact->rigidBody);
+			artifact->rigidBody->~iRigidBody();
+			artifact->rigidBody = NULL;
 			gameCounter += 1;
 		}
 	}
@@ -733,6 +741,11 @@ int main(void) {
 			PairS == "artifact_2" && PairF == "ghostSphere1") {
 
 			collidedB = true;
+			cGameObject* artifact = findObjectByFriendlyName("artifact_2");
+			artifact->bIsVisible = false;
+			gPhysicsWorld->RemoveBody(artifact->rigidBody);
+			artifact->rigidBody->~iRigidBody();
+			artifact->rigidBody = NULL;
 			gameCounter += 1;
 		}
 	}
@@ -742,6 +755,11 @@ int main(void) {
 			PairS == "artifact_3" && PairF == "ghostSphere1") {
 
 			collidedC = true;
+			cGameObject* artifact = findObjectByFriendlyName("artifact_3");
+			artifact->bIsVisible = false;
+			gPhysicsWorld->RemoveBody(artifact->rigidBody);
+			artifact->rigidBody->~iRigidBody();
+			artifact->rigidBody = NULL;
 			gameCounter += 1;
 		}
 	}
@@ -751,15 +769,51 @@ int main(void) {
 			PairS == "artifact_4" && PairF == "ghostSphere1") {
 
 			collidedD = true;
+			cGameObject* artifact = findObjectByFriendlyName("artifact_4");
+			
+			artifact->bIsVisible = false;
+			gPhysicsWorld->RemoveBody(artifact->rigidBody);
+			artifact->rigidBody->~iRigidBody();
+			artifact->rigidBody = NULL;
 			gameCounter += 1;
 		}
 	}
 
 
-	if (gameCounter == 4)
-	{
-		g_textRenderer->drawText(screen_quad.width, screen_quad.height, "Conradulations! You Win!", 350.0f);
+
+
+
+	if (PairF == "mutant-1" && PairS == "chan" ||
+		PairS == "mutant-1" && PairF == "chan") {
+
+		for (int i = 0; i < vec_pObjectsToDraw.size(); i++) {
+			vec_pObjectsToDraw[i]->position = vec_pObjectsToDraw[i]->InitPosition;
+		}
+		gameCounter = 0;
 	}
+	if (PairF == "mutant-2" && PairS == "chan" ||
+		PairS == "mutant-2" && PairF == "chan") {
+
+		for (int i = 0; i < vec_pObjectsToDraw.size(); i++) {
+			vec_pObjectsToDraw[i]->position = vec_pObjectsToDraw[i]->InitPosition;
+		}
+
+		gameCounter = 0;
+	}
+	if (PairF == "mutant-3" && PairS == "chan" ||
+		PairS == "mutant-3" && PairF == "chan") {
+
+		for (int i = 0; i < vec_pObjectsToDraw.size(); i++) {
+			if (vec_pObjectsToDraw[i]->rigidBody != NULL && vec_pObjectsToDraw[i]->rigidBody->GetMass() != 0.0f)
+			{
+				vec_pObjectsToDraw[i]->rigidBody->SetPosition(vec_pObjectsToDraw[i]->InitPosition);
+			}
+			
+		}
+		gameCounter = 0;
+	}
+
+
 
 
     for (int i = 0; i < vec_pObjectsToDraw.size(); i++) {
@@ -785,11 +839,10 @@ int main(void) {
         }
       }
     }
-
-
+	
 	if (boat->position.y < 40.0f)
 	{
-		boat->rigidBody->ApplyImpulse(glm::vec3(0.0f, 300.0f, 0.0f));
+		boat->rigidBody->ApplyImpulse(glm::vec3(0.0f, 110.0f, 0.0f));
 	}
 
 

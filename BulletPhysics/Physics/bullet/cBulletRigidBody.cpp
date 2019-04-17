@@ -329,6 +329,9 @@ namespace nPhysics {
 
 	void cBulletRigidBody::SetPosition(glm::vec3 position)
 	{
+		btTransform transform = mBody->getCenterOfMassTransform();
+		transform.setOrigin(nConvert::ToBullet(position));
+		mBody->setCenterOfMassTransform(transform);
 		//btVector3 vel = this->mBody->setMotionState()
 	}
 

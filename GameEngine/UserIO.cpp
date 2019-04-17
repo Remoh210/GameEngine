@@ -38,6 +38,44 @@ bool IsShiftDown(GLFWwindow* window);
 cGameObject* cloesetObj;
 cGameObject* controlledObj;
 
+
+
+
+
+
+void pickUP(cGameObject* player)
+{
+	glm::vec3 from = player->position + glm::vec3(0.0f, 3.0f, 0.0f);
+	glm::vec3 to = player->getForward();
+	to *= 20.0f;
+	to = to + player->position;
+	to.y += 8.0f;
+	//			to.y -= camera.Position.y;
+	g_pDebugRendererACTUAL->addLine(from, to, glm::vec3(1.0f, 1.0f, 0.0f));
+	nPhysics::iRigidBody* hitRb = gPhysicsWorld->RayCastGetObject(from, to);
+
+	if (hitRb && hitRb->GetMass() < 3000.0f)
+	{
+		//Get Direction
+		//to.y = 20.0f;
+		glm::vec3 dir = to - hitRb->GetPosition();
+		dir = glm::normalize(dir);
+
+
+		if (glm::distance(hitRb->GetPosition(), to) > 2.0f)
+		{
+			hitRb->SetVelocity(dir * 30.0f);
+
+		}
+		else
+		{
+			hitRb->SetVelocity(glm::vec3(0.0f));
+		}
+
+	}
+}
+
+
 void SwitchToWireFrame(std::vector<cGameObject*> models);
 
 void setVelZ(cGameObject* sm, float vel)
@@ -681,34 +719,7 @@ void ProcessAsynKeys(GLFWwindow* window)
 		{
 
 			//Ray Cast
-			glm::vec3 from = ch->position + glm::vec3(0.0f, 2.0f, 0.0f);
-			glm::vec3 to = ch->getForward();
-			to *= 50.0f;
-			to = to + ch->position;
-			to.y += 15.0f;
-//			to.y -= camera.Position.y;
-			g_pDebugRendererACTUAL->addLine(from, to, glm::vec3(1.0f, 1.0f, 0.0f));
-			nPhysics::iRigidBody* hitRb = gPhysicsWorld->RayCastGetObject(from, to);
-
-			if (hitRb)
-			{
-				//Get Direction
-				//to.y = 20.0f;
-				glm::vec3 dir = to - hitRb->GetPosition();
-				dir = glm::normalize(dir);
-				
-
-				if (glm::distance(hitRb->GetPosition(), to) > 2.0f)
-				{
-					hitRb->SetVelocity(dir * 30.0f);
-				
-				}
-				else
-				{
-					hitRb->SetVelocity(glm::vec3(0.0f));
-				}
-
-			}
+			pickUP(ch);
 		}
 		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 		{
@@ -720,7 +731,7 @@ void ProcessAsynKeys(GLFWwindow* window)
 			glm::vec3 to = ch->getForward();
 			to *= 18.0f;
 			to = to + ch->position;
-			to.y = 8.0f;
+			to.y += 8.0f;
 			g_pDebugRendererACTUAL->addLine(from, to, glm::vec3(1.0f, 1.0f, 0.0f));
 			nPhysics::iRigidBody* hitRb = gPhysicsWorld->RayCastGetObject(from, to);
 
