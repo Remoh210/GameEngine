@@ -226,7 +226,7 @@ public:
 			if (posDirection.y < 0.05f)
 				posDirection.y = 0.05f;
 			// Project the new position and assign        
-			Position = Front + posDirection * 40.0f;
+			Position = Front + posDirection * 30.0f;
 		}
 		break;
 		default:

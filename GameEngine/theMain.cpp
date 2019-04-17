@@ -82,6 +82,7 @@ bool collided = false;
 bool collidedA = false;
 bool collidedB = false;
 bool collidedC = false;
+bool collidedD = false;
 // for collision
 std::vector<cGameObject *> vec_pObjectsToDraw;
 // for physics
@@ -353,7 +354,7 @@ int main(void) {
 
 
   float bloom_strength = 10.0f;
-  int bloom_blur_iterations = 20;
+  int bloom_blur_iterations = 5;
   float bloom_threshold = 0.55f;
 
 
@@ -383,7 +384,9 @@ int main(void) {
   BehaviourManager* behavManager = new BehaviourManager();
 
   cGameObject* pPlayer = findObjectByFriendlyName("chan");
-  cGameObject* pWanderEnemy = findObjectByFriendlyName("Devil-Mage");
+  cGameObject* pWanderEnemy1 = findObjectByFriendlyName("mutant-1");
+  cGameObject* pWanderEnemy2 = findObjectByFriendlyName("mutant-2");
+  cGameObject* pWanderEnemy3 = findObjectByFriendlyName("mutant-3");
 
 
   //pApproachEnemy->initPos = pApproachEnemy->position;
@@ -393,15 +396,19 @@ int main(void) {
 
   //Initialize Behaviours
 
-  WanderBehaviour* wander = new WanderBehaviour(pWanderEnemy, 20.2f, 300.2f, 0.0f, glm::vec3(0.0f), 30.0f, -30.0f, pPlayer); //(Agent, Target, maxSpeed, WanderOrigin , UpLimit, DownLimit)
-  behavManager->SetBehaviour(pWanderEnemy, wander);
+  WanderBehaviour* wander1 = new WanderBehaviour(pWanderEnemy1, 20.2f, 300.2f, 4.0f, glm::vec3(0.0f), 200.0f, -100.0f, pPlayer); //(Agent, Target, maxSpeed, WanderOrigin , UpLimit, DownLimit)
+  WanderBehaviour* wander2 = new WanderBehaviour(pWanderEnemy2, 20.2f, 300.2f, 4.0f, glm::vec3(0.0f), 200.0f, -100.0f, pPlayer); //(Agent, Target, maxSpeed, WanderOrigin , UpLimit, DownLimit)
+  WanderBehaviour* wander3 = new WanderBehaviour(pWanderEnemy3, 20.2f, 300.2f, 4.0f, glm::vec3(0.0f), 200.0f, -100.0f, pPlayer); //(Agent, Target, maxSpeed, WanderOrigin , UpLimit, DownLimit)
+  behavManager->SetBehaviour(pWanderEnemy1, wander1);
+  behavManager->SetBehaviour(pWanderEnemy2, wander2);
+  behavManager->SetBehaviour(pWanderEnemy3, wander3);
 
 
 
 
 
 
-
+  cGameObject* boat = findObjectByFriendlyName("boat");
 
 
 
@@ -725,7 +732,7 @@ int main(void) {
 		if (PairF == "artifact_2" && PairS == "ghostSphere1" ||
 			PairS == "artifact_2" && PairF == "ghostSphere1") {
 
-			collidedA = true;
+			collidedB = true;
 			gameCounter += 1;
 		}
 	}
@@ -734,18 +741,24 @@ int main(void) {
 		if (PairF == "artifact_3" && PairS == "ghostSphere1" ||
 			PairS == "artifact_3" && PairF == "ghostSphere1") {
 
-			collidedA = true;
+			collidedC = true;
 			gameCounter += 1;
 		}
 	}
 
-	if (!collidedC) {
+	if (!collidedD) {
 		if (PairF == "artifact_4" && PairS == "ghostSphere1" ||
 			PairS == "artifact_4" && PairF == "ghostSphere1") {
 
-			collidedA = true;
+			collidedD = true;
 			gameCounter += 1;
 		}
+	}
+
+
+	if (gameCounter == 4)
+	{
+		g_textRenderer->drawText(screen_quad.width, screen_quad.height, "Conradulations! You Win!", 350.0f);
 	}
 
 
@@ -774,7 +787,10 @@ int main(void) {
     }
 
 
-
+	if (boat->position.y < 40.0f)
+	{
+		boat->rigidBody->ApplyImpulse(glm::vec3(0.0f, 300.0f, 0.0f));
+	}
 
 
     //if (bIsDebugMode) {

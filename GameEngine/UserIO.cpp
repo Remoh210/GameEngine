@@ -36,6 +36,7 @@ bool IsShiftDown(GLFWwindow* window);
 
 
 cGameObject* cloesetObj;
+cGameObject* controlledObj;
 
 void SwitchToWireFrame(std::vector<cGameObject*> models);
 
@@ -429,6 +430,8 @@ void ProcessAsynKeys(GLFWwindow* window)
 {
 
 
+
+
 	const float CAMERA_SPEED_SLOW = 5.0f;
 	const float CAMERA_SPEED_FAST = 100.0f;
 
@@ -677,13 +680,13 @@ void ProcessAsynKeys(GLFWwindow* window)
 		if (IsMBLDown(window))
 		{
 
-
 			//Ray Cast
-			glm::vec3 from = ch->position + glm::vec3(0.0f, 10.0f, 0.0f);
+			glm::vec3 from = ch->position + glm::vec3(0.0f, 2.0f, 0.0f);
 			glm::vec3 to = ch->getForward();
 			to *= 50.0f;
 			to = to + ch->position;
-			to.y += 12.0f;
+			to.y += 15.0f;
+//			to.y -= camera.Position.y;
 			g_pDebugRendererACTUAL->addLine(from, to, glm::vec3(1.0f, 1.0f, 0.0f));
 			nPhysics::iRigidBody* hitRb = gPhysicsWorld->RayCastGetObject(from, to);
 

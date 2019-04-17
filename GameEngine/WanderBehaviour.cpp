@@ -38,25 +38,27 @@ void WanderBehaviour::update(float dt)
 	
 
 
-	if (glm::distance(mAgent->position, mCurTarget) > 5.0f) {
+	if (glm::distance(mAgent->position, mCurTarget) > 15.0f) {
 
 		
 
 		
 		//
-		if (glm::distance(targetPlayer->position, mAgent->position) < 60.0f)
+		if (glm::distance(targetPlayer->position, mAgent->position) < 100.0f)
 		{
 			glm::vec3 desired = targetPlayer->position - mAgent->position;
 			//normalize it and scale by mMaxSpeed
 			desired = glm::normalize(desired) * mMaxSpeed;
 
 			//steering = glm::normalize(desired) * mMaxForce;
-			mAgent->rigidBody->SetVelocity(desired);
+			mAgent->rigidBody->SetVelocity(desired * 2.0f);
 
 			glm::vec3 lookDirection = mAgent->position - targetPlayer->position;
 			glm::mat4 rot = glm::inverse(glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), lookDirection, glm::vec3(0.0f, 1.0f, 0.0f)));
-			mAgent->currentAnimation = "Walk-forward";
+			mAgent->currentAnimation = "Run-forward";
 			mAgent->m_meshQOrientation = glm::quat(rot);
+
+
 		}
 		else
 		{

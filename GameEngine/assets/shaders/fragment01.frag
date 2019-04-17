@@ -128,7 +128,7 @@ uniform float wholeObjectAlphaTransparency;
 
 const vec3 fogColor = vec3(0.5, 0.5,0.5);
 //const float FogDensity = 0.008;
-const float FogDensity = 0.00008;
+const float FogDensity = 0.0008;
 float ambientAmount = 0.12;
 void main()
 {

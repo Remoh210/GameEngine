@@ -2,9 +2,9 @@
     "Camera": {
         "Speed": 500.0,
         "Position": [
-            104.60615539550781,
-            254.1059112548828,
-            -750.2978515625
+            -23.210803985595704,
+            40.890419006347659,
+            -12.421159744262696
         ]
     },
     "GameObjects": [
@@ -16,9 +16,9 @@
             "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
-                0.62152099609375,
-                9.999998092651368,
-                0.6875
+                98.06758880615235,
+                16.549007415771486,
+                -0.447299599647522
             ],
             "DiffuseRGB_Alpha": [
                 1.0,
@@ -38,9 +38,9 @@
                 0.0
             ],
             "Scale": [
-                10.0,
-                10.0,
-                10.0
+                12.0,
+                12.0,
+                12.0
             ],
             "Textures": [
                 {
@@ -69,9 +69,9 @@
             "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
-                193.62152099609376,
-                9.999998092651368,
-                -344.6875
+                921.3880615234375,
+                3.8188812732696535,
+                604.3805541992188
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -91,9 +91,9 @@
                 0.0
             ],
             "Scale": [
-                10.0,
-                10.0,
-                10.0
+                3.0,
+                3.0,
+                3.0
             ],
             "Textures": [
                 {
@@ -109,12 +109,12 @@
             ],
             "RigidBody": {
                 "Type": "SPHERE",
-                "Radius": 10.0,
+                "Radius": 3.0,
                 "Mass": 5000.0
             }
         },
         {
-            "Name": "moon",
+            "Name": "moon2",
             "Mesh": "earth.ply",
             "Visible": true,
             "Use_Physics": true,
@@ -139,7 +139,7 @@
             ],
             "Rotation": [
                 -162.42465209960938,
-                37.8924446105957,
+                37.892459869384769,
                 -171.96963500976563
             ],
             "Scale": [
@@ -190,9 +190,9 @@
                 100.0
             ],
             "Rotation": [
-                180.0,
+                -180.0,
                 5.865976333618164,
-                180.0
+                -180.0
             ],
             "Scale": [
                 1.0,
@@ -237,9 +237,9 @@
                 100.0
             ],
             "Rotation": [
-                0.000045704382500844079,
-                -0.15972188115119935,
-                -0.000021166079022805208
+                0.00004570440069073811,
+                -0.1597219556570053,
+                -0.000021166088117752225
             ],
             "Scale": [
                 56.7680778503418,
@@ -283,9 +283,9 @@
                 100.0
             ],
             "Rotation": [
-                -0.00003107510565314442,
-                8.875444412231446,
-                0.000026626228645909579
+                -0.00003107509110122919,
+                8.875439643859864,
+                0.000026626223188941368
             ],
             "Scale": [
                 1.100000023841858,
@@ -335,7 +335,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.7401633262634279,
+                -3.740161180496216,
                 0.0
             ],
             "Scale": [
@@ -391,7 +391,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.7401633262634279,
+                -3.740161180496216,
                 0.0
             ],
             "Scale": [
@@ -446,9 +446,9 @@
                 100.0
             ],
             "Rotation": [
-                180.0,
+                -180.0,
                 0.19724345207214356,
-                180.0
+                -180.0
             ],
             "Scale": [
                 2.5631606578826906,
@@ -502,9 +502,9 @@
                 100.0
             ],
             "Rotation": [
-                180.0,
+                -180.0,
                 3.0274786949157717,
-                180.0
+                -180.0
             ],
             "Scale": [
                 2.5631606578826906,
@@ -559,7 +559,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.7401633262634279,
+                -3.740161180496216,
                 0.0
             ],
             "Scale": [
@@ -615,7 +615,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.7401633262634279,
+                -3.740161180496216,
                 0.0
             ],
             "Scale": [
@@ -671,7 +671,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.7401633262634279,
+                -3.740161180496216,
                 0.0
             ],
             "Scale": [
@@ -722,7 +722,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.7401633262634279,
+                -3.740161180496216,
                 0.0
             ],
             "Scale": [
@@ -773,7 +773,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.7401633262634279,
+                -3.740161180496216,
                 0.0
             ],
             "Scale": [
@@ -824,7 +824,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.7401633262634279,
+                -3.740161180496216,
                 0.0
             ],
             "Scale": [
@@ -875,7 +875,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.7401633262634279,
+                -3.740161180496216,
                 0.0
             ],
             "Scale": [
@@ -925,9 +925,9 @@
                 100.0
             ],
             "Rotation": [
-                180.0,
+                -180.0,
                 -1.1668442487716675,
-                -180.0
+                180.0
             ],
             "Scale": [
                 1.7380889654159547,
@@ -976,9 +976,9 @@
                 100.0
             ],
             "Rotation": [
-                180.0,
+                -180.0,
                 89.45284271240235,
-                180.0
+                -180.0
             ],
             "Scale": [
                 2.0894219875335695,
@@ -1027,9 +1027,9 @@
                 100.0
             ],
             "Rotation": [
-                180.0,
+                -180.0,
                 89.45284271240235,
-                180.0
+                -180.0
             ],
             "Scale": [
                 2.0894219875335695,
@@ -1078,9 +1078,9 @@
                 100.0
             ],
             "Rotation": [
-                180.0,
+                -180.0,
                 89.45284271240235,
-                180.0
+                -180.0
             ],
             "Scale": [
                 2.0894219875335695,
@@ -1129,9 +1129,9 @@
                 100.0
             ],
             "Rotation": [
-                180.0,
+                -180.0,
                 89.45284271240235,
-                180.0
+                -180.0
             ],
             "Scale": [
                 2.0894219875335695,
@@ -1215,8 +1215,8 @@
             "Wireframe": false,
             "Position": [
                 805.0606079101563,
-                6.621996879577637,
-                -751.9426879882813
+                10.775864601135254,
+                -780.7282104492188
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -1231,9 +1231,162 @@
                 100.0
             ],
             "Rotation": [
-                -90.00006103515625,
-                -78.08599090576172,
-                0.000041356302972417328
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "Scale": [
+                7.330896377563477,
+                7.330896377563477,
+                7.330896377563477
+            ],
+            "Textures": [
+                {
+                    "Name": "env_objects/cartTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 500.0
+            }
+        },
+        {
+            "Name": "cart2",
+            "Mesh": "env_objects/cart.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Use_HeighMap": false,
+            "Wireframe": false,
+            "Position": [
+                838.166259765625,
+                11.276248931884766,
+                -751.9314575195313
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "Scale": [
+                7.330896377563477,
+                7.330896377563477,
+                7.330896377563477
+            ],
+            "Textures": [
+                {
+                    "Name": "env_objects/cartTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 500.0
+            }
+        },
+        {
+            "Name": "cart3",
+            "Mesh": "env_objects/cart.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Use_HeighMap": false,
+            "Wireframe": false,
+            "Position": [
+                845.7620239257813,
+                10.640464782714844,
+                -782.0875854492188
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -52.44075012207031,
+                0.0
+            ],
+            "Scale": [
+                7.330896377563477,
+                7.330896377563477,
+                7.330896377563477
+            ],
+            "Textures": [
+                {
+                    "Name": "env_objects/cartTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 500.0
+            }
+        },
+        {
+            "Name": "cart4",
+            "Mesh": "env_objects/cart.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Use_HeighMap": false,
+            "Wireframe": false,
+            "Position": [
+                805.3643798828125,
+                11.350691795349121,
+                -746.7683715820313
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                22.867431640625,
+                0.0
             ],
             "Scale": [
                 7.330896377563477,
@@ -1309,16 +1462,16 @@
             }
         },
         {
-            "Name": "portal_cube3",
+            "Name": "artifact_1",
             "Mesh": "Portal_cube.ply",
             "Visible": true,
             "Use_Physics": true,
             "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
-                37.738101959228519,
+                291.78338623046877,
                 10.002847671508789,
-                238.45806884765626
+                -9.873886108398438
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -1333,14 +1486,167 @@
                 100.0
             ],
             "Rotation": [
-                4.363719463348389,
+                4.363722801208496,
                 -0.000012806604900106322,
                 90.00006866455078
             ],
             "Scale": [
-                10.0,
-                10.0,
-                10.0
+                3.0,
+                3.0,
+                3.0
+            ],
+            "Textures": [
+                {
+                    "Name": "portalCubeTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 70.0
+            }
+        },
+        {
+            "Name": "artifact_2",
+            "Mesh": "Portal_cube.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Use_HeighMap": false,
+            "Wireframe": false,
+            "Position": [
+                823.435302734375,
+                5.430485248565674,
+                -765.6680908203125
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                -8.775392532348633,
+                -0.000012806604900106322,
+                90.00006866455078
+            ],
+            "Scale": [
+                3.402685642242432,
+                3.402685642242432,
+                3.402685642242432
+            ],
+            "Textures": [
+                {
+                    "Name": "portalCubeTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 70.0
+            }
+        },
+        {
+            "Name": "artifact_3",
+            "Mesh": "Portal_cube.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Use_HeighMap": false,
+            "Wireframe": false,
+            "Position": [
+                -437.3157043457031,
+                30.166902542114259,
+                594.6500854492188
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                4.363722801208496,
+                -0.000012806604900106322,
+                90.00006866455078
+            ],
+            "Scale": [
+                3.871409893035889,
+                3.871409893035889,
+                3.871409893035889
+            ],
+            "Textures": [
+                {
+                    "Name": "portalCubeTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 70.0
+            }
+        },
+        {
+            "Name": "artifact_4",
+            "Mesh": "Portal_cube.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Use_HeighMap": false,
+            "Wireframe": false,
+            "Position": [
+                -723.9426879882813,
+                13.455421447753907,
+                -517.1728515625
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                4.363722801208496,
+                -0.000012806604900106322,
+                90.00006866455078
+            ],
+            "Scale": [
+                3.325979232788086,
+                3.325979232788086,
+                3.325979232788086
             ],
             "Textures": [
                 {
@@ -2204,9 +2510,9 @@
                 100.0
             ],
             "Rotation": [
-                0.06173798069357872,
-                3.6814358234405519,
-                0.96142578125
+                0.06173804774880409,
+                3.6814398765563967,
+                0.961426317691803
             ],
             "Scale": [
                 1.0856425762176514,
@@ -2608,12 +2914,12 @@
             "Textures": [
                 {
                     "Name": "trees/oak_treeTex.bmp",
-                    "Strength": 0.0,
+                    "Strength": 1.0,
                     "Tile": 1.0
                 },
                 {
                     "Name": "testTex.bmp",
-                    "Strength": 1.0,
+                    "Strength": 0.0,
                     "Tile": 1.0
                 }
             ],
@@ -2915,9 +3221,9 @@
             "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
-                -251.7959442138672,
-                21.131065368652345,
-                428.5491943359375
+                -444.6542663574219,
+                42.703041076660159,
+                664.8338012695313
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -2932,14 +3238,14 @@
                 100.0
             ],
             "Rotation": [
-                -157.98309326171876,
-                -74.27843475341797,
-                141.50538635253907
+                -15.678074836730957,
+                -70.83654022216797,
+                4.776101589202881
             ],
             "Scale": [
-                15.086135864257813,
-                15.086135864257813,
-                15.086135864257813
+                12.718605995178223,
+                12.718605995178223,
+                12.718605995178223
             ],
             "Textures": [
                 {
@@ -2981,7 +3287,7 @@
             "Wireframe": false,
             "Position": [
                 -56.67924880981445,
-                -0.05000019073486328,
+                20.049999237060548,
                 -5.672784328460693
             ],
             "DiffuseRGB_Alpha": [
@@ -2997,9 +3303,9 @@
                 100000.0
             ],
             "Rotation": [
-                180.0,
-                38.49994659423828,
-                180.0
+                0.0,
+                -78.60006713867188,
+                0.0
             ],
             "Scale": [
                 0.05000000074505806,
@@ -3028,7 +3334,7 @@
             }
         },
         {
-            "Name": "Devil-Mage",
+            "Name": "mage-char",
             "SkinnedMesh": "assets/models/FBX/DevilMage/devil_mage.fbx",
             "Animation": {
                 "Action1": "assets/models/FBX/common/spell-walk-forward.fbx",
@@ -3066,9 +3372,9 @@
                 100000.0
             ],
             "Rotation": [
-                -0.004639922641217709,
-                -10.16067123413086,
-                0.0
+                179.90504455566407,
+                7.265434741973877,
+                -180.0
             ],
             "Scale": [
                 0.05000000074505806,
@@ -3084,6 +3390,189 @@
                 {
                     "Name": "testTex.bmp",
                     "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "CAPSULE",
+                "Axis": 1,
+                "Radius": 2.5,
+                "Height": 15.0,
+                "IsPlayer": true,
+                "Mass": 200.0
+            }
+        },
+        {
+            "Name": "mutant-1",
+            "SkinnedMesh": "assets/models/FBX/mutant/mutant.fbx",
+            "Animation": {
+                "Idle": "assets/models/FBX/mutant/mutant-Idle.fbx",
+                "Run-forward": "assets/models/FBX/mutant/mutant-run.fbx",
+                "Run-jump": "assets/models/FBX/mutant/mutant-jump.fbx",
+                "Walk-forward": "assets/models/FBX/mutant/mutant-walk-forward.fbx"
+            },
+            "Visible": true,
+            "Use_Physics": true,
+            "Use_HeighMap": false,
+            "Wireframe": false,
+            "Position": [
+                47.150535583496097,
+                20.05000114440918,
+                -575.2928466796875
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100000.0
+            ],
+            "Rotation": [
+                2.4048571586608888,
+                -4.047461032867432,
+                -6.686784015386138e-9
+            ],
+            "Scale": [
+                0.10000000149011612,
+                0.10000000149011612,
+                0.10000000149011612
+            ],
+            "Textures": [
+                {
+                    "Name": "mutantTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "CAPSULE",
+                "Axis": 1,
+                "Radius": 2.5,
+                "Height": 15.0,
+                "IsPlayer": true,
+                "Mass": 200.0
+            }
+        },
+        {
+            "Name": "mutant-2",
+            "SkinnedMesh": "assets/models/FBX/mutant/mutant.fbx",
+            "Animation": {
+                "Idle": "assets/models/FBX/mutant/mutant-Idle.fbx",
+                "Run-forward": "assets/models/FBX/mutant/mutant-run.fbx",
+                "Run-jump": "assets/models/FBX/mutant/mutant-jump.fbx",
+                "Walk-forward": "assets/models/FBX/mutant/mutant-walk-forward.fbx"
+            },
+            "Visible": true,
+            "Use_Physics": true,
+            "Use_HeighMap": false,
+            "Wireframe": false,
+            "Position": [
+                241.22203063964845,
+                20.05000114440918,
+                662.6246337890625
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100000.0
+            ],
+            "Rotation": [
+                -178.45848083496095,
+                -13.880756378173829,
+                -180.0
+            ],
+            "Scale": [
+                0.12000000476837158,
+                0.12000000476837158,
+                0.12000000476837158
+            ],
+            "Textures": [
+                {
+                    "Name": "mutantTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "CAPSULE",
+                "Axis": 1,
+                "Radius": 2.5,
+                "Height": 15.0,
+                "IsPlayer": true,
+                "Mass": 200.0
+            }
+        },
+        {
+            "Name": "mutant-3",
+            "SkinnedMesh": "assets/models/FBX/mutant/mutant.fbx",
+            "Animation": {
+                "Idle": "assets/models/FBX/mutant/mutant-Idle.fbx",
+                "Run-forward": "assets/models/FBX/mutant/mutant-run.fbx",
+                "Run-jump": "assets/models/FBX/mutant/mutant-jump.fbx",
+                "Walk-forward": "assets/models/FBX/mutant/mutant-walk-forward.fbx"
+            },
+            "Visible": true,
+            "Use_Physics": true,
+            "Use_HeighMap": false,
+            "Wireframe": false,
+            "Position": [
+                -507.7098083496094,
+                20.05000114440918,
+                -444.2259826660156
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100000.0
+            ],
+            "Rotation": [
+                1.6791291236877442,
+                47.519229888916019,
+                3.1605199524165075e-7
+            ],
+            "Scale": [
+                0.10000000149011612,
+                0.10000000149011612,
+                0.10000000149011612
+            ],
+            "Textures": [
+                {
+                    "Name": "mutantTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 1.0,
                     "Tile": 1.0
                 }
             ],
