@@ -116,6 +116,7 @@ public:
 	bool bSave;
 	bool bUseHeighMap;
 	bool bIsGhost;
+	bool bUseNormalMap;
 
 	// ignore this for now...
 	// Around its own axis (NOT the origin)

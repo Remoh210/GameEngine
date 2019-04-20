@@ -447,6 +447,13 @@ void LoadModelsIntoScene( std::vector<cGameObject*> &vec_pObjectsToDraw )
 	::g_pTheTextureManager->SetBasePath("assets/textures");
 	sModelDrawInfo wallDrawInfo;
 	wallDrawInfo.meshFileName = "wall/brick_wall.ply";
+
+
+	::g_pTheTextureManager->Create2DTextureFromBMPFile("wallTex.bmp", true);
+	::g_pTheTextureManager->Create2DTextureFromBMPFile("TextTex.bmp", true);;
+	::g_pTheTextureManager->Create2DTextureFromBMPFile("NormalMaps/wallNormalTex.bmp", true);
+
+
 	g_pTheVAOMeshManager->FindDrawInfoByModelName(wallDrawInfo);
 	{
 
@@ -507,6 +514,7 @@ void LoadModelsIntoScene( std::vector<cGameObject*> &vec_pObjectsToDraw )
 			pWall->setMeshOrientationEulerAngles(rot, true);
 			pWall->meshName = "wall/brick_wall.ply";
 			pWall->bIsWireFrame = false;
+			pWall->bUseNormalMap = true;
 			pWall->bDontLight = false;
 			pWall->position = pos;
 			pWall->bIsVisible = true;
@@ -514,11 +522,36 @@ void LoadModelsIntoScene( std::vector<cGameObject*> &vec_pObjectsToDraw )
 			pWall->bSave = false;
 			
 			
-			sTextureInfo CurModelTex;
-			CurModelTex.name = "wall/brickTex.bmp";
-			CurModelTex.strength = 1.0f;
-			::g_pTheTextureManager->Create2DTextureFromBMPFile(CurModelTex.name, true);
-			pWall->vecTextures.push_back(CurModelTex);
+			sTextureInfo CurModelTex1;
+			CurModelTex1.name = "wallTex.bmp"; 
+			CurModelTex1.strength = 1.0f;
+			pWall->vecTextures.push_back(CurModelTex1);
+
+			sTextureInfo CurModelTex2;
+			CurModelTex2.name = "TestTex.bmp";
+			CurModelTex2.strength = 0.0f;
+			pWall->vecTextures.push_back(CurModelTex2);
+
+			sTextureInfo CurModelTex3;
+			CurModelTex3.name = "NormalMaps/wallNormalTex.bmp";
+			CurModelTex3.strength = 0.0f;
+			pWall->vecTextures.push_back(CurModelTex3);
+
+
+
+			//sTextureInfo CurModelTex2;
+			////CurModelTex.name = "wall/brickTex.bmp";wallTex
+			//CurModelTex2.name = "wallNormal.bmp";
+			//CurModelTex2.strength = 1.0f;
+			//::g_pTheTextureManager->Create2DTextureFromBMPFile(CurModelTex2.name, true);
+			//pWall->vecTextures.push_back(CurModelTex2);
+
+			//sTextureInfo CurModelTex3;
+			////CurModelTex.name = "wall/brickTex.bmp";wallTex
+			//CurModelTex3.name = "wallTex.bmp";
+			//CurModelTex3.strength = 1.0f;
+			//::g_pTheTextureManager->Create2DTextureFromBMPFile(CurModelTex3.name, true);
+			//pWall->vecTextures.push_back(CurModelTex3);
 
 			
 			glm::vec3 halfExtents = glm::vec3(wallDrawInfo.maxX * scale, wallDrawInfo.maxY * scale,

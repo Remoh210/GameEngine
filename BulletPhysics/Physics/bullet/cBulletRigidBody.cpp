@@ -1,6 +1,7 @@
 #include "cBulletRigidBody.h"
 #include "nConvert.h"
 #include "bullet_shapes.h"
+#include "BulletCollision/CollisionDispatch/btInternalEdgeUtility.h"
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
 #include <glm/mat4x4.hpp> 
@@ -234,6 +235,16 @@ namespace nPhysics {
 			mBody->setLinearVelocity(nConvert::ToBullet(def.Velocity));
 			mBody->setAngularVelocity(nConvert::ToBullet(def.AngularVelocity));
 			mBody->setSleepingThresholds(0.0f, 0.0f);
+
+
+
+
+
+
+
+
+			//btTriangleInfoMap* triangleInfoMap = new btTriangleInfoMap();
+			//btGenerateInternalEdgeInfo(dynamic_cast<btBvhTriangleMeshShape*>(colShape), triangleInfoMap);
 
 
 			mBody->setCollisionFlags(mBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);

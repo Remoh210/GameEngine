@@ -172,7 +172,7 @@ namespace nPhysics
 
 	cBulletMeshCollider::cBulletMeshCollider(const GL_Triangle * triangles, size_t numOfTriangles)
 	{
-		btTriangleMesh* triangleMesh = new btTriangleMesh();
+		btTriangleMesh* triangleMesh = new btTriangleMesh(); 
 		for (int i = 0; i < numOfTriangles; i++)
 		{
 			GL_Triangle curTri = triangles[i];

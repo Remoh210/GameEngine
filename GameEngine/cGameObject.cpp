@@ -18,6 +18,7 @@ cGameObject::cGameObject()
 	this->bExtentsFromMesh = true;
 	this->bUseHeighMap = false;
 	this->bIsGhost = false;
+	this->bUseNormalMap = false;
 	// Set unique ID
 	this->m_uniqueID = cGameObject::m_NextID;
 	// Increment

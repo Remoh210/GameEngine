@@ -35,6 +35,7 @@ GLint tex06_UniLoc = -1;
 GLint tex07_UniLoc = -1;
 //High map
 GLint texHM_UniLoc = -1;
+GLint texNM_UniLoc = -1;
 
 
 GLint texBW_0_UniLoc = -1;
@@ -66,6 +67,7 @@ void BindTextures(cGameObject* pCurrentMesh, GLuint shaderProgramID, cFBO* fbo)
 		tex06_UniLoc = glGetUniformLocation(shaderProgramID, "texture06");		// uniform sampler2D texture06;
 		tex07_UniLoc = glGetUniformLocation(shaderProgramID, "texture07");		// uniform sampler2D texture07;
 		texHM_UniLoc = glGetUniformLocation(shaderProgramID, "texHeightMap");
+		texNM_UniLoc = glGetUniformLocation(shaderProgramID, "texNormalMap");
 
 		texBW_0_UniLoc = glGetUniformLocation(shaderProgramID, "texBlendWeights[0]");	// uniform vec4 texBlendWeights[2];
 		texBW_1_UniLoc = glGetUniformLocation(shaderProgramID, "texBlendWeights[1]");	// uniform vec4 texBlendWeights[2];
@@ -151,15 +153,26 @@ void BindTextures(cGameObject* pCurrentMesh, GLuint shaderProgramID, cFBO* fbo)
 		case 1:		// uniform sampler2D texture01  AND texBlendWeights[0].y;
 			glUniform1i(tex01_UniLoc, texBindIndex);
 			break;
-		case 2:
-			glUniform1i(tex02_UniLoc, texBindIndex);
+		case 2: //3rd for heighmap
+			 if (pCurrentMesh->bUseNormalMap) 
+			{
+				glUniform1i(texNM_UniLoc, texBindIndex);
+			}
+			else
+			{
+				glUniform1i(tex02_UniLoc, texBindIndex);
+			}
 			break;
 		case 3: //3rd for heighmap
-			glUniform1i(texHM_UniLoc, texBindIndex);
+			if (pCurrentMesh->bUseHeighMap) {
+				glUniform1i(texHM_UniLoc, texBindIndex);
+			}
+			else
+			{
+				glUniform1i(tex03_UniLoc, texBindIndex);
+			}
+			
 			break;
-		//case 3: //3rd for heighmap
-		//	glUniform1i(tex03_UniLoc, texBindIndex);
-		//	break;
 		case 4:		// uniform sampler2D texture04  AND texBlendWeights[1].x;
 			glUniform1i(tex04_UniLoc, texBindIndex);
 			break;
@@ -331,6 +344,7 @@ void DrawObject(cGameObject* pCurrentMesh,
 	GLint matProj_location = glGetUniformLocation(shaderProgramID, "matProj");
 	GLint bDontUseLighting_UniLoc = glGetUniformLocation(shaderProgramID, "bDontUseLighting");
 	GLint bUseHeighMap_UniLoc = glGetUniformLocation(shaderProgramID, "bUseHeightMap");
+	GLint bUseNormalMap_UniLoc = glGetUniformLocation(shaderProgramID, "bUseNormalMap");
 	GLint bAddReflect_UniLoc = glGetUniformLocation(program, "bAddReflect");
 	GLint bAddRefract_UniLoc = glGetUniformLocation(program, "bAddRefract");
 
@@ -416,6 +430,16 @@ void DrawObject(cGameObject* pCurrentMesh,
 	else
 	{
 		glUniform1f(bAddReflect_UniLoc, (float)GL_FALSE);
+	}
+	
+	if (pCurrentMesh->bUseNormalMap)
+	{
+		glUniform1f(bUseNormalMap_UniLoc, (float)GL_TRUE);
+		
+	}
+	else
+	{
+		glUniform1f(bUseNormalMap_UniLoc, (float)GL_FALSE);
 	}
 
 

@@ -19,7 +19,24 @@ in vec4 vBoneID;		// really passing it as 4 values
 in vec4 vBoneWeight;	
 
 
+struct sLight
+{
+	vec4 position;			
+	vec4 diffuse;	
+	vec4 specular;	// rgb = highlight colour, w = power
+	vec4 atten;		// x = constant, y = linear, z = quadratic, w = DistanceCutOff
+	vec4 direction;	// Spot, directional lights
+	vec4 param1;	// x = lightType, y = inner angle, z = outer angle, w = TBD
+	                // 0 = pointlight
+					// 1 = spot light
+					// 2 = directional light
+	vec4 param2;	// x = 0 for off, 1 for on
+};
 
+uniform vec3 eyeLocation;		// This is in "world space"
+const int NUMBEROFLIGHTS = 20; 
+uniform sLight theLights[NUMBEROFLIGHTS];  	// 80 uniforms
+uniform float texTiling;
 
 struct sVSOut
 {
@@ -27,8 +44,9 @@ struct sVSOut
 	vec4 vertPosWorld;	// "World space"
 	vec4 vertNormal;	// "Model space"
 	vec4 vertUV_x2;		// To the next shader stage
-	vec4 vertTanXYZ;	// Tangent to the surface
-	vec4 vertBiNormXYZ;	// bi-normal (or bi-tangent) to the surface
+    vec4 TangentLightPos; 
+    vec4 TangentViewPos;
+    vec4 TangentFragPos;
 	vec4 viewSpace;     //For fog
 };
 out sVSOut vsOutput;
@@ -36,6 +54,7 @@ out sVSOut vsOutput;
 
 
 uniform sampler2D texHeightMap;
+uniform sampler2D texNormalMap;
 uniform bool bUseHeightMap;			
 uniform float heightMapRatio;		
 uniform float time;
@@ -58,14 +77,14 @@ void main()
 	if ( bUseHeightMap )
 	{
 
-		vec2 tiledUV = vUV_x2.st * 0.2;
-		float newTime = time * 0.00005;
+		vec2 tiledUV = vUV_x2.st * texTiling;
+		float newTime = time * 0.00001;
 		float height = texture( texHeightMap, vec2(tiledUV.s + newTime, tiledUV.t + newTime) ).r;
 		//float height = clamp( HM_Color, 0.1, 1.0 );
 
 
 
-		float HeightRatio = 0.08;
+		float HeightRatio = 0.008;
 		height = height * HeightRatio;
 		
 		//posTemp.y = 0.0f;		// "Flatten" the mesh
@@ -79,10 +98,10 @@ void main()
 	
 	// Pass the texture coordinates out;
 	vsOutput.vertUV_x2 = vUV_x2;
-	
-	// Also pass the bi-tangent (bi-normal) and tangent to fragment
-	vsOutput.vertTanXYZ = vTanXYZ;		// Tangent to the surface
-	vsOutput.vertBiNormXYZ = vBiNormXYZ;		// bi-normal (or bi-tangent) to the surface
+
+
+
+
 
 	
 	// Skinned mesh or not?
@@ -125,11 +144,7 @@ void main()
 		
 		
 		// And then you do the same for the binormal and bitangent
-		vec4 vTanXYZ_Bone = matBoneTransform_InTrans * vTanXYZ;
-		vsOutput.vertTanXYZ = matModelInvTrans * vTanXYZ_Bone;
-		
-		vec4 vBiNormXYZ_Bone = matBoneTransform_InTrans * vBiNormXYZ;
-		vsOutput.vertBiNormXYZ = matModelInvTrans * vBiNormXYZ_Bone;
+
 		
 		
 		// Debug: make green if this flag is set
@@ -151,8 +166,39 @@ void main()
 		// Remove all scaling and transformation from model
 		// Leaving ONLY rotation... 
 		vsOutput.vertNormal = matModelInvTrans * vec4(normalize(vNormal.xyz),1.0f);
+
+
 	
 	}//if ( bIsASkinnedMesh )
+
+
+
+
+
+for ( int index = 0; index < NUMBEROFLIGHTS; index++ )
+	{	
+		// ********************************************************
+		// is light "on"
+		if ( theLights[index].param2.x == 0.0f )
+		{	// it's off
+			continue;
+		}
+
+
+	mat3 normalMatrix = transpose(inverse(mat3(matModel)));
+    vec3 T = normalize(normalMatrix * vTanXYZ.xyz);
+    vec3 N = normalize(normalMatrix * vBiNormXYZ.xyz);
+    T = normalize(T - dot(T, N) * N);
+    vec3 B = cross(N, T);
+	
+    
+    mat3 TBN = transpose(mat3(T, B, N));    
+    vsOutput.TangentLightPos.xyz = TBN * theLights[index].position.xyz;
+    vsOutput.TangentViewPos.xyz  = TBN * eyeLocation.xyz;
+    vsOutput.TangentFragPos.xyz  = TBN * vsOutput.vertPosWorld.xyz;
+
+	}
+
 	
 	
 }

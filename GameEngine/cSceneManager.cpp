@@ -66,6 +66,7 @@ bool cSceneManager::saveScene(std::string filename) {
 			rapidjson::Value Scale(rapidjson::kArrayType);
 			rapidjson::Value Visible(CurModel->bIsVisible);
 			rapidjson::Value UseHeightMap(CurModel->bUseHeighMap);
+			rapidjson::Value UseNormalMap(CurModel->bUseNormalMap);
 			rapidjson::Value UsePhysics(CurModel->bIsUpdatedByPhysics);
 			rapidjson::Value WireFrame(CurModel->bIsWireFrame);
 
@@ -121,7 +122,13 @@ bool cSceneManager::saveScene(std::string filename) {
 
 			ObjValue.AddMember("Visible", Visible, allocator);
 			ObjValue.AddMember("Use_Physics", UsePhysics, allocator);
-			ObjValue.AddMember("Use_HeighMap", UseHeightMap, allocator);
+			if(CurModel->bUseHeighMap){
+				ObjValue.AddMember("Use_Height_Map", UseHeightMap, allocator);
+			}
+			if (CurModel->bUseNormalMap) {
+				ObjValue.AddMember("Use_Normal_Map", UseHeightMap, allocator);
+			}
+			
 			ObjValue.AddMember("Wireframe", WireFrame, allocator);
 			ObjValue.AddMember("Position", PositionArray, allocator);
 			ObjValue.AddMember("DiffuseRGB_Alpha", DiffuseRGBArray, allocator);
@@ -422,9 +429,14 @@ bool cSceneManager::loadScene(std::string filename) {
 		{
 			CurModel->bRefraction = GameObject[i]["Refraction"].GetBool();
 		}
-		if (GameObject[i].HasMember("Use_HeighMap"))
+		if (GameObject[i].HasMember("Use_Height_Map"))
 		{
-			CurModel->bUseHeighMap = GameObject[i]["Use_HeighMap"].GetBool();
+			CurModel->bUseHeighMap = GameObject[i]["Use_Height_Map"].GetBool();
+		}
+
+		if (GameObject[i].HasMember("Use_Normal_Map"))
+		{
+			CurModel->bUseNormalMap = GameObject[i]["Use_Normal_Map"].GetBool();
 		}
 
 		//if ply;

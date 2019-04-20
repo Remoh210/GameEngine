@@ -2,6 +2,7 @@
 #include "nConvert.h"
 #include "cBulletRigidBody.h"
 #include "cBulletConstraints.h"
+#include "BulletCollision/CollisionDispatch/btInternalEdgeUtility.h"
 
 
 std::pair<std::string, std::string> lastColNames;
@@ -17,6 +18,10 @@ bool callbackFunc(btManifoldPoint& cp,
 	((nPhysics::cBulletRigidBody*)obj2->getCollisionObject()->getUserPointer())->SetCollision(true);
 	lastColNames.first = ((nPhysics::cBulletRigidBody*)obj1->getCollisionObject()->getUserPointer())->GetGOName();
 	lastColNames.second = ((nPhysics::cBulletRigidBody*)obj2->getCollisionObject()->getUserPointer())->GetGOName();
+
+
+
+	btAdjustInternalEdgeContacts(cp, obj1, obj2, id1, index1);
 	return false;
 }
 

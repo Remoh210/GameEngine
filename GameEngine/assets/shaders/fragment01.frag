@@ -10,17 +10,13 @@ struct sGSOut
 	vec4 vertPosWorld;	// "World space"
 	vec4 vertNormal;	// "Model space"
 	vec4 vertUV_x2;		// To the next shader stage
-	vec4 vertTanXYZ;	// Tangent to the surface
-	vec4 vertBiNormXYZ;	// bi-normal (or bi-tangent) to the surface
   vec4 viewSpace;     //For fog
+  vec4 TangentLightPos; 
+  vec4 TangentViewPos;
+  vec4 TangentFragPos;
 };
 
 in sGSOut gsOuput;
-
-
-
-
-
 
 
 
@@ -60,13 +56,6 @@ out vec4 finalOutputColour;			// GL_COLOR_ATTACHMENT0
 out vec4 finalOutputNormal;			// GL_COLOR_ATTACHMENT1
 out vec4 finalOutputVertWorldPos;	// GL_COLOR_ATTACHMENT2
 
-//struct sOutput
-//{
-//	vec4 Colour;
-//	vec4 Normal;
-//	vec4 vertPos;
-//};
-//out sOutput finalOutoutData;
 
 struct sLight
 {
@@ -89,9 +78,6 @@ const int DIRECTIONAL_LIGHT_TYPE = 2;
 const int NUMBEROFLIGHTS = 20;
 uniform sLight theLights[NUMBEROFLIGHTS];  	// 80 uniforms
 
-// CAN'T put texture samplers into an array (sadly)
-//uniform sampler textures[10];
-
 uniform sampler2D texture00;
 uniform sampler2D texture01;
 uniform sampler2D texture02;
@@ -100,6 +86,9 @@ uniform sampler2D texture04;
 uniform sampler2D texture05;
 uniform sampler2D texture06;
 uniform sampler2D texture07;
+
+//normal 
+uniform sampler2D texNormalMap;
 
 // For the 2 pass rendering
 uniform float renderPassNumber;	// 1 = 1st pass, 2nd for offscreen to quad
@@ -118,6 +107,7 @@ uniform bool bAddReflect;		// Add reflection
 uniform bool bAddRefract;		// Add refraction
 uniform float refractionIndex;
 uniform bool bUseHeightMap;	
+uniform bool bUseNormalMap;
 // This is 4 x 2 floats or 8 floats
 uniform vec4 texBlendWeights[2];	// x is 0, y is 1, z is 2
 
@@ -128,24 +118,47 @@ uniform float wholeObjectAlphaTransparency;
 
 const vec3 fogColor = vec3(0.5, 0.5,0.5);
 //const float FogDensity = 0.008;
-const float FogDensity = 0.0025;
-float ambientAmount = 0.12;
+const float FogDensity = 0.000;
+float ambientAmount = 0.3;
 void main()
 {
 
 // In from a previous stage (geom shader)
 	vec4 color         = gsOuput.color;			                   // in from the vertex shader
 	vec4 vertPosWorld  = gsOuput.vertPosWorld;
-	vec4 vertNormal    = gsOuput.vertNormal;              // "Model space" (only rotation)
 	vec4 vertUV_x2		 = gsOuput.vertUV_x2;               // Texture coordinates
-	vec4 viewSpace     = gsOuput.viewSpace;  
-	vec4 vertTanXYZ  	 = gsOuput.vertTanXYZ;  		               // Tangent to the surface
-	vec4 vertBiNormXYZ = gsOuput.vertBiNormXYZ;  		              // bi-normal (or bi-tangent) to the surface
-
-
-	vec4 tiledUV = vertUV_x2;
-
-
+	vec4 viewSpace     = gsOuput.viewSpace;
+	vec4 tiledUV 			 = vertUV_x2;  
+  // 
+	// 
+		if(bUseHeightMap)
+	{
+		tiledUV.s *= texTiling;
+		tiledUV.t *= texTiling;
+		//tiledUV.s *= 15.0;
+		//tiledUV.t *= 15.0;
+		float newTime = time * 0.00001;
+		tiledUV.s *= newTime;
+		tiledUV.t *= newTime;
+	}
+	else
+	{
+		tiledUV.s *= texTiling;
+		tiledUV.t *= texTiling;
+	}
+	
+	vec4 vertNormal;
+	if(bUseNormalMap)
+	{
+	vec3 normal;
+	normal = texture(texNormalMap, tiledUV.st).rgb;
+	vertNormal.rgb  = normalize(normal * 2.0 - 1.0).rgb;
+	}
+	else
+	{
+		vertNormal = gsOuput.vertNormal;
+	}
+	
 
 
 
@@ -186,28 +199,10 @@ void main()
 
 
 
-	if(bUseHeightMap)
-	{
-		tiledUV.s *= 15.0;
-		tiledUV.t *= 15.0;
-		float newTime = time * 0.00005;
-		tiledUV.s *= newTime;
-		tiledUV.t *= newTime;
-	}
-	else
-	{
-		tiledUV.s *= texTiling;
-		tiledUV.t *= texTiling;
-	}
-	
-	vec4 materialDiffuse = vec4(0.0f, 0.0f, 0.0f, 1.0f);
-	
-	// FOR NOW, I'm adding the bi-normal and tangent here
-	// (so they won't be optimized out)
-	materialDiffuse.xyz += ( vertTanXYZ.xyz * 0.001f);
-	materialDiffuse.xyz += ( vertBiNormXYZ.xyz * 0.001f);
 
 	
+	vec4 materialDiffuse = vec4(0.0f, 0.0f, 0.0f, 1.0f);
+
 	vec4 materialSpecular = objectSpecular;
 
 
@@ -226,17 +221,13 @@ dist = length(viewSpace);
 	// is this the skybox texture?
 	if (useSkyBoxTexture == true)
 	{
-		//finalOutputColour.rgb = vec3(1.0f, 0.0f, 0.0f);
 
-		// Note for cube maps, the texture coordinates are 3D
-		// (so here we are using the normal on the surface 
-		//  of the sphere, like a "ray cast" really)
-		vec3 skyPixelColour = texture( textureSkyBox, vertNormal.xyz ).rgb;
+		vec3 skyPixelColour = texture( textureSkyBox, gsOuput.vertNormal.xyz ).rgb;
 		
 		finalOutputColour.rgb = skyPixelColour;
 		finalOutputColour.a = 1.0f;
 		
-		finalOutputNormal.rgb = vertNormal.xyz;
+		finalOutputNormal.rgb = gsOuput.vertNormal.xyz;
 		finalOutputNormal.a = 1.0f;
 
 
@@ -358,6 +349,19 @@ dist = length(viewSpace);
 		{	// it's off
 			continue;
 		}
+
+		
+
+		vec3 LightDirection;
+		//if normal map
+		if(bUseNormalMap)
+		{
+			LightDirection = normalize(gsOuput.TangentLightPos - gsOuput.TangentFragPos).rgb;
+		}
+		else
+		{
+			LightDirection = theLights[index].direction.rgb;
+		}
 		
 		// Cast to an int (note with c'tor)
 		int intLightType = int(theLights[index].param1.x);
@@ -372,10 +376,13 @@ dist = length(viewSpace);
 			// -- Almost always, there's only 1 of these in a scene
 			// Cheapest light to calculate. 
 
+
+			
+
 			vec3 lightContrib = theLights[index].diffuse.rgb;
 			
 			// Get the dot product of the light and normalize
-			float dotProduct = dot( -theLights[index].direction.xyz,  
+			float dotProduct = dot(LightDirection.xyz,  
 									   normalize(norm.xyz) );	// -1 to 1
 
 			dotProduct = max( 0.0f, dotProduct );		// 0 to 1
@@ -451,7 +458,8 @@ dist = length(viewSpace);
 
 		// Get eye or view vector
 		// The location of the vertex in the world to your eye
-		vec3 eyeVector = normalize(eyeLocation.xyz - vertPosWorld.xyz);
+		//vec3 eyeVector = normalize(eyeLocation.xyz - vertPosWorld.xyz);
+		vec3 eyeVector = normalize(gsOuput.TangentViewPos - gsOuput.TangentFragPos).rgb;
 
 		// To simplify, we are NOT using the light specular value, just the object’s.
 		float objectSpecularPower = objectSpecular.w; 
@@ -482,7 +490,7 @@ dist = length(viewSpace);
 			vertexToLight = normalize(vertexToLight);
 
 			float currentLightRayAngle
-					= dot( vertexToLight.xyz, theLights[index].direction.xyz );
+					= dot( vertexToLight.xyz, LightDirection.xyz );
 					
 			currentLightRayAngle = max(0.0f, currentLightRayAngle);
 

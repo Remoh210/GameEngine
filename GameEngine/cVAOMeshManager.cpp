@@ -249,6 +249,7 @@ bool cVAOMeshManager::m_LoadModelFromFile_Ply5nLoader(sModelDrawInfo &drawInfo)
 
 	// Same with triangles
 
+
 //	memset( drawInfo.pTriangles, 0, sizeof( sPlyTriangle ) * drawInfo.numberOfTriangles );
 
 	PlyElement curElement;
@@ -267,6 +268,79 @@ bool cVAOMeshManager::m_LoadModelFromFile_Ply5nLoader(sModelDrawInfo &drawInfo)
 		drawInfo.pMeshData->pIndices[index + 0] = curElement.vertex_index_1;
 		drawInfo.pMeshData->pIndices[index + 1] = curElement.vertex_index_2;
 		drawInfo.pMeshData->pIndices[index + 2] = curElement.vertex_index_3;
+
+
+
+		//calculating tangent and biNormal
+		glm::vec3 v0 = glm::vec3(
+			drawInfo.pMeshData->pVertices[curElement.vertex_index_1].x, 
+			drawInfo.pMeshData->pVertices[curElement.vertex_index_1].y, 
+			drawInfo.pMeshData->pVertices[curElement.vertex_index_1].z);
+		glm::vec3 v1 = glm::vec3(
+			drawInfo.pMeshData->pVertices[curElement.vertex_index_2].x,
+			drawInfo.pMeshData->pVertices[curElement.vertex_index_2].y,
+			drawInfo.pMeshData->pVertices[curElement.vertex_index_2].z);
+		glm::vec3 v2 = glm::vec3(
+			drawInfo.pMeshData->pVertices[curElement.vertex_index_3].x,
+			drawInfo.pMeshData->pVertices[curElement.vertex_index_3].y,
+			drawInfo.pMeshData->pVertices[curElement.vertex_index_3].z);
+
+
+		glm::vec2 uv0 = glm::vec2(
+			drawInfo.pMeshData->pVertices[curElement.vertex_index_1].u0,
+			drawInfo.pMeshData->pVertices[curElement.vertex_index_1].v0);
+		glm::vec2 uv1 = glm::vec2(
+			drawInfo.pMeshData->pVertices[curElement.vertex_index_2].u0,
+			drawInfo.pMeshData->pVertices[curElement.vertex_index_2].v0);
+		glm::vec2 uv2 = glm::vec2(
+			drawInfo.pMeshData->pVertices[curElement.vertex_index_3].u0,
+			drawInfo.pMeshData->pVertices[curElement.vertex_index_3].v0);
+
+		//Edges
+		glm::vec3 deltaPos1 = v1 - v0;
+		glm::vec3 deltaPos2 = v2 - v0;
+
+		// UV delta
+		glm::vec2 deltaUV1 = uv1 - uv0;
+		glm::vec2 deltaUV2 = uv2 - uv0;
+
+		float r = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV1.y * deltaUV2.x);
+		glm::vec3 tangent = (deltaPos1 * deltaUV2.y - deltaPos2 * deltaUV1.y)*r;
+		glm::vec3 bitangent = (deltaPos2 * deltaUV1.x - deltaPos1 * deltaUV2.x)*r;
+		tangent = glm::normalize(tangent);
+		//tangent = glm::normalize(tangent - drawInfo.pMeshData->pVertices[curElement.vertex_index_1]. * glm::dot(n, t));
+		glm::vec3 normal = glm::vec3(
+			drawInfo.pMeshData->pVertices[curElement.vertex_index_1].nx,
+			drawInfo.pMeshData->pVertices[curElement.vertex_index_1].ny,
+			drawInfo.pMeshData->pVertices[curElement.vertex_index_1].nz);
+
+
+		tangent = glm::normalize(tangent - normal * glm::dot(normal, tangent));
+		//tx, ty, tz, tw;	// tangent				
+		//bx, by, bz, bw;	// bi-normal	
+		drawInfo.pMeshData->pVertices[curElement.vertex_index_1].tx = tangent.x;
+		drawInfo.pMeshData->pVertices[curElement.vertex_index_1].ty = tangent.y;
+		drawInfo.pMeshData->pVertices[curElement.vertex_index_1].tz = tangent.z;
+
+		drawInfo.pMeshData->pVertices[curElement.vertex_index_1].bx = bitangent.x;
+		drawInfo.pMeshData->pVertices[curElement.vertex_index_1].by = bitangent.y;
+		drawInfo.pMeshData->pVertices[curElement.vertex_index_1].bz = bitangent.z;
+
+		drawInfo.pMeshData->pVertices[curElement.vertex_index_2].tx = tangent.x;
+		drawInfo.pMeshData->pVertices[curElement.vertex_index_2].ty = tangent.y;
+		drawInfo.pMeshData->pVertices[curElement.vertex_index_2].tz = tangent.z;
+
+		drawInfo.pMeshData->pVertices[curElement.vertex_index_2].bx = bitangent.x;
+		drawInfo.pMeshData->pVertices[curElement.vertex_index_2].by = bitangent.y;
+		drawInfo.pMeshData->pVertices[curElement.vertex_index_2].bz = bitangent.z;
+
+		drawInfo.pMeshData->pVertices[curElement.vertex_index_3].tx = tangent.x;
+		drawInfo.pMeshData->pVertices[curElement.vertex_index_3].ty = tangent.y;
+		drawInfo.pMeshData->pVertices[curElement.vertex_index_3].tz = tangent.z;
+
+		drawInfo.pMeshData->pVertices[curElement.vertex_index_3].bx = bitangent.x;
+		drawInfo.pMeshData->pVertices[curElement.vertex_index_3].by = bitangent.y;
+		drawInfo.pMeshData->pVertices[curElement.vertex_index_3].bz = bitangent.z;
 
 	}//for ( unsigned int index...
 

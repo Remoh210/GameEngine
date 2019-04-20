@@ -685,7 +685,7 @@
     "Lights": [
       {
           "Name": "MainLight",
-          "Type": "POINT_LIGHT",
+          "Type": "DIRECTIONAL_LIGHT",
           "Position": [
               -9.0,
               330.0,
@@ -697,10 +697,16 @@
               9.038285120333001e-10,
               -431602080.0
           ],
+          "Direction" : 
+          [
+            0.01,
+            -1.0,
+            0.01
+          ],
           "DiffuseRGB_Alpha": [
-              1.0,
-              1.0,
-              1.0,
+              0.8,
+              0.8,
+              0.8,
               1.0
           ],
           "Turned": "ON"

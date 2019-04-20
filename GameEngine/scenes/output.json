@@ -234,7 +234,7 @@
                 1.0,
                 1.0,
                 1.0,
-                100.0
+                1000000.0
             ],
             "Rotation": [
                 0.00004570440432871692,
@@ -3433,7 +3433,6 @@
             },
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 76.98789978027344,
@@ -3488,7 +3487,7 @@
             "Mesh": "plane_floor.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
+            "Use_Normal_Map": false,
             "Wireframe": false,
             "Position": [
                 0.0,
@@ -3505,7 +3504,7 @@
                 1.0,
                 1.0,
                 1.0,
-                10000000.0
+                100.0
             ],
             "Rotation": [
                 0.0,
@@ -3519,12 +3518,17 @@
             ],
             "Textures": [
                 {
-                    "Name": "grassTex.bmp",
+                    "Name": "ground/grassTex.bmp",
                     "Strength": 1.0,
                     "Tile": 60.0
                 },
                 {
                     "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 60.0
+                },
+                {
+                    "Name": "ground/grassNormalTex.bmp",
                     "Strength": 0.0,
                     "Tile": 60.0
                 }
@@ -3545,7 +3549,8 @@
             "Mesh": "highResPlane.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": true,
+            "Use_Height_Map": true,
+            "Use_Norlmal_Map": true,
             "Reflection": true,
             "Refraction": true,
             "Wireframe": false,
@@ -3564,7 +3569,7 @@
                 1.0,
                 1.0,
                 1.0,
-                100.0
+                10.0
             ],
             "Rotation": [
                 0.0,
@@ -3578,19 +3583,24 @@
             ],
             "Textures": [
                 {
-                    "Name": "waterTex.bmp",
+                    "Name": "water/waterTex.bmp",
                     "Strength": 1.0,
-                    "Tile": 1.0
+                    "Tile": 100.0
                 },
                 {
                     "Name": "testTex.bmp",
                     "Strength": 0.0,
-                    "Tile": 1.0
+                    "Tile": 100.0
                 },
                 {
-                    "Name": "height_maps/waterHM.bmp",
+                    "Name": "water/waterNormalTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 100.0
+                },
+                {
+                    "Name": "water/waterHeightTex.bmp",
                     "Strength": 1.0,
-                    "Tile": 1.0
+                    "Tile": 100.0
                 }
             ]
         },
@@ -3599,7 +3609,6 @@
             "Mesh": "ramp.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 0.0,
@@ -3657,7 +3666,7 @@
             "Direction": [
                 0.30000001192092898,
                 -1.0,
-                0.0
+                0.3
             ],
             "Position": [
                 6486.0,
@@ -3671,16 +3680,16 @@
                 -431602080.0
             ],
             "DiffuseRGB_Alpha": [
-                0.4,
-                0.4,
-                0.4,
+                0.9,
+                0.9,
+                0.9,
                 1.0
             ],
             "Turned": "ON"
         },
         {
             "Name": "MainLightOLD",
-            "Type": "SPOT_LIGHT",
+            "Type": "POINT_LIGHT",
             "Angles": [
                 0.0,
                 0.0
@@ -3733,7 +3742,7 @@
         },
         {
             "Name": "Torch_Light1",
-            "Type": "SPOT_LIGHT",
+            "Type": "POINT_LIGHT",
             "Angles": [
                 10.0,
                 20.0
