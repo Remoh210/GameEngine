@@ -314,7 +314,7 @@
             "Mesh": "env_objects/lantern.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
+            "Use_Normal_Map": true,
             "Wireframe": false,
             "Position": [
                 684.5810546875,
@@ -353,7 +353,13 @@
                     "Name": "testTex.bmp",
                     "Strength": 0.0,
                     "Tile": 1.0
+                },
+                {
+                    "Name": "env_objects/lanternNorm.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
                 }
+                
             ],
             "RigidBody": {
                 "Type": "BOX",
@@ -956,7 +962,7 @@
             "Mesh": "fantasy_house.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
+            "Use_Normal_Map": true,
             "Wireframe": false,
             "Position": [
                 611.3331909179688,
@@ -995,7 +1001,13 @@
                     "Name": "testTex.bmp",
                     "Strength": 0.0,
                     "Tile": 1.0
+                },
+                {
+                    "Name": "fantasy_house/fantasyHouseNormal.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
                 }
+                
             ],
             "RigidBody": {
                 "Type": "BOX",
@@ -1007,7 +1019,7 @@
             "Mesh": "fantasy_house.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
+            "Use_Normal_Map": true,
             "Wireframe": false,
             "Position": [
                 837.556640625,
@@ -1046,6 +1058,11 @@
                     "Name": "testTex.bmp",
                     "Strength": 0.0,
                     "Tile": 1.0
+                },
+                {
+                    "Name": "fantasy_house/fantasyHouseNormal.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
                 }
             ],
             "RigidBody": {
@@ -1058,7 +1075,7 @@
             "Mesh": "fantasy_house.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
+            "Use_Normal_Map": true,
             "Wireframe": false,
             "Position": [
                 843.3413696289063,
@@ -1097,6 +1114,11 @@
                     "Name": "testTex.bmp",
                     "Strength": 0.0,
                     "Tile": 1.0
+                },
+                {
+                    "Name": "fantasy_house/fantasyHouseNormal.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
                 }
             ],
             "RigidBody": {
@@ -1109,7 +1131,7 @@
             "Mesh": "fantasy_house.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
+            "Use_Normal_Map": true,
             "Wireframe": false,
             "Position": [
                 611.1971435546875,
@@ -1148,6 +1170,11 @@
                     "Name": "testTex.bmp",
                     "Strength": 0.0,
                     "Tile": 1.0
+                },
+                {
+                    "Name": "fantasy_house/fantasyHouseNormal.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
                 }
             ],
             "RigidBody": {
@@ -1160,7 +1187,7 @@
             "Mesh": "env_objects/statue.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
+            "Use_Normal_Map": false,
             "Wireframe": false,
             "Position": [
                 730.3412475585938,
@@ -1199,6 +1226,11 @@
                     "Name": "testTex.bmp",
                     "Strength": 0.0,
                     "Tile": 1.0
+                },
+                {
+                    "Name": "env_objects/statueNormalTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
                 }
             ],
             "RigidBody": {
@@ -1211,7 +1243,7 @@
             "Mesh": "env_objects/cart.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
+            "Use_Normal_Map": true,
             "Wireframe": false,
             "Position": [
                 805.0557861328125,
@@ -1250,6 +1282,11 @@
                     "Name": "testTex.bmp",
                     "Strength": 0.0,
                     "Tile": 1.0
+                },
+                {
+                    "Name": "env_objects/cartNormalTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
                 }
             ],
             "RigidBody": {
@@ -1262,7 +1299,7 @@
             "Mesh": "env_objects/cart.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
+            "Use_Normal_Map": true,
             "Wireframe": false,
             "Position": [
                 838.1648559570313,
@@ -1301,6 +1338,11 @@
                     "Name": "testTex.bmp",
                     "Strength": 0.0,
                     "Tile": 1.0
+                },
+                {
+                    "Name": "env_objects/cartNormalTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
                 }
             ],
             "RigidBody": {
@@ -1313,7 +1355,7 @@
             "Mesh": "env_objects/cart.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
+            "Use_Normal_Map": true,
             "Wireframe": false,
             "Position": [
                 845.761474609375,
@@ -1352,6 +1394,11 @@
                     "Name": "testTex.bmp",
                     "Strength": 0.0,
                     "Tile": 1.0
+                },
+                {
+                    "Name": "env_objects/cartNormalTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
                 }
             ],
             "RigidBody": {
@@ -1364,7 +1411,7 @@
             "Mesh": "env_objects/cart.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
+            "Use_Normal_Map": true,
             "Wireframe": false,
             "Position": [
                 805.332763671875,
@@ -1402,6 +1449,11 @@
                 {
                     "Name": "testTex.bmp",
                     "Strength": 0.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "env_objects/cartNormalTex.bmp",
+                    "Strength": 1.0,
                     "Tile": 1.0
                 }
             ],
@@ -1568,7 +1620,7 @@
             "Mesh": "wall/brick_tower.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
+            "Use_Normal_Map": true,
             "Wireframe": false,
             "Position": [
                 972.5390014648438,
@@ -1607,7 +1659,13 @@
                     "Name": "testTex.bmp",
                     "Strength": 0.0,
                     "Tile": 1.0
+                },
+                {
+                    "Name": "wall/towerNormal.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
                 }
+                
             ],
             "RigidBody": {
                 "Type": "BOX",
@@ -1619,7 +1677,7 @@
             "Mesh": "wall/brick_tower.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
+            "Use_Normal_Map": true,
             "Wireframe": false,
             "Position": [
                 -964.9511108398438,
@@ -1658,6 +1716,11 @@
                     "Name": "testTex.bmp",
                     "Strength": 0.0,
                     "Tile": 1.0
+                },
+                {
+                    "Name": "wall/towerNormal.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
                 }
             ],
             "RigidBody": {
@@ -1670,7 +1733,7 @@
             "Mesh": "wall/brick_tower.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
+            "Use_Normal_Map": true,
             "Wireframe": false,
             "Position": [
                 970.0822143554688,
@@ -1709,6 +1772,11 @@
                     "Name": "testTex.bmp",
                     "Strength": 0.0,
                     "Tile": 1.0
+                },
+                {
+                    "Name": "wall/towerNormal.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
                 }
             ],
             "RigidBody": {
@@ -1721,7 +1789,7 @@
             "Mesh": "wall/brick_tower.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
+            "Use_Normal_Map": true,
             "Wireframe": false,
             "Position": [
                 -973.5399169921875,
@@ -1758,6 +1826,11 @@
                 },
                 {
                     "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "wall/towerNormal.bmp",
                     "Strength": 0.0,
                     "Tile": 1.0
                 }
@@ -3163,6 +3236,53 @@
             }
         },
         {
+            "Name": "bow",
+            "Mesh": "character/bow.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Use_HeighMap": false,
+            "Wireframe": false,
+            "Position": [
+                -444.6542663574219,
+                48.87075424194336,
+                664.8338012695313
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                -15.678074836730957,
+                -70.83654022216797,
+                4.77609920501709
+            ],
+            "Scale": [
+                12.718605995178223,
+                12.718605995178223,
+                12.718605995178223
+            ],
+            "Textures": [
+                {
+                    "Name": "character/bowTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                }
+            ]
+        },
+        {
             "Name": "chan",
             "SkinnedMesh": "assets/models/FBX/chan.fbx",
             "Animation": {
@@ -3179,9 +3299,13 @@
                 "Walk-backward": "assets/models/FBX/chan-walk-backward.fbx",
                 "Walk-forward": "assets/models/FBX/chan-walk-forward.fbx"
             },
+            "Props": 
+            [
+                "bow"
+            ],
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
+            "Use_Normal_Map": true,
             "Wireframe": false,
             "Position": [
                 -471.0438537597656,
@@ -3212,12 +3336,17 @@
             ],
             "Textures": [
                 {
-                    "Name": "chanTex.bmp",
+                    "Name": "character/chanTex.bmp",
                     "Strength": 1.0,
                     "Tile": 1.0
                 },
                 {
                     "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "character/chanNormal.bmp",
                     "Strength": 0.0,
                     "Tile": 1.0
                 }
@@ -3549,10 +3678,10 @@
             "Mesh": "highResPlane.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_Height_Map": true,
+            "Use_Height_Map": false,
             "Use_Norlmal_Map": true,
-            "Reflection": true,
-            "Refraction": true,
+            "Reflection": false,
+            "Refraction": false,
             "Wireframe": false,
             "Position": [
                 -516.3553466796875,
@@ -3563,13 +3692,13 @@
                 0.0,
                 0.0,
                 0.0,
-                0.6
+                1.0
             ],
             "SpecularRGB_Alpha": [
                 1.0,
                 1.0,
                 1.0,
-                10.0
+                1.0
             ],
             "Rotation": [
                 0.0,
@@ -3585,22 +3714,17 @@
                 {
                     "Name": "water/waterTex.bmp",
                     "Strength": 1.0,
-                    "Tile": 100.0
+                    "Tile": 30.0
                 },
                 {
                     "Name": "testTex.bmp",
                     "Strength": 0.0,
-                    "Tile": 100.0
+                    "Tile": 30.0
                 },
                 {
-                    "Name": "water/waterNormalTex.bmp",
+                    "Name": "water/waterNormalTex2.bmp",
                     "Strength": 0.0,
-                    "Tile": 100.0
-                },
-                {
-                    "Name": "water/waterHeightTex.bmp",
-                    "Strength": 1.0,
-                    "Tile": 100.0
+                    "Tile": 30.0
                 }
             ]
         },
@@ -3664,9 +3788,9 @@
                 0.0
             ],
             "Direction": [
-                0.30000001192092898,
-                -1.0,
-                0.3
+                0.0,
+                -0.3,
+                0.0
             ],
             "Position": [
                 6486.0,

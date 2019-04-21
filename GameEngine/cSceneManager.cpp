@@ -639,6 +639,19 @@ bool cSceneManager::loadScene(std::string filename) {
 		}
 
 
+		if (GameObject[i].HasMember("Props")) {
+			const rapidjson::Value& PopsArray = GameObject[i]["Props"];
+			for (rapidjson::SizeType i = 0; i < PopsArray.Size(); i++)
+			{
+				std::string ObjName;
+				ObjName = PopsArray[i].GetString();
+				cGameObject* prop = findObjectByFriendlyName(ObjName);
+				if(prop)
+				CurModel->vec_pChildObjectsToDraw.push_back(prop);
+			}
+		}
+
+
 		if(GameObject[i].HasMember("RigidBody"))
 		{
 			std::string type = GameObject[i]["RigidBody"]["Type"].GetString();

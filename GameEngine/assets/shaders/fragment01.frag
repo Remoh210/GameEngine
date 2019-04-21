@@ -131,22 +131,8 @@ void main()
 	vec4 tiledUV 			 = vertUV_x2;  
   // 
 	// 
-		if(bUseHeightMap)
-	{
-		tiledUV.s *= texTiling;
-		tiledUV.t *= texTiling;
-		//tiledUV.s *= 15.0;
-		//tiledUV.t *= 15.0;
-		float newTime = time * 0.00001;
-		tiledUV.s *= newTime;
-		tiledUV.t *= newTime;
-	}
-	else
-	{
-		tiledUV.s *= texTiling;
-		tiledUV.t *= texTiling;
-	}
-	
+
+	tiledUV *= texTiling;
 	vec4 vertNormal;
 	if(bUseNormalMap)
 	{
@@ -350,17 +336,24 @@ dist = length(viewSpace);
 			continue;
 		}
 
-		
+		vec3 lightDiffuseContrib;
+			
+
+		 // Specular 
+		vec3 lightSpecularContrib;
 
 		vec3 LightDirection;
+		vec3 eyeVector;
 		//if normal map
 		if(bUseNormalMap)
 		{
 			LightDirection = normalize(gsOuput.TangentLightPos - gsOuput.TangentFragPos).rgb;
+			eyeVector = normalize(gsOuput.TangentViewPos - gsOuput.TangentFragPos).rgb;
 		}
 		else
 		{
 			LightDirection = theLights[index].direction.rgb;
+			eyeVector = normalize(eyeLocation.xyz - vertPosWorld.xyz);
 		}
 		
 		// Cast to an int (note with c'tor)
@@ -379,30 +372,60 @@ dist = length(viewSpace);
 
 			
 
-			vec3 lightContrib = theLights[index].diffuse.rgb;
+			// vec3 lightContrib = theLights[index].diffuse.rgb;
 			
-			// Get the dot product of the light and normalize
-			float dotProduct = dot(LightDirection.xyz,  
-									   normalize(norm.xyz) );	// -1 to 1
+			// // Get the dot product of the light and normalize
+			// float dotProduct = dot(LightDirection.xyz,  
+			// 						   normalize(norm.xyz) );	// -1 to 1
 
-			dotProduct = max( 0.0f, dotProduct );		// 0 to 1
+			// dotProduct = max( 0.0f, dotProduct );		// 0 to 1
 			
-			lightContrib *= dotProduct;		
+			// lightContrib *= dotProduct;		
 			
-			finalObjectColour.rgb += (materialDiffuse.rgb * theLights[index].diffuse.rgb * lightContrib); 
-									 //+ (materialSpecular.rgb * lightSpecularContrib.rgb);
-			// NOTE: There isn't any attenuation, like with sunlight.
-			// (This is part of the reason directional lights are fast to calculate)
+			// finalObjectColour.rgb += (materialDiffuse.rgb * theLights[index].diffuse.rgb * lightContrib); 
+			// 						 //+ (materialSpecular.rgb * lightSpecularContrib.rgb);
+			// // NOTE: There isn't any attenuation, like with sunlight.
+			// // (This is part of the reason directional lights are fast to calculate)
 
-			// TODO: Still need to do specular, but this gives you an idea
-			finalOutputColour.rgb = finalObjectColour.rgb;
-			finalOutputColour.rgb += materialDiffuse.rgb  * ambientAmount;
-			finalOutputColour.a = wholeObjectAlphaTransparency;
+			// // TODO: Still need to do specular, but this gives you an idea
+			// finalOutputColour.rgb = finalObjectColour.rgb;
+			// finalOutputColour.rgb += materialDiffuse.rgb  * ambientAmount;
+			// finalOutputColour.a = wholeObjectAlphaTransparency;
 
 			// Also output the normal to colour #1
-			finalOutputNormal.rgb = vertNormal.xyz;
-			finalOutputNormal.r = 1.0f;
-			finalOutputNormal.a = 1.0f;
+			//finalOutputNormal.rgb = vertNormal.xyz;
+			//finalOutputNormal.r = 1.0f;
+			//finalOutputNormal.a = 1.0f;
+
+
+
+
+
+
+
+
+
+
+		finalObjectColour.rgb += materialDiffuse.rgb;
+    // ambient
+    // diffuse
+    float diff = max(dot(LightDirection.xyz, norm.xyz), 0.0);
+    vec3 diffuse = diff * finalObjectColour.rgb;
+    // specular
+    vec3 viewDir = normalize(gsOuput.TangentViewPos - gsOuput.TangentFragPos).rgb;
+    vec3 reflectDir = reflect(-LightDirection.xyz, norm.xyz);
+    vec3 halfwayDir = normalize(LightDirection.xyz + viewDir);  
+    float spec = pow(max(dot(norm.xyz, halfwayDir), 0.0), 32.0);
+
+    vec3 specular = vec3(0.2) * spec;
+    finalObjectColour = vec4(diffuse + specular, 1.0);
+
+		lightDiffuseContrib = diffuse;
+		lightSpecularContrib = specular;
+
+
+
+
 
 
 	// // Add any reflection or refraction 
@@ -438,7 +461,7 @@ dist = length(viewSpace);
 		{
 		
 		// Assume it's a point light 
-		// intLightType = 0
+		// // intLightType = 0
 		
 		// Contribution for this light
 		vec3 vLightToVertex = theLights[index].position.xyz - vertPosWorld.xyz;
@@ -459,7 +482,7 @@ dist = length(viewSpace);
 		// Get eye or view vector
 		// The location of the vertex in the world to your eye
 		//vec3 eyeVector = normalize(eyeLocation.xyz - vertPosWorld.xyz);
-		vec3 eyeVector = normalize(gsOuput.TangentViewPos - gsOuput.TangentFragPos).rgb;
+		
 
 		// To simplify, we are NOT using the light specular value, just the object’s.
 		float objectSpecularPower = objectSpecular.w; 
@@ -476,6 +499,44 @@ dist = length(viewSpace);
 		// total light contribution is Diffuse + Specular
 		lightDiffuseContrib *= attenuation;
 		lightSpecularContrib *= attenuation;
+
+
+
+
+		// vec3 eyeVector = normalize(gsOuput.TangentViewPos - gsOuput.TangentFragPos).rgb;
+
+		// float objectSpecularPower = objectSpecular.w; 
+		// vec3 vLightToVertex = theLights[index].position.xyz - vertPosWorld.xyz;
+		// float distance = length(vLightToVertex);	
+
+    // // diffuse shading
+    // float diff = max(dot(norm.xyz, LightDirection), 0.0);
+    // // specular shading
+    // vec3 reflectDir = reflect(-LightDirection, norm.xyz);
+    // float spec = pow(max(dot(eyeVector, reflectDir), 0.0), objectSpecularPower);
+    // // attenuation
+		// float attenuation = 1.0f / 
+		// 		( theLights[index].atten.x + 										
+		// 		  theLights[index].atten.y * distance +						
+		// 		  theLights[index].atten.z * distance*distance );  
+    // // combine results
+    // lightDiffuseContrib  = theLights[index].diffuse.rgb  * diff;
+    // lightSpecularContrib = theLights[index].specular.rgb * spec;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		
 		
 		// But is it a spot light
@@ -526,8 +587,8 @@ dist = length(viewSpace);
 		
 		
 					
-		finalObjectColour.rgb += (materialDiffuse.rgb * lightDiffuseContrib.rgb) 
-		                         + (materialSpecular.rgb * lightSpecularContrib.rgb);
+		 finalObjectColour.rgb += (materialDiffuse.rgb * lightDiffuseContrib.rgb) 
+		                          + (materialSpecular.rgb * lightSpecularContrib.rgb);
 		// ********************************************************
 	}//for(intindex=0...
 	
