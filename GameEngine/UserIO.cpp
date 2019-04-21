@@ -136,9 +136,9 @@ void key_callback( GLFWwindow* window,
 	//SAVE MODELS
 	if (key == GLFW_KEY_G && action == GLFW_PRESS)
 	{
-		for (int i = 0; i < vec_controlable.size(); i++) {
-			vec_controlable[i]->rigidBody->SetVelocity(vec_controlable[i]->rigidBody->GetVelocity() + glm::vec3(0.0f, 40.0f, 0.0f));
-		}
+		//for (int i = 0; i < vec_controlable.size(); i++) {
+		//	vec_controlable[i]->rigidBody->SetVelocity(vec_controlable[i]->rigidBody->GetVelocity() + glm::vec3(0.0f, 40.0f, 0.0f));
+		//}
 	}
 
 	//LOAD MODELS
@@ -721,6 +721,7 @@ void ProcessAsynKeys(GLFWwindow* window)
 			//Ray Cast
 			pickUP(ch);
 		}
+
 		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 		{
 			glm::vec3 velVec;
@@ -837,6 +838,10 @@ void ProcessAsynKeys(GLFWwindow* window)
 			ch->currentAnimation = "Action2";
 			ch->rigidBody->SetVelocity(glm::vec3(0.0f, vel.y, 0.0f));
 
+		}
+		else if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
+		{
+			ch->currentAnimation = "Action6";
 		}
 		else
 		{

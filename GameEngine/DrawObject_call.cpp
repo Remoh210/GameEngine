@@ -465,9 +465,9 @@ void DrawObject(cGameObject* pCurrentMesh,
 	}
 	else
 	{
-
 		std::string CurAnim = pCurrentMesh->pAnimController->GetCurrentAnimation();
 		pCurrentMesh->pAniState->activeAnimation.name = CurAnim;
+		pCurrentMesh->pAniState->activeAnimation.totalTime = pCurrentMesh->pSimpleSkinnedMesh->GetDurationInSec(CurAnim);
 		if (CurAnim != pCurrentMesh->prevAnimation)
 		{
 			pCurrentMesh->pAniState->activeAnimation.currentTime = 0.0f;
@@ -500,22 +500,22 @@ void DrawObject(cGameObject* pCurrentMesh,
 
 		
 
-		/*playTime += deltaTime;
-		float dur = pCurrentMesh->pSimpleSkinnedMesh->GetDurationInSec(CurAnim);
-		if (CurAnim == "Run-jump" && playTime >= dur)
-		{
-			playTime = dur;
-		}
-		else
-		{
-			
-			if (playTime >= dur)
-			{
+		//playTime += deltaTime;
+		//float dur = pCurrentMesh->pSimpleSkinnedMesh->GetDurationInSec(CurAnim);
+		//if (CurAnim == "Run-jump" && playTime >= dur)
+		//{
+		//	playTime = dur;
+		//}
+		//else
+		//{
+		//	
+		//	if (playTime >= dur)
+		//	{
 
-				playTime = 0;
+		//		playTime = 0;
 
-			}
-		}*/
+		//	}
+		//}
 
 		
 		
@@ -535,6 +535,8 @@ void DrawObject(cGameObject* pCurrentMesh,
 		//		std::cout << "bones_UniLoc: " << bones_UniLoc << std::endl;	std::cout.flush();
 		glUniformMatrix4fv(bones_UniLoc, numberOfBonesUsed, GL_FALSE,
 			(const GLfloat*)glm::value_ptr(*pBoneMatrixArray));
+
+
 
 
 		for (unsigned int boneIndex = 0; boneIndex != numberOfBonesUsed; boneIndex++)
@@ -578,6 +580,37 @@ void DrawObject(cGameObject* pCurrentMesh,
 			
 
 		}
+
+
+		if (pCurrentMesh->friendlyName == "chan") {
+			glm::mat4 boneLeftHandlocal = pCurrentMesh->vecObjectBoneTransformation[9];//12
+			glm::mat4 boneLeftHandTranslation = boneLeftHandlocal * pCurrentMesh->nonUniformScale.x;
+			glm::mat4 matLeftHandOrientation = glm::mat4(pCurrentMesh->m_meshQOrientation);
+			matLeftHandOrientation *= boneLeftHandTranslation;
+			boneLeftHandTranslation *= matLeftHandOrientation;
+
+
+			cGameObject* ds = findObjectByFriendlyName("bow");
+			//pCurrentMesh->m_meshQOrientation = glm::toQuat(glm::mat4(pCurrentMesh->m_meshQOrientation) * boneLeftHandlocal);
+			////glm::vec3 offset = pTheGO->orientation * itTrans->second * glm::vec4(1.0f);
+			//ds->position = ds->nonUniformScale.x + ds->position;
+
+			glm::vec4 vecLeftHandTrans(1.0f, 1.0f, 1.0f, 1.0f);
+			glm::vec4 LeftHandbonepos = matLeftHandOrientation * vecLeftHandTrans;
+
+			
+			ds->position = glm::vec3(LeftHandbonepos) + pCurrentMesh->position;
+			ds->m_meshQOrientation = glm::toQuat(glm::mat4(pCurrentMesh->m_meshQOrientation) * boneLeftHandlocal);
+		}
+
+
+
+
+
+
+
+
+
 
 		pCurrentMesh->prevAnimation = CurAnim;
 		

@@ -966,6 +966,11 @@ int main(void) {
     //	std::cout << "notHit" << std::endl;
     //}
 
+	//Updaters
+	g_pCharacterManager->updateCharAnimControllers();
+
+
+
 #pragma endregion
     UpdateWindowTitle();
     glfwSwapBuffers(window); // Shows what we drew

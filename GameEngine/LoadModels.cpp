@@ -333,7 +333,9 @@ void LoadModelTypes( cVAOMeshManager* pTheVAOMeshManager, GLuint shaderProgramID
 	wall.meshFileName = "wall/brick_wall.ply";			// "Sphere_320_faces_xyz.ply";
 	pTheVAOMeshManager->LoadModelIntoVAO(wall, shaderProgramID);
 
-
+	sModelDrawInfo Arrow;
+	Arrow.meshFileName = "character/arrow.ply";			// "Sphere_320_faces_xyz.ply";
+	pTheVAOMeshManager->LoadModelIntoVAO(Arrow, shaderProgramID);
 
 	sModelDrawInfo cube1x1x1;
 	cube1x1x1.meshFileName = "cube.ply";			// "cube_flat_shaded_xyz.ply";
@@ -414,7 +416,7 @@ void LoadModelsIntoScene( std::vector<cGameObject*> &vec_pObjectsToDraw )
 		cGameObject* pDebugCube = new cGameObject();
 		pDebugCube->setDiffuseColour(glm::vec3(1.0f, 0.0f, 0.0f));
 		pDebugCube->friendlyName = "DebugCube";
-		float scale = 1.0f;
+		float scale = 10.0f;
 		pDebugCube->nonUniformScale = glm::vec3(scale, scale, scale);
 		pDebugCube->meshName = "cube.ply";
 		pDebugCube->bIsWireFrame = true;
@@ -430,13 +432,12 @@ void LoadModelsIntoScene( std::vector<cGameObject*> &vec_pObjectsToDraw )
 	{
 		cGameObject* pDebugcapsule = new cGameObject();
 		pDebugcapsule->setDiffuseColour(glm::vec3(1.0f, 0.0f, 0.0f));
-		pDebugcapsule->friendlyName = "DebugCapsule";
-		float scale = 5.0f;
+		pDebugcapsule->friendlyName = "weweew";
+		float scale = 10.0f;
 		pDebugcapsule->nonUniformScale = glm::vec3(scale, scale, scale);
-		pDebugcapsule->bDontLight = "capsule.ply";
 		pDebugcapsule->meshName = "capsule.ply";
 		pDebugcapsule->bIsWireFrame = true;
-		pDebugcapsule->position = glm::vec3(0.0f, 10.0f, 0.0f);
+		pDebugcapsule->position = glm::vec3(0.0f, 20.0f, 0.0f);
 		pDebugcapsule->bIsUpdatedByPhysics = false;
 		pDebugcapsule->bIsVisible = false;
 		pDebugcapsule->bIsDebug = true;
@@ -450,6 +451,7 @@ void LoadModelsIntoScene( std::vector<cGameObject*> &vec_pObjectsToDraw )
 
 
 	::g_pTheTextureManager->Create2DTextureFromBMPFile("wallTex.bmp", true);
+	::g_pTheTextureManager->Create2DTextureFromBMPFile("character/arrowTex.bmp", true);
 	::g_pTheTextureManager->Create2DTextureFromBMPFile("TextTex.bmp", true);;
 	::g_pTheTextureManager->Create2DTextureFromBMPFile("NormalMaps/wallNormalTex.bmp", true);
 

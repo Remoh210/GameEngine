@@ -57,3 +57,20 @@ void cCharacterManager::setAllChatVel()
 	}
 	//it++
 }
+
+void cCharacterManager::updateCharAnimControllers()
+{
+
+	//std::map<std::string, cGameObject*>::iterator it;
+
+	//for (it = mMapCharacters.begin(); it != mMapCharacters.end(); it++)
+	//{
+
+	//	(*it).second->pAnimController->UpdateController();
+	//	
+
+	//}
+
+	mActiveCharacter->pAnimController->UpdateController();
+	//	
+}

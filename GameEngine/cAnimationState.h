@@ -25,6 +25,7 @@ public:
 		// Returns true if time had to be reset
 		// (for checking to see if the animation has finished or not)
 		// TODO: Deal with running the animation backwards, perhaps?? 
+		bool bExited;
 		bool IncrementTime(bool bResetToZero = true);
 	};
 

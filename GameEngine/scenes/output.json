@@ -1,10 +1,10 @@
 {
     "Camera": {
-        "Speed": 500.0,
+        "Speed": 50.0,
         "Position": [
-            421.8117370605469,
-            22.373178482055665,
-            898.8125
+            -471.0438537597656,
+            -1.7756001949310303,
+            -35.669681549072269
         ]
     },
     "GameObjects": [
@@ -13,7 +13,6 @@
             "Mesh": "earth.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 98.06758880615235,
@@ -66,7 +65,6 @@
             "Mesh": "earth.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 921.3880615234375,
@@ -118,7 +116,6 @@
             "Mesh": "earth.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -688.0986938476563,
@@ -139,7 +136,7 @@
             ],
             "Rotation": [
                 -162.42465209960938,
-                37.89244079589844,
+                37.8924446105957,
                 -171.96963500976563
             ],
             "Scale": [
@@ -170,7 +167,6 @@
             "Mesh": "door/doorFrame.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 1.0332461595535279,
@@ -190,9 +186,9 @@
                 100.0
             ],
             "Rotation": [
-                180.0,
+                -180.0,
                 5.865976333618164,
-                180.0
+                -180.0
             ],
             "Scale": [
                 1.0,
@@ -217,7 +213,6 @@
             "Mesh": "env_objects/lake.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -522.7196044921875,
@@ -237,9 +232,9 @@
                 1000000.0
             ],
             "Rotation": [
-                0.00004570440432871692,
-                -0.1597219705581665,
-                -0.000021166089936741629
+                0.000045704407966695729,
+                -0.1597219854593277,
+                -0.00002116609175573103
             ],
             "Scale": [
                 56.7680778503418,
@@ -263,12 +258,11 @@
             "Mesh": "door/door.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
-                14.872289657592774,
-                11.690865516662598,
-                48.688228607177737
+                14.864598274230957,
+                11.689431190490723,
+                48.6890983581543
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -283,9 +277,9 @@
                 100.0
             ],
             "Rotation": [
-                0.000011843176253023558,
-                8.86194896697998,
-                -0.000017109068721765653
+                -0.00867602787911892,
+                8.89203929901123,
+                0.01067070197314024
             ],
             "Scale": [
                 1.100000023841858,
@@ -314,7 +308,7 @@
             "Mesh": "env_objects/lantern.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_Normal_Map": true,
+            "Use_Normal_Map": false,
             "Wireframe": false,
             "Position": [
                 684.5810546875,
@@ -335,7 +329,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.7401609420776369,
+                -3.7401604652404787,
                 0.0
             ],
             "Scale": [
@@ -359,7 +353,6 @@
                     "Strength": 0.0,
                     "Tile": 1.0
                 }
-                
             ],
             "RigidBody": {
                 "Type": "BOX",
@@ -376,7 +369,6 @@
             "Mesh": "env_objects/lantern.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 684.6613159179688,
@@ -397,7 +389,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.7401609420776369,
+                -3.7401604652404787,
                 0.0
             ],
             "Scale": [
@@ -432,7 +424,6 @@
             "Mesh": "env_objects/lantern.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 776.0260620117188,
@@ -452,9 +443,9 @@
                 100.0
             ],
             "Rotation": [
-                180.0,
+                -180.0,
                 0.19724345207214356,
-                180.0
+                -180.0
             ],
             "Scale": [
                 2.5631606578826906,
@@ -488,7 +479,6 @@
             "Mesh": "env_objects/lantern.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 781.6055297851563,
@@ -508,9 +498,9 @@
                 100.0
             ],
             "Rotation": [
-                180.0,
+                -180.0,
                 3.0274786949157717,
-                180.0
+                -180.0
             ],
             "Scale": [
                 2.5631606578826906,
@@ -544,7 +534,6 @@
             "Mesh": "env_objects/lantern.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 684.5810546875,
@@ -565,7 +554,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.7401609420776369,
+                -3.7401604652404787,
                 0.0
             ],
             "Scale": [
@@ -600,7 +589,6 @@
             "Mesh": "env_objects/lantern.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 684.5810546875,
@@ -621,7 +609,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.7401609420776369,
+                -3.7401604652404787,
                 0.0
             ],
             "Scale": [
@@ -656,7 +644,6 @@
             "Mesh": "cottage/cottage.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 618.2454223632813,
@@ -677,7 +664,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.7401609420776369,
+                -3.7401604652404787,
                 0.0
             ],
             "Scale": [
@@ -707,7 +694,6 @@
             "Mesh": "cottage/cottage.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 605.9288940429688,
@@ -728,7 +714,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.7401609420776369,
+                -3.7401604652404787,
                 0.0
             ],
             "Scale": [
@@ -758,7 +744,6 @@
             "Mesh": "cottage/cottage.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 608.9964599609375,
@@ -779,7 +764,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.7401609420776369,
+                -3.7401604652404787,
                 0.0
             ],
             "Scale": [
@@ -809,7 +794,6 @@
             "Mesh": "cottage/cottage.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 840.0146484375,
@@ -830,7 +814,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.7401609420776369,
+                -3.7401604652404787,
                 0.0
             ],
             "Scale": [
@@ -860,7 +844,6 @@
             "Mesh": "cottage/cottage.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 840.8143310546875,
@@ -881,7 +864,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.7401609420776369,
+                -3.7401604652404787,
                 0.0
             ],
             "Scale": [
@@ -911,7 +894,6 @@
             "Mesh": "farm_house.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 857.6336059570313,
@@ -931,9 +913,9 @@
                 100.0
             ],
             "Rotation": [
-                180.0,
+                -180.0,
                 -1.1668442487716675,
-                -180.0
+                180.0
             ],
             "Scale": [
                 1.7380889654159547,
@@ -962,7 +944,7 @@
             "Mesh": "fantasy_house.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_Normal_Map": true,
+            "Use_Normal_Map": false,
             "Wireframe": false,
             "Position": [
                 611.3331909179688,
@@ -982,9 +964,9 @@
                 100.0
             ],
             "Rotation": [
-                180.0,
+                -180.0,
                 89.45284271240235,
-                180.0
+                -180.0
             ],
             "Scale": [
                 2.0894219875335695,
@@ -1007,7 +989,6 @@
                     "Strength": 0.0,
                     "Tile": 1.0
                 }
-                
             ],
             "RigidBody": {
                 "Type": "BOX",
@@ -1019,7 +1000,7 @@
             "Mesh": "fantasy_house.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_Normal_Map": true,
+            "Use_Normal_Map": false,
             "Wireframe": false,
             "Position": [
                 837.556640625,
@@ -1039,9 +1020,9 @@
                 100.0
             ],
             "Rotation": [
-                180.0,
+                -180.0,
                 89.45284271240235,
-                180.0
+                -180.0
             ],
             "Scale": [
                 2.0894219875335695,
@@ -1075,7 +1056,7 @@
             "Mesh": "fantasy_house.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_Normal_Map": true,
+            "Use_Normal_Map": false,
             "Wireframe": false,
             "Position": [
                 843.3413696289063,
@@ -1095,9 +1076,9 @@
                 100.0
             ],
             "Rotation": [
-                180.0,
+                -180.0,
                 89.45284271240235,
-                180.0
+                -180.0
             ],
             "Scale": [
                 2.0894219875335695,
@@ -1131,7 +1112,7 @@
             "Mesh": "fantasy_house.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_Normal_Map": true,
+            "Use_Normal_Map": false,
             "Wireframe": false,
             "Position": [
                 611.1971435546875,
@@ -1151,9 +1132,9 @@
                 100.0
             ],
             "Rotation": [
-                180.0,
+                -180.0,
                 89.45284271240235,
-                180.0
+                -180.0
             ],
             "Scale": [
                 2.0894219875335695,
@@ -1187,7 +1168,6 @@
             "Mesh": "env_objects/statue.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_Normal_Map": false,
             "Wireframe": false,
             "Position": [
                 730.3412475585938,
@@ -1243,12 +1223,12 @@
             "Mesh": "env_objects/cart.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_Normal_Map": true,
+            "Use_Normal_Map": false,
             "Wireframe": false,
             "Position": [
-                805.0557861328125,
-                11.193540573120118,
-                -780.7196044921875
+                805.0531616210938,
+                11.189104080200196,
+                -780.7178344726563
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -1263,9 +1243,9 @@
                 100.0
             ],
             "Rotation": [
-                0.00008452961628790945,
-                -0.10166849195957184,
-                -0.0000017601003037270858
+                -0.03591601550579071,
+                -0.10590827465057373,
+                0.0011820868821814657
             ],
             "Scale": [
                 7.330896377563477,
@@ -1299,12 +1279,12 @@
             "Mesh": "env_objects/cart.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_Normal_Map": true,
+            "Use_Normal_Map": false,
             "Wireframe": false,
             "Position": [
-                838.1648559570313,
-                11.193538665771485,
-                -751.9270629882813
+                838.1622314453125,
+                11.189103126525879,
+                -751.92529296875
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -1319,9 +1299,9 @@
                 100.0
             ],
             "Rotation": [
-                0.00005770934512838721,
-                -0.09538925439119339,
-                -6.64884964862722e-7
+                -0.03594103083014488,
+                -0.09962663799524307,
+                0.0011770029086619616
             ],
             "Scale": [
                 7.330896377563477,
@@ -1355,12 +1335,12 @@
             "Mesh": "env_objects/cart.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_Normal_Map": true,
+            "Use_Normal_Map": false,
             "Wireframe": false,
             "Position": [
-                845.761474609375,
-                11.193544387817383,
-                -782.0781860351563
+                845.761962890625,
+                11.18858814239502,
+                -782.0728759765625
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -1375,9 +1355,9 @@
                 100.0
             ],
             "Rotation": [
-                0.00002155369656975381,
-                -52.44210433959961,
-                -6.849004989817331e-7
+                -0.03381806239485741,
+                -52.4410285949707,
+                0.018829353153705598
             ],
             "Scale": [
                 7.330896377563477,
@@ -1411,12 +1391,12 @@
             "Mesh": "env_objects/cart.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_Normal_Map": true,
+            "Use_Normal_Map": false,
             "Wireframe": false,
             "Position": [
-                805.332763671875,
-                11.1935453414917,
-                -746.7593383789063
+                805.3231201171875,
+                11.189908027648926,
+                -746.7590942382813
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -1431,9 +1411,9 @@
                 100.0
             ],
             "Rotation": [
-                0.0000026154311854043046,
-                22.864665985107423,
-                -0.000005558056727750227
+                -0.012552104890346527,
+                22.865659713745118,
+                0.008148282766342163
             ],
             "Scale": [
                 7.330896377563477,
@@ -1467,12 +1447,11 @@
             "Mesh": "env_objects/log.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
-                265.56719970703127,
-                2.15576171875,
-                -562.766845703125
+                265.56671142578127,
+                2.1504087448120119,
+                -562.7674560546875
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -1487,9 +1466,9 @@
                 100.0
             ],
             "Rotation": [
-                -179.99974060058595,
-                86.2728042602539,
-                -179.9998779296875
+                179.18153381347657,
+                86.20316314697266,
+                179.21656799316407
             ],
             "Scale": [
                 2.0894219875335695,
@@ -1518,12 +1497,11 @@
             "Mesh": "Portal_cube.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 823.4939575195313,
-                3.4036548137664797,
-                -765.6869506835938
+                3.3992128372192385,
+                -765.687744140625
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -1538,9 +1516,9 @@
                 100.0
             ],
             "Rotation": [
-                18.159502029418947,
-                -0.0000025613210254959997,
-                90.00001525878906
+                18.074840545654298,
+                -0.04108700528740883,
+                89.96113586425781
             ],
             "Scale": [
                 3.4026856422424318,
@@ -1569,11 +1547,10 @@
             "Mesh": "Portal_cube.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
-                -438.4262390136719,
-                16.30824089050293,
+                -438.42620849609377,
+                16.308202743530275,
                 595.3336181640625
             ],
             "DiffuseRGB_Alpha": [
@@ -1589,9 +1566,9 @@
                 100.0
             ],
             "Rotation": [
-                3.9212393760681154,
-                -2.3096768856048586,
-                90.40725708007813
+                3.9210119247436525,
+                -2.30891489982605,
+                90.40691375732422
             ],
             "Scale": [
                 3.8714098930358888,
@@ -1620,7 +1597,7 @@
             "Mesh": "wall/brick_tower.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_Normal_Map": true,
+            "Use_Normal_Map": false,
             "Wireframe": false,
             "Position": [
                 972.5390014648438,
@@ -1665,7 +1642,6 @@
                     "Strength": 0.0,
                     "Tile": 1.0
                 }
-                
             ],
             "RigidBody": {
                 "Type": "BOX",
@@ -1677,7 +1653,7 @@
             "Mesh": "wall/brick_tower.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_Normal_Map": true,
+            "Use_Normal_Map": false,
             "Wireframe": false,
             "Position": [
                 -964.9511108398438,
@@ -1733,7 +1709,7 @@
             "Mesh": "wall/brick_tower.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_Normal_Map": true,
+            "Use_Normal_Map": false,
             "Wireframe": false,
             "Position": [
                 970.0822143554688,
@@ -1789,7 +1765,7 @@
             "Mesh": "wall/brick_tower.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_Normal_Map": true,
+            "Use_Normal_Map": false,
             "Wireframe": false,
             "Position": [
                 -973.5399169921875,
@@ -1845,7 +1821,6 @@
             "Mesh": "trees/dead_tree.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -581.5006713867188,
@@ -1901,7 +1876,6 @@
             "Mesh": "trees/dead_tree.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -419.69580078125,
@@ -1957,7 +1931,6 @@
             "Mesh": "trees/dead_tree.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -682.281005859375,
@@ -2013,7 +1986,6 @@
             "Mesh": "trees/dead_tree.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -381.4125061035156,
@@ -2069,7 +2041,6 @@
             "Mesh": "trees/dead_tree.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -737.1143798828125,
@@ -2125,7 +2096,6 @@
             "Mesh": "trees/dead_tree.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -333.914306640625,
@@ -2181,7 +2151,6 @@
             "Mesh": "trees/dead_tree.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -753.9715576171875,
@@ -2237,7 +2206,6 @@
             "Mesh": "trees/dead_tree.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -305.1247253417969,
@@ -2293,7 +2261,6 @@
             "Mesh": "trees/polar_tree.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -532.9486083984375,
@@ -2349,7 +2316,6 @@
             "Mesh": "trees/polar_tree.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -730.4286499023438,
@@ -2405,7 +2371,6 @@
             "Mesh": "trees/polar_tree.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -424.7228698730469,
@@ -2461,7 +2426,6 @@
             "Mesh": "trees/polar_tree.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -573.6571655273438,
@@ -2481,9 +2445,9 @@
                 100.0
             ],
             "Rotation": [
-                0.06173805892467499,
-                3.681440830230713,
-                0.9614263772964478
+                0.06173807382583618,
+                3.6814417839050295,
+                0.9614264965057373
             ],
             "Scale": [
                 1.0856425762176514,
@@ -2517,7 +2481,6 @@
             "Mesh": "trees/polar_tree.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -450.5745849609375,
@@ -2573,7 +2536,6 @@
             "Mesh": "trees/polar_tree.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -773.6785888671875,
@@ -2629,7 +2591,6 @@
             "Mesh": "trees/polar_tree.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -499.38848876953127,
@@ -2685,7 +2646,6 @@
             "Mesh": "trees/polar_tree.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -591.2156982421875,
@@ -2741,7 +2701,6 @@
             "Mesh": "trees/oak_tree.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -677.2224731445313,
@@ -2797,7 +2756,6 @@
             "Mesh": "trees/oak_tree.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -420.3211364746094,
@@ -2853,7 +2811,6 @@
             "Mesh": "trees/oak_tree.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -323.3951721191406,
@@ -2909,7 +2866,6 @@
             "Mesh": "trees/oak_tree.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -673.3929443359375,
@@ -2965,7 +2921,6 @@
             "Mesh": "trees/oak_tree.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -515.5380859375,
@@ -3021,7 +2976,6 @@
             "Mesh": "trees/oak_tree.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -655.8369140625,
@@ -3077,7 +3031,6 @@
             "Mesh": "trees/oak_tree.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -366.0755920410156,
@@ -3133,7 +3086,6 @@
             "Mesh": "trees/oak_tree.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -670.8785400390625,
@@ -3189,11 +3141,10 @@
             "Mesh": "boat.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 -444.6542663574219,
-                48.87075424194336,
+                48.787418365478519,
                 664.8338012695313
             ],
             "DiffuseRGB_Alpha": [
@@ -3209,9 +3160,9 @@
                 100.0
             ],
             "Rotation": [
-                -15.678074836730957,
+                -15.678069114685059,
                 -70.83654022216797,
-                4.77609920501709
+                4.77609395980835
             ],
             "Scale": [
                 12.718605995178223,
@@ -3240,12 +3191,12 @@
             "Mesh": "character/bow.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
+            "Use_Normal_Map": false,
             "Wireframe": false,
             "Position": [
-                -444.6542663574219,
-                48.87075424194336,
-                664.8338012695313
+                -469.5100402832031,
+                5.002503395080566,
+                -5.771393299102783
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -3260,14 +3211,14 @@
                 100.0
             ],
             "Rotation": [
-                -15.678074836730957,
-                -70.83654022216797,
-                4.77609920501709
+                8.008021354675293,
+                5.448002338409424,
+                -95.92059326171875
             ],
             "Scale": [
-                12.718605995178223,
-                12.718605995178223,
-                12.718605995178223
+                4.718605995178223,
+                4.718605995178223,
+                4.718605995178223
             ],
             "Textures": [
                 {
@@ -3291,6 +3242,7 @@
                 "Action3": "assets/models/FBX/chan-push-forward.fbx",
                 "Action4": "assets/models/FBX/chan-spell-strafe-left.fbx",
                 "Action5": "assets/models/FBX/chan-spell-strafe-right.fbx",
+                "Action6": "assets/models/FBX/chan-shoot.fbx",
                 "Idle": "assets/models/FBX/chan-idle.fbx",
                 "Run-forward": "assets/models/FBX/chan-run-forward.fbx",
                 "Run-jump": "assets/models/FBX/chan-run-jump.fbx",
@@ -3299,17 +3251,13 @@
                 "Walk-backward": "assets/models/FBX/chan-walk-backward.fbx",
                 "Walk-forward": "assets/models/FBX/chan-walk-forward.fbx"
             },
-            "Props": 
-            [
-                "bow"
-            ],
             "Visible": true,
             "Use_Physics": true,
-            "Use_Normal_Map": true,
+            "Use_Normal_Map": false,
             "Wireframe": false,
             "Position": [
                 -471.0438537597656,
-                -0.05000019073486328,
+                -3.2756001949310304,
                 -5.66968297958374
             ],
             "DiffuseRGB_Alpha": [
@@ -3379,11 +3327,10 @@
             },
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 112.7364501953125,
-                -0.05000114440917969,
+                -3.2756009101867677,
                 -637.677490234375
             ],
             "DiffuseRGB_Alpha": [
@@ -3401,7 +3348,7 @@
             "Rotation": [
                 179.90504455566407,
                 7.265434741973877,
-                180.0
+                -180.0
             ],
             "Scale": [
                 0.05000000074505806,
@@ -3440,11 +3387,10 @@
             },
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 706.3702392578125,
-                -0.05000114440917969,
+                -3.2756009101867677,
                 -106.3825912475586
             ],
             "DiffuseRGB_Alpha": [
@@ -3460,9 +3406,9 @@
                 100000.0
             ],
             "Rotation": [
-                -0.016720470041036607,
-                -31.418983459472658,
-                4.885075677307782e-10
+                178.13427734375,
+                7.265414714813232,
+                -180.0
             ],
             "Scale": [
                 0.10000000149011612,
@@ -3501,11 +3447,10 @@
             },
             "Visible": true,
             "Use_Physics": true,
-            "Use_HeighMap": false,
             "Wireframe": false,
             "Position": [
                 476.44732666015627,
-                -0.05000114440917969,
+                -3.2756009101867677,
                 967.7770385742188
             ],
             "DiffuseRGB_Alpha": [
@@ -3521,9 +3466,9 @@
                 100000.0
             ],
             "Rotation": [
-                -0.12049570679664612,
-                0.2025383561849594,
-                1.3027632791984267e-11
+                177.84469604492188,
+                45.19035720825195,
+                180.0
             ],
             "Scale": [
                 0.12000000476837158,
@@ -3565,8 +3510,8 @@
             "Wireframe": false,
             "Position": [
                 76.98789978027344,
-                -0.05000019073486328,
-                -48.096214294433597
+                -3.2756001949310304,
+                -48.09621810913086
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -3581,9 +3526,9 @@
                 100000.0
             ],
             "Rotation": [
-                -0.14664201438426972,
-                -23.548112869262697,
-                3.6380092272025878e-9
+                -10.61844539642334,
+                -13.320162773132325,
+                1.096721149451696e-7
             ],
             "Scale": [
                 0.10000000149011612,
@@ -3616,7 +3561,6 @@
             "Mesh": "plane_floor.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_Normal_Map": false,
             "Wireframe": false,
             "Position": [
                 0.0,
@@ -3647,7 +3591,7 @@
             ],
             "Textures": [
                 {
-                    "Name": "ground/grassTex.bmp",
+                    "Name": "grassTex.bmp",
                     "Strength": 1.0,
                     "Tile": 60.0
                 },
@@ -3678,10 +3622,6 @@
             "Mesh": "highResPlane.ply",
             "Visible": true,
             "Use_Physics": true,
-            "Use_Height_Map": false,
-            "Use_Norlmal_Map": true,
-            "Reflection": false,
-            "Refraction": false,
             "Wireframe": false,
             "Position": [
                 -516.3553466796875,
@@ -3789,7 +3729,7 @@
             ],
             "Direction": [
                 0.0,
-                -0.3,
+                -0.30000001192092898,
                 0.0
             ],
             "Position": [
@@ -3804,9 +3744,9 @@
                 -431602080.0
             ],
             "DiffuseRGB_Alpha": [
-                0.9,
-                0.9,
-                0.9,
+                0.8999999761581421,
+                0.8999999761581421,
+                0.8999999761581421,
                 1.0
             ],
             "Turned": "ON"
@@ -3814,15 +3754,6 @@
         {
             "Name": "MainLightOLD",
             "Type": "POINT_LIGHT",
-            "Angles": [
-                0.0,
-                0.0
-            ],
-            "Direction": [
-                0.0,
-                0.0,
-                0.0
-            ],
             "Position": [
                 2406.0,
                 425.0,
@@ -3867,15 +3798,6 @@
         {
             "Name": "Torch_Light1",
             "Type": "POINT_LIGHT",
-            "Angles": [
-                10.0,
-                20.0
-            ],
-            "Direction": [
-                -431602080.0,
-                -431602080.0,
-                -431602080.0
-            ],
             "Position": [
                 100.0,
                 1725.0,

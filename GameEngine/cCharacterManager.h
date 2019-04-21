@@ -13,6 +13,7 @@ public:
 	void setActiveChar(std::string GoName);
 	void IterateChar();
 	void setAllChatVel();
+	void updateCharAnimControllers();
 
 private:
 

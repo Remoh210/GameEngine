@@ -5,12 +5,14 @@
 bool cAnimationState::sStateDetails::IncrementTime(bool bResetToZero /*=true*/)
 {
 	bool bDidWeReset = false;
+	bExited = false;
 
 	this->currentTime += this->frameStepTime;
 	if ( this->currentTime >= this->totalTime )
 	{
 		this->currentTime = 0.0f;
 		bDidWeReset = true;
+		bExited = true;
 	}
 
 	return bDidWeReset;
