@@ -34,6 +34,7 @@
 #include "cMoveToEase.h"
 #include "cMoveToEaseIO.h"
 #include "cSimpleDebugRenderer.h"
+#include "cSoundManager.h"
 
 #include "cSimpleAssimpSkinnedMeshLoader_OneMesh.h"
 // ... and more
@@ -75,7 +76,7 @@ extern unsigned int SCR_HEIGHT;
 extern glm::vec3 g_Gravity;
 
 extern cFBO* g_pFBOMain;
-
+extern cSoundManager* g_pSoundManager;
 extern cVAOMeshManager* g_pTheVAOMeshManager;
 extern std::vector< cGameObject* > vec_pObjectsToDraw;
 extern std::vector< cGameObject* > vec_controlable;

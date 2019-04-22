@@ -292,6 +292,7 @@ int main(void) {
 
   LoadSkinnedMeshModel(::vec_pObjectsToDraw, program);
   g_pSoundManager->InitFmod();
+  g_pSoundManager->loadSounds("scenes/sound.json");
   LoadModelTypes(::g_pTheVAOMeshManager, program);
   ::g_pSceneManager->loadScene(scene);
   ::LightManager->LoadUniformLocations(program);
@@ -303,6 +304,10 @@ int main(void) {
                                findObjectByFriendlyName("DebugCube"), program);
   g_pCharacterManager = new cCharacterManager(vec_pObjectsToDraw);
   g_pCharacterManager->setActiveChar("chan");
+
+
+ 
+  
 
 
 
@@ -409,14 +414,6 @@ int main(void) {
 
 
   cGameObject* boat = findObjectByFriendlyName("boat");
-
-
-
-
-
-
-
-
 
 
 
@@ -968,6 +965,7 @@ int main(void) {
 
 	//Updaters
 	g_pCharacterManager->updateCharAnimControllers();
+	g_pSoundManager->Update();
 
 
 

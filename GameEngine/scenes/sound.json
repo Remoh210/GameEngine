@@ -1,0 +1,22 @@
+{
+    "Sounds" : [
+
+        {
+            "Name": "shot",
+            "FileName" : "assets/sounds/shot.mp3",
+            "Type" : "Regular",
+            "Loop" : false,
+            "PlayFromStart" : false,
+            "Volume" : 20
+            
+        },
+        {
+            "Name": "bg",
+            "FileName" : "assets/sounds/rain_bg.mp3",
+            "Type" : "Regular",
+            "Volume" : 5,
+            "PlayFromStart" : true,
+            "Loop" : true
+        }
+    ]
+}

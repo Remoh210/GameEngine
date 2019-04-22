@@ -134,7 +134,7 @@ void cAnimationController::UpdateController()
 			projectile->rigidBody = rigidBody;
 			gPhysicsWorld->AddBody(rigidBody);
 
-
+			g_pSoundManager->playSound("shot");
 			std::cout << "fire!" << std::endl;
 		}
 	}
