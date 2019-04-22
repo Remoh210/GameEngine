@@ -70,10 +70,10 @@ void cSoundManager::loadSounds(std::string file)
 		curSound->FileName = Sounds[i]["FileName"].GetString();
 		
 
-		FMOD::Sound* fmSound;
+		FMOD::Sound* fmSound = NULL;
 		curSound->fmodSound = fmSound;
 		mSounds.push_back(fmSound);
-		FMOD::Channel* channel;
+		FMOD::Channel* channel = NULL;
 		curSound->fmodChannel = channel;
 		this->mChannels.push_back(channel);
 

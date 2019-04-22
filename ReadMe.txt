@@ -1,19 +1,4 @@
-!!Run on Debug or Release x64!!
-
---Graphics--
-There is 2 portals: static and dynamic with second textures
-Some of objects are reflective
-bloom and chromatic aberration as post-processing effects 
-
-
---Animation--
-Instead of rolling I'm also made "strafe with casting spell" animation
-since I'm going to use it for Game Jam
-
-There is also "pushing" animation 
-I've made all spheres ridiculously heavy, so try to push them!
-
-Also I left debugging lines for ray cast
+!!Run elease x64!!
 
 Controls:
 
@@ -24,10 +9,9 @@ Third Person:
 WASD + Mouse - Move
 S/D - Strafe
 Hold Shift + W - run
-Hold Mouse left button - Prepare to cast spell
+Hold Mouse left button - Magnetic beam
 
-9/8 - change character
-
+G - shoot a bow
 
 -----------Character------------
 

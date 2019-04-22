@@ -151,10 +151,8 @@ void key_callback( GLFWwindow* window,
 
 	if (glfwGetKey(window, GLFW_KEY_K))
 	{
-		//contrMode = 0;
-	    //SwitchToSolid(vec_pObjectsToDraw);
-		//findObjectByFriendlyName("Cloth")->softBody->SwitchWind();
-
+		
+		camera.mCameraType = AIM;
 	}
 
 	if (glfwGetKey(window, GLFW_KEY_1))
@@ -189,6 +187,10 @@ void key_callback( GLFWwindow* window,
 
 
 	}
+
+
+
+
 	//if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
 	//{
 	//	vec_pSpheres[SphIndex]->rigidBody->SetVelocity(vec_pSpheres[SphIndex]->rigidBody->GetVelocity() + glm::vec3(0.0f, 40.0f, 0.0f));
@@ -722,10 +724,14 @@ void ProcessAsynKeys(GLFWwindow* window)
 			pickUP(ch);
 		}
 
-		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+		if (ch->pAniState->activeAnimation.name == "Action6")
+		{
+
+		}
+		else if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 		{
 			glm::vec3 velVec;
-			glm::vec3 CamDir = camera.getDirectionVector();
+			glm::vec3 CamDir = ch->getForward();
 
 			//Ray Cast
 			glm::vec3 from = ch->position + glm::vec3(0.0f, 10.0f, 0.0f);
@@ -842,6 +848,7 @@ void ProcessAsynKeys(GLFWwindow* window)
 		else if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
 		{
 			ch->currentAnimation = "Action6";
+			ch->rigidBody->SetVelocity(glm::vec3(0.0f, vel.y, 0.0f));
 		}
 		else
 		{

@@ -24,6 +24,13 @@ void cAnimationController::JumpForward()
 std::string cAnimationController::GetCurrentAnimation()
 {
 
+	
+	
+	return "";
+}
+
+void cAnimationController::UpdateController()
+{
 	glm::vec3 vel = mActiveChar->rigidBody->GetVelocity();
 	glm::vec3 pos = mActiveChar->rigidBody->GetPosition();
 	//glm::vec3 from;
@@ -35,48 +42,20 @@ std::string cAnimationController::GetCurrentAnimation()
 
 	if (!gPhysicsWorld->RayCast(pos, to))
 	{
-		return "Run-jump";
+		mActiveChar->pAniState->activeAnimation.name = "Run-jump";
+		return;
 	}
-	if (abs(vel.x) < 1.01f && abs(vel.z) < 1.01f)
-	{
-		if (mActiveChar->currentAnimation != "Action2" && mActiveChar->currentAnimation != "Action6")
-		{
-			return "Idle";
-		}
-		else
-		{
-			this->mActiveChar->currentAnimation;
-		}
-		
-	}
-	
-	
-	return this->mActiveChar->currentAnimation;
-	
-	
-}
 
-void cAnimationController::UpdateController()
-{
-
-	//glm::vec3 vel = mActiveChar->rigidBody->GetVelocity();
-	//glm::vec3 pos = mActiveChar->rigidBody->GetPosition();
-	//if (pos.y > -2.0f)
-	//{
-	//	this->curState = inAir;
-	//}
-	//else if (vel.x < 0.01f, vel.z < 0.01f)
-	//{
-	//	this->curState = Idle;
-	//}
-	//if (mActiveChar->pAniState->activeAnimation.name != "Action2" && mActiveChar->currentAnimation != "Action6")
-	//{
-	//	return "Action6";
-	//}
 
 	if (mActiveChar->pAniState->activeAnimation.name == "Action6")
 	{
-		if (mActiveChar->pAniState->activeAnimation.bExited)
+		if (!mActiveChar->pAniState->activeAnimation.bExited)
+		{
+			glm::vec3 vel(0.0f, mActiveChar->rigidBody->GetVelocity().y, 0.0f);
+			mActiveChar->rigidBody->SetVelocity(vel);
+			return;
+		}
+		else
 		{
 			cGameObject* bow = findObjectByFriendlyName("bow");
 
@@ -136,8 +115,52 @@ void cAnimationController::UpdateController()
 
 			g_pSoundManager->playSound("shot");
 			std::cout << "fire!" << std::endl;
+
+
+			mActiveChar->currentAnimation = "Idle";
+
+
 		}
 	}
+
+
+	if (abs(vel.x) < 1.01f && abs(vel.z) < 1.01f)
+	{
+		if (mActiveChar->currentAnimation != "Action2" && mActiveChar->currentAnimation != "Action6")
+		{
+			mActiveChar->pAniState->activeAnimation.name = "Idle";
+			//return "Idle";
+		}
+		else
+		{
+			mActiveChar->pAniState->activeAnimation.name = mActiveChar->currentAnimation;
+			//this->mActiveChar->currentAnimation;
+		}
+
+	}
+
+	mActiveChar->pAniState->activeAnimation.name = mActiveChar->currentAnimation;
+
+
+
+
+	//glm::vec3 vel = mActiveChar->rigidBody->GetVelocity();
+	//glm::vec3 pos = mActiveChar->rigidBody->GetPosition();
+	//if (pos.y > -2.0f)
+	//{
+	//	this->curState = inAir;
+	//}
+	//else if (vel.x < 0.01f, vel.z < 0.01f)
+	//{
+	//	this->curState = Idle;
+	//}
+	//if (mActiveChar->pAniState->activeAnimation.name != "Action2" && mActiveChar->currentAnimation != "Action6")
+	//{
+	//	return "Action6";
+	//}
+
+	
+	
 
 
 

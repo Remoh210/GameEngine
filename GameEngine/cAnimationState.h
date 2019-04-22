@@ -17,6 +17,7 @@ public:
 		sStateDetails() : 
 			currentTime(0.0f), 
 			totalTime(0.0f),
+			bHasExitTime(false),
 			frameStepTime(0.0f){};
 		std::string name;
 		float currentTime;		// Time (frame) in current animation
@@ -26,6 +27,7 @@ public:
 		// (for checking to see if the animation has finished or not)
 		// TODO: Deal with running the animation backwards, perhaps?? 
 		bool bExited;
+		bool bHasExitTime;
 		bool IncrementTime(bool bResetToZero = true);
 	};
 

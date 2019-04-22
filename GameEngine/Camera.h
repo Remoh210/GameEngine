@@ -11,7 +11,8 @@
 enum Camera_Type
 {
 	FREE,
-	THIRD_PERSON
+	THIRD_PERSON,
+	AIM
 };
 
 
@@ -98,6 +99,12 @@ public:
 		case THIRD_PERSON:
 			return glm::lookAt(Position, mTarget->position + glm::vec3(0.0f, 5.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 			break;
+		case AIM :
+			//Position = mTarget->position + glm::vec3(0.0f, 8.0f, 0.0f);
+			Position = mTarget->position + mTarget->getForward() * 3.0f;
+			Position.y += 8.0f;
+			return glm::lookAt(Position, Position + Front, Up);
+			break;
 		default:
 			break;
 		}
@@ -135,14 +142,26 @@ public:
 		Pitch += yoffset;
 
 		// Make sure that when pitch is out of bounds, screen doesn't get flipped
-		if (constrainPitch)
+		switch (mCameraType)
 		{
-			if (Pitch > 89.0f)
-				Pitch = 89.0f;
-			if (Pitch < -89.0f)
-				Pitch = -89.0f;
-		}
+		case FREE:
+			if (constrainPitch)
+			{
+				if (Pitch > 89.0f)
+					Pitch = 89.0f;
+				if (Pitch < -89.0f)
+					Pitch = -89.0f;
+			}
+			break;
+		case AIM:
+		{
+			if (Pitch > 50.0f)
+				Pitch = 50.0f;
+			if (Pitch < -50.0f)
+				Pitch = -50.0f;
 
+		}
+		}
 		// Update Front, Right and Up Vectors using the updated Euler angles
 		updateCameraVectors();
 	}
@@ -215,7 +234,6 @@ public:
 		break;
 		case THIRD_PERSON:
 		{
-			// LookAt by GameObject
 			Front = mTarget->position;
 			glm::vec3 posDirection;
 			posDirection.x = cos(glm::radians(Yaw)) * cos(glm::radians(Pitch));
@@ -225,8 +243,23 @@ public:
 
 			if (posDirection.y < 0.05f)
 				posDirection.y = 0.05f;
-			// Project the new position and assign        
+     
 			Position = Front + posDirection * 20.0f;
+		}
+		break;
+		case AIM:
+		{
+			glm::vec3 front(0.0f, 0.0f, -1.0f);
+			front.x = cos(glm::radians(Yaw)) * cos(glm::radians(Pitch));
+			front.y = 0.0f;//sin(glm::radians(Pitch));
+			front.z = sin(glm::radians(Yaw)) * cos(glm::radians(Pitch));
+			Front = glm::normalize(front);
+			Right = glm::normalize(glm::cross(Front, WorldUp));
+			Up = glm::normalize(glm::cross(Right, Front));
+
+
+
+			//Position = mTarget->position + mTarget->getForward() * 2.0f;
 		}
 		break;
 		default:

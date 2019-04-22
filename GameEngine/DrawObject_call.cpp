@@ -465,14 +465,14 @@ void DrawObject(cGameObject* pCurrentMesh,
 	}
 	else
 	{
-		std::string CurAnim = pCurrentMesh->pAnimController->GetCurrentAnimation();
-		pCurrentMesh->pAniState->activeAnimation.name = CurAnim;
-		pCurrentMesh->pAniState->activeAnimation.totalTime = pCurrentMesh->pSimpleSkinnedMesh->GetDurationInSec(CurAnim);
-		if (CurAnim != pCurrentMesh->prevAnimation)
+		//std::string CurAnim = pCurrentMesh->pAnimController->GetCurrentAnimation();
+		//pCurrentMesh->pAniState->activeAnimation.name = CurAnim;
+		pCurrentMesh->pAniState->activeAnimation.totalTime = pCurrentMesh->pSimpleSkinnedMesh->GetDurationInSec(pCurrentMesh->pAniState->activeAnimation.name);
+		if (pCurrentMesh->pAniState->activeAnimation.name != pCurrentMesh->prevAnimation)
 		{
 			pCurrentMesh->pAniState->activeAnimation.currentTime = 0.0f;
 		}
-		pCurrentMesh->pAniState->activeAnimation.totalTime = pCurrentMesh->pSimpleSkinnedMesh->GetDurationInSec(CurAnim);
+		pCurrentMesh->pAniState->activeAnimation.totalTime = pCurrentMesh->pSimpleSkinnedMesh->GetDurationInSec(pCurrentMesh->pAniState->activeAnimation.name);
 		pCurrentMesh->pAniState->activeAnimation.frameStepTime = deltaTime;
 		if (fbo == NULL) {
 			pCurrentMesh->pAniState->activeAnimation.IncrementTime();
@@ -493,7 +493,7 @@ void DrawObject(cGameObject* pCurrentMesh,
 		pCurrentMesh->pSimpleSkinnedMesh->BoneTransform(
 			//0.0f,	// curFrameTime,
 			pCurrentMesh->pAniState->activeAnimation.currentTime,	// curFrameTime,
-		CurAnim,
+			pCurrentMesh->pAniState->activeAnimation.name,
 		vecFinalTransformation,		// Final bone transforms for mesh
 		pCurrentMesh->vecObjectBoneTransformation,  // final location of bones
 		vecOffsets);                 // local offset for each bone
@@ -612,7 +612,7 @@ void DrawObject(cGameObject* pCurrentMesh,
 
 
 
-		pCurrentMesh->prevAnimation = CurAnim;
+		pCurrentMesh->prevAnimation = pCurrentMesh->pAniState->activeAnimation.name;
 		
 		
 

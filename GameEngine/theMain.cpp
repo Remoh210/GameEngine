@@ -292,11 +292,11 @@ int main(void) {
 
   LoadSkinnedMeshModel(::vec_pObjectsToDraw, program);
   g_pSoundManager->InitFmod();
-  g_pSoundManager->loadSounds("scenes/sound.json");
+
   LoadModelTypes(::g_pTheVAOMeshManager, program);
   ::g_pSceneManager->loadScene(scene);
   ::LightManager->LoadUniformLocations(program);
-
+  g_pSoundManager->loadSounds("scenes/sound.json");
   LoadModelsIntoScene(::vec_pObjectsToDraw);
   g_simpleDubugRenderer =
       new cSimpleDebugRenderer(findObjectByFriendlyName("DebugCapsule"),
@@ -924,6 +924,20 @@ int main(void) {
       // glm::quat targetOrientation = rot2 * rot1;
       // player->m_meshQOrientation = targetOrientation;
     }
+
+	if (camera.mCameraType == AIM)
+	{
+
+		//camera.updateCameraVectors();
+		glm::vec3 lookDirection = camera.Position + camera.Front;
+		//lookDirection.y = 0.0f;
+		lookDirection = glm::normalize(lookDirection);
+		glm::vec3 worldUP(0.0f, 1.0f, 0.0f);
+		glm::mat4 finalOrientation = glm::inverse(
+			glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), -camera.Front * 10.0f, worldUP));
+		player->m_meshQOrientation = glm::toQuat(finalOrientation);
+
+	}
 
     // Update collision flag
     for (int i = 0; i < vec_pObjectsToDraw.size(); i++) {

@@ -126,7 +126,7 @@ bool cSceneManager::saveScene(std::string filename) {
 				ObjValue.AddMember("Use_Height_Map", UseHeightMap, allocator);
 			}
 			if (CurModel->bUseNormalMap) {
-				ObjValue.AddMember("Use_Normal_Map", UseHeightMap, allocator);
+				ObjValue.AddMember("Use_Normal_Map", UseNormalMap, allocator);
 			}
 			
 			ObjValue.AddMember("Wireframe", WireFrame, allocator);
