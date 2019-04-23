@@ -556,23 +556,23 @@ void LoadModelsIntoScene( std::vector<cGameObject*> &vec_pObjectsToDraw )
 			//pWall->vecTextures.push_back(CurModelTex3);
 
 			
-			glm::vec3 halfExtents = glm::vec3(wallDrawInfo.maxX * scale, wallDrawInfo.maxY * scale,
-				wallDrawInfo.maxZ * scale);
+			//glm::vec3 halfExtents = glm::vec3(wallDrawInfo.maxX * scale, wallDrawInfo.maxY * scale,
+			//	wallDrawInfo.maxZ * scale);
 
 
-			nPhysics::iShape* CurShape = NULL;
-			nPhysics::sRigidBodyDef def;
-			//in Radians
-			def.Position = pWall->position;
-			def.Mass = 0.0f;
-			def.quatOrientation = pWall->m_meshQOrientation;
-			def.GameObjectName = pWall->friendlyName;
+			//nPhysics::iShape* CurShape = NULL;
+			//nPhysics::sRigidBodyDef def;
+			////in Radians
+			//def.Position = pWall->position;
+			//def.Mass = 0.0f;
+			//def.quatOrientation = pWall->m_meshQOrientation;
+			//def.GameObjectName = pWall->friendlyName;
 
-			CurShape = gPhysicsFactory->CreateBoxShape(halfExtents);
+			//CurShape = gPhysicsFactory->CreateBoxShape(halfExtents);
 
-			nPhysics::iRigidBody* rigidBody = gPhysicsFactory->CreateRigidBody(def, CurShape);
-			pWall->rigidBody = rigidBody;
-			gPhysicsWorld->AddBody(rigidBody);
+			//nPhysics::iRigidBody* rigidBody = gPhysicsFactory->CreateRigidBody(def, CurShape);
+			//pWall->rigidBody = rigidBody;
+			//gPhysicsWorld->AddBody(rigidBody);
 
 			vec_pObjectsToDraw.push_back(pWall);
 		}

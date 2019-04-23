@@ -2,7 +2,8 @@
     "Window": {
         "Width": 1350,
         "Height": 764,
-        "Title" : "Balls!"
+        "Title" : "Balls!",
+		"FullScreen" : false
     },
     "Language" : "English",
 	  "Scene" : "output.json",

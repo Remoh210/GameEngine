@@ -67,13 +67,9 @@ void WanderBehaviour::update(float dt)
 			//normalize it and scale by mMaxSpeed
 			desired = glm::normalize(desired) * mMaxSpeed;
 			float d = glm::length(desired);
-			if (d < 10.0f) {
-				float m = map(d, 0, 10, 0, mMaxSpeed);
-				desired = glm::normalize(desired) * m;
-			}
-			else {
-				desired = glm::normalize(desired) * mMaxSpeed;
-			}
+
+			desired = glm::normalize(desired) * mMaxSpeed;
+			
 
 			glm::vec3 steering = desired - mAgent->rigidBody->GetVelocity();
 
@@ -81,7 +77,8 @@ void WanderBehaviour::update(float dt)
 				steering = glm::normalize(steering) * mMaxForce;
 			}
 			//steering = glm::normalize(desired) * mMaxForce;
-			mAgent->rigidBody->ApplyImpulse(steering);
+			//mAgent->rigidBody->ApplyImpulse(steering);
+			mAgent->rigidBody->SetVelocity(desired);
 
 			glm::vec3 lookDirection = mAgent->position - mCurTarget;
 			glm::mat4 rot = glm::inverse(glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), lookDirection, glm::vec3(0.0f, 1.0f, 0.0f)));
@@ -103,6 +100,7 @@ void WanderBehaviour::update(float dt)
 		//mAgent->velocity = glm::vec3(0.0f);
 		//mAgent->accel = glm::vec3(0.0f);
 		mTimeWaitedSoFar += (float)dt;
+		mAgent->currentAnimation = "Idle";
 		if (mTimeWaitedSoFar > mTimeToWait)
 		{
 			mCurTarget = glm::vec3(mAgent->position.x + RandomFloat(mDwnLim, mUpLim), 0.0f, mAgent->position.z + RandomFloat(mDwnLim, mUpLim));

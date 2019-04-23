@@ -75,6 +75,7 @@ double currentTime = 0;
 double deltaTime = 0;
 double FPS_last_Time = 0;
 bool bIsDebugMode = false;
+bool bFullScreen = false;
 
 // for collision
 float time = 0.0f;
@@ -157,7 +158,15 @@ int main(void) {
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 
-  window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, title.c_str(), NULL, NULL);
+  if(bFullScreen)
+  {
+	  window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, title.c_str(), glfwGetPrimaryMonitor(), NULL);
+  }
+  else
+  {
+	  window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, title.c_str(), NULL, NULL);
+  }
+  
   if (!window) {
     glfwTerminate();
     exit(EXIT_FAILURE);
@@ -403,9 +412,9 @@ int main(void) {
 
   //Initialize Behaviours
 
-  WanderBehaviour* wander1 = new WanderBehaviour(pWanderEnemy1, 20.2f, 300.2f, 4.0f, glm::vec3(0.0f), 100.0f, -100.0f, pPlayer); //(Agent, Target, maxSpeed, WanderOrigin , UpLimit, DownLimit)
-  WanderBehaviour* wander2 = new WanderBehaviour(pWanderEnemy2, 20.2f, 300.2f, 4.0f, glm::vec3(0.0f), 100.0f, -100.0f, pPlayer); //(Agent, Target, maxSpeed, WanderOrigin , UpLimit, DownLimit)
-  WanderBehaviour* wander3 = new WanderBehaviour(pWanderEnemy3, 20.2f, 300.2f, 4.0f, glm::vec3(0.0f), 100.0f, -100.0f, pPlayer); //(Agent, Target, maxSpeed, WanderOrigin , UpLimit, DownLimit)
+  WanderBehaviour* wander1 = new WanderBehaviour(pWanderEnemy1, 20.2f, 400.2f, 4.0f, glm::vec3(0.0f), 100.0f, -100.0f, pPlayer); //(Agent, Target, maxSpeed, WanderOrigin , UpLimit, DownLimit)
+  WanderBehaviour* wander2 = new WanderBehaviour(pWanderEnemy2, 20.2f, 400.2f, 4.0f, glm::vec3(0.0f), 100.0f, -100.0f, pPlayer); //(Agent, Target, maxSpeed, WanderOrigin , UpLimit, DownLimit)
+  WanderBehaviour* wander3 = new WanderBehaviour(pWanderEnemy3, 20.2f, 400.2f, 4.0f, glm::vec3(0.0f), 100.0f, -100.0f, pPlayer); //(Agent, Target, maxSpeed, WanderOrigin , UpLimit, DownLimit)
   behavManager->SetBehaviour(pWanderEnemy1, wander1);
   behavManager->SetBehaviour(pWanderEnemy2, wander2);
   behavManager->SetBehaviour(pWanderEnemy3, wander3);
@@ -944,6 +953,12 @@ int main(void) {
 
 	}
 
+
+	if (camera.mCameraType == FREE)
+	{
+		player->rigidBody->SetVelocity(glm::vec3(0.f));
+	}
+
     // Update collision flag
     for (int i = 0; i < vec_pObjectsToDraw.size(); i++) {
       cGameObject *CurGo = vec_pObjectsToDraw[i];
@@ -1074,6 +1089,11 @@ bool loadConfig() {
     for (int i = 0; i < 3; i++) {
       g_Gravity[i] = grArray[i].GetFloat();
     }
+
+	if (Window.HasMember("FullScreen"))
+	{
+		bFullScreen = Window["FullScreen"].GetBool();
+	}
   }
 
   return true;
