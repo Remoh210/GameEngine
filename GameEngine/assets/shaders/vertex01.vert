@@ -78,13 +78,13 @@ void main()
 	{
 
 		vec2 tiledUV = vUV_x2.st * texTiling;
-		float newTime = time * 0.00001;
+		float newTime = time * 0.0001;
 		float height = texture( texHeightMap, vec2(tiledUV.s + newTime, tiledUV.t + newTime) ).r;
 		//float height = clamp( HM_Color, 0.1, 1.0 );
 
 
 
-		float HeightRatio = 0.008;
+		float HeightRatio = 0.01;
 		height = height * HeightRatio;
 		
 		//posTemp.y = 0.0f;		// "Flatten" the mesh

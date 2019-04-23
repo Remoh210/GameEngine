@@ -161,6 +161,15 @@ public:
 				Pitch = -50.0f;
 
 		}
+		case THIRD_PERSON:
+			if (constrainPitch)
+			{
+				if (Pitch > 89.0f)
+					Pitch = 89.0f;
+				if (Pitch < -89.0f)
+					Pitch = -89.0f;
+			}
+			break;
 		}
 		// Update Front, Right and Up Vectors using the updated Euler angles
 		updateCameraVectors();

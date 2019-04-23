@@ -65,7 +65,7 @@ cCharacterManager *g_pCharacterManager = NULL;
 int cou;
 int nbFrames = 0;
 int FPS = 0;
-
+int gFogDensity = 1.0f;
 int gameCounter = 0;
 
 bool RayHitted = false;
@@ -269,6 +269,8 @@ int main(void) {
   GLint matProj_location = glGetUniformLocation(program, "matProj");
   GLint eyeLocation_location = glGetUniformLocation(program, "eyeLocation");
 
+  GLint fogDensity = glGetUniformLocation(program, "FogDensity");
+
   ::g_pDebugRendererACTUAL = new cDebugRenderer();
   ::g_pDebugRenderer = (iDebugRenderer *)::g_pDebugRendererACTUAL;
 
@@ -438,8 +440,11 @@ int main(void) {
      
 #pragma region main render
 	  
-		  // Render target state must be inside of scope operator for the next set of OpenGL commands.
-		  RenderTarget::State render_target_state(scene_texture);
+		 
+
+		 glUniform1f(fogDensity, gFogDensity/10000.0f);
+
+		 RenderTarget::State render_target_state(scene_texture);
         // Set for the 1st pass
 
         //**********************************************************

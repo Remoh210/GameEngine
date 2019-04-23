@@ -115,10 +115,10 @@ uniform float wholeObjectAlphaTransparency;
 
 //Copying UV to mult by tile value
 
-
+uniform float FogDensity;
 const vec3 fogColor = vec3(0.5, 0.5,0.5);
 //const float FogDensity = 0.008;
-const float FogDensity = 0.000;
+//const float FogDensity = 0.008;
 float ambientAmount = 0.3;
 void main()
 {
@@ -132,11 +132,32 @@ void main()
   // 
 	// 
 
+
+
+
+
+
 	tiledUV *= texTiling;
 	vec4 vertNormal;
+	vec3 normal;
+
+	if ( bUseHeightMap )
+	{
+
+		float newTime = time * 0.001;
+		tiledUV.s + newTime;
+		tiledUV.t + newTime;
+
+		
+		normal = texture(texNormalMap, vec2(tiledUV.s + newTime, tiledUV.t + newTime)).rgb;
+		vertNormal.rgb  = normalize(normal * 2.0 - 1.0).rgb;
+
+	
+	}
+	else
+	{
 	if(bUseNormalMap)
 	{
-	vec3 normal;
 	normal = texture(texNormalMap, tiledUV.st).rgb;
 	vertNormal.rgb  = normalize(normal * 2.0 - 1.0).rgb;
 	}
@@ -144,6 +165,10 @@ void main()
 	{
 		vertNormal = gsOuput.vertNormal;
 	}
+
+	}
+
+
 	
 
 

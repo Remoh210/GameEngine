@@ -3449,6 +3449,7 @@
             },
             "Visible": true,
             "Use_Physics": true,
+            "Use_Normal_Map": true,
             "Wireframe": false,
             "Position": [
                 -471.0438537597656,
@@ -3465,7 +3466,7 @@
                 1.0,
                 1.0,
                 1.0,
-                100000.0
+                10.0
             ],
             "Rotation": [
                 0.0,
@@ -3773,7 +3774,7 @@
                 1.0,
                 1.0,
                 1.0,
-                100000.0
+                10000000.0
             ],
             "Rotation": [
                 0.0,
@@ -3817,6 +3818,8 @@
             "Name": "water",
             "Mesh": "highResPlane.ply",
             "Visible": true,
+            "Use_Height_Map": true,
+            "Use_Normal_Map": true,
             "Use_Physics": true,
             "Wireframe": false,
             "Position": [
@@ -3827,8 +3830,8 @@
             "DiffuseRGB_Alpha": [
                 0.0,
                 0.0,
-                0.0,
-                1.0
+                1.0,
+                0.4
             ],
             "SpecularRGB_Alpha": [
                 1.0,
@@ -3849,18 +3852,23 @@
             "Textures": [
                 {
                     "Name": "water/waterTex.bmp",
-                    "Strength": 1.0,
-                    "Tile": 30.0
+                    "Strength": 0.0,
+                    "Tile": 10.0
                 },
                 {
                     "Name": "testTex.bmp",
                     "Strength": 0.0,
-                    "Tile": 30.0
+                    "Tile": 10.0
                 },
                 {
-                    "Name": "water/waterNormalTex2.bmp",
+                    "Name": "water/waterNormalTex.bmp",
                     "Strength": 0.0,
-                    "Tile": 30.0
+                    "Tile": 10.0
+                },
+                {
+                    "Name": "water/waterHeightTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 10.0
                 }
             ]
         },

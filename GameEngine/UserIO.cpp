@@ -358,11 +358,23 @@ void key_callback( GLFWwindow* window,
 		//pSM->currentAnimation = "assets/modelsFBX/RPG-Character_Unarmed-Fall(FBX2013).fbx";
 	}
 
-
+	
 
 	if (glfwGetKey(window, GLFW_KEY_4))
 	{
+		
 		//pSM->currentAnimation = "Action1";
+	}
+
+
+	if (glfwGetKey(window, GLFW_KEY_7))
+	{
+		gFogDensity += 1.0f;
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_8))
+	{
+		gFogDensity -= 1.0f;
 	}
 
 
