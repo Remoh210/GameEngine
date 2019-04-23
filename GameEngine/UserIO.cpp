@@ -76,6 +76,50 @@ void pickUP(cGameObject* player)
 }
 
 
+
+void pickBow(cGameObject* player){
+	cGameObject* bow = findObjectByFriendlyName("bow");
+	if (glm::distance(bow->position, player->position) < 30.0f)
+	{
+		gPhysicsWorld->RemoveBody(bow->rigidBody);
+		//bow->rigidBody->~iRigidBody();
+		bow->rigidBody = NULL;
+
+	}
+}
+
+void dropBow(cGameObject* player)
+{
+	cGameObject* bow = findObjectByFriendlyName("bow");
+
+	if(bow->rigidBody == NULL)
+	{
+		sModelDrawInfo bowInfo;
+		bowInfo.meshFileName = "character/bow.ply";
+		g_pTheVAOMeshManager->FindDrawInfoByModelName(bowInfo);
+		glm::vec3 halfExtents = glm::vec3(bowInfo.maxX * bow->nonUniformScale.x, bowInfo.maxY * bow->nonUniformScale.x,
+			bowInfo.maxZ * bow->nonUniformScale.x);
+
+		nPhysics::iShape* CurShape = NULL;
+		nPhysics::sRigidBodyDef def;
+		//in Radians
+		def.Position = bow->position;
+		def.Mass = 200.0f;
+		def.quatOrientation = bow->m_meshQOrientation;
+		def.GameObjectName = bow->friendlyName;
+
+		CurShape = gPhysicsFactory->CreateBoxShape(halfExtents);
+
+		nPhysics::iRigidBody* rigidBody = gPhysicsFactory->CreateRigidBody(def, CurShape);
+		bow->rigidBody = rigidBody;
+		gPhysicsWorld->AddBody(rigidBody);
+		
+	}
+
+	
+}
+
+
 void SwitchToWireFrame(std::vector<cGameObject*> models);
 
 void setVelZ(cGameObject* sm, float vel)
@@ -165,6 +209,21 @@ void key_callback( GLFWwindow* window,
 	if (glfwGetKey(window, GLFW_KEY_2))
 	{
 		contrMode = 2;
+		//SwitchToSolid(vec_pObjectsToDraw);
+		//findObjectByFriendlyName("Cloth")->softBody->SwitchWind();
+
+	}
+
+
+	if (glfwGetKey(window, GLFW_KEY_4))
+	{
+		camera.mCameraType == THIRD_PERSON;
+
+
+	}
+	if (glfwGetKey(window, GLFW_KEY_5))
+	{
+		//contrMode = 2;
 		//SwitchToSolid(vec_pObjectsToDraw);
 		//findObjectByFriendlyName("Cloth")->softBody->SwitchWind();
 
@@ -514,41 +573,24 @@ void ProcessAsynKeys(GLFWwindow* window)
 
 		if(axes[4] > -0.5f)
 		{
-			//Ray Cast
-			glm::vec3 from = ch->position + glm::vec3(0.0f, 10.0f, 0.0f);
-			glm::vec3 to = ch->getForward();
-			to *= 50.0f;
-			to = to + ch->position;
-			to.y += 12.0f;
-			g_pDebugRendererACTUAL->addLine(from, to, glm::vec3(1.0f, 1.0f, 0.0f));
-			nPhysics::iRigidBody* hitRb = gPhysicsWorld->RayCastGetObject(from, to);
+			
+			pickUP(ch);
 
-			if (hitRb)
-			{
-				//Get Direction
-				//to.y = 20.0f;
-				glm::vec3 dir = to - hitRb->GetPosition();
-				dir = glm::normalize(dir);
-
-
-				if (glm::distance(hitRb->GetPosition(), to) > 2.0f)
-				{
-					hitRb->SetVelocity(dir * 30.0f);
-
-				}
-				else
-				{
-					hitRb->SetVelocity(glm::vec3(0.0f));
-				}
-
-			}
 		}
 
+		if (buttons[0] == GLFW_PRESS)
+		{
+			pickBow(ch);
+		}
 
+		if (buttons[3] == GLFW_PRESS)
+		{
+			dropBow(ch);
+		}
 
 		//Jump
 
-		if (buttons[1] == GLFW_PRESS && ch->pAnimController->GetCurrentAnimation() != "Run-jump")
+		if (buttons[1] == GLFW_PRESS && ch->pAniState->activeAnimation.name != "Run-jump")
 		{
 			glm::vec3 vel;
 			vel = ch->rigidBody->GetVelocity();
@@ -558,7 +600,19 @@ void ProcessAsynKeys(GLFWwindow* window)
 
 		glm::vec3 velVec;
 		glm::vec3 CamDir = camera.getDirectionVector();
-		if (axes[1] < -0.2f)
+		if (buttons[5] == GLFW_PRESS)
+		{
+			ch->currentAnimation = "Action6";
+			ch->pAniState->activeAnimation.name = "Action6";
+			//ch->rigidBody->SetVelocity(glm::vec3(0.0f, vel.y, 0.0f));
+
+		}
+
+		if (ch->pAniState->activeAnimation.name == "Action6")
+		{
+
+		}
+		else if (axes[1] < -0.2f)
 		{
 
 			//Ray Cast
@@ -593,7 +647,7 @@ void ProcessAsynKeys(GLFWwindow* window)
 				ch->currentAnimation = "Run-forward";
 				ch->rigidBody->SetVelocity(velVec);
 
-				if (buttons[1] == GLFW_PRESS && ch->pAnimController->GetCurrentAnimation() != "Run-jump")
+				if (buttons[1] == GLFW_PRESS && ch->pAniState->activeAnimation.name != "Run-jump")
 				{
 					glm::vec3 vel;
 					vel = ch->rigidBody->GetVelocity();
@@ -705,6 +759,8 @@ void ProcessAsynKeys(GLFWwindow* window)
 		if (buttons[3] == GLFW_PRESS) { std::cout << "buttons[3]: Pressed" << std::endl; }
 		if (buttons[4] == GLFW_PRESS) { std::cout << "buttons[4]: Pressed" << std::endl; }
 		if (buttons[5] == GLFW_PRESS) { std::cout << "buttons[5]: Pressed" << std::endl; }
+		if (buttons[6] == GLFW_PRESS) { std::cout << "buttons[6]: Pressed" << std::endl; }
+		if (buttons[7] == GLFW_PRESS) { std::cout << "buttons[7]: Pressed" << std::endl; }
 		
 	}
 
@@ -712,10 +768,18 @@ void ProcessAsynKeys(GLFWwindow* window)
 	if (!bIsDebugMode && contrMode == 2) {
 
 
+		if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
+		{
+			dropBow(ch);
+
+		}
 
 
+		if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS)
+		{
+			pickBow(ch);
 
-
+		}
 
 		if (IsMBLDown(window))
 		{

@@ -47,6 +47,16 @@ void cAnimationController::UpdateController()
 	}
 
 
+	//if (mActiveChar->pAniState->activeAnimation.name == "Action8")
+	//{
+	//	if (!mActiveChar->pAniState->activeAnimation.bExited)
+	//	{
+	//		glm::vec3 vel(0.0f, mActiveChar->rigidBody->GetVelocity().y, 0.0f);
+	//		mActiveChar->rigidBody->SetVelocity(vel);
+	//		return;
+	//	}
+	//}
+
 	if (mActiveChar->pAniState->activeAnimation.name == "Action6")
 	{
 		if (!mActiveChar->pAniState->activeAnimation.bExited)
@@ -126,7 +136,7 @@ void cAnimationController::UpdateController()
 
 	if (abs(vel.x) < 1.01f && abs(vel.z) < 1.01f)
 	{
-		if (mActiveChar->currentAnimation != "Action2" && mActiveChar->currentAnimation != "Action6")
+		if (mActiveChar->currentAnimation != "Action2" && mActiveChar->currentAnimation != "Action6" && mActiveChar->currentAnimation != "Action8")
 		{
 			mActiveChar->pAniState->activeAnimation.name = "Idle";
 			//return "Idle";

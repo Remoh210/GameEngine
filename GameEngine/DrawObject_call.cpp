@@ -581,8 +581,10 @@ void DrawObject(cGameObject* pCurrentMesh,
 
 		}
 
+		cGameObject* ds = findObjectByFriendlyName("bow");
+		if (pCurrentMesh->friendlyName == "chan" && ds->rigidBody == NULL) {
 
-		if (pCurrentMesh->friendlyName == "chan") {
+			
 			glm::mat4 boneLeftHandlocal = pCurrentMesh->vecObjectBoneTransformation[9];//12
 			glm::mat4 boneLeftHandTranslation = boneLeftHandlocal * pCurrentMesh->nonUniformScale.x;
 			glm::mat4 matLeftHandOrientation = glm::mat4(pCurrentMesh->m_meshQOrientation);
@@ -590,7 +592,7 @@ void DrawObject(cGameObject* pCurrentMesh,
 			boneLeftHandTranslation *= matLeftHandOrientation;
 
 
-			cGameObject* ds = findObjectByFriendlyName("bow");
+
 			//pCurrentMesh->m_meshQOrientation = glm::toQuat(glm::mat4(pCurrentMesh->m_meshQOrientation) * boneLeftHandlocal);
 			////glm::vec3 offset = pTheGO->orientation * itTrans->second * glm::vec4(1.0f);
 			//ds->position = ds->nonUniformScale.x + ds->position;

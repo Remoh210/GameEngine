@@ -3437,6 +3437,8 @@
                 "Action4": "assets/models/FBX/chan-spell-strafe-left.fbx",
                 "Action5": "assets/models/FBX/chan-spell-strafe-right.fbx",
                 "Action6": "assets/models/FBX/chan-shoot.fbx",
+                "Action7": "assets/models/FBX/aim-idle.fbx",
+                "Action8": "assets/models/FBX/pick.fbx",
                 "Idle": "assets/models/FBX/chan-idle.fbx",
                 "Run-forward": "assets/models/FBX/chan-run-forward.fbx",
                 "Run-jump": "assets/models/FBX/chan-run-jump.fbx",
