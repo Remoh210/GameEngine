@@ -371,7 +371,7 @@ int main(void) {
 
   float bloom_strength = 10.0f;
   int bloom_blur_iterations = 5;
-  float bloom_threshold = 0.65f;
+  float bloom_threshold = 0.58f;
 
 
 
