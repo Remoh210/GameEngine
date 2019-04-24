@@ -363,52 +363,6 @@
             }
         },
         {
-            "Name": "doorFrame",
-            "Mesh": "door/doorFrame.ply",
-            "Visible": true,
-            "Use_Physics": true,
-            "Wireframe": false,
-            "Position": [
-                1.0332461595535279,
-                11.112482070922852,
-                53.649471282958987
-            ],
-            "DiffuseRGB_Alpha": [
-                0.0,
-                0.0,
-                0.0,
-                1.0
-            ],
-            "SpecularRGB_Alpha": [
-                1.0,
-                1.0,
-                1.0,
-                100.0
-            ],
-            "Rotation": [
-                180.0,
-                5.865976333618164,
-                180.0
-            ],
-            "Scale": [
-                1.0,
-                1.0,
-                1.0
-            ],
-            "Textures": [
-                {
-                    "Name": "door/stoneTex.bmp",
-                    "Strength": 1.0,
-                    "Tile": 1.0
-                },
-                {
-                    "Name": "testTex.bmp",
-                    "Strength": 0.0,
-                    "Tile": 1.0
-                }
-            ]
-        },
-        {
             "Name": "lake",
             "Mesh": "env_objects/lake.ply",
             "Visible": true,
@@ -985,12 +939,12 @@
             "Textures": [
                 {
                     "Name": "cottage/cottageTex.bmp",
-                    "Strength": 0.0,
+                    "Strength": 1.0,
                     "Tile": 1.0
                 },
                 {
                     "Name": "testTex.bmp",
-                    "Strength": 1.0,
+                    "Strength": 0.0,
                     "Tile": 1.0
                 }
             ],
@@ -1307,8 +1261,20 @@
                 }
             ],
             "RigidBody": {
-                "Type": "BOX",
-                "Mass": 500.0
+                "Type": "BOX_HINGE",
+                "Mass": 500.0,
+                "Pivot" :
+                [
+                    0.0,
+                    0.0,
+                    -4.3
+                ],
+                "Axis" :
+                [
+                    0.0,
+                    1.0,
+                    0.0
+                ]
             }
         },
         {
@@ -3085,6 +3051,7 @@
             "Mesh": "trees/dead_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_LOD" : true,
             "Wireframe": false,
             "Position": [
                 -581.5006713867188,
@@ -3140,6 +3107,7 @@
             "Mesh": "trees/dead_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_LOD" : true,
             "Wireframe": false,
             "Position": [
                 -419.69580078125,
@@ -3195,6 +3163,7 @@
             "Mesh": "trees/dead_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_LOD" : true,
             "Wireframe": false,
             "Position": [
                 -682.281005859375,
@@ -3250,6 +3219,7 @@
             "Mesh": "trees/dead_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_LOD" : true,
             "Wireframe": false,
             "Position": [
                 -381.4125061035156,
@@ -3305,6 +3275,7 @@
             "Mesh": "trees/dead_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_LOD" : true,
             "Wireframe": false,
             "Position": [
                 -737.1143798828125,
@@ -3360,6 +3331,7 @@
             "Mesh": "trees/dead_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_LOD" : true,
             "Wireframe": false,
             "Position": [
                 -333.914306640625,
@@ -3416,6 +3388,7 @@
             "Visible": true,
             "Use_Physics": true,
             "Wireframe": false,
+            "Use_LOD" : true,
             "Position": [
                 -753.9715576171875,
                 26.63753318786621,
@@ -3470,6 +3443,7 @@
             "Mesh": "trees/dead_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_LOD" : true,
             "Wireframe": false,
             "Position": [
                 -305.1247253417969,
@@ -3525,6 +3499,7 @@
             "Mesh": "trees/polar_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_LOD" : true,
             "Wireframe": false,
             "Position": [
                 -532.9486083984375,
@@ -3580,6 +3555,7 @@
             "Mesh": "trees/polar_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_LOD" : true,
             "Wireframe": false,
             "Position": [
                 -730.4286499023438,
@@ -3635,6 +3611,7 @@
             "Mesh": "trees/polar_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_LOD" : true,
             "Wireframe": false,
             "Position": [
                 -424.7228698730469,
@@ -3690,6 +3667,7 @@
             "Mesh": "trees/polar_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_LOD" : true,
             "Wireframe": false,
             "Position": [
                 -573.6571655273438,
@@ -3745,6 +3723,7 @@
             "Mesh": "trees/polar_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_LOD" : true,
             "Wireframe": false,
             "Position": [
                 -450.5745849609375,
@@ -3800,6 +3779,7 @@
             "Mesh": "trees/polar_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_LOD" : true,
             "Wireframe": false,
             "Position": [
                 -773.6785888671875,
@@ -3854,6 +3834,7 @@
             "Name": "polar_tree7",
             "Mesh": "trees/polar_tree.ply",
             "Visible": true,
+            "Use_LOD" : true,
             "Use_Physics": true,
             "Wireframe": false,
             "Position": [
@@ -3911,6 +3892,7 @@
             "Visible": true,
             "Use_Physics": true,
             "Wireframe": false,
+            "Use_LOD" : true,
             "Position": [
                 -591.2156982421875,
                 82.84635162353516,
@@ -3965,6 +3947,7 @@
             "Mesh": "trees/oak_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_LOD" : true,
             "Wireframe": false,
             "Position": [
                 -677.2224731445313,
@@ -4020,6 +4003,7 @@
             "Mesh": "trees/oak_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_LOD" : true,
             "Wireframe": false,
             "Position": [
                 -420.3211364746094,
@@ -4075,6 +4059,7 @@
             "Mesh": "trees/oak_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_LOD" : true,
             "Wireframe": false,
             "Position": [
                 -323.3951721191406,
@@ -4130,6 +4115,7 @@
             "Mesh": "trees/oak_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_LOD" : true,
             "Wireframe": false,
             "Position": [
                 -673.3929443359375,
@@ -4184,6 +4170,7 @@
             "Name": "oak_tree5",
             "Mesh": "trees/oak_tree.ply",
             "Visible": true,
+            "Use_LOD" : true,
             "Use_Physics": true,
             "Wireframe": false,
             "Position": [
@@ -4240,6 +4227,7 @@
             "Mesh": "trees/oak_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_LOD" : true,
             "Wireframe": false,
             "Position": [
                 -655.8369140625,
@@ -4295,6 +4283,7 @@
             "Mesh": "trees/oak_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_LOD" : true,
             "Wireframe": false,
             "Position": [
                 -366.0755920410156,
@@ -4350,6 +4339,7 @@
             "Mesh": "trees/oak_tree.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Use_LOD" : true,
             "Wireframe": false,
             "Position": [
                 -670.8785400390625,
@@ -4500,8 +4490,8 @@
             "Name": "chan",
             "SkinnedMesh": "assets/models/FBX/chan.fbx",
             "Animation": {
-                "Action1": "assets/models/FBX/common/spell-walk-forward.fbx",
-                "Action2": "assets/models/FBX/common/spell-idle.fbx",
+                "Action1": "assets/models/FBX/spell-walk-forward.fbx",
+                "Action2": "assets/models/FBX/spell-idle.fbx",
                 "Action3": "assets/models/FBX/chan-push-forward.fbx",
                 "Action4": "assets/models/FBX/chan-spell-strafe-left.fbx",
                 "Action5": "assets/models/FBX/chan-spell-strafe-right.fbx",
@@ -5165,6 +5155,53 @@
                 "Type": "MESH_COLLIDER",
                 "Mass": 0.0
             }
+        },
+        {
+            "Name": "treeImposter",
+            "Mesh": "quad.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "IsImposter": true,
+            "Wireframe": false,
+            "Position": [
+                0.0,
+                60.0,
+                0.0
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Scale": [
+                20.0,
+                35.0,
+                20.0
+            ],
+            "Textures": [
+                {
+                    "Name": "imposterTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ]
         }
     ],
     "Lights": [

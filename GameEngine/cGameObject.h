@@ -119,6 +119,8 @@ public:
 	bool bUseNormalMap;
 	bool isDead;
 	bool bIsProjectile;
+	bool bIsImposter;
+	bool bUseLOD;
 
 	// ignore this for now...
 	// Around its own axis (NOT the origin)

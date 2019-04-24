@@ -942,14 +942,15 @@ int main(void) {
 
 	if (camera.mCameraType == AIM)
 	{
-
+		camera.updateCameraVectors();
 		//camera.updateCameraVectors();
 		glm::vec3 lookDirection = camera.Position + camera.Front;
 		//lookDirection.y = 0.0f;
-		lookDirection = glm::normalize(lookDirection);
+		lookDirection = glm::normalize(camera.Front);
+		lookDirection.y = 0.0f;
 		glm::vec3 worldUP(0.0f, 1.0f, 0.0f);
 		glm::mat4 finalOrientation = glm::inverse(
-			glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), -camera.Front * 10.0f, worldUP));
+			glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), -lookDirection * 10.0f, worldUP));
 		player->m_meshQOrientation = glm::toQuat(finalOrientation);
 
 	}
@@ -983,6 +984,7 @@ int main(void) {
     to = to + player->position;
     to.y = 10.0f;
 
+	if(bIsDebugMode)
     g_pDebugRendererACTUAL->addLine(from, to, glm::vec3(0.0f, 1.0f, 0.0f));
 
     bodyHit = gPhysicsWorld->RayCastGetObject(from, to);

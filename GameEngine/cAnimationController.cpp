@@ -39,7 +39,9 @@ void cAnimationController::UpdateController()
 	//from = glm::vec3(pos.x, pos.y -height, pos.z);
 
 	glm::vec3 to = glm::vec3(pos.x, pos.y - height, pos.z);
-	g_pDebugRendererACTUAL->addLine(pos, to, glm::vec3(1.0f, 0.0f, 0.0f));
+	if (bIsDebugMode) {
+		g_pDebugRendererACTUAL->addLine(pos, to, glm::vec3(1.0f, 0.0f, 0.0f));
+	}
 
 	if (!gPhysicsWorld->RayCast(pos, to))
 	{
@@ -74,7 +76,7 @@ void cAnimationController::UpdateController()
 			projectile->meshName = "character/arrow.ply";
 			projectile->friendlyName = "projectile" + std::to_string(projectile->getUniqueID());
 			projectile->setDiffuseColour(glm::vec3(0.0f));
-			float scale = 15.0f;
+			float scale = 8.0f;
 			projectile->nonUniformScale = glm::vec3(scale, scale, scale);
 			projectile->m_meshQOrientation = mActiveChar->m_meshQOrientation;
 			projectile->bIsWireFrame = false;

@@ -155,10 +155,10 @@ public:
 			break;
 		case AIM:
 		{
-			if (Pitch > 50.0f)
-				Pitch = 50.0f;
-			if (Pitch < -50.0f)
-				Pitch = -50.0f;
+			if (Pitch > 80.0f)
+				Pitch = 80.0f;
+			if (Pitch < -80.0f)
+				Pitch = -80.0f;
 
 		}
 		case THIRD_PERSON:
@@ -260,7 +260,7 @@ public:
 		{
 			glm::vec3 front(0.0f, 0.0f, -1.0f);
 			front.x = cos(glm::radians(Yaw)) * cos(glm::radians(Pitch));
-			front.y = 0.0f;//sin(glm::radians(Pitch));
+			front.y = sin(glm::radians(Pitch));
 			front.z = sin(glm::radians(Yaw)) * cos(glm::radians(Pitch));
 			Front = glm::normalize(front);
 			Right = glm::normalize(glm::cross(Front, WorldUp));

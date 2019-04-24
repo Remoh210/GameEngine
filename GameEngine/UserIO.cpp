@@ -51,7 +51,9 @@ void pickUP(cGameObject* player)
 	to = to + player->position;
 	to.y += 8.0f;
 	//			to.y -= camera.Position.y;
-	g_pDebugRendererACTUAL->addLine(from, to, glm::vec3(1.0f, 1.0f, 0.0f));
+	if (bIsDebugMode) {
+		g_pDebugRendererACTUAL->addLine(from, to, glm::vec3(1.0f, 1.0f, 0.0f));
+	}
 	nPhysics::iRigidBody* hitRb = gPhysicsWorld->RayCastGetObject(from, to);
 
 	if (hitRb && hitRb->GetMass() < 3000.0f)
@@ -195,8 +197,15 @@ void key_callback( GLFWwindow* window,
 
 	if (glfwGetKey(window, GLFW_KEY_K))
 	{
+		if (camera.mCameraType == AIM)
+		{
+			camera.mCameraType = THIRD_PERSON;
+		}
+		else
+		{
+			camera.mCameraType = AIM;
+		}
 		
-		camera.mCameraType = AIM;
 	}
 
 	if (glfwGetKey(window, GLFW_KEY_1))
@@ -263,7 +272,7 @@ void key_callback( GLFWwindow* window,
 	if (glfwGetKey(window, GLFW_KEY_BACKSPACE))
 	{
 		//SwapThePhysics();
-		::g_pSceneManager->saveScene("output.json");
+		//::g_pSceneManager->saveScene("output.json");
 		//::g_pSceneManager->loadScene("scene1.json");
 		//CreateModels("Models.txt", g_pTheVAOMeshManager, program);
 
@@ -611,7 +620,16 @@ void ProcessAsynKeys(GLFWwindow* window)
 		}
 
 		glm::vec3 velVec;
-		glm::vec3 CamDir = camera.getDirectionVector();
+		glm::vec3 CamDir;
+		if (camera.mCameraType == THIRD_PERSON)
+		{
+			CamDir = camera.getDirectionVector();
+		}
+		else
+		{
+			CamDir = ch->getForward();
+		}
+		
 		if (buttons[5] == GLFW_PRESS)
 		{
 			ch->currentAnimation = "Action6";
@@ -633,7 +651,10 @@ void ProcessAsynKeys(GLFWwindow* window)
 			to *= 18.0f;
 			to = to + ch->position;
 			to.y = 8.0f;
-			g_pDebugRendererACTUAL->addLine(from, to, glm::vec3(1.0f, 1.0f, 0.0f));
+			if (bIsDebugMode) {
+				g_pDebugRendererACTUAL->addLine(from, to, glm::vec3(1.0f, 1.0f, 0.0f));
+			}
+
 			nPhysics::iRigidBody* hitRb = gPhysicsWorld->RayCastGetObject(from, to);
 
 			if (hitRb && hitRb->GetMass() > 3000.f)
@@ -752,6 +773,21 @@ void ProcessAsynKeys(GLFWwindow* window)
 		}
 
 
+		if (buttons[16] == GLFW_PRESS) 
+		{ 
+
+			camera.mCameraType = THIRD_PERSON;
+			
+		}
+		if (buttons[14] == GLFW_PRESS)
+		{
+
+			camera.mCameraType = AIM;
+			
+		}
+
+
+
 		   
 		//Print some axes info 
 		if (std::abs(axes[0]) > 0.2f ) { std::cout << "axis[0]: " << axes[0] << std::endl; }
@@ -773,6 +809,16 @@ void ProcessAsynKeys(GLFWwindow* window)
 		if (buttons[5] == GLFW_PRESS) { std::cout << "buttons[5]: Pressed" << std::endl; }
 		if (buttons[6] == GLFW_PRESS) { std::cout << "buttons[6]: Pressed" << std::endl; }
 		if (buttons[7] == GLFW_PRESS) { std::cout << "buttons[7]: Pressed" << std::endl; }
+		if (buttons[8] == GLFW_PRESS) { std::cout << "buttons[8]: Pressed" << std::endl; }
+		if (buttons[9] == GLFW_PRESS) { std::cout << "buttons[9]: Pressed" << std::endl; }
+		if (buttons[10] == GLFW_PRESS) { std::cout << "buttons[10]: Pressed" << std::endl; }
+		if (buttons[11] == GLFW_PRESS) { std::cout << "buttons[11]: Pressed" << std::endl; }
+		if (buttons[12] == GLFW_PRESS) { std::cout << "buttons[12]: Pressed" << std::endl; }
+		if (buttons[13] == GLFW_PRESS) { std::cout << "buttons[13]: Pressed" << std::endl; }
+		if (buttons[14] == GLFW_PRESS) { std::cout << "buttons[14]: Pressed" << std::endl; }
+		if (buttons[15] == GLFW_PRESS) { std::cout << "buttons[15]: Pressed" << std::endl; }
+		if (buttons[14] == GLFW_PRESS) { std::cout << "buttons[16]: Pressed" << std::endl; }
+		if (buttons[15] == GLFW_PRESS) { std::cout << "buttons[17]: Pressed" << std::endl; }
 		
 	}
 
@@ -793,6 +839,16 @@ void ProcessAsynKeys(GLFWwindow* window)
 
 		}
 
+		glm::vec3 CamDir;
+		if(camera.mCameraType == THIRD_PERSON)
+		{
+			CamDir = camera.getDirectionVector();
+		}
+		else
+		{
+			CamDir = ch->getForward();
+		}
+		
 		if (IsMBLDown(window))
 		{
 
@@ -807,7 +863,9 @@ void ProcessAsynKeys(GLFWwindow* window)
 		else if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 		{
 			glm::vec3 velVec;
-			glm::vec3 CamDir = ch->getForward();
+
+			
+			
 
 			//Ray Cast
 			glm::vec3 from = ch->position + glm::vec3(0.0f, 10.0f, 0.0f);
@@ -815,7 +873,9 @@ void ProcessAsynKeys(GLFWwindow* window)
 			to *= 18.0f;
 			to = to + ch->position;
 			to.y += 8.0f;
-			g_pDebugRendererACTUAL->addLine(from, to, glm::vec3(1.0f, 1.0f, 0.0f));
+			if (bIsDebugMode) {
+				g_pDebugRendererACTUAL->addLine(from, to, glm::vec3(1.0f, 1.0f, 0.0f));
+			}
 			nPhysics::iRigidBody* hitRb = gPhysicsWorld->RayCastGetObject(from, to);
 
 			if (hitRb && hitRb->GetMass() > 3000.f)
@@ -863,7 +923,7 @@ void ProcessAsynKeys(GLFWwindow* window)
 		else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
 		{
 			glm::vec3 velVec;
-			glm::vec3 CamDir = camera.getDirectionVector();
+			//glm::vec3 CamDir = camera.getDirectionVector();
 			velVec = -CamDir * 30.0f;
 			velVec.y = vel.y;
 			ch->rigidBody->SetVelocity(velVec);
@@ -873,7 +933,7 @@ void ProcessAsynKeys(GLFWwindow* window)
 		else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		{
 			glm::vec3 velVec;
-			glm::vec3 CamDir = camera.getDirectionVector();
+			//glm::vec3 CamDir = camera.getDirectionVector();
 			//calculate Left
 			glm::vec3 right = glm::cross(CamDir, glm::vec3(0.0f, 1.0f, 0.0f));
 			velVec = right * 25.0f;
@@ -892,7 +952,7 @@ void ProcessAsynKeys(GLFWwindow* window)
 		else if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
 		{
 			glm::vec3 velVec;
-			glm::vec3 CamDir = camera.getDirectionVector();
+			//glm::vec3 CamDir = camera.getDirectionVector();
 			//calculate Left
 			glm::vec3 left = -glm::cross(CamDir, glm::vec3(0.0f, 1.0f, 0.0f));
 

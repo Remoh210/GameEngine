@@ -1,8 +1,8 @@
 {
     "Window": {
-        "Width": 1350,
-        "Height": 764,
-        "Title" : "Balls!",
+        "Width": 1600,
+        "Height": 900,
+        "Title" : "Game Jam!",
 		"FullScreen" : false
     },
     "Language" : "English",

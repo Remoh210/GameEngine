@@ -661,37 +661,22 @@ dist = length(viewSpace);
 	// Particle imposter (smoke, fire, water, etc.)
 	if ( bIsParticleImposter ) 
 	{
-		// Discard anything that's "black enough"
+
 		vec4 tex0Col = texture( texture00, vertUV_x2.st ).rgba;	// Imposter texture (smoke, fire)
-		
-		// Out shader was only testing for black and white, 
-		// but now we have coloured textures, so use all the colours to 
-		// test for "black".
-		// Alternatively, you can use a 2nd texture as a "mask" (black and white) texture
-		
-		// Note "greyscale", that humans see, isn't even over the colours. 
-		// (google "RGB to greyscale" to get this equation:)
 		float pixelBlackAndWhite = (0.3f * tex0Col.r) + (0.59f * tex0Col.g) + (0.11f * tex0Col.b);
 		
-		// We had a threshold of 0.25, but how it's passed in
-		if ( pixelBlackAndWhite < ParticleImposterBlackThreshold )
+		if ( pixelBlackAndWhite < 0.01 )
 		{
-			// Don't draw it
-			// Literally Doesn't Draw the pixel
+
 			discard;
 		}	
-		// OK, I'm drawing the particle imposter...
-		// The darker it is, the more transparent it should be
-		// Colour is from 0 to 1  (white = 1)
-		// Alpha goes from 0 to 1, too (oh my goodness)
-		finalOutputColour.a = pixelBlackAndWhite;
+
+		finalOutputColour.a = pixelBlackAndWhite * 3.2;
 		finalOutputColour.rgb += tex0Col.rgb;
 		
-		// Override the "fade at death" transparency, too
-		finalOutputColour.a *= ParticleImposterAlphaOverride;
-//		finalOutputColour.r = 1.0f - ParticleImposterAlphaOverride;
+		//finalOutputColour.a *= 0.8f;
 		
-	}//if(bIsParticleImposter)
+	}
 
 
 

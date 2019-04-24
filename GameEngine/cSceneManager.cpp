@@ -653,6 +653,16 @@ bool cSceneManager::loadScene(std::string filename) {
 			CurModel->bIsProjectile = true;
 		}
 
+
+		if (GameObject[i].HasMember("IsImposter"))
+		{
+			CurModel->bIsImposter = GameObject[i]["IsImposter"].GetBool();
+		}
+
+		if (GameObject[i].HasMember("Use_LOD"))
+		{
+			CurModel->bUseLOD = GameObject[i]["Use_LOD"].GetBool();
+		}
 		
 
 		if (GameObject[i].HasMember("Props")) {

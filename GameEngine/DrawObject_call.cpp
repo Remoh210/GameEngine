@@ -2,7 +2,8 @@
 #include "globalOpenGLStuff.h"		// For GLFW and glad (OpenGL calls)
 #include "globalStuff.h"
 #include "GlobalCharacterControlls.h"
-
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/quaternion.hpp>
 #include <glm/glm.hpp>
 #include <glm/vec3.hpp> // glm::vec3
 #include <glm/vec4.hpp> // glm::vec4
@@ -18,6 +19,8 @@
 
 #include <iostream>
 
+
+glm::quat RotationBetweenVectors(glm::vec3 start, glm::vec3 dest);
 
 //std::map<std::string /*name*/, cParticleEmitter* > g_map_pParticleEmitters;
 
@@ -282,7 +285,34 @@ void DrawScene_Simple(std::vector<cGameObject*> vec_pMeshSceneObjects,
 		cGameObject* pCurrentMesh = vec_pMeshSceneObjects[objIndex];
 		
 		glm::mat4x4 matModel = glm::mat4(1.0f);
-		DrawObject(pCurrentMesh, matModel, shaderProgramID, fbo);
+
+
+		if (pCurrentMesh->bUseLOD)
+		{
+			if (glm::distance(pCurrentMesh->position, camera.Position) > 300.0f)
+			{
+				cGameObject* imposter = findObjectByFriendlyName("treeImposter");
+				imposter->position = pCurrentMesh->position;
+				glm::vec3 lookDirection = camera.Position - imposter->position;
+				lookDirection = glm::normalize(lookDirection);
+				//lookDirection.y = 0.0f;
+				lookDirection = glm::normalize(lookDirection);
+				glm::vec3 worldUP(0.0f, 1.0f, 0.0f);
+				glm::mat4 finalOrientation = glm::inverse(
+					glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), lookDirection, worldUP));
+				imposter->m_meshQOrientation = glm::toQuat(finalOrientation);
+				DrawObject(imposter, matModel, shaderProgramID, fbo);
+			}
+			else
+			{
+				DrawObject(pCurrentMesh, matModel, shaderProgramID, fbo);
+			}
+		}
+		else
+		{
+			DrawObject(pCurrentMesh, matModel, shaderProgramID, fbo);
+		}
+		
 		
 	}
 
@@ -345,6 +375,7 @@ void DrawObject(cGameObject* pCurrentMesh,
 	GLint bDontUseLighting_UniLoc = glGetUniformLocation(shaderProgramID, "bDontUseLighting");
 	GLint bUseHeighMap_UniLoc = glGetUniformLocation(shaderProgramID, "bUseHeightMap");
 	GLint bUseNormalMap_UniLoc = glGetUniformLocation(shaderProgramID, "bUseNormalMap");
+	GLint bIsImposter = glGetUniformLocation(shaderProgramID, "bIsParticleImposter");
 	GLint bAddReflect_UniLoc = glGetUniformLocation(program, "bAddReflect");
 	GLint bAddRefract_UniLoc = glGetUniformLocation(program, "bAddRefract");
 
@@ -440,6 +471,16 @@ void DrawObject(cGameObject* pCurrentMesh,
 	else
 	{
 		glUniform1f(bUseNormalMap_UniLoc, (float)GL_FALSE);
+	}
+
+	if (pCurrentMesh->bIsImposter)
+	{
+		glUniform1f(bIsImposter, (float)GL_TRUE);
+
+	}
+	else
+	{
+		glUniform1f(bIsImposter, (float)GL_FALSE);
 	}
 
 

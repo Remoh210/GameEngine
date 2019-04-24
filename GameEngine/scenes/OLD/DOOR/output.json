@@ -550,12 +550,12 @@
             "Textures": [
                 {
                     "Name": "door/doorTex.bmp",
-                    "Strength": 0.0,
+                    "Strength": 1.0,
                     "Tile": 1.0
                 },
                 {
                     "Name": "testTex.bmp",
-                    "Strength": 1.0,
+                    "Strength": 0.0,
                     "Tile": 1.0
                 }
             ],
@@ -909,56 +909,6 @@
                 618.2454223632813,
                 0.0,
                 -859.5646362304688
-            ],
-            "DiffuseRGB_Alpha": [
-                0.0,
-                0.0,
-                0.0,
-                1.0
-            ],
-            "SpecularRGB_Alpha": [
-                1.0,
-                1.0,
-                1.0,
-                100.0
-            ],
-            "Rotation": [
-                0.0,
-                -3.7401583194732668,
-                0.0
-            ],
-            "Scale": [
-                1.7712745666503907,
-                1.7712745666503907,
-                1.7712745666503907
-            ],
-            "Textures": [
-                {
-                    "Name": "cottage/cottageTex.bmp",
-                    "Strength": 1.0,
-                    "Tile": 1.0
-                },
-                {
-                    "Name": "testTex.bmp",
-                    "Strength": 0.0,
-                    "Tile": 1.0
-                }
-            ],
-            "RigidBody": {
-                "Type": "BOX",
-                "Mass": 0.0
-            }
-        },
-        {
-            "Name": "cottage2",
-            "Mesh": "cottage/cottage.ply",
-            "Visible": true,
-            "Use_Physics": true,
-            "Wireframe": false,
-            "Position": [
-                605.9288940429688,
-                0.0,
-                -646.1453857421875
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
