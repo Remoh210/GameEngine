@@ -648,6 +648,12 @@ bool cSceneManager::loadScene(std::string filename) {
 			}
 		}
 
+		if (GameObject[i].HasMember("IsProjectile"))
+		{
+			CurModel->bIsProjectile = true;
+		}
+
+		
 
 		if (GameObject[i].HasMember("Props")) {
 			const rapidjson::Value& PopsArray = GameObject[i]["Props"];
@@ -1106,7 +1112,7 @@ bool cSceneManager::loadScene(std::string filename) {
 				gPhysicsWorld->AddConstraint(costr);
 			}
 
-			else if (type == "BOX_TO_BOX_HINDGE")
+			else if (type == "BOX_TO_BOX_HINGE")
 			{
 
 			nPhysics::iShape* CurShapeA = NULL;

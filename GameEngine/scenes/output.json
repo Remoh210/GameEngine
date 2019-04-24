@@ -1,10 +1,10 @@
 {
     "Camera": {
-        "Speed": 500.0,
+        "Speed": 50.0,
         "Position": [
-            -488.56134033203127,
-            6.359500885009766,
-            -5.119251728057861
+            424.1295471191406,
+            4.795336723327637,
+            -655.5401611328125
         ]
     },
     "GameObjects": [
@@ -32,8 +32,8 @@
                 100.0
             ],
             "Rotation": [
-                3.9210124015808107,
-                -2.3089146614074709,
+                3.921013116836548,
+                -2.3089122772216799,
                 90.40691375732422
             ],
             "Scale": [
@@ -66,7 +66,7 @@
             "Wireframe": false,
             "Position": [
                 -79.0,
-                40.0,
+                40.1640739440918,
                 20.0
             ],
             "DiffuseRGB_Alpha": [
@@ -82,8 +82,8 @@
                 100.0
             ],
             "Rotation": [
-                3.9210124015808107,
-                -2.3089146614074709,
+                3.921013116836548,
+                -2.3089122772216799,
                 90.40691375732422
             ],
             "Scale": [
@@ -132,8 +132,8 @@
                 100.0
             ],
             "Rotation": [
-                3.9210124015808107,
-                -2.3089146614074709,
+                3.921013116836548,
+                -2.3089122772216799,
                 90.40691375732422
             ],
             "Scale": [
@@ -182,8 +182,8 @@
                 100.0
             ],
             "Rotation": [
-                3.9210124015808107,
-                -2.3089146614074709,
+                3.921013116836548,
+                -2.3089122772216799,
                 90.40691375732422
             ],
             "Scale": [
@@ -336,7 +336,7 @@
             ],
             "Rotation": [
                 0.424652099609375,
-                0.8924522995948792,
+                0.8924533724784851,
                 -171.96963500976563
             ],
             "Scale": [
@@ -432,9 +432,9 @@
                 1000000.0
             ],
             "Rotation": [
-                0.00004570441524265334,
-                -0.15972201526165009,
-                -0.00002116609539370984
+                0.00004570445162244141,
+                -0.15972216427326203,
+                -0.000021166113583603875
             ],
             "Scale": [
                 56.7680778503418,
@@ -450,6 +450,67 @@
             ],
             "RigidBody": {
                 "Type": "MESH_COLLIDER",
+                "Mass": 0.0
+            }
+        },
+        {
+            "Name": "lantern_Lake",
+            "Mesh": "env_objects/lantern.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Use_Normal_Map": true,
+            "Wireframe": false,
+            "Position": [
+                -330.7131042480469,
+                65.326904296875,
+                623.4889526367188
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                -180.0,
+                -0.45776066184043887,
+                -180.0
+            ],
+            "Scale": [
+                2.5631606578826906,
+                2.5631606578826906,
+                2.5631606578826906
+            ],
+            "Textures": [
+                {
+                    "Name": "env_objects/lanternTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "env_objects/lanternNorm.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "HalfExtents": [
+                    1.0,
+                    10.0,
+                    1.0
+                ],
                 "Mass": 0.0
             }
         },
@@ -477,9 +538,9 @@
                 100.0
             ],
             "Rotation": [
-                -0.00867602787911892,
+                -0.008676030673086644,
                 8.89203929901123,
-                0.010670703835785389
+                0.010670713149011135
             ],
             "Scale": [
                 1.100000023841858,
@@ -528,7 +589,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.740159511566162,
+                -3.7401552200317385,
                 0.0
             ],
             "Scale": [
@@ -588,7 +649,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.740159511566162,
+                -3.7401552200317385,
                 0.0
             ],
             "Scale": [
@@ -753,7 +814,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.740159511566162,
+                -3.7401552200317385,
                 0.0
             ],
             "Scale": [
@@ -808,7 +869,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.740159511566162,
+                -3.7401552200317385,
                 0.0
             ],
             "Scale": [
@@ -863,7 +924,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.740159511566162,
+                -3.7401552200317385,
                 0.0
             ],
             "Scale": [
@@ -913,7 +974,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.740159511566162,
+                -3.7401552200317385,
                 0.0
             ],
             "Scale": [
@@ -924,12 +985,12 @@
             "Textures": [
                 {
                     "Name": "cottage/cottageTex.bmp",
-                    "Strength": 1.0,
+                    "Strength": 0.0,
                     "Tile": 1.0
                 },
                 {
                     "Name": "testTex.bmp",
-                    "Strength": 0.0,
+                    "Strength": 1.0,
                     "Tile": 1.0
                 }
             ],
@@ -963,7 +1024,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.740159511566162,
+                -3.7401552200317385,
                 0.0
             ],
             "Scale": [
@@ -1013,7 +1074,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.740159511566162,
+                -3.7401552200317385,
                 0.0
             ],
             "Scale": [
@@ -1063,7 +1124,7 @@
             ],
             "Rotation": [
                 0.0,
-                -3.740159511566162,
+                -3.7401552200317385,
                 0.0
             ],
             "Scale": [
@@ -1140,14 +1201,14 @@
         },
         {
             "Name": "fantasy_house",
-            "Mesh": "fantasy_house.ply",
+            "Mesh": "buildings/fantasy_house_mod.ply",
             "Visible": true,
             "Use_Physics": true,
             "Use_Normal_Map": true,
             "Wireframe": false,
             "Position": [
                 611.3331909179688,
-                25.983741760253908,
+                30.673484802246095,
                 -710.9510498046875
             ],
             "DiffuseRGB_Alpha": [
@@ -1168,9 +1229,9 @@
                 -180.0
             ],
             "Scale": [
-                2.0894219875335695,
-                2.0894219875335695,
-                2.0894219875335695
+                2.5,
+                2.5,
+                2.5
             ],
             "Textures": [
                 {
@@ -1190,8 +1251,848 @@
                 }
             ],
             "RigidBody": {
-                "Type": "BOX",
+                "Type": "MESH_COLLIDER",
                 "Mass": 0.0
+            }
+        },
+        {
+            "Name": "fantasy_houseDoor",
+            "Mesh": "buildings/fantasy_house_door.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Use_Normal_Map": true,
+            "Wireframe": false,
+            "Position": [
+                560.6270751953125,
+                7.415448188781738,
+                -702.2974853515625
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "Scale": [
+                2.5,
+                2.5,
+                2.5
+            ],
+            "Textures": [
+                {
+                    "Name": "door/doorTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "door/doorNormal.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 500.0
+            }
+        },
+        {
+            "Name": "table",
+            "Mesh": "env_objects/table.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Use_Normal_Map": true,
+            "Wireframe": false,
+            "Position": [
+                629.4848022460938,
+                3.330146074295044,
+                -695.7517700195313
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                0.45284271240234377,
+                0.0
+            ],
+            "Scale": [
+                8.05832576751709,
+                8.05832576751709,
+                8.05832576751709
+            ],
+            "Textures": [
+                {
+                    "Name": "env_objects/tableTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "env_objects/tableNormal.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 500.0
+            }
+        },
+        {
+            "Name": "table2",
+            "Mesh": "env_objects/table.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Use_Normal_Map": true,
+            "Wireframe": false,
+            "Position": [
+                629.3511962890625,
+                3.330146074295044,
+                -725.510986328125
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                0.45284271240234377,
+                0.0
+            ],
+            "Scale": [
+                8.05832576751709,
+                8.05832576751709,
+                8.05832576751709
+            ],
+            "Textures": [
+                {
+                    "Name": "env_objects/tableTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "env_objects/tableNormal.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 500.0
+            }
+        },
+        {
+            "Name": "knight",
+            "Mesh": "knight.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Use_Normal_Map": true,
+            "Wireframe": false,
+            "Position": [
+                651.5077514648438,
+                7.211652755737305,
+                -724.8216552734375
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -87.78520965576172,
+                0.0
+            ],
+            "Scale": [
+                0.2946029007434845,
+                0.2946029007434845,
+                0.2946029007434845
+            ],
+            "Textures": [
+                {
+                    "Name": "env_objects/knightTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "env_objects/knightNormal.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 1000.0
+            }
+        },
+        {
+            "Name": "knight2",
+            "Mesh": "knight2.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Use_Normal_Map": true,
+            "Wireframe": false,
+            "Position": [
+                653.6693115234375,
+                9.876971244812012,
+                -698.2880249023438
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                180.0,
+                -86.93630981445313,
+                180.0
+            ],
+            "Scale": [
+                0.34174293279647829,
+                0.34174293279647829,
+                0.34174293279647829
+            ],
+            "Textures": [
+                {
+                    "Name": "env_objects/knight2Tex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "env_objects/knight2Normal.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 1000.0
+            }
+        },
+        {
+            "Name": "bread",
+            "Mesh": "bread.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Use_Normal_Map": true,
+            "Wireframe": false,
+            "Position": [
+                625.7018432617188,
+                6.816332817077637,
+                -726.0288696289063
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                0.45284271240234377,
+                0.0
+            ],
+            "Scale": [
+                2.095078468322754,
+                2.095078468322754,
+                2.095078468322754
+            ],
+            "Textures": [
+                {
+                    "Name": "env_objects/breadTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "env_objects/breadNormal.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 100.0
+            }
+        },
+        {
+            "Name": "bread2",
+            "Mesh": "bread.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Use_Normal_Map": true,
+            "Wireframe": false,
+            "Position": [
+                632.714599609375,
+                6.178977012634277,
+                -695.5845336914063
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                0.45284271240234377,
+                0.0
+            ],
+            "Scale": [
+                2.095078468322754,
+                2.095078468322754,
+                2.095078468322754
+            ],
+            "Textures": [
+                {
+                    "Name": "env_objects/breadTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "env_objects/breadNormal.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 100.0
+            }
+        },
+        {
+            "Name": "tableLamp",
+            "Mesh": "tableLamp.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Use_Normal_Map": true,
+            "Wireframe": false,
+            "Position": [
+                628.474853515625,
+                7.447333335876465,
+                -724.1204223632813
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                0.45284271240234377,
+                0.0
+            ],
+            "Scale": [
+                0.023092199116945268,
+                0.023092199116945268,
+                0.023092199116945268
+            ],
+            "Textures": [
+                {
+                    "Name": "env_objects/tableLampTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "env_objects/tableLampNormal.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 100.0
+            }
+        },
+        {
+            "Name": "tableLamp2",
+            "Mesh": "tableLamp.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Use_Normal_Map": true,
+            "Wireframe": false,
+            "Position": [
+                630.1871948242188,
+                7.142575740814209,
+                -694.121826171875
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                0.45284271240234377,
+                0.0
+            ],
+            "Scale": [
+                0.019337419420480729,
+                0.019337419420480729,
+                0.019337419420480729
+            ],
+            "Textures": [
+                {
+                    "Name": "env_objects/tableLampTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "env_objects/tableLampNormal.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 100.0
+            }
+        },
+        {
+            "Name": "chair",
+            "Mesh": "env_objects/chair.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Use_Normal_Map": true,
+            "Wireframe": false,
+            "Position": [
+                627.480712890625,
+                2.408243417739868,
+                -703.9974365234375
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                0.45284271240234377,
+                0.0
+            ],
+            "Scale": [
+                0.11280088871717453,
+                0.11280088871717453,
+                0.11280088871717453
+            ],
+            "Textures": [
+                {
+                    "Name": "env_objects/chairTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "env_objects/chairNormal.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 300.0
+            }
+        },
+        {
+            "Name": "chair2",
+            "Mesh": "env_objects/chair.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Use_Normal_Map": true,
+            "Wireframe": false,
+            "Position": [
+                621.6094970703125,
+                2.408243417739868,
+                -701.6981811523438
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                21.492069244384767,
+                0.0
+            ],
+            "Scale": [
+                0.11280088871717453,
+                0.11280088871717453,
+                0.11280088871717453
+            ],
+            "Textures": [
+                {
+                    "Name": "env_objects/chairTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "env_objects/chairNormal.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 300.0
+            }
+        },
+        {
+            "Name": "chair3",
+            "Mesh": "env_objects/chair.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Use_Normal_Map": true,
+            "Wireframe": false,
+            "Position": [
+                627.0506591796875,
+                2.408243417739868,
+                -720.10693359375
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                -7.228778839111328,
+                0.0
+            ],
+            "Scale": [
+                0.11280088871717453,
+                0.11280088871717453,
+                0.11280088871717453
+            ],
+            "Textures": [
+                {
+                    "Name": "env_objects/chairTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "env_objects/chairNormal.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 300.0
+            }
+        },
+        {
+            "Name": "chair4",
+            "Mesh": "env_objects/chair.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Use_Normal_Map": true,
+            "Wireframe": false,
+            "Position": [
+                632.883056640625,
+                2.408243417739868,
+                -718.9605712890625
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                0.0,
+                14.378267288208008,
+                0.0
+            ],
+            "Scale": [
+                0.11280088871717453,
+                0.11280088871717453,
+                0.11280088871717453
+            ],
+            "Textures": [
+                {
+                    "Name": "env_objects/chairTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "env_objects/chairNormal.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 300.0
+            }
+        },
+        {
+            "Name": "book",
+            "Mesh": "env_objects/book.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Use_Normal_Map": true,
+            "Wireframe": false,
+            "Position": [
+                631.500244140625,
+                6.866962909698486,
+                -725.0551147460938
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                180.0,
+                -77.95764923095703,
+                180.0
+            ],
+            "Scale": [
+                4.0,
+                4.0,
+                4.0
+            ],
+            "Textures": [
+                {
+                    "Name": "env_objects/bookTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "env_objects/bookNormal.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 100.0
+            }
+        },
+        {
+            "Name": "openBook",
+            "Mesh": "env_objects/openBook.ply",
+            "Visible": true,
+            "Use_Physics": true,
+            "Use_Normal_Map": true,
+            "Wireframe": false,
+            "Position": [
+                626.4434204101563,
+                6.50318717956543,
+                -696.3280029296875
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                100.0
+            ],
+            "Rotation": [
+                -0.0,
+                50.77545928955078,
+                -0.0
+            ],
+            "Scale": [
+                2.3232815265655519,
+                2.3232815265655519,
+                2.3232815265655519
+            ],
+            "Textures": [
+                {
+                    "Name": "env_objects/bookOpTex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "env_objects/bookOpNormal.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "BOX",
+                "Mass": 100.0
             }
         },
         {
@@ -1444,7 +2345,7 @@
             "Rotation": [
                 -0.03591601550579071,
                 -0.10590827465057373,
-                0.0011820871150121093
+                0.0011820882791653276
             ],
             "Scale": [
                 7.330896377563477,
@@ -1498,7 +2399,7 @@
                 100.0
             ],
             "Rotation": [
-                -0.03594103828072548,
+                -0.035941075533628467,
                 -0.09962663799524307,
                 0.0011770029086619616
             ],
@@ -1554,9 +2455,9 @@
                 100.0
             ],
             "Rotation": [
-                -0.033818066120147708,
-                -52.441017150878909,
-                0.018829351291060449
+                -0.03381809964776039,
+                -52.44101333618164,
+                0.018829340115189554
             ],
             "Scale": [
                 7.330896377563477,
@@ -1610,9 +2511,9 @@
                 100.0
             ],
             "Rotation": [
-                -0.012552104890346527,
+                -0.012552105821669102,
                 22.865659713745118,
-                0.008148284628987313
+                0.008148285560309887
             ],
             "Scale": [
                 7.330896377563477,
@@ -1765,8 +2666,8 @@
                 100.0
             ],
             "Rotation": [
-                3.9210124015808107,
-                -2.3089146614074709,
+                3.921013116836548,
+                -2.3089122772216799,
                 90.40691375732422
             ],
             "Scale": [
@@ -2640,9 +3541,9 @@
                 100.0
             ],
             "Rotation": [
-                0.06173809990286827,
-                3.681443452835083,
-                0.9614267349243164
+                0.061738185584545138,
+                3.6814520359039308,
+                0.9614269137382507
             ],
             "Scale": [
                 1.0856425762176514,
@@ -3338,9 +4239,9 @@
             "Use_Physics": true,
             "Wireframe": false,
             "Position": [
-                -444.6542663574219,
-                48.787418365478519,
-                664.8338012695313
+                -440.8006591796875,
+                42.69812774658203,
+                622.4625244140625
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -3388,9 +4289,9 @@
             "Use_Physics": true,
             "Wireframe": false,
             "Position": [
-                -470.8413391113281,
-                1.9415233135223389,
-                -7.180753707885742
+                441.5238952636719,
+                1.816171407699585,
+                -661.6099853515625
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -3405,9 +4306,9 @@
                 100.0
             ],
             "Rotation": [
-                -77.59214782714844,
-                7.167144775390625,
-                -69.01238250732422
+                -75.6248550415039,
+                5.972219944000244,
+                -69.30379486083985
             ],
             "Scale": [
                 4.718605995178223,
@@ -3452,9 +4353,9 @@
             "Use_Normal_Map": true,
             "Wireframe": false,
             "Position": [
-                -471.0438537597656,
+                441.7969055175781,
                 -3.2756001949310304,
-                -5.66968297958374
+                -660.3071899414063
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -3470,7 +4371,7 @@
             ],
             "Rotation": [
                 180.0,
-                88.20006561279297,
+                74.89997863769531,
                 180.0
             ],
             "Scale": [
@@ -3491,74 +4392,6 @@
                 },
                 {
                     "Name": "character/chanNormal.bmp",
-                    "Strength": 0.0,
-                    "Tile": 1.0
-                }
-            ],
-            "RigidBody": {
-                "Type": "CAPSULE",
-                "Axis": 1,
-                "Radius": 2.5,
-                "Height": 15.0,
-                "IsPlayer": true,
-                "Mass": 200.0
-            }
-        },
-        {
-            "Name": "mage-char",
-            "SkinnedMesh": "assets/models/FBX/DevilMage/devil_mage.fbx",
-            "Animation": {
-                "Action1": "assets/models/FBX/common/spell-walk-forward.fbx",
-                "Action2": "assets/models/FBX/common/spell-idle.fbx",
-                "Action3": "assets/models/FBX//DevilMage/devilMage-push-forward.fbx",
-                "Action4": "assets/models/FBX/DevilMage/devilMage-spell-strafe-left.fbx",
-                "Action5": "assets/models/FBX/DevilMage/devilMage-spell-strafe-right.fbx",
-                "Idle": "assets/models/FBX/DevilMage/devilMage-Idle.fbx",
-                "Run-forward": "assets/models/FBX/DevilMage/chan-run-forward.fbx",
-                "Run-jump": "assets/models/FBX/DevilMage/chan-run-jump.fbx",
-                "Strafe-left": "assets/models/FBX/DevilMage/chan-strafe-left.fbx",
-                "Strafe-right": "assets/models/FBX/DevilMage/chan-strafe-right.fbx",
-                "Walk-backward": "assets/models/FBX/DevilMage/chan-walk-backward.fbx",
-                "Walk-forward": "assets/models/FBX/DevilMage/devilMage-walk-forward.fbx"
-            },
-            "Visible": true,
-            "Use_Physics": true,
-            "Wireframe": false,
-            "Position": [
-                112.7364501953125,
-                -3.2756009101867677,
-                -637.677490234375
-            ],
-            "DiffuseRGB_Alpha": [
-                0.0,
-                0.0,
-                0.0,
-                1.0
-            ],
-            "SpecularRGB_Alpha": [
-                1.0,
-                1.0,
-                1.0,
-                100000.0
-            ],
-            "Rotation": [
-                179.90504455566407,
-                7.265434741973877,
-                -180.0
-            ],
-            "Scale": [
-                0.05000000074505806,
-                0.05000000074505806,
-                0.05000000074505806
-            ],
-            "Textures": [
-                {
-                    "Name": "devilMageTex.bmp",
-                    "Strength": 1.0,
-                    "Tile": 1.0
-                },
-                {
-                    "Name": "testTex.bmp",
                     "Strength": 0.0,
                     "Tile": 1.0
                 }
@@ -3734,12 +4567,12 @@
             "Textures": [
                 {
                     "Name": "mutantTex.bmp",
-                    "Strength": 0.0,
+                    "Strength": 1.0,
                     "Tile": 1.0
                 },
                 {
                     "Name": "testTex.bmp",
-                    "Strength": 1.0,
+                    "Strength": 0.0,
                     "Tile": 1.0
                 }
             ],
@@ -3838,7 +4671,7 @@
             ],
             "Rotation": [
                 90.0,
-                0.0,
+                -0.0,
                 0.0
             ],
             "Scale": [
@@ -3899,7 +4732,7 @@
             ],
             "Rotation": [
                 180.0,
-                0.0,
+                -0.0,
                 0.0
             ],
             "Scale": [
@@ -3960,7 +4793,7 @@
             ],
             "Rotation": [
                 0.0,
-                0.0,
+                -0.0,
                 90.0
             ],
             "Scale": [
@@ -4021,7 +4854,7 @@
             ],
             "Rotation": [
                 0.0,
-                0.0,
+                -0.0,
                 180.0
             ],
             "Scale": [
@@ -4095,7 +4928,7 @@
             "Textures": [
                 {
                     "Name": "water/waterTex.bmp",
-                    "Strength": 0.0,
+                    "Strength": 1.0,
                     "Tile": 10.0
                 },
                 {
@@ -4180,9 +5013,9 @@
                 0.0
             ],
             "Position": [
-                6486.0,
+                6476.74658203125,
                 425.0,
-                15.0
+                -3.5339131355285646
             ],
             "Attenuation": [
                 0.0,
@@ -4191,9 +5024,9 @@
                 -431602080.0
             ],
             "DiffuseRGB_Alpha": [
-                0.8999999761581421,
-                0.8999999761581421,
-                0.8999999761581421,
+                1.0,
+                1.0,
+                0.0,
                 1.0
             ],
             "Turned": "ON"
@@ -4202,9 +5035,9 @@
             "Name": "MainLightOLD",
             "Type": "POINT_LIGHT",
             "Position": [
-                2376.0,
+                2391.689208984375,
                 425.0,
-                15.0
+                49.11679458618164
             ],
             "Attenuation": [
                 0.0,
@@ -4224,13 +5057,13 @@
             "Name": "Torch_Light0",
             "Type": "POINT_LIGHT",
             "Position": [
-                -335.0,
-                65.0,
-                625.0
+                -337.7865295410156,
+                67.69971466064453,
+                628.3628540039063
             ],
             "Attenuation": [
                 0.0,
-                0.018752150237560273,
+                0.03321496397256851,
                 0.000014999999621068128,
                 -431602080.0
             ],
@@ -4246,9 +5079,9 @@
             "Name": "Torch_Light1",
             "Type": "POINT_LIGHT",
             "Position": [
-                100.0,
+                99.9884033203125,
                 1725.0,
-                480.0
+                479.79913330078127
             ],
             "Attenuation": [
                 0.0,
@@ -4268,9 +5101,9 @@
             "Name": "Torch_Light2",
             "Type": "POINT_LIGHT",
             "Position": [
-                690.0,
+                689.8380126953125,
                 10.0,
-                -490.0
+                -489.6834411621094
             ],
             "Attenuation": [
                 0.0,
@@ -4290,7 +5123,7 @@
             "Name": "Torch_Light3",
             "Type": "POINT_LIGHT",
             "Position": [
-                775.0,
+                771.6234741210938,
                 10.0,
                 -490.0
             ],
@@ -4312,13 +5145,13 @@
             "Name": "Torch_Light4",
             "Type": "POINT_LIGHT",
             "Position": [
-                690.0,
+                690.618408203125,
                 10.0,
                 -690.0
             ],
             "Attenuation": [
                 0.0,
-                0.027944810688495637,
+                0.05355728790163994,
                 0.0000023896579932625174,
                 -431602080.0
             ],
@@ -4334,13 +5167,13 @@
             "Name": "Torch_Light5",
             "Type": "POINT_LIGHT",
             "Position": [
-                770.0,
-                10.0,
-                -695.0
+                771.6941528320313,
+                8.693991661071778,
+                -687.3844604492188
             ],
             "Attenuation": [
                 0.0,
-                0.07932677865028382,
+                0.06724949181079865,
                 0.0000023896579932625174,
                 -431602080.0
             ],
@@ -4356,9 +5189,9 @@
             "Name": "Torch_Light6",
             "Type": "POINT_LIGHT",
             "Position": [
-                885.0,
+                891.5171508789063,
                 10.0,
-                -375.0
+                -415.9095764160156
             ],
             "Attenuation": [
                 0.0,
@@ -4378,9 +5211,9 @@
             "Name": "QuestLight",
             "Type": "POINT_LIGHT",
             "Position": [
-                -840.0,
+                -836.4273681640625,
                 145.0,
-                85.0
+                94.41625213623047
             ],
             "Attenuation": [
                 0.0,

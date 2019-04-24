@@ -31,6 +31,7 @@ std::string cAnimationController::GetCurrentAnimation()
 
 void cAnimationController::UpdateController()
 {
+
 	glm::vec3 vel = mActiveChar->rigidBody->GetVelocity();
 	glm::vec3 pos = mActiveChar->rigidBody->GetPosition();
 	//glm::vec3 from;
@@ -83,6 +84,7 @@ void cAnimationController::UpdateController()
 			projectile->bIsVisible = true;
 			projectile->setSpecularPower(100.0f);
 			projectile->bSave = false;
+			projectile->bIsProjectile = true;
 
 			vec_pObjectsToDraw.push_back(projectile);
 

@@ -19,7 +19,7 @@ private:
 	float mUpLim;
 	float mDwnLim;
 	float mTimeToWait;
-	
+	bool pusuePlayer;
 	float mTimeWaitedSoFar;
 	bool mStart;
 	glm::vec3 mCurTarget;

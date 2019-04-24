@@ -827,6 +827,7 @@ int main(void) {
 
 
 
+
     for (int i = 0; i < vec_pObjectsToDraw.size(); i++) {
       cGameObject *curMesh = vec_pObjectsToDraw[i];
 

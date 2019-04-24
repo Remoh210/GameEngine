@@ -117,6 +117,8 @@ public:
 	bool bUseHeighMap;
 	bool bIsGhost;
 	bool bUseNormalMap;
+	bool isDead;
+	bool bIsProjectile;
 
 	// ignore this for now...
 	// Around its own axis (NOT the origin)

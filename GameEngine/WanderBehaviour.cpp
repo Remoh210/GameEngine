@@ -4,7 +4,7 @@
 #include "globalStuff.h"
 
 glm::vec3 oldTarget;
-bool pusuePlayer = false;
+;
 float map(float value, float minA, float maxA, float minB, float maxB) {
 	return (1 - ((value - minA) / (maxA - minA))) * minB + ((value - minA) / (maxA - minA)) * maxB;
 }
@@ -20,6 +20,7 @@ WanderBehaviour::WanderBehaviour(cGameObject* agent, float maxSpeed, float maxFo
 	, mUpLim(upLim)
 	, mDwnLim(dwLim)
 	, targetPlayer(player)
+	, pusuePlayer(false)
 {
 	mStart = true;
 	mCurTarget = glm::vec3(mAgent->position.x + RandomFloat(mDwnLim, mUpLim), 0.0f, mAgent->position.z + RandomFloat(mDwnLim, mUpLim));
@@ -35,57 +36,64 @@ void WanderBehaviour::update(float dt)
 	//float curTime = 3.1f;
 	if (mAgent == 0) return;
 	
+	if (mAgent->isDead) return;
 	
 
+	if (glm::distance(targetPlayer->position, mAgent->position) < 100.0f)
+	{
+		glm::vec3 desired = targetPlayer->position - mAgent->position;
+		//normalize it and scale by mMaxSpeed
+		desired = glm::normalize(desired) * mMaxSpeed;
 
-	if (glm::distance(mAgent->position, mCurTarget) > 15.0f) {
+		//steering = glm::normalize(desired) * mMaxForce;
+		mAgent->rigidBody->SetVelocity(desired * 2.0f);
+
+		glm::vec3 lookDirection = mAgent->position - targetPlayer->position;
+		glm::mat4 rot = glm::inverse(glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), lookDirection, glm::vec3(0.0f, 1.0f, 0.0f)));
+		mAgent->currentAnimation = "Run-forward";
+		mAgent->m_meshQOrientation = glm::quat(rot);
+		pusuePlayer = true;
+
+
+	}
+	else
+	{
+		pusuePlayer = false;
+	}
+
+
+	if (glm::distance(mAgent->position, mCurTarget) > 15.0f && !pusuePlayer) {
 
 		
 
 		
 		//
-		if (glm::distance(targetPlayer->position, mAgent->position) < 100.0f)
-		{
-			glm::vec3 desired = targetPlayer->position - mAgent->position;
-			//normalize it and scale by mMaxSpeed
-			desired = glm::normalize(desired) * mMaxSpeed;
-
-			//steering = glm::normalize(desired) * mMaxForce;
-			mAgent->rigidBody->SetVelocity(desired * 2.0f);
-
-			glm::vec3 lookDirection = mAgent->position - targetPlayer->position;
-			glm::mat4 rot = glm::inverse(glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), lookDirection, glm::vec3(0.0f, 1.0f, 0.0f)));
-			mAgent->currentAnimation = "Run-forward";
-			mAgent->m_meshQOrientation = glm::quat(rot);
+	
 
 
+		glm::vec3 desired = mCurTarget - mAgent->position;
+		//normalize it and scale by mMaxSpeed
+		desired = glm::normalize(desired) * mMaxSpeed;
+		float d = glm::length(desired);
+
+		desired = glm::normalize(desired) * mMaxSpeed;
+		
+
+		glm::vec3 steering = desired - mAgent->rigidBody->GetVelocity();
+
+		if (glm::length(steering) > mMaxForce) {
+			steering = glm::normalize(steering) * mMaxForce;
 		}
-		else
-		{
+		//steering = glm::normalize(desired) * mMaxForce;
+		//mAgent->rigidBody->ApplyImpulse(steering);
+		mAgent->rigidBody->SetVelocity(desired);
 
-			glm::vec3 desired = mCurTarget - mAgent->position;
-			//normalize it and scale by mMaxSpeed
-			desired = glm::normalize(desired) * mMaxSpeed;
-			float d = glm::length(desired);
+		glm::vec3 lookDirection = mAgent->position - mCurTarget;
+		glm::mat4 rot = glm::inverse(glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), lookDirection, glm::vec3(0.0f, 1.0f, 0.0f)));
+		mAgent->currentAnimation = "Walk-forward";
+		mAgent->m_meshQOrientation = glm::quat(rot);
 
-			desired = glm::normalize(desired) * mMaxSpeed;
-			
-
-			glm::vec3 steering = desired - mAgent->rigidBody->GetVelocity();
-
-			if (glm::length(steering) > mMaxForce) {
-				steering = glm::normalize(steering) * mMaxForce;
-			}
-			//steering = glm::normalize(desired) * mMaxForce;
-			//mAgent->rigidBody->ApplyImpulse(steering);
-			mAgent->rigidBody->SetVelocity(desired);
-
-			glm::vec3 lookDirection = mAgent->position - mCurTarget;
-			glm::mat4 rot = glm::inverse(glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), lookDirection, glm::vec3(0.0f, 1.0f, 0.0f)));
-			mAgent->currentAnimation = "Walk-forward";
-			mAgent->m_meshQOrientation = glm::quat(rot);
-
-		}
+		
 
 
 

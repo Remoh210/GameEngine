@@ -19,6 +19,8 @@ cGameObject::cGameObject()
 	this->bUseHeighMap = false;
 	this->bIsGhost = false;
 	this->bUseNormalMap = false;
+	this->isDead = false;
+	this->bIsProjectile = false;
 	// Set unique ID
 	this->m_uniqueID = cGameObject::m_NextID;
 	// Increment

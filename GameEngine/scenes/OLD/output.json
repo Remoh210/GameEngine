@@ -202,8 +202,9 @@
                 }
             ],
             "RigidBody": {
-                "Type": "BOX",
-                "Mass": 200.0
+                "Type": "BOX_HINDGE",
+                "Mass": 200.0,
+                "Pivot"
             }
         },
         {
