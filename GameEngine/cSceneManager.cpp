@@ -572,7 +572,12 @@ bool cSceneManager::loadScene(std::string filename) {
 					curSkinnedMesh->LoadMeshAnimation("Fall", Fall);
 				}
 
+				std::string ActionWalkBack = (GameObject[i]["Animation"].HasMember("Action-walk-backward")) ? GameObject[i]["Animation"]["Action-walk-backward"].GetString() : "";
+				if (ActionWalkBack != "") {
+					curSkinnedMesh->LoadMeshAnimation("Action-walk-backward", ActionWalkBack);
+				}
 
+				
 				
 
 				//cAnimationState* pAniState;

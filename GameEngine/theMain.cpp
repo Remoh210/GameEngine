@@ -65,7 +65,7 @@ cCharacterManager *g_pCharacterManager = NULL;
 int cou;
 int nbFrames = 0;
 int FPS = 0;
-int gFogDensity = 1.0f;
+int gFogDensity = 10.0f;
 int gameCounter = 0;
 
 bool RayHitted = false;

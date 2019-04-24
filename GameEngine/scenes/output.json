@@ -4504,6 +4504,7 @@
                 "Strafe-left": "assets/models/FBX/chan-strafe-left.fbx",
                 "Strafe-right": "assets/models/FBX/chan-strafe-right.fbx",
                 "Walk-backward": "assets/models/FBX/chan-walk-backward.fbx",
+                "Action-walk-backward": "assets/models/FBX/spell-walk-backward.fbx",
                 "Walk-forward": "assets/models/FBX/chan-walk-forward.fbx"
             },
             "Visible": true,
@@ -5053,6 +5054,7 @@
             "Mesh": "highResPlane.ply",
             "Visible": true,
             "Use_Physics": true,
+            "Reflection": true,
             "Use_Height_Map": true,
             "Use_Normal_Map": true,
             "Wireframe": false,
@@ -5065,7 +5067,7 @@
                 0.0,
                 0.0,
                 1.0,
-                0.4000000059604645
+                0.6
             ],
             "SpecularRGB_Alpha": [
                 1.0,
@@ -5213,9 +5215,9 @@
                 0.0
             ],
             "Direction": [
-                0.0,
+                0.3,
                 -0.30000001192092898,
-                0.0
+                0.3
             ],
             "Position": [
                 6476.74658203125,
@@ -5229,9 +5231,9 @@
                 -431602080.0
             ],
             "DiffuseRGB_Alpha": [
-                1.0,
-                1.0,
-                0.0,
+                0.4,
+                0.4,
+                0.4,
                 1.0
             ],
             "Turned": "ON"

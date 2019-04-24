@@ -66,7 +66,7 @@ void pickUP(cGameObject* player)
 
 		if (glm::distance(hitRb->GetPosition(), to) > 2.0f)
 		{
-			hitRb->SetVelocity(dir * 30.0f);
+			hitRb->SetVelocity(dir * 35.0f);
 
 		}
 		else
@@ -711,8 +711,20 @@ void ProcessAsynKeys(GLFWwindow* window)
 		{
 			velVec = -CamDir * 18.0f;
 			velVec.y = vel.y;
-			ch->currentAnimation = "Walk-backward";
 			ch->rigidBody->SetVelocity(velVec);
+			//Casting gravity beam
+			if (axes[4] > -0.5f)
+			{
+
+				ch->currentAnimation = "Action-walk-backward";
+
+			}
+			else
+			{
+				ch->currentAnimation = "Walk-backward";
+
+			}
+
 
 		}
 		//strafe
@@ -790,35 +802,35 @@ void ProcessAsynKeys(GLFWwindow* window)
 
 		   
 		//Print some axes info 
-		if (std::abs(axes[0]) > 0.2f ) { std::cout << "axis[0]: " << axes[0] << std::endl; }
-		if (std::abs(axes[1]) > 0.2f) { std::cout << "axis[1]: " << axes[1] << std::endl; }
-		//right stick horizontal
-		if (std::abs(axes[2]) > 0.2f) { std::cout << "axis[2]: " << axes[2] << std::endl; }
-		//right stick up
-		if (std::abs(axes[5]) > 0.2f) { std::cout << "axis[5]: " << axes[5] << std::endl; }
-		
-		//Trigers
-		if (axes[3] > -1.0f) { std::cout << "axis[3]: " << axes[3] << std::endl; }
-		if (axes[4] > -1.0f) { std::cout << "axis[4]: " << axes[4] << std::endl; }
+		//if (std::abs(axes[0]) > 0.2f ) { std::cout << "axis[0]: " << axes[0] << std::endl; }
+		//if (std::abs(axes[1]) > 0.2f) { std::cout << "axis[1]: " << axes[1] << std::endl; }
+		////right stick horizontal
+		//if (std::abs(axes[2]) > 0.2f) { std::cout << "axis[2]: " << axes[2] << std::endl; }
+		////right stick up
+		//if (std::abs(axes[5]) > 0.2f) { std::cout << "axis[5]: " << axes[5] << std::endl; }
+		//
+		////Trigers
+		//if (axes[3] > -1.0f) { std::cout << "axis[3]: " << axes[3] << std::endl; }
+		//if (axes[4] > -1.0f) { std::cout << "axis[4]: " << axes[4] << std::endl; }
 
-		if (buttons[0] == GLFW_PRESS) { std::cout << "buttons[0]: Pressed" << std::endl; }
-		if (buttons[1] == GLFW_PRESS) { std::cout << "buttons[1]: Pressed" << std::endl; }
-		if (buttons[2] == GLFW_PRESS) { std::cout << "buttons[2]: Pressed" << std::endl; }
-		if (buttons[3] == GLFW_PRESS) { std::cout << "buttons[3]: Pressed" << std::endl; }
-		if (buttons[4] == GLFW_PRESS) { std::cout << "buttons[4]: Pressed" << std::endl; }
-		if (buttons[5] == GLFW_PRESS) { std::cout << "buttons[5]: Pressed" << std::endl; }
-		if (buttons[6] == GLFW_PRESS) { std::cout << "buttons[6]: Pressed" << std::endl; }
-		if (buttons[7] == GLFW_PRESS) { std::cout << "buttons[7]: Pressed" << std::endl; }
-		if (buttons[8] == GLFW_PRESS) { std::cout << "buttons[8]: Pressed" << std::endl; }
-		if (buttons[9] == GLFW_PRESS) { std::cout << "buttons[9]: Pressed" << std::endl; }
-		if (buttons[10] == GLFW_PRESS) { std::cout << "buttons[10]: Pressed" << std::endl; }
-		if (buttons[11] == GLFW_PRESS) { std::cout << "buttons[11]: Pressed" << std::endl; }
-		if (buttons[12] == GLFW_PRESS) { std::cout << "buttons[12]: Pressed" << std::endl; }
-		if (buttons[13] == GLFW_PRESS) { std::cout << "buttons[13]: Pressed" << std::endl; }
-		if (buttons[14] == GLFW_PRESS) { std::cout << "buttons[14]: Pressed" << std::endl; }
-		if (buttons[15] == GLFW_PRESS) { std::cout << "buttons[15]: Pressed" << std::endl; }
-		if (buttons[14] == GLFW_PRESS) { std::cout << "buttons[16]: Pressed" << std::endl; }
-		if (buttons[15] == GLFW_PRESS) { std::cout << "buttons[17]: Pressed" << std::endl; }
+		//if (buttons[0] == GLFW_PRESS) { std::cout << "buttons[0]: Pressed" << std::endl; }
+		//if (buttons[1] == GLFW_PRESS) { std::cout << "buttons[1]: Pressed" << std::endl; }
+		//if (buttons[2] == GLFW_PRESS) { std::cout << "buttons[2]: Pressed" << std::endl; }
+		//if (buttons[3] == GLFW_PRESS) { std::cout << "buttons[3]: Pressed" << std::endl; }
+		//if (buttons[4] == GLFW_PRESS) { std::cout << "buttons[4]: Pressed" << std::endl; }
+		//if (buttons[5] == GLFW_PRESS) { std::cout << "buttons[5]: Pressed" << std::endl; }
+		//if (buttons[6] == GLFW_PRESS) { std::cout << "buttons[6]: Pressed" << std::endl; }
+		//if (buttons[7] == GLFW_PRESS) { std::cout << "buttons[7]: Pressed" << std::endl; }
+		//if (buttons[8] == GLFW_PRESS) { std::cout << "buttons[8]: Pressed" << std::endl; }
+		//if (buttons[9] == GLFW_PRESS) { std::cout << "buttons[9]: Pressed" << std::endl; }
+		//if (buttons[10] == GLFW_PRESS) { std::cout << "buttons[10]: Pressed" << std::endl; }
+		//if (buttons[11] == GLFW_PRESS) { std::cout << "buttons[11]: Pressed" << std::endl; }
+		//if (buttons[12] == GLFW_PRESS) { std::cout << "buttons[12]: Pressed" << std::endl; }
+		//if (buttons[13] == GLFW_PRESS) { std::cout << "buttons[13]: Pressed" << std::endl; }
+		//if (buttons[14] == GLFW_PRESS) { std::cout << "buttons[14]: Pressed" << std::endl; }
+		//if (buttons[15] == GLFW_PRESS) { std::cout << "buttons[15]: Pressed" << std::endl; }
+		//if (buttons[14] == GLFW_PRESS) { std::cout << "buttons[16]: Pressed" << std::endl; }
+		//if (buttons[15] == GLFW_PRESS) { std::cout << "buttons[17]: Pressed" << std::endl; }
 		
 	}
 
@@ -927,7 +939,16 @@ void ProcessAsynKeys(GLFWwindow* window)
 			velVec = -CamDir * 30.0f;
 			velVec.y = vel.y;
 			ch->rigidBody->SetVelocity(velVec);
-			ch->currentAnimation = "Walk-backward";
+
+			if (IsMBLDown(window))
+			{
+				ch->currentAnimation = "Action-walk-backward";
+			}
+			else
+			{
+				ch->currentAnimation = "Walk-backward";
+			}
+			
 
 		}
 		else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)

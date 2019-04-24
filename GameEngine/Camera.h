@@ -188,7 +188,9 @@ public:
 
 	void setFreeCamera()
 	{
-		Front = glm::vec3(0.0f, 0.0f, -1.0f);
+		ProcessMouseMovement(0.0f, 0.0f, true);
+		//Front = glm::vec3(0.0f, 0.0f, -1.0f);
+		updateCameraVectors();
 		mCameraType = FREE;
 	}
 

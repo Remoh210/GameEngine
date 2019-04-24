@@ -442,6 +442,7 @@ dist = length(viewSpace);
     vec3 halfwayDir = normalize(LightDirection.xyz + viewDir);  
     float spec = pow(max(dot(norm.xyz, halfwayDir), 0.0), 32.0);
 
+		diffuse *= 0.5;
     vec3 specular = vec3(0.2) * spec;
     finalObjectColour = vec4(diffuse + specular, 1.0);
 
