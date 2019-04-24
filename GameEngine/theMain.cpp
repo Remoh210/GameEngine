@@ -854,7 +854,7 @@ int main(void) {
 	
 	if (boat->position.y < 40.0f)
 	{
-		boat->rigidBody->ApplyImpulse(glm::vec3(0.0f, 110.0f, 0.0f));
+		boat->rigidBody->ApplyImpulse(glm::vec3(0.0f, 180.0f, 0.0f));
 	}
 
 

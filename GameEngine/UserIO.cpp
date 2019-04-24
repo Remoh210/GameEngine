@@ -543,8 +543,8 @@ void ProcessAsynKeys(GLFWwindow* window)
 
 
 
-	const float CAMERA_SPEED_SLOW = 2.0f;
-	const float CAMERA_SPEED_FAST = 100.0f;
+	const float CAMERA_SPEED_SLOW = 30.0f;
+	const float CAMERA_SPEED_FAST = 300.0f;
 
 	cGameObject* ch = g_pCharacterManager->getActiveChar();
 	glm::vec3 vel;
@@ -941,6 +941,8 @@ void ProcessAsynKeys(GLFWwindow* window)
 	{
 		cameraSpeed = CAMERA_SPEED_FAST;
 	}
+
+	camera.MovementSpeed = cameraSpeed;
 	
 	// If no keys are down, move the camera
 	if ( AreAllModifiersUp(window) )
@@ -1116,7 +1118,7 @@ void ProcessAsynKeys(GLFWwindow* window)
 
 
 
-		if (glfwGetKey(window, GLFW_KEY_UP))
+		/*if (glfwGetKey(window, GLFW_KEY_UP))
 		{
 			if (vec_controlable.at(index)->vecTextures.size() > 1)
 			{
@@ -1133,7 +1135,7 @@ void ProcessAsynKeys(GLFWwindow* window)
 				vec_controlable.at(index)->vecTextures.at(0).strength += 0.002f;
 			}
 			else { std::cout << vec_controlable.at(index)->friendlyName << " has only one texture" << std::endl; }
-		}
+		}*/
 
 		
 
