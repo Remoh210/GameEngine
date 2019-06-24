@@ -4565,6 +4565,70 @@
             }
         },
         {
+            "Name": "human",
+            "SkinnedMesh": "assets/models/FBX/human.fbx",
+            "Animation": {
+                "Idle": "assets/models/FBX/lineage2/human_idle.fbx"
+
+            },
+            "Visible": true,
+            "Use_Physics": true,
+            "Use_Normal_Map": false,
+            "Wireframe": false,
+            "Position": [
+                441.7969055175781,
+                30.2756001949310304,
+                -660.3071899414063
+            ],
+            "DiffuseRGB_Alpha": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "SpecularRGB_Alpha": [
+                1.0,
+                1.0,
+                1.0,
+                10.0
+            ],
+            "Rotation": [
+                0.0,
+                -89.98021697998047,
+                0.0
+            ],
+            "Scale": [
+                2.2,
+                2.2,
+                2.2
+            ],
+            "Textures": [
+                {
+                    "Name": "lineage2/human1Tex.bmp",
+                    "Strength": 1.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "testTex.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                },
+                {
+                    "Name": "character/chanNormal.bmp",
+                    "Strength": 0.0,
+                    "Tile": 1.0
+                }
+            ],
+            "RigidBody": {
+                "Type": "CAPSULE",
+                "Axis": 1,
+                "Radius": 2.5,
+                "Height": 15.0,
+                "IsPlayer": true,
+                "Mass": 200.0
+            }
+        },
+        {
             "Name": "mutant-1",
             "SkinnedMesh": "assets/models/FBX/mutant/mutant.fbx",
             "Animation": {
@@ -5067,7 +5131,7 @@
                 0.0,
                 0.0,
                 1.0,
-                0.6
+                0.7
             ],
             "SpecularRGB_Alpha": [
                 1.0,

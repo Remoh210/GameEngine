@@ -74,7 +74,6 @@ extern double deltaTime;
 extern unsigned int SCR_WIDTH;
 extern unsigned int SCR_HEIGHT;
 extern int gFogDensity;
-extern glm::vec3 g_Gravity;
 
 extern cFBO* g_pFBOMain;
 extern cSoundManager* g_pSoundManager;

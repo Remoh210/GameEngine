@@ -120,6 +120,9 @@
     <Filter Include="Behaviour">
       <UniqueIdentifier>{f59ba40f-f060-4972-8ad3-364cbaa52a9c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ConfigManager">
+      <UniqueIdentifier>{089025ab-83ea-4b81-a572-f0b8ecd3efbc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="theMain.cpp">
@@ -248,9 +251,6 @@
     <ClCompile Include="cSimpleDebugRenderer.cpp">
       <Filter>SimpleDebugRenderer</Filter>
     </ClCompile>
-    <ClCompile Include="HotSwap.cpp">
-      <Filter>UserIO</Filter>
-    </ClCompile>
     <ClCompile Include="cGameObject.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
@@ -310,6 +310,9 @@
     </ClCompile>
     <ClCompile Include="GameLoop.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cConfigManager.cpp">
+      <Filter>ConfigManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -489,6 +492,9 @@
     </ClInclude>
     <ClInclude Include="BehaviourManager.h">
       <Filter>Behaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="cConfigManager.h">
+      <Filter>ConfigManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

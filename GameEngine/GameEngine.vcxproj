@@ -164,6 +164,7 @@
     <ClCompile Include="cCameraChangeAnim.cpp" />
     <ClCompile Include="cCharacterManager.cpp" />
     <ClCompile Include="cCommandGroup.cpp" />
+    <ClCompile Include="cConfigManager.cpp" />
     <ClCompile Include="cFBO.cpp" />
     <ClCompile Include="cFollowCurve.cpp" />
     <ClCompile Include="cFollowObjectCommand.cpp" />
@@ -195,7 +196,6 @@
     <ClCompile Include="Error\COpenGLError.cpp" />
     <ClCompile Include="GameLoop.cpp" />
     <ClCompile Include="glad.c" />
-    <ClCompile Include="HotSwap.cpp" />
     <ClCompile Include="LoadModels.cpp" />
     <ClCompile Include="ObjectTest.cpp" />
     <ClCompile Include="OpenGLMeshLoader.cpp">
@@ -261,6 +261,7 @@
     <ClInclude Include="globalOpenGLStuff.h" />
     <ClInclude Include="globalStuff.h" />
     <ClInclude Include="cTextRend.h" />
+    <ClInclude Include="cConfigManager.h" />
     <ClInclude Include="PostEffect.h" />
     <ClInclude Include="iCommand.h" />
     <ClInclude Include="linmath.h" />

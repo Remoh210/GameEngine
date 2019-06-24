@@ -31,6 +31,7 @@
 #include "cGameObject.h"
 #include "cShaderManager.h"
 #include "cSoundManager.h"
+#include "cConfigManager.h"
 #include "cVAOMeshManager.h"
 #include <algorithm>
 #include <windows.h>
@@ -39,8 +40,6 @@
 #include "PostEffect.h"
 #include "cLightHelper.h"
 
-// TEST
-glm::quat RotationBetweenVectors(glm::vec3 start, glm::vec3 dest);
 
 // Dll
 HINSTANCE hGetProckDll = 0;
@@ -49,8 +48,6 @@ ePhysics physics_library = UNKNOWN;
 
 nPhysics::iPhysicsFactory *gPhysicsFactory = NULL;
 nPhysics::iPhysicsWorld *gPhysicsWorld = NULL;
-
-glm::vec3 g_Gravity = glm::vec3(0.0f, -1.0f, 0.0f);
 
 GLuint program;
 cDebugRenderer *g_pDebugRendererACTUAL = NULL;
@@ -68,14 +65,10 @@ int FPS = 0;
 int gFogDensity = 10.0f;
 int gameCounter = 0;
 
-bool RayHitted = false;
-std::vector<cAABB::sAABB_Triangle> vec_cur_AABB_tris;
-void UpdateWindowTitle(void);
 double currentTime = 0;
 double deltaTime = 0;
 double FPS_last_Time = 0;
 bool bIsDebugMode = false;
-bool bFullScreen = false;
 
 // for collision
 float time = 0.0f;
@@ -94,8 +87,7 @@ unsigned int numberOfObjectsToDraw = 0;
 
 unsigned int SCR_WIDTH = 1000;
 unsigned int SCR_HEIGHT = 900;
-std::string title = "Default";
-std::string scene = "Scene1.json";
+
 
 Camera camera(glm::vec3(0.0f, 0.0f, 0.0f));
 
@@ -111,6 +103,7 @@ glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 glm::vec3 g_CameraEye = glm::vec3(0.0, 0.0, 250.0f);
 
+
 cShaderManager *pTheShaderManager = NULL;
 cVAOMeshManager *g_pTheVAOMeshManager = NULL;
 cSceneManager *g_pSceneManager = NULL;
@@ -124,14 +117,7 @@ cBasicTextureManager *g_pTheTextureManager = NULL;
 static void error_callback(int error, const char *description) {
   fprintf(stderr, "Error: %s\n", description);
 }
-glm::mat4 portal_view(glm::mat4 orig_view, cGameObject *src, cGameObject *dst);
-cAABBHierarchy *g_pTheTerrain = new cAABBHierarchy();
 
-bool loadConfig();
-cFBO *g_pFBOMain;
-
-cFBO *FBO_Portal1;
-cFBO *FBO_Portal2;
 
 nPhysics::iRigidBody *bodyHit = NULL;
 
@@ -145,9 +131,14 @@ GLint g_FBO_SizeInPixes = 512; // = 512 the WIDTH of the framebuffer, in pixels;
 
 
 int main(void) {
-#pragma region initialization
-  loadConfig();
 
+  cConfigManager configManager;
+  if(!configManager.loadConfig("config.json"))
+  {
+	  std::cout << "Can't load config..";
+	  exit(EXIT_FAILURE);
+  }
+  sConfig Config = configManager.getConfig();
   GLFWwindow *window;
 
   glfwSetErrorCallback(error_callback);
@@ -158,13 +149,15 @@ int main(void) {
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 
-  if(bFullScreen)
+  SCR_WIDTH = Config.ScreenWidth;
+  SCR_HEIGHT = Config.ScreenHeight;
+  if(Config.IsFullScreen)
   {
-	  window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, title.c_str(), glfwGetPrimaryMonitor(), NULL);
+	  window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, Config.WindowTitle.c_str(), glfwGetPrimaryMonitor(), NULL);
   }
   else
   {
-	  window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, title.c_str(), NULL, NULL);
+	  window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, Config.WindowTitle.c_str(), NULL, NULL);
   }
   
   if (!window) {
@@ -210,16 +203,6 @@ int main(void) {
   // Load the uniform location values (some of them, anyway)
   cShaderManager::cShaderProgram *pSP =
       ::pTheShaderManager->pGetShaderProgramFromFriendlyName("BasicUberShader");
-  pSP->LoadUniformLocation("texture00");
-  pSP->LoadUniformLocation("texture01");
-  pSP->LoadUniformLocation("texture02");
-  pSP->LoadUniformLocation("texture03");
-  pSP->LoadUniformLocation("texture04");
-  pSP->LoadUniformLocation("texture05");
-  pSP->LoadUniformLocation("texture06");
-  pSP->LoadUniformLocation("texture07");
-  pSP->LoadUniformLocation("texBlendWeights[0]");
-  pSP->LoadUniformLocation("texBlendWeights[1]");
 
   program = pTheShaderManager->getIDFromFriendlyName("BasicUberShader");
 
@@ -231,45 +214,10 @@ int main(void) {
   ::g_pSoundManager = new cSoundManager();
   ::g_pSceneManager->setBasePath("scenes");
   ::LightManager = new cLightManager();
-  ::g_pFBOMain = new cFBO();
 
-  FBO_Portal1 = new cFBO();
-  FBO_Portal2 = new cFBO();
 
-  std::string FBOErrorString;
-  if (::g_pFBOMain->init(800, 600, FBOErrorString)) {
-    std::cout << "Framebuffer 1 is good to go!" << std::endl;
-  } else {
-    std::cout << "Framebuffer 1 is NOT complete" << std::endl;
-  }
 
-  if (FBO_Portal1->init(800, 600, FBOErrorString)) {
-    std::cout << "Framebuffer 2 is good to go!" << std::endl;
-  } else {
-    std::cout << "Framebuffer 2 is NOT complete" << std::endl;
-  }
 
-  if (FBO_Portal2->init(800, 600, FBOErrorString)) {
-    std::cout << "Framebuffer 3 is good to go!" << std::endl;
-  } else {
-    std::cout << "Framebuffer 3 is NOT complete" << std::endl;
-  }
-
-  // Set Up FBO
-  static const GLenum draw_bufers[] = {GL_COLOR_ATTACHMENT0};
-  glDrawBuffers(1, draw_bufers);
-
-  // Check for "completenesss"
-  GLenum FBOStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
-
-  if (FBOStatus == GL_FRAMEBUFFER_COMPLETE) {
-    std::cout << "Framebuffer is good to go!" << std::endl;
-  } else {
-    std::cout << "Framebuffer is NOT complete" << std::endl;
-  }
-
-  // Point back to default frame buffer
-  glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
   // Loading the uniform variables here (rather than the inner draw loop)
   GLint objectColour_UniLoc = glGetUniformLocation(program, "objectColour");
@@ -299,13 +247,13 @@ int main(void) {
       (f_createPhysicsFactory)GetProcAddress(hGetProckDll, "CreateFactory");
   gPhysicsFactory = CreatePhysicsFactory();
   gPhysicsWorld = gPhysicsFactory->CreatePhysicsWorld();
-  gPhysicsWorld->SetGravity(g_Gravity);
+  gPhysicsWorld->SetGravity(Config.Gravity);
 
   LoadSkinnedMeshModel(::vec_pObjectsToDraw, program);
   g_pSoundManager->InitFmod();
 
   LoadModelTypes(::g_pTheVAOMeshManager, program);
-  ::g_pSceneManager->loadScene(scene);
+  ::g_pSceneManager->loadScene(Config.SceneFileName);
   ::LightManager->LoadUniformLocations(program);
   g_pSoundManager->loadSounds("scenes/sound.json");
   LoadModelsIntoScene(::vec_pObjectsToDraw);
@@ -320,33 +268,12 @@ int main(void) {
  
   
 
-
-
-
-  // for (unsigned int objIndex = 0;
-  //	objIndex != (unsigned int)vec_pObjectsToDraw.size();
-  //	objIndex++)
-  //{
-  //	cGameObject* pCurrentMesh = vec_pObjectsToDraw[objIndex];
-  //	if (pCurrentMesh->materialDiffuse.a < 1.0f) {
-  // vec_transObj.push_back(pCurrentMesh); } 	else {
-  // vec_non_transObj.push_back(pCurrentMesh); }
-
-  //}//for ( unsigned int objIndex = 0;
-
   double lastTime = glfwGetTime();
 
   cLightHelper *pLightHelper = new cLightHelper();
 
-  // Lua
-  //::p_LuaScripts = new cLuaBrain();
-  //::p_LuaScripts->SetObjectVector(&(::vec_pObjectsToDraw));
-  //::p_LuaScripts->LoadScriptFile("example.lua");
-
   // FBO
   int renderPassNumber = 1;
-  // 1 = 1st pass (the actual scene)
-  // 2 = 2nd pass (rendering what we drew to the output)
   GLint renderPassNumber_UniLoc =
       glGetUniformLocation(program, "renderPassNumber");
 
@@ -392,11 +319,6 @@ int main(void) {
 
 
 
-
-
-
-
-
   BehaviourManager* behavManager = new BehaviourManager();
 
   cGameObject* pPlayer = findObjectByFriendlyName("chan");
@@ -405,12 +327,6 @@ int main(void) {
   cGameObject* pWanderEnemy3 = findObjectByFriendlyName("mutant-3");
 
 
-  //pApproachEnemy->initPos = pApproachEnemy->position;
-  //pWanderEnemy->initPos = pWanderEnemy->position;
-  //pPursueEnemy->initPos = pPursueEnemy->position;
-  //pSeekEnemy->initPos = pSeekEnemy->position;
-
-  //Initialize Behaviours
 
   WanderBehaviour* wander1 = new WanderBehaviour(pWanderEnemy1, 20.2f, 400.2f, 4.0f, glm::vec3(0.0f), 100.0f, -100.0f, pPlayer); //(Agent, Target, maxSpeed, WanderOrigin , UpLimit, DownLimit)
   WanderBehaviour* wander2 = new WanderBehaviour(pWanderEnemy2, 20.2f, 400.2f, 4.0f, glm::vec3(0.0f), 100.0f, -100.0f, pPlayer); //(Agent, Target, maxSpeed, WanderOrigin , UpLimit, DownLimit)
@@ -426,52 +342,25 @@ int main(void) {
 
   cGameObject* boat = findObjectByFriendlyName("boat");
 
-
-
-  
-  // Draw the "scene" (run the program)
   while (!glfwWindowShouldClose(window)) {
 	  ::pTheShaderManager->useShaderProgram("BasicUberShader");
-#pragma region framebuffer for portal 1
-
-      // Switch to the shader we want
       
 
-      // First Portal
-      float ratio;
-      int width, height;
-      width = 600;
-      height = 800;
-
-
-
-
+      
      
 #pragma region main render
 	  
 		 
 
-		 glUniform1f(fogDensity, gFogDensity/10000.0f);
-
-		 RenderTarget::State render_target_state(scene_texture);
-        // Set for the 1st pass
-
-        //**********************************************************
-        // Clear the offscreen frame buffer
+		glUniform1f(fogDensity, gFogDensity/10000.0f);
+		RenderTarget::State render_target_state(scene_texture);
         glViewport(0, 0, g_FBO_SizeInPixes, g_FBO_SizeInPixes);
         GLfloat zero = 0.0f;
         GLfloat one = 1.0f;
         glClearBufferfv(GL_COLOR, 0, &zero);
         glClearBufferfv(GL_DEPTH, 0, &one);
-        //**********************************************************
-
-
-
-        // glUniform1f(renderPassNumber_UniLoc, 1.0f);	// Tell shader it's the
-        // 1st pass
-
-        ratio;
-        width, height;
+		float ratio;
+		int width, height;
 
         matProjection = glm::mat4(1.0f);
         matView = glm::mat4(1.0f);
@@ -501,9 +390,6 @@ int main(void) {
         glUniform3f(eyeLocation_location, camera.Position.x, camera.Position.y,
                     camera.Position.z);
 
-        // matView = glm::lookAt( g_CameraEye,	// Eye
-        //	                    g_CameraAt,		// At
-        //	                    glm::vec3( 0.0f, 1.0f, 0.0f ) );// Up
 
         glUniformMatrix4fv(matView_location, 1, GL_FALSE,
                            glm::value_ptr(matView));
@@ -511,59 +397,9 @@ int main(void) {
                            glm::value_ptr(matProjection));
         LightManager->CopyLightValuesToShader();
 
-        //glUniform1f(renderPassNumber_UniLoc, 2.0f);
-        //portal->bIsVisible = true;
-        //portal2->bIsVisible = true;
-        //matModel = glm::mat4(1.0f); // identity
-        //DrawObject(portal, matModel, program, FBO_Portal1);
-        //matModel = glm::mat4(1.0f); // identity
-        //DrawObject(portal2, matModel, program, FBO_Portal2);
-        //portal->bIsVisible = false;
-       // portal2->bIsVisible = false;
 		
         DrawScene_Simple(vec_pObjectsToDraw, program, 1);
         
-		for (std::vector<sLight *>::iterator it = LightManager->vecLights.begin();
-			it != LightManager->vecLights.end(); ++it) {
-
-			sLight *CurLight = *it;
-			if (CurLight->AtenSphere == true) {
-
-				cGameObject *pDebugSphere = findObjectByFriendlyName("DebugSphere");
-				pDebugSphere->bIsVisible = true;
-				pDebugSphere->bDontLight = true;
-				glm::vec4 oldDiffuse = pDebugSphere->materialDiffuse;
-				glm::vec3 oldScale = pDebugSphere->nonUniformScale;
-				pDebugSphere->setDiffuseColour(
-					glm::vec3(255.0f / 255.0f, 105.0f / 255.0f, 180.0f / 255.0f));
-				pDebugSphere->bUseVertexColour = false;
-				pDebugSphere->position = glm::vec3(CurLight->position);
-				glm::mat4 matBall(1.0f);
-
-				pDebugSphere->materialDiffuse = oldDiffuse;
-				pDebugSphere->setUniformScale(0.1f); // Position
-				DrawObject(pDebugSphere, matBall, program);
-
-				const float ACCURACY_OF_DISTANCE = 0.0001f;
-				const float INFINITE_DISTANCE = 10000.0f;
-
-				float distance90Percent = pLightHelper->calcApproxDistFromAtten(
-					0.90f, ACCURACY_OF_DISTANCE, INFINITE_DISTANCE, CurLight->atten.x,
-					CurLight->atten.y, CurLight->atten.z);
-
-				pDebugSphere->setUniformScale(distance90Percent); // 90% brightness
-				// pDebugSphere->objColour = glm::vec3(1.0f,1.0f,0.0f);
-				pDebugSphere->setDiffuseColour(glm::vec3(1.0f, 1.0f, 0.0f));
-				DrawObject(pDebugSphere, matBall, program);
-
-
-
-				//			pDebugSphere->objColour = oldColour;
-				pDebugSphere->materialDiffuse = oldDiffuse;
-				pDebugSphere->nonUniformScale = oldScale;
-				pDebugSphere->bIsVisible = false;
-			}
-		}
 
 
 #pragma endregion
@@ -574,12 +410,10 @@ int main(void) {
       
 
 	  bloom_effect.execute(bloom_result, scene_texture.color, bloom_strength, bloom_blur_iterations, bloom_threshold);
-
 	  ChromAbEffect.execute(ChromAberrationEffect, bloom_result.texture);
       
-      
-  
-    
+ 
+ 
 	  //Draw main screen quad
       screen_quad.draw_with_texture(ChromAberrationEffect.texture);
     }
@@ -588,48 +422,13 @@ int main(void) {
 
 #pragma region text_rendering
 
-        //		DrawScene_Simple(vec_non_transObj, program, 1);
-        //		DrawScene_Simple(vec_transObj, program, 1);
 
-        // for ( unsigned int objIndex = 0;
-        //	  objIndex != (unsigned int)vec_non_transObj.size();
-        //	  objIndex++ )
-        //{
-        //	cGameObject* pCurrentMesh = vec_non_transObj[objIndex];
-        //
-        //	glm::mat4x4 matModel = glm::mat4(1.0f);
-        //// mat4x4 m, p, mvp;
-
-        //	DrawObject(pCurrentMesh, matModel, program);
-
-        //}//for ( unsigned int objIndex = 0;
-
-        // for (unsigned int objIndex = 0;
-        //	objIndex != (unsigned int)vec_transObj.size();
-        //	objIndex++)
-        //{
-        //	cGameObject* pCurrentMesh = vec_transObj[objIndex];
-
-        //	glm::mat4x4 matModel = glm::mat4(1.0f);
-        //// mat4x4 m, p, mvp;
-
-        //	DrawScene_Simple(pCurrentMesh, matModel, program);
-
-        //}//for ( unsigned int objIndex = 0;
-
-        // DrawScene_Simple(std::vector<cGameObject*> vec_pMeshSceneObjects,
-        //	GLuint shaderProgramID,
-        //	unsigned int passNumber)
-        //{
-
-        //}
 
         double FPS_currentTime = glfwGetTime();
         nbFrames++;
         if (FPS_currentTime - FPS_last_Time >=
-            1.0) { // If last prinf() was more than 1 sec ago
-          // printf and reset timer
-          // printf("%f ms/frame\n", 1000.0 / double(nbFrames));
+            1.0) 
+		{ 
           FPS = nbFrames * 1;
           nbFrames = 0;
           FPS_last_Time += 1.0;
@@ -637,36 +436,13 @@ int main(void) {
         g_textRenderer->drawText(screen_quad.width, screen_quad.height,
                                  ("FPS: " + std::to_string(FPS)).c_str());
 
-        //switch (physics_library) {
-        //case SIMPLE:
-        //  g_textRenderer->drawText(screen_quad.width, screen_quad.height,
-        //                           ("Physics: My crappy physics"), 100.0f);
-        //  break;
-        //case BULLET:
-        //  g_textRenderer->drawText(screen_quad.width, screen_quad.height, ("Physics: Bullet"), 100.0f);
-        //  break;
-        //case UNKNOWN:
-        //  break;
-        //default:
-        //  break;
-        //}
-        //g_textRenderer->drawText(
-        //    screen_quad.width, screen_quad.height,
-        //    ("Gravity: " + std::to_string((int)g_Gravity.y)).c_str(), 150.0f);
-
+       
         std::string strhited;
-       /* if (bodyHit)
-          strhited = "Ray Hit: " + bodyHit->GetGOName();
-        else
-          strhited = "Ray Hit: Nothing";*/
 		std::string artCount = "Artifacts found : " + std::to_string(gameCounter) + " out of 3";
-        //g_textRenderer->drawText(screen_quad.width, screen_quad.height, strhited.c_str(), 100.0f);
 		g_textRenderer->drawText(screen_quad.width, screen_quad.height, artCount.c_str(), 150.0f);
 		if (gameCounter > 3) {
 			g_textRenderer->drawText(screen_quad.width, screen_quad.height, ("Conradulations! You Win!"), 200.0f);
 		}
-        // g_textRenderer->drawText(width, height,"Ray hit: " + RayHitted ?
-        // "no": "yes" , 200.0f);
 
 #pragma endregion
 
@@ -679,11 +455,10 @@ int main(void) {
     }
 
 #pragma region Update physics
-    // High res timer (likely in ms or ns)
     currentTime = glfwGetTime();
     deltaTime = currentTime - lastTime;
 
-    double MAX_DELTA_TIME = 0.1; // 100 ms
+    double MAX_DELTA_TIME = 0.1; 
     if (deltaTime > MAX_DELTA_TIME) {
       deltaTime = MAX_DELTA_TIME;
     }
@@ -698,35 +473,8 @@ int main(void) {
 
     } // for ( unsigned int objIndex = 0;
 
-    // sceneCommandGroup.Update(deltaTime);
-
-    // The physics update loop
-
-    // New Dll physics
     gPhysicsWorld->Update(deltaTime);
 
-    // Collision listner, kind of....
-
-    //std::string PairF = gPhysicsWorld->GetLastColPair().first;
-    //std::string PairS = gPhysicsWorld->GetLastColPair().second;
-    //if (PairF == "chan" && PairS == "HingeCube" ||
-    //    PairS == "chan" && PairF == "HingeCube") {
-
-    //  collided = true;
-    //}
-    //if (collided) {
-    //  cGameObject *hgcube = findObjectByFriendlyName("HingeCube");
-    //  time += deltaTime;
-    //  if (time < 2.0f) {
-    //    hgcube->vecTextures[1].strength = 1.0f;
-    //    time += deltaTime;
-
-    //  } else {
-    //    hgcube->vecTextures[1].strength = 0.0f;
-    //    time = 0.f;
-    //    collided = false;
-    //  }
-    //}
 		
 
 
@@ -858,51 +606,6 @@ int main(void) {
 	}
 
 
-    //if (bIsDebugMode) {
-    //  // Call the debug renderer
-    //  for (int i = 0; i < vec_pObjectsToDraw.size(); i++) {
-    //    cGameObject *curObj = vec_pObjectsToDraw[i];
-    //    // curObj->bIsVisible = false;
-    //    curObj->bDontLight = true;
-    //    if (curObj->rigidBody != NULL) {
-    //      if (curObj->rigidBody->GetShape()->GetShapeType() ==
-    //          nPhysics::SHAPE_TYPE_SPHERE) {
-
-    //        float rad;
-    //        curObj->rigidBody->GetShape()->GetSphereRadius(rad);
-    //        g_simpleDubugRenderer->drawCube(curObj->rigidBody->GetPosition(),
-    //                                        rad);
-    //      }
-
-    //      // if (curObj->rigidBody->GetShape()->GetShapeType() ==
-    //      // nPhysics::SHAPE_TYPE_PLANE) {
-    //      //	//curObj->bIsWireFrame = true;
-    //      //	//curObj->bIsVisible = true;
-    //      //	//glm::mat4 matIden = glm::mat4(1.0f);
-    //      //	//DrawObject(curObj, matIden, program);
-    //      //}
-    //    }
-    //    if (curObj->softBody != NULL) {
-
-    //      glm::vec3 max;
-    //      glm::vec3 min;
-    //      glm::vec3 center;
-    //      curObj->softBody->GetAABB(min, max);
-    //      center = (min + max) / 2.0f;
-    //      float size = glm::distance(min, max) / 2.0f;
-    //      g_simpleDubugRenderer->drawCube(center, size);
-    //    }
-    //  }
-    //} else {
-    //  for (int i = 0; i < vec_pObjectsToDraw.size(); i++) {
-    //    cGameObject *curObj = vec_pObjectsToDraw[i];
-    //    if (!curObj->bIsDebug) {
-    //      curObj->bIsVisible = true;
-    //      curObj->bIsWireFrame = false;
-    //      curObj->bDontLight = false;
-    //    }
-    //  }
-    //}
 
 #pragma endregion
 #pragma region whatever
@@ -925,19 +628,6 @@ int main(void) {
           glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), lookDirection, worldUP));
       player->m_meshQOrientation = glm::toQuat(finalOrientation);
 
-      // camera.updateCameraVectors();
-      // glm::vec3 lookDirection = camera.Position - player->position;
-      // lookDirection.y = 1.0f;
-      // glm::quat rot1 = RotationBetweenVectors(glm::vec3(0.0f, 0.0f, 1.0f),
-      // -lookDirection);
-
-      // glm::vec3 desiredUp(0.0f, 1.0f, 0.0f);
-      // glm::vec3 right = glm::cross(-lookDirection, desiredUp);
-      // desiredUp = cross(right, -lookDirection);
-      // glm::vec3 newUp = rot1 * glm::vec3(0.0f, 1.0f, 0.0f);
-      // glm::quat rot2 = RotationBetweenVectors(newUp, desiredUp);
-      // glm::quat targetOrientation = rot2 * rot1;
-      // player->m_meshQOrientation = targetOrientation;
     }
 
 	if (camera.mCameraType == AIM)
@@ -945,7 +635,6 @@ int main(void) {
 		camera.updateCameraVectors();
 		//camera.updateCameraVectors();
 		glm::vec3 lookDirection = camera.Position + camera.Front;
-		//lookDirection.y = 0.0f;
 		lookDirection = glm::normalize(camera.Front);
 		lookDirection.y = 0.0f;
 		glm::vec3 worldUP(0.0f, 1.0f, 0.0f);
@@ -958,6 +647,7 @@ int main(void) {
 
 	if (camera.mCameraType == FREE)
 	{
+		camera.updateCameraVectors();
 		player->rigidBody->SetVelocity(glm::vec3(0.f));
 	}
 
@@ -965,40 +655,12 @@ int main(void) {
     for (int i = 0; i < vec_pObjectsToDraw.size(); i++) {
       cGameObject *CurGo = vec_pObjectsToDraw[i];
       if (CurGo->rigidBody != NULL) {
-        // if (CurGo->friendlyName == "chan")
-        //{
-        //	std::cout<< "GO col: " << CurGo->bHadCollision << std::endl;
-        //	std::cout << "RB col: " << CurGo->rigidBody->GetCollision() <<
-        // std::endl;
-        //}
         CurGo->bHadCollision = CurGo->rigidBody->GetCollision();
         CurGo->rigidBody->SetCollision(false);
       }
     }
 
-    // Ray Cast
-    glm::vec3 from = player->position + glm::vec3(0.0f, 10.0f, 0.0f);
 
-    glm::vec3 to = player->getForward();
-    to *= 50.0f;
-    to = to + player->position;
-    to.y = 10.0f;
-
-	if(bIsDebugMode)
-    g_pDebugRendererACTUAL->addLine(from, to, glm::vec3(0.0f, 1.0f, 0.0f));
-
-    bodyHit = gPhysicsWorld->RayCastGetObject(from, to);
-
-    // Kill Velocity for inactive characters
-
-    //g_pCharacterManager->setAllChatVel();
-    //{
-    //	std::cout << "hit" << std::endl;
-    //}
-    // else
-    //{
-    //	std::cout << "notHit" << std::endl;
-    //}
 
 	//Updaters
 	g_pCharacterManager->updateCharAnimControllers();
@@ -1007,20 +669,17 @@ int main(void) {
 
 
 #pragma endregion
-    UpdateWindowTitle();
-    glfwSwapBuffers(window); // Shows what we drew
+    glfwSwapBuffers(window); 
     glfwPollEvents();
 
     ProcessAsynKeys(window);
   } 
   
 
-  // Delete stuff
   delete pTheShaderManager;
   delete ::g_pTheVAOMeshManager;
   delete ::g_pTheTextureManager;
-
-  //
+  delete ::g_pCharacterManager;
   delete ::g_pDebugRenderer;
 
   glfwDestroyWindow(window);
@@ -1028,25 +687,8 @@ int main(void) {
   exit(EXIT_SUCCESS);
 }
 
-glm::mat4 portal_view(glm::mat4 orig_view, cGameObject *src, cGameObject *dst) {
-  orig_view = glm::translate(orig_view, -camera.Position);
-  glm::mat4 mv = orig_view * src->matTransform;
-  glm::mat4 portal_cam =
-      // 3. transformation from source portal to the camera - it's the
-      //    first portal's ModelView matrix:
-      mv
 
-      // 2. object is front-facing, the camera is facing the other way:
-      * glm::rotate(glm::mat4(1.0), glm::radians(180.0f),
-                    glm::vec3(0.0, 1.0, 0.0))
-      // 1. go the destination portal; using inverse, because camera
-      //    transformations are reversed compared to object
-      //    transformations:
-      * glm::inverse(dst->matTransform);
-  return portal_cam;
-}
 
-void UpdateWindowTitle(void) { return; }
 
 cGameObject *findObjectByFriendlyName(std::string theNameToFind) {
   for (unsigned int index = 0; index != vec_pObjectsToDraw.size(); index++) {
@@ -1066,75 +708,8 @@ cGameObject *findObjectByUniqueID(unsigned int ID_to_find) {
     }
   }
 
-  // Didn't find it.
-  return NULL; // 0 or nullptr
+  return NULL; 
 }
 
-bool loadConfig() {
-  rapidjson::Document doc;
-  FILE *fp = fopen("config/config.json", "rb"); // non-Windows use "r"
-  char readBuffer[65536];
-  rapidjson::FileReadStream is(fp, readBuffer, sizeof(readBuffer));
-  doc.ParseStream(is);
-  fclose(fp);
-  rapidjson::Value Window(rapidjson::kObjectType);
-  Window = doc["Window"];
 
-  SCR_WIDTH = Window["Width"].GetInt();
-  SCR_HEIGHT = Window["Height"].GetInt();
 
-  title = Window["Title"].GetString();
-  if (doc.HasMember("Scene")) {
-    scene = doc["Scene"].GetString();
-  }
-  if (doc.HasMember("Gravity")) {
-    const rapidjson::Value &grArray = doc["Gravity"];
-    for (int i = 0; i < 3; i++) {
-      g_Gravity[i] = grArray[i].GetFloat();
-    }
-
-	if (Window.HasMember("FullScreen"))
-	{
-		bFullScreen = Window["FullScreen"].GetBool();
-	}
-  }
-
-  return true;
-
-  // std::string language = doc["Language"].GetString();
-  // ASSERT_NE(language, "");
-  // if (language == "English") { TextRend.setLang(ENGLISH); }
-  // else if (language == "Spanish") { TextRend.setLang(SPANISH); }
-  // else if (language == "Japanese") { TextRend.setLang(JAPANESE); }
-  // else if (language == "Ukrainian") { TextRend.setLang(UKRAINAN); }
-  // else if (language == "Polish") { TextRend.setLang(POLSKA); }
-}
-
-glm::quat RotationBetweenVectors(glm::vec3 start, glm::vec3 dest) {
-  start = glm::normalize(start);
-  dest = glm::normalize(dest);
-
-  float cosTheta = dot(start, dest);
-  glm::vec3 rotationAxis;
-
-  if (cosTheta < -1 + 0.001f) {
-    // special case when vectors in opposite directions:
-    // there is no "ideal" rotation axis
-    // So guess one; any will do as long as it's perpendicular to start
-    rotationAxis = glm::cross(glm::vec3(0.0f, 0.0f, 1.0f), start);
-    if (glm::length2(rotationAxis) <
-        0.01) // bad luck, they were parallel, try again!
-      rotationAxis = glm::cross(glm::vec3(1.0f, 0.0f, 0.0f), start);
-
-    rotationAxis = normalize(rotationAxis);
-    return glm::angleAxis(glm::radians(180.0f), rotationAxis);
-  }
-
-  rotationAxis = cross(start, dest);
-
-  float s = sqrt((1 + cosTheta) * 2);
-  float invs = 1 / s;
-
-  return glm::quat(s * 0.5f, rotationAxis.x * invs, rotationAxis.y * invs,
-                   rotationAxis.z * invs);
-}

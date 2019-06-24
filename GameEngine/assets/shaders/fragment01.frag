@@ -651,7 +651,7 @@ dist = length(viewSpace);
 	}
 	if ( bAddReflect )
 	{
-		float amountToAdd = 0.25f;
+		float amountToAdd = 0.55f;
 		// Drop the amount of current colour by a little bit...
 		finalOutputColour *= ( 1.0f - amountToAdd );
 		// ... and add the reflective colour

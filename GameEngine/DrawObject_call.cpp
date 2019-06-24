@@ -20,7 +20,7 @@
 #include <iostream>
 
 
-glm::quat RotationBetweenVectors(glm::vec3 start, glm::vec3 dest);
+
 
 //std::map<std::string /*name*/, cParticleEmitter* > g_map_pParticleEmitters;
 
