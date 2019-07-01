@@ -20,6 +20,5 @@ namespace nPhysics
 		iSoftBody(const iSoftBody& other){}
 		iSoftBody& operator=(const iSoftBody& other) { return *this; }
 
-
 	};
 }

@@ -221,6 +221,24 @@
     <ClCompile Include="WanderBehaviour.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\eBodyType.h" />
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\eConstraintType.h" />
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\eShapeType.h" />
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\GL_Triangle.h" />
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\GL_Vertex.h" />
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\iCilinderShape.h" />
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\iCollisionBody.h" />
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\iConstraint.h" />
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\iPhysicsFactory.h" />
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\iPhysicsWorld.h" />
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\iRigidBody.h" />
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\iShape.h" />
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\iSoftBody.h" />
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\iVehicle.h" />
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\iWreckingBallPhysics.h" />
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\shapes.h" />
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\sRigidBodyDef.h" />
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\sSoftBodyDef.h" />
     <ClInclude Include="Behaviour.h" />
     <ClInclude Include="BehaviourManager.h" />
     <ClInclude Include="cAABB.h" />
@@ -242,6 +260,7 @@
     <ClInclude Include="cMoveToCommand.h" />
     <ClInclude Include="cMoveToEase.h" />
     <ClInclude Include="cMoveToEaseIO.h" />
+    <ClInclude Include="common.h" />
     <ClInclude Include="cOrientTo.h" />
     <ClInclude Include="cSceneManager.h" />
     <ClInclude Include="cSimpleAssimpSkinnedMeshLoader_OneMesh.h" />

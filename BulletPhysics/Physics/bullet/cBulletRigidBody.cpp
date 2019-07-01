@@ -108,7 +108,6 @@ namespace nPhysics {
 			mBody = new btRigidBody(rbInfo);
 			mBody->setLinearVelocity(nConvert::ToBullet(def.Velocity));
 			mBody->setAngularVelocity(nConvert::ToBullet(def.AngularVelocity));
-			//mBody->setAngularFactor(btVector3(0.0f, 1.0f, 0.0f));
 			mBody->setSleepingThresholds(0.0f, 0.0f);
 
 			mBody->setCollisionFlags(mBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
@@ -145,7 +144,6 @@ namespace nPhysics {
 			mBody = new btRigidBody(rbInfo);
 			mBody->setLinearVelocity(nConvert::ToBullet(def.Velocity));
 			mBody->setAngularVelocity(nConvert::ToBullet(def.AngularVelocity));
-			//mBody->setAngularFactor(btVector3(0.0f, 1.0f, 0.0f));
 			mBody->setSleepingThresholds(0.0f, 0.0f);
 
 			mBody->setCollisionFlags(mBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
@@ -198,8 +196,6 @@ namespace nPhysics {
 				rbInfo.m_friction = 0;
 				mBody = new btRigidBody(rbInfo);
 				mBody->setAngularFactor(btVector3(0.0f, 1.0f, 0.0f));
-				//mBody->setLinearFactor(btVector3(0, 1, 0));
-				//mBody->setCollisionFlags(mBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
 				mBody->setSleepingThresholds(0.0f, 0.0f);
 				
 			}
@@ -238,15 +234,6 @@ namespace nPhysics {
 
 
 
-
-
-
-
-
-			//btTriangleInfoMap* triangleInfoMap = new btTriangleInfoMap();
-			//btGenerateInternalEdgeInfo(dynamic_cast<btBvhTriangleMeshShape*>(colShape), triangleInfoMap);
-
-
 			mBody->setCollisionFlags(mBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 			if (def.isGhostShape)
 			{
@@ -258,7 +245,6 @@ namespace nPhysics {
 		}
 		default:
 		{
-
 			break;
 		}
 
@@ -343,7 +329,6 @@ namespace nPhysics {
 		btTransform transform = mBody->getCenterOfMassTransform();
 		transform.setOrigin(nConvert::ToBullet(position));
 		mBody->setCenterOfMassTransform(transform);
-		//btVector3 vel = this->mBody->setMotionState()
 	}
 
 	void cBulletRigidBody::ApplyForce(glm::vec3 force, glm::vec3 relPos)
@@ -381,10 +366,9 @@ namespace nPhysics {
 
 	void cBulletRigidBody::SetVelocity(glm::vec3 velocity)
 	{
-		//this->mBody->activate();
 		this->mBody->setLinearVelocity(nConvert::ToBullet(velocity));
 	}
-	void cBulletRigidBody::SettAccel(glm::vec3 accel)
+	void cBulletRigidBody::SetAccel(glm::vec3 accel)
 	{
 	}
 	void cBulletRigidBody::SetCollision(bool coll)

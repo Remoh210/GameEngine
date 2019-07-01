@@ -11,7 +11,6 @@ struct sConfig
 	unsigned int ScreenHeight;
 	glm::vec3 Gravity;
 	bool IsFullScreen;
-
 };
 
 class cConfigManager

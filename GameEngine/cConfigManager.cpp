@@ -27,7 +27,6 @@ bool cConfigManager::loadConfig(std::string configFile)
 	rapidjson::Value Window(rapidjson::kObjectType);
 	Window = doc["Window"];
 
-	
 	if (Window.HasMember("Width")) {
 		mConfig.ScreenWidth = Window["Width"].GetInt();
 	}

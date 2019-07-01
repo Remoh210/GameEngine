@@ -35,11 +35,9 @@ namespace nPhysics
 		virtual void SetMatRotation(glm::mat4 rotation);
 		virtual void SetMass(float mass);
 		virtual void SetVelocity(glm::vec3 velocity);
-		virtual void SettAccel(glm::vec3 accel);
+		virtual void SetAccel(glm::vec3 accel);
 		virtual void SetCollision(bool coll);
 
-
-		//void SettAccel(glm::vec3 accel);
 	private:
 		btDefaultMotionState* mMotionState;
 		btRigidBody* mBody;

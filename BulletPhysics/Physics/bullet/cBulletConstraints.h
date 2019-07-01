@@ -18,7 +18,7 @@ namespace nPhysics
 		virtual btTypedConstraint* GetTypedConstraint() { return mConstraint; }
 
 	private:
-		btPoint2PointConstraint * mConstraint;
+		btPoint2PointConstraint* mConstraint;
 		cBulletPoinToPointConstraint(const cBulletPoinToPointConstraint& other) {}
 		cBulletPoinToPointConstraint& operator=(const cBulletPoinToPointConstraint& other) { return *this; }
 

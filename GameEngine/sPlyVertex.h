@@ -7,7 +7,7 @@ struct sPlyVertex
 	float x;
 	float y;
 	float z;
-	// Now has normals (this is FROM THE FILE)
+
 	float nx;
 	float ny;
 	float nz;

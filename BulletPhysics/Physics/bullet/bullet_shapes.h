@@ -23,7 +23,6 @@ namespace nPhysics
 		cBulletSphereShape(const cBulletSphereShape& other) : iSphereShape(other) {}
 		cBulletSphereShape& operator=(const cBulletSphereShape& other) { return *this; }
 		btCollisionShape* mBulletShape;
-
 	};
 
 	class cBulletPlaneShape :  public iPlaneShape
@@ -41,11 +40,9 @@ namespace nPhysics
 	protected:
 		glm::vec3 mNormal;
 		float mCnonst;
-		//iShape
 		cBulletPlaneShape(const cBulletPlaneShape& other) : iPlaneShape(other) {}
 		cBulletPlaneShape& operator=(const cBulletPlaneShape& other) { return *this; }
 		btCollisionShape* mBulletShape;
-
 	};
 
 	class cBulletCylinderShape : public iCylinderShape
@@ -67,8 +64,6 @@ namespace nPhysics
 		cBulletCylinderShape(const cBulletCylinderShape& other) : iCylinderShape(other) {}
 		cBulletCylinderShape& operator=(const cBulletCylinderShape& other) { return *this; }
 		btCollisionShape* mBulletShape;
-
-
 	};
 
 	class cBulletCapsuleShape : public iCapsuleShape
@@ -91,8 +86,6 @@ namespace nPhysics
 		cBulletCapsuleShape(const cBulletCapsuleShape& other) : iCapsuleShape(other) {}
 		cBulletCapsuleShape& operator=(const cBulletCapsuleShape& other) { return *this; }
 		btCollisionShape* mBulletShape;
-
-
 	};
 
 	class cBulletBoxShape : public iBoxShape
@@ -114,8 +107,6 @@ namespace nPhysics
 		cBulletBoxShape(const cBulletBoxShape& other) : iBoxShape(other) {}
 		cBulletBoxShape& operator=(const cBulletBoxShape& other) { return *this; }
 		btCollisionShape* mBulletShape;
-
-
 	};
 
 	class cBulletMeshCollider : public iMeshCollider
@@ -133,8 +124,6 @@ namespace nPhysics
 		cBulletMeshCollider(const cBulletMeshCollider& other) : iMeshCollider(other) {}
 		cBulletMeshCollider& operator=(const cBulletMeshCollider& other) { return *this; }
 		btCollisionShape* mBulletShape;
-
-
 	};
 
 }

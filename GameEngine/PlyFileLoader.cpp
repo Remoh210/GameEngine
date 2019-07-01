@@ -16,31 +16,17 @@
 //	float x;
 //	float y;
 //	float z;
-//};
-//
-//// 3 2603 2647 2602 
-//struct sPlyTriangle	{	// "face"
-//	int vertex_index_1;
-//	int vertex_index_2;
-//	int vertex_index_3;
-//};
 
-// Actual variables in memory
-// NO extern here
-sPlyVertex*		g_pArrayVert = 0;	// = new sPlyTriangle[numberOfTriangles];	// HEAP
+sPlyVertex*		g_pArrayVert = 0;
 unsigned int	g_numberOfVertices = 0;
-sPlyTriangle*	g_pArrayTris = 0;	// NULL NULL  nullptr
+sPlyTriangle*	g_pArrayTris = 0;	
 unsigned int	g_numberOfTriangles = 0;
 
-// Load the file and place it into a temporary 
-//	set of arrays (in the CPU's RAM)
 bool LoadPlyFileData(std::string fileName)
 {
-	// Open the file that you asked.
 	std::ifstream theFile(fileName.c_str());
 
-	// if ( theFile.is_open() == false )
-	if (!theFile.is_open())			// More "c" or "C++" ish
+	if (!theFile.is_open())			
 	{
 		std::cout << "Didn't open file" << std::endl;
 		return false;
@@ -83,16 +69,7 @@ bool LoadPlyFileData(std::string fileName)
 			break;		// exit while loop...
 		}
 	};
-	// ...Jumping down to here
 
-	//-0.036872 0.127727 0.00440925 
-	//-0.0453607 0.128854 0.00114541 
-
-	// Create an vertex array to store the data.
-//	sPlyVertex tempVert; 
-//	sPlyVertex tempArrayVert[1000];		// Static (stack)
-
-//	sPlyVertex* pArrayVert = new sPlyVertex[numberOfVertices];	// HEAP
 	g_pArrayVert = new sPlyVertex[g_numberOfVertices];	// HEAP
 
 //	ZeroMemory(); win32
@@ -109,9 +86,7 @@ bool LoadPlyFileData(std::string fileName)
 		//		theFile >> g_pArrayVert[index].;
 	}
 
-	// Same with triangles
 
-//	sPlyTriangle* pArrayTris = new sPlyTriangle[numberOfTriangles];	// HEAP
 	g_pArrayTris = new sPlyTriangle[g_numberOfTriangles];	// HEAP
 
 	memset(g_pArrayTris, 0, sizeof(sPlyTriangle) * g_numberOfTriangles);
@@ -131,30 +106,6 @@ bool LoadPlyFileData(std::string fileName)
 	return true;
 }
 
-
-
-//void saveLightInfo(std::string filename, std::vector<sLight*> lights)
-//{
-//	filename = "output/" + filename;
-//	std::string line;
-//	std::ofstream file(filename.c_str());
-//	if (file.is_open())
-//	{
-//		for (std::vector<sLight*>::iterator it = lights.begin(); it != lights.end(); ++it) 
-//		{
-//			sLight* CurLight = *it;
-//			file << "Position_xyz: " << CurLight->position.x << " " << CurLight->position.y << " " << CurLight->position.z << "\n";
-//			file << "Attenuation_xyz: " << CurLight->atten.x << " " << CurLight->atten.y << " " << CurLight->atten.z << "\n";
-//			file << "Diffuse_rgbw: " << CurLight->diffuse.x << " " << CurLight->diffuse.y << " " << CurLight->diffuse.z << " " << CurLight->diffuse.w << "\n";
-//			file << "on_off: " << CurLight->param2.x << "\n";
-//			//pTheOneLight->AtenSphere = false;
-//			//LightManager->vecLights.push_back(pTheOneLight);
-//			//LightManager->LoadUniformLocations(program);
-//		}
-//		std::cout << "Lights information saved to " << filename.c_str() << std::endl;
-//		file.close();
-//	}
-//}
 
 
 void saveLightInfo(std::string filename, std::vector<sLight*> lights)

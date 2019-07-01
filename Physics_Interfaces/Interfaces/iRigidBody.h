@@ -33,7 +33,7 @@ namespace nPhysics
 		virtual void SetMatRotation(glm::mat4 rotation) = 0;
 		virtual void SetMass(float mass) = 0;
 		virtual void SetVelocity(glm::vec3 velocity) = 0;
-		virtual void SettAccel(glm::vec3 accel) = 0;
+		virtual void SetAccel(glm::vec3 accel) = 0;
 		//virtual void GetAABB(glm::vec3& minBoundsOut, glm::vec3& maxBoundsOut) = 0;
 
 		virtual void ApplyForce(glm::vec3 force, glm::vec3 relPos = glm::vec3(0.0f)) = 0;

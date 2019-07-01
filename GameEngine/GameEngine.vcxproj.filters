@@ -123,6 +123,9 @@
     <Filter Include="ConfigManager">
       <UniqueIdentifier>{089025ab-83ea-4b81-a572-f0b8ecd3efbc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PhysicInterfaces">
+      <UniqueIdentifier>{292827f5-d968-42d9-913b-2db110cd3d12}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="theMain.cpp">
@@ -495,6 +498,63 @@
     </ClInclude>
     <ClInclude Include="cConfigManager.h">
       <Filter>ConfigManager</Filter>
+    </ClInclude>
+    <ClInclude Include="common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\eBodyType.h">
+      <Filter>PhysicInterfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\eConstraintType.h">
+      <Filter>PhysicInterfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\eShapeType.h">
+      <Filter>PhysicInterfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\GL_Triangle.h">
+      <Filter>PhysicInterfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\GL_Vertex.h">
+      <Filter>PhysicInterfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\iCilinderShape.h">
+      <Filter>PhysicInterfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\iCollisionBody.h">
+      <Filter>PhysicInterfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\iConstraint.h">
+      <Filter>PhysicInterfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\iPhysicsFactory.h">
+      <Filter>PhysicInterfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\iPhysicsWorld.h">
+      <Filter>PhysicInterfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\iRigidBody.h">
+      <Filter>PhysicInterfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\iShape.h">
+      <Filter>PhysicInterfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\iSoftBody.h">
+      <Filter>PhysicInterfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\iVehicle.h">
+      <Filter>PhysicInterfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\iWreckingBallPhysics.h">
+      <Filter>PhysicInterfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\shapes.h">
+      <Filter>PhysicInterfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\sRigidBodyDef.h">
+      <Filter>PhysicInterfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics_Interfaces\Interfaces\sSoftBodyDef.h">
+      <Filter>PhysicInterfaces</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -32,13 +32,13 @@ namespace nPhysics {
 
 		btDefaultCollisionConfiguration* mCollisionConfiguration;
 
-		//use the default collision dispatcher. For parallel processing you can use a diffent dispatcher (see Extras/BulletMultiThreaded)
+		//use the default collision dispatcher. For parallel processing you can use a diffent dispatcher 
 		btCollisionDispatcher* mDispatcher;
 
-		//btDbvtBroadphase is a good general purpose broadphase. You can also try out btAxis3Sweep.
+		//btDbvtBroadphase is a good general purpose broadphase. 
 		btBroadphaseInterface* mOverlappingPairCache;
 
-		//the default constraint solver. For parallel processing you can use a different solver (see Extras/BulletMultiThreaded)
+		//the default constraint solver. For parallel processing you can use a different solver 
 		btSequentialImpulseConstraintSolver* mSolver = new btSequentialImpulseConstraintSolver;
 
 		btDiscreteDynamicsWorld* mDynamicsWorld;

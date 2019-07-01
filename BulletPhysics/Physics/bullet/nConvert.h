@@ -41,9 +41,6 @@ namespace nPhysics {
 
 		}
 
-
-
-
 		inline glm::quat ToSimple(const btQuaternion& quatIn)
 		{
 			glm::quat glm_quat(quatIn.getW(), quatIn.getX(), quatIn.getY(), quatIn.getZ());
